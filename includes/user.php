@@ -44,10 +44,7 @@ class User extends Db_object{
 		} else {
 
 			return false;
-		}
-
-
-		//return !empty($the_result_array) ? array_shift($the_result_array) : false; // ternery syntax.
+		}	
 	}
 
 	// Verifies the update of user data on the settings.php.
@@ -55,17 +52,32 @@ class User extends Db_object{
 
 		global $database;
 
-		$error_array          = array();
-		$first_name   = $database->escape_string($first_name);
+		$error_array    = array();
+		$first_name     = $database->escape_string($first_name);
 		$middle_name    = $database->escape_string($middle_name);
 		$last_name      = $database->escape_string($last_name);
-
 
 		if(strlen($first_name  ) > 30 || strlen($middle_name) > 30 || strlen($last_name) > 30) { 
 			array_push($error_array,  "The firstname, middlename or last name cant be longer than 30 characters each.");
 		}
 
 		return $error_array;
+	}
+
+		// checks if the user is an admin or not.
+	public static function is_admin($user_id) {
+
+		global $database;
+
+		$sql = "SELECT privilege_level FROM " . self::$db_table . " WHERE ";
+		$sql .= "id = '{$user_id}' ";
+		$sql .= "AND privilege_level = '1' ";
+		$sql .= "LIMIT 1";
+
+		$the_result_array = self::find_by_query($sql);
+
+		return !empty($the_result_array) ? true : false;
+
 
 	}
 
@@ -73,7 +85,6 @@ class User extends Db_object{
 	public function get_user_image() {
 
 		return "img" . DS . "profile" . DS . "default" . DS . $this->user_image;
-	
 	}
 
 	// Verifiserer at brukeren ligger i databasen, brukes ved llogin og kan brukes andre steder.
@@ -107,7 +118,7 @@ class User extends Db_object{
 		$password          = strip_tags($password);
 		$password_check    = strip_tags($password_check);
 
-		//Sjekker om brukernavn eller email ligger i databasen.
+		// Sjekker om brukernavn eller email ligger i databasen.
 		$sql  = "SELECT * FROM " . self::$db_table . " WHERE ";
 		$sql .= "username = '{$username}' ";
 		$sql .= "LIMIT 1";
@@ -178,8 +189,6 @@ class User extends Db_object{
 
 		}
 	}
-
-
 }
 
 ?>

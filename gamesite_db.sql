@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24. Jan, 2019 01:15 AM
+-- Generation Time: 24. Jan, 2019 21:47 PM
 -- Server-versjon: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -97,17 +97,18 @@ CREATE TABLE `users` (
   `middle_name` varchar(100) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `user_image` varchar(100) NOT NULL,
-  `joined` date NOT NULL
+  `joined` date NOT NULL,
+  `privilege_level` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dataark for tabell `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willi', 'Wack', 'Wonk', '1.png', '2019-01-23'),
-(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperud', '3.png', '2019-01-23'),
-(3, 'heman@willi.no', 'heman', 'qwerty', 'mister', 'universe', 'Wonk', '2.png', '2019-01-23');
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`) VALUES
+(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksensensene', '1.png', '2019-01-23', 1),
+(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperud', '3.png', '2019-01-23', 0),
+(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonko', '2.png', '2019-01-23', 0);
 
 --
 -- Indexes for dumped tables
@@ -163,7 +164,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

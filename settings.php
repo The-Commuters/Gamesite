@@ -7,10 +7,13 @@
 // Should be placed in a popup of some kind or another page.
 // Currently only here to place the users form they use to update their infomration.
 
-$user = User::find_by_id($session->user_id);
-?>
-
-<?php 
+if (empty($_GET['id'])) {
+	$user = User::find_by_id($session->user_id);
+} elseif (User::is_admin($session->user_id) && isset($_GET['id'])) {
+	$user = User::find_by_id($_GET['id']);
+} else {
+	redirect("users.php");
+}
 
 if (isset($_POST['submit'])) {
 	 
@@ -34,6 +37,7 @@ if (isset($_POST['submit'])) {
 		echo "Not updated!";
 	}
 } 
+
 ?>
 
 
