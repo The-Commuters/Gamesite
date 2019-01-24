@@ -50,6 +50,25 @@ class User extends Db_object{
 		//return !empty($the_result_array) ? array_shift($the_result_array) : false; // ternery syntax.
 	}
 
+	// Verifies the update of user data on the settings.php.
+	public static function verify_update($first_name, $middle_name, $last_name) {
+
+		global $database;
+
+		$error_array          = array();
+		$first_name   = $database->escape_string($first_name);
+		$middle_name    = $database->escape_string($middle_name);
+		$last_name      = $database->escape_string($last_name);
+
+
+		if(strlen($first_name  ) > 30 || strlen($middle_name) > 30 || strlen($last_name) > 30) { 
+			array_push($error_array,  "The firstname, middlename or last name cant be longer than 30 characters each.");
+		}
+
+		return $error_array;
+
+	}
+
 	// Collects the placement of the game path, used when showing the picture at  the list of users.
 	public function get_user_image() {
 

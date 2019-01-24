@@ -53,11 +53,9 @@ if (isset($_POST['submit'])) {
 		
 	</div>
 
-
 	<div class="">
 		<input type="submit" name="submit" value="Submit">
 	</div>
-
 
 </form>
 
