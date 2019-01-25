@@ -21,25 +21,22 @@ $games = Game::find_all();
 </thead>
 <tbody>
 
- <!-- For each loop that runs trough all the elements in the $games array. -->
- <?php foreach ($games as $game) : ?>
+  <!-- For each loop that runs trough all the elements in the $games array. -->
+  <?php foreach ($games as $game) : ?>
 
-   <tr>
+  <?php 
+  if ($session->is_signed_in()) {
+    if (User::is_admin($session->user_id) && isset($session->user_id)) {
+      include("admin_includes/admin_gamelist.php");
+    } else {
+      include("includes/user_gamelist.php");
+    }
+  } else {
+    include("includes/user_gamelist.php");
+  }
 
-    <td>
-      <a href="<?php echo $game->game_path();?>">
-        <img src="<?php echo $game->game_image_path();?>" style="height: 100px; width: 100px;">
-      </a>
-    </td>
-    <td><?php echo $game->id; ?></td>
-    <!-- The <a> leads to the canvas that the game is played in. -->
-      <td><a href="<?php echo $game->game_path();?>"><?php echo $game->filename; ?></a></td>
-      <td><?php echo $game->title; ?></td>
-      <td><?php echo $game->size; ?></td>
+  ?>
 
-    </tr>
-
-    <!-- Ends the foreach loop here.-->
   <?php endforeach; ?>
 
 </tbody>
