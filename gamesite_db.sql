@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24. Jan, 2019 21:47 PM
--- Server-versjon: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: 25. Jan, 2019 11:01 AM
+-- Tjener-versjon: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -106,9 +106,37 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksensensene', '1.png', '2019-01-23', 1),
-(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperud', '3.png', '2019-01-23', 0),
-(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonko', '2.png', '2019-01-23', 0);
+(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksensenseee', '1.png', '2019-01-23', 1),
+(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0),
+(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0),
+(8, 'Hello@youGuys.Mano', 'MyPreciousFEFESo', 'qwerty', 'Jacobs', 'Beste', 'Varer', '1.png', '2019-01-25', 0),
+(11, 'Hello@youGuys.ManommmOOO', 'MyPreciousFEFESonmmRealShit', 'qwerty', 'Jacobso', 'Besto', 'Varero', '1.png', '2019-01-25', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `user_activity`
+--
+
+CREATE TABLE `user_activity` (
+  `id` int(11) NOT NULL,
+  `act` varchar(25) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
+  `target_id` varchar(100) NOT NULL,
+  `type` varchar(25) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dataark for tabell `user_activity`
+--
+
+INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`) VALUES
+(1, 'create', '11', '11', 'users', '2019-01-25 09:33:30'),
+(2, 'update', '', '1', 'users', '2019-01-25 09:40:14'),
+(3, 'update', '1', '1', 'users', '2019-01-25 09:40:38'),
+(5, 'delete', '', '9', 'users', '2019-01-25 09:42:46'),
+(12, 'create', '1', '31', 'games', '2019-01-25 09:57:50');
 
 --
 -- Indexes for dumped tables
@@ -139,6 +167,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_activity`
+--
+ALTER TABLE `user_activity`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -152,7 +186,7 @@ ALTER TABLE `achievements`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -164,7 +198,13 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `user_activity`
+--
+ALTER TABLE `user_activity`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

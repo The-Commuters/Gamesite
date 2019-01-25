@@ -115,6 +115,33 @@ class Db_object {
 	}
 
 
+	// Puts something into the user_activiy-table in the database
+	protected function log_user_activity($act, $user_id, $target, $type) {
+
+		global $database;
+
+		//$database->escape_string();
+
+		$sql  = "INSERT INTO user_activity(act, user_id, target_id, type)";
+		$sql .= "VALUES ('{$act}', '{$user_id}', '{$target}', '{$type}')";
+
+
+		if ($database->query($sql)) {
+			
+			$this->id = $database->the_insert_id();
+
+			return true;
+
+		} else {
+
+			return false;
+
+		}
+
+
+	}
+
+
 	//Gjør koden smartere, sier at man skal oppdatere et database-objekt hvis den er der, og lage den hvis ikke.
 	public function save() {
 		
@@ -127,8 +154,11 @@ class Db_object {
 	public function create() {
 		
 		global $database;
+		global $session;
 
 		$properties = $this->clean_properties();
+
+
 
 		//Setter det opp slik for at den skal bli enklere å holde orden på.
 		//Implode deler opp alle array variabler med et komma så det blir en String.
@@ -140,6 +170,11 @@ class Db_object {
 		if ($database->query($sql)) {
 			
 			$this->id = $database->the_insert_id();
+
+			// Sets user_id as the logged in user if there is one logged in, helps when there is a user logged in.
+			$user_id = isset($session->user_id) ? $session->user_id : $this->id;
+			// Logs the creation of a object in the user activity-table on the database.
+			$log = $this->log_user_activity("create", $user_id, $this->id, static::$db_table);
 
 			return true;
 
@@ -156,6 +191,7 @@ class Db_object {
 	public function update() {
 		
 		global $database;
+		global $session;
 
 		$properties = $this->properties();
 
@@ -172,6 +208,9 @@ class Db_object {
 		$sql .= " WHERE id= " . $database->escape_string($this->id);
 
 		$database->query($sql);
+
+		//Logs the creation of a object in the user activity-table on the database.
+		$log = $this->log_user_activity("update", $session->user_id, $this->id, static::$db_table);
 		
 		//If the affected rows equal one, then... 
 		return (mysqli_affected_rows($database->connection) == 1) ? true : false;
@@ -186,6 +225,9 @@ class Db_object {
 		$sql .= " LIMIT 1";
 
 		$database->query($sql);
+
+		//Logs the creation of a object in the user activity-table on the database.
+	    $log = $this->log_user_activity("delete", $session->user_id, $this->id, static::$db_table);
 		
 		//If the affected rows equal one, then... 
 		return (mysqli_affected_rows($database->connection) == 1) ? true : false;
