@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 25. Jan, 2019 11:01 AM
+-- Generation Time: 28. Jan, 2019 13:38 PM
 -- Tjener-versjon: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -30,6 +30,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `achievements` (
   `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `friend_list`
+--
+
+CREATE TABLE `friend_list` (
+  `id` int(11) NOT NULL,
+  `user_1` int(10) NOT NULL,
+  `user_2` int(10) NOT NULL,
+  `status` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -106,11 +119,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksensenseee', '1.png', '2019-01-23', 1),
+(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1),
 (2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0),
-(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0),
-(8, 'Hello@youGuys.Mano', 'MyPreciousFEFESo', 'qwerty', 'Jacobs', 'Beste', 'Varer', '1.png', '2019-01-25', 0),
-(11, 'Hello@youGuys.ManommmOOO', 'MyPreciousFEFESonmmRealShit', 'qwerty', 'Jacobso', 'Besto', 'Varero', '1.png', '2019-01-25', 0);
+(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0);
 
 -- --------------------------------------------------------
 
@@ -136,7 +147,13 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (2, 'update', '', '1', 'users', '2019-01-25 09:40:14'),
 (3, 'update', '1', '1', 'users', '2019-01-25 09:40:38'),
 (5, 'delete', '', '9', 'users', '2019-01-25 09:42:46'),
-(12, 'create', '1', '31', 'games', '2019-01-25 09:57:50');
+(12, 'create', '1', '31', 'games', '2019-01-25 09:57:50'),
+(13, 'update', '1', '8', 'users', '2019-01-25 11:04:17'),
+(14, 'update', '1', '8', 'users', '2019-01-25 11:04:44'),
+(15, 'delete', '', '11', 'users', '2019-01-25 11:32:36'),
+(16, 'update', '1', '8', 'users', '2019-01-26 13:18:30'),
+(17, 'delete', '', '8', 'users', '2019-01-28 10:03:00'),
+(18, 'update', '1', '1', 'users', '2019-01-28 10:03:06');
 
 --
 -- Indexes for dumped tables
@@ -146,6 +163,12 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 -- Indexes for table `achievements`
 --
 ALTER TABLE `achievements`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `friend_list`
+--
+ALTER TABLE `friend_list`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -183,28 +206,34 @@ ALTER TABLE `achievements`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `friend_list`
+--
+ALTER TABLE `friend_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
