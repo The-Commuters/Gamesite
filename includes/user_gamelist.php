@@ -14,6 +14,8 @@
 	<!-- The <a> leads to the canvas that the game is played in. -->
 	<td><a href="<?php echo $game->game_path();?>"><?php echo $game->filename; ?></a></td>
 	<td><?php echo $game->title; ?></td>
+	<td><?php echo $game->genre; ?></td>
+	<td><?php echo $game->creator; ?></td>
 	<td><?php echo $game->size; ?></td>
 
 </tr>

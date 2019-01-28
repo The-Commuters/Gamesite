@@ -7,13 +7,15 @@ class Game extends Db_object {
 	protected static $db_table = "games"; //Slik at man kan endre navnet på databasetabellen.
 
 	//Array skal brukes i properies() og inneholder bruker-variablene til objektet.
-	protected static $db_table_fields = array('id', 'title', 'description', 'foldername', 'filename', 'size');
+	protected static $db_table_fields = array('id', 'title', 'description', 'foldername', 'filename', 'genre', 'creator', 'size');
 	public $id; 
 	public $title;
 	public $description;
 	public $foldername;
 	public $filename;
 	public $size;
+	public $genre;
+	public $creator;
 
 	public $tmp_path; //Temp path for storing games.
 	public $upload_directory = "games";
@@ -58,14 +60,12 @@ class Game extends Db_object {
 	public function game_path() {
 
 		return $this->upload_directory . DS . $this->foldername . DS . $this->filename;
-
 	}
 
 	// Collects the placement of the game path, used when showing the picture at gameslist.
 	public function game_image_path() {
 
 		return $this->upload_directory . DS . $this->foldername . DS . "image.png";
-
 	}
 
 	// Saves a game-object that has been made, the files and database-information.
@@ -126,6 +126,43 @@ class Game extends Db_object {
 
 		}
 	}
+
+	// The search function for games.
+	// $array = findgame()
+	public function find_game($genres, $title, $creator) {
+
+		// Adds things to the search with.
+		$sql  = "SELECT * FROM games WHERE ";
+
+		//Creator - name or parts of name
+		if (isset($creator)) {
+			$sql .= " creator LIKE '%{$creator}%' AND";
+		}
+		
+		// Genre - All in one genre
+		// Selector is a array with the current genres.
+		if (isset($genres)) {
+			$last_element = end($genres);
+			foreach ($genres as $genre) {
+				$sql .= " genre = '{$genre}' AND ";
+				
+				/* Later this wil be used to make it possible for people to search with several genres.
+				if ($genre != $last_element) {
+					$sql .= " OR";				
+				} else {
+					$sql .= " AND ";
+				}*/
+			}
+		}
+
+		//Title, searches for any title like this.
+		if (isset($title)) {
+			$sql .= " title LIKE '%{$title}%'";
+		}
+
+		return self::find_by_query($sql);
+	}
+
 } // End of games-class.
 
 
