@@ -13,4 +13,10 @@
 					<td><?php echo $user->last_name; ?></td>
 					<td><?php echo $user->joined; ?></td>
 
+					<?php if (!User::is_friend($session->user_id, $user->id) && $session->user_id != $user->id) { ?>
+	
+					<td><a href="includes/add_friend.php?id=<?php echo $user->id; ?>">Send friend request!</a></td>
+
+					<?php } ?>
+
 				</tr>

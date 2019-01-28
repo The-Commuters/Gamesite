@@ -64,7 +64,30 @@ class User extends Db_object{
 		return $error_array;
 	}
 
-		// checks if the user is an admin or not.
+	public static function add_friend($user_id, $friend_id) {
+
+		global $database;
+
+		// 0 in status will mean that the friend request is pending, when the reciever accepts this will be changed to 1
+		$status = 0;
+
+		$sql  = "INSERT INTO friend_list(user_1, user_2, status)";
+		$sql .= "VALUES ('{$user_id}', '{$friend_id}', '{$status}')";
+
+
+		if ($database->query($sql)) {
+
+			return true;
+
+		} else {
+
+			return false;
+
+		}
+
+	}
+
+	// checks if the user is an admin or not.
 	public static function is_admin($user_id) {
 
 		global $database;
@@ -77,9 +100,24 @@ class User extends Db_object{
 		$the_result_array = self::find_by_query($sql);
 
 		return !empty($the_result_array) ? true : false;
-
-
 	}
+
+	// checks if the user is an admin or not.
+	public static function is_friend($user_id, $friend_id) {
+
+		global $database;
+
+		$sql  = "SELECT * FROM friend_list WHERE ";
+		$sql .= "user_1     = '{$user_id}' ";
+		$sql .= "AND user_2 = '{$friend_id}' ";
+		$sql .= "OR user_2  = '{$user_id}' ";
+		$sql .= "AND user_1 = '{$friend_id}' ";
+		$sql .= "LIMIT 1";
+
+		$the_result_array = self::find_by_query($sql);
+
+		return !empty($the_result_array) ? true : false;
+	}	
 
 	// Collects the placement of the game path, used when showing the picture at  the list of users.
 	public function get_user_image() {
