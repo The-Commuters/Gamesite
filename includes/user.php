@@ -87,6 +87,35 @@ class User extends Db_object{
 
 	}
 
+		// The search function for users.
+	public function find_user($first_name, $middle_name, $last_name, $id) {
+
+		// Adds things to the search with.
+		$sql  = "SELECT * FROM users WHERE ";
+
+		//Creator - name or parts of name
+		if (isset($first_name)) {
+			$sql .= " first_name LIKE '%{$first_name}%' AND";
+		}
+		
+		//Creator - name or parts of name
+		if (isset($middle_name)) {
+			$sql .= " middle_name LIKE '%{$middle_name}%' AND";
+		}
+
+		//Creator - name or parts of name
+		if (isset($last_name)) {
+			$sql .= " last_name LIKE '%{$last_name}%' AND";
+		}
+
+		//Creator - name or parts of name
+		if (isset($id)) {
+			$sql .= " id LIKE '%{$id}%'";
+		}
+
+		return self::find_by_query($sql);
+	}
+
 	// checks if the user is an admin or not.
 	public static function is_admin($user_id) {
 

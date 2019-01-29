@@ -114,8 +114,6 @@ if (!empty($error_array)) {
 	}
 }
 
-
-
 ?>
 
 <div class="">

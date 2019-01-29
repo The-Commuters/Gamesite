@@ -22,14 +22,19 @@
 
     <a href="index.php">Index</a>
     <a href="games.php">List of games</a>
-    <a href="users.php">List of users</a>
 
     <?php if ($session->is_signed_in()) { ?>
+
+        <a href="profile.php?id=<?php echo $session->user_id;?>">Profile</a>
+        <a href="upload.php">Upload</a>
+        <a href="settings.php">Settings</a>
+        <a href="logout.php">Logout</a>
 	
-	<a href="profile.php?id=<?php echo $session->user_id;?>">Profile</a>
-	<a href="upload.php">Upload</a>
-    <a href="settings.php">Settings</a>
-    <a href="logout.php">Logout</a>
+        <?php if (User::is_admin($session->user_id)) { ?>
+
+            <a href="users.php">List of users</a>
+        
+        <?php } ?>
 
     <?php } else { ?>
 
