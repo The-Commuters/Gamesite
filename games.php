@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
 </tbody>
 </table>
 
-<form id="login-id" action="" method="post">
+<form id="game_search" action="" method="post">
 <div class="">
 
   <label>Game Creator</label>

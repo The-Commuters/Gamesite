@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 28. Jan, 2019 13:38 PM
+-- Generation Time: 28. Jan, 2019 23:27 PM
 -- Tjener-versjon: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -45,6 +45,13 @@ CREATE TABLE `friend_list` (
   `status` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dataark for tabell `friend_list`
+--
+
+INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `status`) VALUES
+(28, 2, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -66,7 +73,9 @@ CREATE TABLE `gained_achievements` (
 CREATE TABLE `games` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `genre` varchar(100) NOT NULL,
   `description` text NOT NULL,
+  `creator` varchar(100) NOT NULL,
   `foldername` varchar(25) NOT NULL,
   `filename` varchar(255) NOT NULL,
   `size` int(11) NOT NULL
@@ -76,11 +85,11 @@ CREATE TABLE `games` (
 -- Dataark for tabell `games`
 --
 
-INSERT INTO `games` (`id`, `title`, `description`, `foldername`, `filename`, `size`) VALUES
-(1, 'The Coin-eating Snake', '', 'snakegame.zip', 'snakegame.php', 1455),
-(2, 'There Can Only Be One', '', 'breakout.zip', 'breakout.php', 1390),
-(3, 'The Grand Card-game', '', 'cardgame.zip', 'cardgame.php', 1117580),
-(4, 'Collect The Diamonds', '', '2dgame.zip', '2dgame.php', 1634029);
+INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `foldername`, `filename`, `size`) VALUES
+(1, 'The Coin-eating Snake', 'Action', '', 'Mona Clairvoyant', 'snakegame.zip', 'snakegame.php', 1455),
+(2, 'There Can Only Be One', 'Slice Of Life', '', 'Clinter Coyote', 'breakout.zip', 'breakout.php', 1390),
+(3, 'The Grand Card-game', 'Comedy', '', 'Mama Nokso', 'cardgame.zip', 'cardgame.php', 1117580),
+(4, 'Collect The Diamonds', 'Goat Simulator', '', 'Heman Bermont', '2dgame.zip', '2dgame.php', 1634029);
 
 -- --------------------------------------------------------
 
@@ -209,7 +218,7 @@ ALTER TABLE `achievements`
 -- AUTO_INCREMENT for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `games`
