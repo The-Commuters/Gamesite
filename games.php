@@ -42,9 +42,6 @@ if (isset($_POST['submit'])) {
 </thead>
 <tbody>
 
-  <!-- For each loop that runs trough all the elements in the $games array. -->
-  <?php foreach ($games as $game) : ?>
-
   <?php 
   if ($session->is_signed_in()) {
     if (User::is_admin($session->user_id) && isset($session->user_id)) {
@@ -57,8 +54,6 @@ if (isset($_POST['submit'])) {
   }
 
   ?>
-
-  <?php endforeach; ?>
 
 </tbody>
 </table>

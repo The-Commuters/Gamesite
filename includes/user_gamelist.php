@@ -1,5 +1,5 @@
-
-
+<!-- For each loop that runs trough all the elements in the $games array. -->
+<?php foreach ($users as $user) : ?>
 
 <tr>
 
@@ -19,3 +19,5 @@
 	<td><?php echo $game->size; ?></td>
 
 </tr>
+
+<?php endforeach; ?>

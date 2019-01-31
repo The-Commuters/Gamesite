@@ -46,19 +46,10 @@ if (isset($_POST['submit'])) {
 		</thead>
 		<tbody>
 
-			<!-- For each loop that runs trough all the elements in the $games array. -->
-			<?php foreach ($users as $user) : ?>
 
 				<?php 
-				// Checks if the logged in user is an admin or not.
-				if (User::is_admin($session->user_id)) {
 					include("admin_includes/admin_userlist.php");
-				} else {
-					include("includes/userlist.php");
-				}
 				?>
-
-			<?php endforeach; ?>
 
 		</tbody>
 	</table>
