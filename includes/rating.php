@@ -17,43 +17,38 @@ class Rating extends Db_object {
 	// Objekter som blir sendt til databasen blir laget her, og utregninger
 	// Av gjennomsnittlig score skal og foregå her.
 
-	public static function verify_Rating($score, $game_id) {
+	public function verify_Rating() {
 
 		// Will check if there already is a rating for the game by the user.
 		global $session;
 		global $database;
 
-		$score = $database->escape_string($score);
-		$game_id = $database->escape_string($game_id);
-
+		$score   = $database->escape_string($this->score);
+		$game_id = $database->escape_string($this->game_id);
 		$user_id = $session->user_id;
 
-		//$this->create();
-		/*
-		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
-		$sql .= "user_id = '{$game_id}' ";
+		$rating  = new Rating();
+
+		$rating->score   = $score;
+		$rating->game_id = $game_id;
+		$rating->user_id = $user_id;
+	
+		$sql  = "SELECT * FROM ratings WHERE ";
+		$sql .= "user_id = '{$user_id}' ";
 		$sql .= "AND game_id = '{$game_id}' ";
 		$sql .= "LIMIT 1";
 
-		$the_result_array = self::find_by_query($sql);*/
+		$the_result_array = self::find_by_query($sql);
 
-		$rating = new rating;
+		if (!empty($the_result_array)) {
+			$rating->id = $the_result_array[0]->id;
+			$rating->update();
+		} else {
+			$rating->create();
+		}
 
-		$rating->score = $score;
-		$rating->game_id = $game_id;
-		$rating->user_id = $user_id;
-
-		$rating->create();
-
-		//!empty($the_result_array) ? $rating->create() : $rating->update(); // ternery syntax.
 	}
 	
-
-
-
-
-
-
 } // End of games-class.
 
 
