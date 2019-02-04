@@ -28,7 +28,6 @@ class Rating extends Db_object {
 		$user_id = $session->user_id;
 
 		$rating  = new Rating();
-		$rating2  = new Rating();
 
 		$rating->score   = $score;
 		$rating->game_id = $game_id;
@@ -42,7 +41,7 @@ class Rating extends Db_object {
 		$the_result_array = self::find_by_query($sql);
 
 		if (!empty($the_result_array)) {
-			$rating->id = $the_result_array->id;
+			$rating->id = $the_result_array[0]->id;
 			$rating->update();
 		} else {
 			$rating->create();
