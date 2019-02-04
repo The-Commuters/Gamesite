@@ -12,7 +12,7 @@
 
  <!-- Rating in here for now, might add it into a include with ajax at a later point. -->
 
- <form onchange="rate_game(this.value)">
+ <form id="gamescore" onchange="rate_game()">
   <input type="radio" name="stars" value="1"> 1 star
   <input type="radio" name="stars" value="2"> 2 star
   <input type="radio" name="stars" value="3"> 3 star
@@ -23,24 +23,25 @@
 <div id="message">Tilbakemelding will bli vist her!</div>
 
 <script>
-function rate_game(score) {
+function rate_game() {
 
-	var game_id = '<?php echo $current_game_id; ?>';
+    var score = document.querySelector('input[name="stars"]:checked').value;
+	var game_id = '<?php echo $game->id; ?>';
 
     if (score == "") {
         document.getElementById("message").innerHTML = "";
         return;
     } else { 
 
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("message").innerHTML = this.responseText;
-            }
-        };
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("message").innerHTML = this.responseText;
+        }
+    };
 
-        xmlhttp.open("GET","includes/rate_game.php?s="+score+"&g="+game_id,true);
-        xmlhttp.send();
+    xmlhttp.open("GET","includes/rate_game.php?s="+score+"&g="+game_id,true);
+    xmlhttp.send();
     }
 }
 </script>
