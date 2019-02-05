@@ -248,13 +248,10 @@ class User extends Db_object{
 
 			$user->create();
 
-			return $error_array; // ternery syntax.
+		} 
 
-		} else {
-
-			return $error_array;
-
-		}
+		return $error_array;
+	
 	}
 }
 

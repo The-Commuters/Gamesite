@@ -33,7 +33,7 @@ class Rating extends Db_object {
 		$rating->game_id = $game_id;
 		$rating->user_id = $user_id;
 	
-		$sql  = "SELECT * FROM ratings WHERE ";
+		$sql  = "SELECT * FROM " . self::$db_table . " WHERE ";
 		$sql .= "user_id = '{$user_id}' ";
 		$sql .= "AND game_id = '{$game_id}' ";
 		$sql .= "LIMIT 1";
@@ -48,8 +48,8 @@ class Rating extends Db_object {
 		}
 
 	}
-	
-} // End of games-class.
+
+} // End of ratings-class.
 
 
 

@@ -12,6 +12,8 @@
 
  <!-- Rating in here for now, might add it into a include with ajax at a later point. -->
 
+<?php if ($session->is_signed_in()) { ?>
+   
  <form id="gamescore" onchange="rate_game()">
   <input type="radio" name="stars" value="1"> 1 star
   <input type="radio" name="stars" value="2"> 2 star
@@ -20,7 +22,16 @@
   <input type="radio" name="stars" value="5"> 5 star
 </form>
 
-<div id="message">Tilbakemelding will bli vist her!</div>
+<?php } ?>
+
+<div id="message">
+
+<?php 
+$score = $game->get_rating();
+echo $score; 
+?>
+
+</div>
 
 <script>
 function rate_game() {

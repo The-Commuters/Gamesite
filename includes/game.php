@@ -138,20 +138,12 @@ class Game extends Db_object {
 		if (isset($creator)) {
 			$sql .= " creator LIKE '%{$creator}%' AND";
 		}
-		
-		// Genre - All in one genre
-		// Selector is a array with the current genres.
+
+		// Gets here the gebres, later we might add to it.
 		if (isset($genres)) {
 			$last_element = end($genres);
 			foreach ($genres as $genre) {
 				$sql .= " genre = '{$genre}' AND ";
-				
-				/* Later this wil be used to make it possible for people to search with several genres.
-				if ($genre != $last_element) {
-					$sql .= " OR";				
-				} else {
-					$sql .= " AND ";
-				}*/
 			}
 		}
 
@@ -161,6 +153,31 @@ class Game extends Db_object {
 		}
 
 		return self::find_by_query($sql);
+	}
+
+	public function get_rating() {
+
+		global $database;
+
+		$game_id = $this->id;
+
+		$sql  = "SELECT AVG(score) FROM ratings WHERE ";
+		$sql .= "game_id = '{$game_id}' ";
+		$sql .= "LIMIT 1";
+
+		$result = $database->query($sql);
+
+		// Breaks the answer up with implode and shows the average score.
+		if ($row = $result->fetch_assoc()) {
+			$average_score = implode(", ", $row);
+		}
+
+		// Ensures that 
+		$average_score = number_format($average_score, 2, '.', ',');
+		
+		// Sends the score to the place where the function is called.
+		return !empty($average_score) ? $average_score : false;
+
 	}
 
 } // End of games-class.
