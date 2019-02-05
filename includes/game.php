@@ -172,11 +172,9 @@ class Game extends Db_object {
 			$average_score = implode(", ", $row);
 		}
 
-		// Ensures that 
-		$average_score = number_format($average_score, 2, '.', ',');
-		
+		// Ensures that there is only two decimals in the score.		
 		// Sends the score to the place where the function is called.
-		return !empty($average_score) ? $average_score : false;
+		return !empty($average_score) ? number_format($average_score, 2, '.', ',') : false;
 
 	}
 

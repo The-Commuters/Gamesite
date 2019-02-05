@@ -27,8 +27,11 @@
 <div id="message">
 
 <?php 
-$score = $game->get_rating();
-echo $score; 
+if ($score = $game->get_rating()) {
+    echo $score; 
+} else {
+    echo "Game has never been rated";
+}
 ?>
 
 </div>
