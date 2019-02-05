@@ -14,7 +14,7 @@
 
 <?php if ($session->is_signed_in()) { ?>
    
- <form id="gamescore" onchange="rate_game()">
+ <form id="gamescore" onchange="rate_game(<?php echo $game->id; ?>)">
   <input type="radio" name="stars" value="1"> 1 star
   <input type="radio" name="stars" value="2"> 2 star
   <input type="radio" name="stars" value="3"> 3 star
@@ -36,26 +36,5 @@ if ($score = $game->get_rating()) {
 
 </div>
 
-<script>
-function rate_game() {
+<script src="js/functions.js"></script>
 
-    var score = document.querySelector('input[name="stars"]:checked').value;
-	var game_id = '<?php echo $game->id; ?>';
-
-    if (score == "") {
-        document.getElementById("message").innerHTML = "";
-        return;
-    } else { 
-
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("message").innerHTML = this.responseText;
-        }
-    };
-
-    xmlhttp.open("GET","includes/rate_game.php?s="+score+"&g="+game_id,true);
-    xmlhttp.send();
-    }
-}
-</script>

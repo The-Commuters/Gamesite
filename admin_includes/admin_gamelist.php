@@ -17,7 +17,7 @@
 	<td><?php echo $game->title; ?></td>
 	<td><?php echo $game->size; ?></td>
 	<td><a href="admin_includes/delete_game.php?id=<?php echo $game->id; ?>" 
-		onclick="return confirm('Are you sure you want to delete<?php echo $game->title ?>')">Delete</a></td>
+		onclick="return confirm('Are you sure you want to delete <?php echo $game->title ?>')">Delete</a></td>
 
 </tr>
 
