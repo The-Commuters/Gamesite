@@ -21,17 +21,37 @@ function rate_game(game_id) {
 
 function update_userlist() {
 
-    var first_name = document.getElementById("first_name").value;
-    var middle_name = document.getElementById("middle_name").value;
-    var last_name = document.getElementById("last_name").value;
-    var id = document.getElementById("id").value;
+    var search = document.getElementById("search").value;
+
+    var selector = document.getElementById("category");
+    var category = selector.options[selector.selectedIndex].value;
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
             document.getElementById("userlist").innerHTML = this.responseText;
     };
 
-    xmlhttp.open("GET","includes/userlist.php?f="+first_name+"&m="+middle_name+ "&l=" + last_name+"&u="+id,true);
+    xmlhttp.open("GET","includes/userlist.php?s="+search+"&c="+category,true);
+    xmlhttp.send();
+    
+}
+
+function update_gamelist() {
+
+    var search = document.getElementById("search").value;
+
+    var selector = document.getElementById("genre");
+    var genre = selector.options[selector.selectedIndex].value;
+
+    var selector = document.getElementById("category");
+    var category = selector.options[selector.selectedIndex].value;
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+            document.getElementById("gameslist").innerHTML = this.responseText;
+    };
+
+    xmlhttp.open("GET","includes/gamelist.php?s="+search+"&c="+category+"&g="+genre,true);
     xmlhttp.send();
     
 }

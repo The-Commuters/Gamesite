@@ -13,10 +13,7 @@ $genres = array();
 //These are here so that htmlentities does not show errors, can be removed is the form is placed before it.
 if (!isset($_GET['f'])) {
 
-  $last_name = "";
-  $middle_name = "";
-  $first_name = "";
-  $id = "";
+  $search = "";
   $users = User::find_all();
 
 }
@@ -25,29 +22,20 @@ if (!isset($_GET['f'])) {
 <form id="user_search" >
 <div class="">
 
-  <div>
-  <label>First Name</label>
-  <input type="text" id="first_name" value="<?php echo htmlentities($first_name); ?>">
-  </div>
+<div>
 
-  <div>
-  <label>Middle Name</label>
-  <input type="text"  id="middle_name" value="<?php echo htmlentities($middle_name); ?>">
-  </div>
+  <label>User Search</label>
+  <input type="text" onkeyup="update_userlist()" id="search" value="<?php echo htmlentities($search); ?>">
 
-  <div>
-  <label>Last Name</label>
-  <input type="text" id="last_name" value="<?php echo htmlentities($last_name); ?>">
-  </div>
-
-  <div>
-  <label>ID</label>
-  <input type="text" id="id" value="<?php echo htmlentities($id); ?>">
-  </div>
+  <select id="category" onchange="update_userlist()">
+    <option value="all" selected="selected">All</option>
+    <option value="first_name">First Name</option>
+    <option value="middle_name">Middle Name</option>
+    <option value="last_name">Last Name</option>
+    <option value="id">ID</option>
+  </select>
 
 </div>
-<input type="button" onclick="update_userlist()" value="Submit">
-
 
 </form>
   <div id="userlist">
@@ -56,7 +44,6 @@ if (!isset($_GET['f'])) {
     ?>
   </div>
 </div>  
-
 
 <script src="js/functions.js"></script>
 

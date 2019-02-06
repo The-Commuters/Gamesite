@@ -8,10 +8,6 @@
         }    
     ?>
 
- <?php include("includes/footer.php"); ?>
-
- <!-- Rating in here for now, might add it into a include with ajax at a later point. -->
-
 <?php if ($session->is_signed_in()) { ?>
    
  <form id="gamescore" onchange="rate_game(<?php echo $game->id; ?>)">
@@ -38,3 +34,4 @@ if ($score = $game->get_rating()) {
 
 <script src="js/functions.js"></script>
 
+ <?php include("includes/footer.php"); ?>

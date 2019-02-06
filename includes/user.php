@@ -88,29 +88,36 @@ class User extends Db_object{
 	}
 
 		// The search function for users.
-	public function find_user($first_name, $middle_name, $last_name, $id) {
+	public function find_user($search, $category) {
 
 		// Adds things to the search with.
 		$sql  = "SELECT * FROM users WHERE ";
 
+		if ($category == 'all') {
+			$sql .= " first_name LIKE '%{$search}%' OR";
+			$sql .= " middle_name LIKE '%{$search}%' OR";
+			$sql .= " last_name LIKE '%{$search}%' OR";
+			$sql .= " id LIKE '%{$search}%'";
+		}
+
 		//Creator - name or parts of name
-		if (isset($first_name)) {
-			$sql .= " first_name LIKE '%{$first_name}%' AND";
+		if ($category == 'first_name') {
+			$sql .= " first_name LIKE '%{$search}%'";
 		}
 		
 		//Creator - name or parts of name
-		if (isset($middle_name)) {
-			$sql .= " middle_name LIKE '%{$middle_name}%' AND";
+		if ($category == 'middle_name') {
+			$sql .= " middle_name LIKE '%{$search}%'";
 		}
 
 		//Creator - name or parts of name
-		if (isset($last_name)) {
-			$sql .= " last_name LIKE '%{$last_name}%' AND";
+		if ($category == 'last_name') {
+			$sql .= " last_name LIKE '%{$search}%'";
 		}
 
 		//Creator - name or parts of name
-		if (isset($id)) {
-			$sql .= " id LIKE '%{$id}%'";
+		if ($category == 'id') {
+			$sql .= " id LIKE '%{$search}%'";
 		}
 
 		return self::find_by_query($sql);

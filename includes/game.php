@@ -127,29 +127,18 @@ class Game extends Db_object {
 		}
 	}
 
-	// The search function for games.
-	// $array = findgame()
-	public function find_game($genres, $title, $creator) {
+	public function find_game($category, $genre, $search) {
 
-		// Adds things to the search with.
 		$sql  = "SELECT * FROM games WHERE ";
+		$sql .= " genre LIKE '%{$genre}%' ";
 
-		//Creator - name or parts of name
-		if (isset($creator)) {
-			$sql .= " creator LIKE '%{$creator}%' AND";
-		}
-
-		// Gets here the gebres, later we might add to it.
-		if (isset($genres)) {
-			$last_element = end($genres);
-			foreach ($genres as $genre) {
-				$sql .= " genre = '{$genre}' AND ";
-			}
-		}
-
-		//Title, searches for any title like this.
-		if (isset($title)) {
-			$sql .= " title LIKE '%{$title}%'";
+		if ($category == "title") {
+			$sql .= "AND title LIKE '%{$search}%' ";
+		} elseif ($category == "creator") {
+			$sql .= "AND creator LIKE '%{$search}%' ";
+		} else {
+			$sql .= "AND (title LIKE '%{$search}%' ";
+			$sql .= "OR creator LIKE '%{$search}%') ";
 		}
 
 		return self::find_by_query($sql);

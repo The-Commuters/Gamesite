@@ -4,29 +4,22 @@
 
 $genres = array();
 
-if (isset($_GET['f'])) {
+if (isset($_GET['s'])) {
 
 	// Uses GET to collect all of the variables that the user searches for.
-	$first_name  = $_GET['f'];
-	$middle_name = $_GET['m'];
-	$last_name   = $_GET['l'];
-	$id          = $_GET['u'];
+	$search  = $_GET['s'];
+	$category = $_GET['c'];
 
-  $users = User::find_user($first_name, $middle_name, $last_name, $id);
+    $users = User::find_user($search, $category);
 
 } else {
 
-  $last_name = "";
-  $middle_name = "";
-  $first_name = "";
-  $id = "";
+  $search = "";
   $users = User::find_all();
 
 }
 
 ?>
-
-
 
 	<table>
 		<thead>
