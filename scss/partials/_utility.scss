@@ -1,0 +1,19 @@
+// Utility
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// Floats
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.clearfix::after {
+	content: " ";
+
+	clear: both;
+
+	display: table;
+}

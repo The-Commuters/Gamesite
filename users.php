@@ -2,48 +2,49 @@
 
 <?php include("includes/header.php"); ?>
 
-<?php if (!$session->is_signed_in()) {redirect("login.php");} ?>
-
-<?php
-
-$users = User::find_all();
-
-?>
+<?php if (!$session->is_signed_in() || !User::is_admin($session->user_id)) {redirect("login.php");} ?>
 
 <div >  
 
-	<table>
-		<thead>
+<?php 
 
-			<tr>
-				<th>Image</th>
-				<th>Username</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Joined</th>
-			</tr>
+$genres = array();
 
-		</thead>
-		<tbody>
+//These are here so that htmlentities does not show errors, can be removed is the form is placed before it.
+if (!isset($_GET['f'])) {
 
-			<!-- For each loop that runs trough all the elements in the $games array. -->
-			<?php foreach ($users as $user) : ?>
+  $search = "";
+  $users = User::find_all();
 
-				<?php 
-				// Checks if the logged in user is an admin or not.
-				if (User::is_admin($session->user_id)) {
-					include("admin_includes/admin_userlist.php");
-				} else {
-					include("includes/userlist.php");
-				}
-				?>
+}
+?>
 
-			<?php endforeach; ?>
+<form id="user_search" >
+<div class="">
 
-		</tbody>
-	</table>
+<div>
 
+  <label>User Search</label>
+  <input type="text" onkeyup="update_userlist()" id="search" value="<?php echo htmlentities($search); ?>">
+
+  <select id="category" onchange="update_userlist()">
+    <option value="all" selected="selected">All</option>
+    <option value="first_name">First Name</option>
+    <option value="middle_name">Middle Name</option>
+    <option value="last_name">Last Name</option>
+    <option value="id">ID</option>
+  </select>
+
+</div>
+
+</form>
+  <div id="userlist">
+    <?php 
+    include("includes/userlist.php");
+    ?>
+  </div>
 </div>  
 
+<script src="js/functions.js"></script>
 
 <?php include("includes/footer.php"); ?>

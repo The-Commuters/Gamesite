@@ -1,0 +1,197 @@
+// Button
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// Index
+// 1 - Extendables
+// 1.1 - Base button
+// 1.2 - Transparent interaction
+// 1.3 - Filled interaction
+// 2 - Buttons
+// 2.1 - Text button
+// 2.2 - Outlined button
+// 2.3 - Contained button
+// 2.4 - Toggle button
+// 3 - Utility
+// 3.1 - Grouping
+// 3.2 - Ripple effect
+// 3.3 - Block
+
+// 1 - Extendables
+
+// 1.1 - Base button extendable
+%button {
+	display: inline-block;
+
+	transition: 0.3s;
+
+	border: 1px solid transparent;
+	border-radius: 0.3rem;
+	padding: 1rem 1.6rem 0.9rem;
+
+	user-select: none;
+
+	font-size: 1.4rem;
+	font-weight: 700;
+	text-align: center;
+	vertical-align: top;
+	text-transform: uppercase;
+	letter-spacing: 0.15rem;
+
+
+	&:focus {
+		outline: 0;
+	}
+
+	&[disabled] {
+		pointer-events: none;
+
+		color: $color-gray-600;
+	}
+
+}
+
+// 1.2 - Transparent interactions extendable
+%interaction-transparent {
+	&:hover {
+		background-color: scale-color($color-primary, $saturation: -75%, $alpha: -95%);
+	}
+
+	.active,
+	&:active,
+	&:focus,
+	&:checked {
+		background-color: scale-color($color-primary, $saturation: -75%, $alpha: -89%);
+	}
+}
+
+// 1.3 - Filled interactions extendable
+%interaction-filled {
+	&:hover {
+		background-color: scale-color($color-primary, $lightness: 10%);
+	}
+
+	.active,
+	&:active,
+	&:focus,
+	&:checked {
+		background-color: scale-color($color-primary, $lightness: -10%);
+	}
+
+	&[disabled] {
+		background-color: $color-gray-300;
+	}
+}
+
+// 2 - Buttons
+
+// 2.1 - Text button
+
+.button-text {
+	@extend %button;
+
+	background-color: transparent;
+
+	color: $color-primary;
+
+	@extend %interaction-transparent;
+}
+
+// 2.2 - Outlined button
+.button-outlined {
+	@extend %button;
+
+	border-color: $color-gray-400;
+
+	background-color: transparent;
+
+	color: $color-primary;
+
+	@extend %interaction-transparent;
+}
+
+// 2.3 - Contained button
+.button-contained {
+	@extend %button;
+
+	background-color: $color-primary;
+
+	color: white;
+	
+	@extend %interaction-filled;
+}
+
+// 2.4 - Toggle button
+.button-toggle {
+	@extend %button;
+
+	border-color: $color-gray-400;
+	padding: 0.8rem 1rem 0.7rem;
+	min-width: 4.1rem;
+	height: 4.1rem;
+
+	background-color: transparent;
+
+	@extend %interaction-transparent;
+
+	& > img,
+	& > svg {
+		transform: translateY(0.5rem);
+
+		margin-top: -1rem;
+		width: 2rem;
+		height: 2rem;
+	}
+}
+
+// 3 - Utility
+
+// 3.1 - Grouping buttons
+.button-group {
+	display: inline-flex;
+
+	> *:not(:first-child) {
+		border-left: none;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	> *:not(:last-child) {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+// 3.2 Button ripple effect
+.button-ripple {
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        background-image: radial-gradient(circle, scale-color($color-primary, $saturation: -50% ,$lightness: 50%) 10%, transparent 10.01%);
+        background-repeat: no-repeat;
+        background-position: 50%;
+        transform: scale(10, 10);
+        opacity: 0;
+        transition: transform 0.5s, opacity 1s;
+    }
+
+    &:active:after {
+        transform: scale(0, 0);
+        opacity: 0.3;
+        transition: 0s;
+    }
+}
+
+// 3.3 - Block button
+.button-block {
+	width: 100%;
+}

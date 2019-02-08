@@ -7,13 +7,15 @@ class Game extends Db_object {
 	protected static $db_table = "games"; //Slik at man kan endre navnet på databasetabellen.
 
 	//Array skal brukes i properies() og inneholder bruker-variablene til objektet.
-	protected static $db_table_fields = array('id', 'title', 'description', 'foldername', 'filename', 'size');
+	protected static $db_table_fields = array('id', 'title', 'description', 'foldername', 'filename', 'genre', 'creator', 'size');
 	public $id; 
 	public $title;
 	public $description;
 	public $foldername;
 	public $filename;
 	public $size;
+	public $genre;
+	public $creator;
 
 	public $tmp_path; //Temp path for storing games.
 	public $upload_directory = "games";
@@ -58,14 +60,12 @@ class Game extends Db_object {
 	public function game_path() {
 
 		return $this->upload_directory . DS . $this->foldername . DS . $this->filename;
-
 	}
 
 	// Collects the placement of the game path, used when showing the picture at gameslist.
 	public function game_image_path() {
 
 		return $this->upload_directory . DS . $this->foldername . DS . "image.png";
-
 	}
 
 	// Saves a game-object that has been made, the files and database-information.
@@ -126,6 +126,47 @@ class Game extends Db_object {
 
 		}
 	}
+
+	public function find_game($category, $genre, $search) {
+
+		$sql  = "SELECT * FROM games WHERE ";
+		$sql .= " genre LIKE '%{$genre}%' ";
+
+		if ($category == "title") {
+			$sql .= "AND title LIKE '%{$search}%' ";
+		} elseif ($category == "creator") {
+			$sql .= "AND creator LIKE '%{$search}%' ";
+		} else {
+			$sql .= "AND (title LIKE '%{$search}%' ";
+			$sql .= "OR creator LIKE '%{$search}%') ";
+		}
+
+		return self::find_by_query($sql);
+	}
+
+	public function get_rating() {
+
+		global $database;
+
+		$game_id = $this->id;
+
+		$sql  = "SELECT AVG(score) FROM ratings WHERE ";
+		$sql .= "game_id = '{$game_id}' ";
+		$sql .= "LIMIT 1";
+
+		$result = $database->query($sql);
+
+		// Breaks the answer up with implode and shows the average score.
+		if ($row = $result->fetch_assoc()) {
+			$average_score = implode(", ", $row);
+		}
+
+		// Ensures that there is only two decimals in the score.		
+		// Sends the score to the place where the function is called.
+		return !empty($average_score) ? number_format($average_score, 2, '.', ',') : false;
+
+	}
+
 } // End of games-class.
 
 

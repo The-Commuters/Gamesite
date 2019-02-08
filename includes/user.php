@@ -19,14 +19,14 @@ class User extends Db_object{
 	public $joined;
 
 	// Verifiserer at brukeren ligger i databasen, brukes ved login og kan brukes andre steder.
-	public static function verify_user($username, $password) {
+	public static function verify_user($email, $password) {
 
 		global $database;
-		$username = $database->escape_string($username);
+		$email = $database->escape_string($email);
 		$password = $database->escape_string($password);
 
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
-		$sql .= "username = '{$username}' ";
+		$sql .= "email = '{$email}' ";
 		$sql .= "AND password = '{$password}' ";
 		$sql .= "LIMIT 1";
 
@@ -64,7 +64,66 @@ class User extends Db_object{
 		return $error_array;
 	}
 
-		// checks if the user is an admin or not.
+	public static function add_friend($user_id, $friend_id) {
+
+		global $database;
+
+		// 0 in status will mean that the friend request is pending, when the reciever accepts this will be changed to 1
+		$status = 0;
+
+		$sql  = "INSERT INTO friend_list(user_1, user_2, status)";
+		$sql .= "VALUES ('{$user_id}', '{$friend_id}', '{$status}')";
+
+
+		if ($database->query($sql)) {
+
+			return true;
+
+		} else {
+
+			return false;
+
+		}
+
+	}
+
+		// The search function for users.
+	public function find_user($search, $category) {
+
+		// Adds things to the search with.
+		$sql  = "SELECT * FROM users WHERE ";
+
+		if ($category == 'all') {
+			$sql .= " first_name LIKE '%{$search}%' OR";
+			$sql .= " middle_name LIKE '%{$search}%' OR";
+			$sql .= " last_name LIKE '%{$search}%' OR";
+			$sql .= " id LIKE '%{$search}%'";
+		}
+
+		//Creator - name or parts of name
+		if ($category == 'first_name') {
+			$sql .= " first_name LIKE '%{$search}%'";
+		}
+		
+		//Creator - name or parts of name
+		if ($category == 'middle_name') {
+			$sql .= " middle_name LIKE '%{$search}%'";
+		}
+
+		//Creator - name or parts of name
+		if ($category == 'last_name') {
+			$sql .= " last_name LIKE '%{$search}%'";
+		}
+
+		//Creator - name or parts of name
+		if ($category == 'id') {
+			$sql .= " id LIKE '%{$search}%'";
+		}
+
+		return self::find_by_query($sql);
+	}
+
+	// checks if the user is an admin or not.
 	public static function is_admin($user_id) {
 
 		global $database;
@@ -77,9 +136,24 @@ class User extends Db_object{
 		$the_result_array = self::find_by_query($sql);
 
 		return !empty($the_result_array) ? true : false;
-
-
 	}
+
+	// checks if the user is an admin or not.
+	public static function is_friend($user_id, $friend_id) {
+
+		global $database;
+
+		$sql  = "SELECT * FROM friend_list WHERE ";
+		$sql .= "user_1     = '{$user_id}' ";
+		$sql .= "AND user_2 = '{$friend_id}' ";
+		$sql .= "OR user_2  = '{$user_id}' ";
+		$sql .= "AND user_1 = '{$friend_id}' ";
+		$sql .= "LIMIT 1";
+
+		$the_result_array = self::find_by_query($sql);
+
+		return !empty($the_result_array) ? true : false;
+	}	
 
 	// Collects the placement of the game path, used when showing the picture at  the list of users.
 	public function get_user_image() {
@@ -181,13 +255,10 @@ class User extends Db_object{
 
 			$user->create();
 
-			return $error_array; // ternery syntax.
+		} 
 
-		} else {
-
-			return $error_array;
-
-		}
+		return $error_array;
+	
 	}
 }
 
