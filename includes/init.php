@@ -4,7 +4,7 @@
 
 
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);  //backslash in windows, annet i mac.
-define('SITE_ROOT', DS . 'XAMPP'. DS . 'htdocs' . DS . 'gamesite');  //Dette er plassering fil folderen, må endres ettersom hvor den er plassert.
+defined('SITE_ROOT') ? null : define('SITE_ROOT', DS . 'XAMPP'. DS . 'htdocs' . DS . 'gamesite');  //Dette er plassering fil folderen, må endres ettersom hvor den er plassert.
 defined('INCLUDES_PATH') ? null : define('INCLUDES_PATH', SITE_ROOT . DS . 'includes');
 
 require_once("functions.php"); // Funksjoner som er utenfor klasser. 

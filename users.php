@@ -4,85 +4,47 @@
 
 <?php if (!$session->is_signed_in() || !User::is_admin($session->user_id)) {redirect("login.php");} ?>
 
-<?php
-//Sjekker om brukeren er logget inn, kommer ikke nødvendigvis til å være nødvendig i prosjektet.
-//Sender dem til login ved hjelp av funksjonen redirect i "functions.php".
+<div >  
+
+<?php 
 
 $genres = array();
 
-if (isset($_POST['submit'])) {
+//These are here so that htmlentities does not show errors, can be removed is the form is placed before it.
+if (!isset($_GET['f'])) {
 
-  $last_name = trim($_POST['last_name']); 
-  $middle_name = trim($_POST['middle_name']);
-  $first_name = trim($_POST['first_name']);
-  $id = trim($_POST['id']);
-
-  $users = User::find_user($first_name, $middle_name, $last_name, $id);
-
-} else {
-
-  $last_name = "";
-  $middle_name = "";
-  $first_name = "";
-  $id = "";
+  $search = "";
   $users = User::find_all();
 
 }
 ?>
 
-<div >  
-
-	<table>
-		<thead>
-
-			<tr>
-				<th>Image</th>
-				<th>Username</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Joined</th>
-			</tr>
-
-		</thead>
-		<tbody>
-
-
-				<?php 
-					include("admin_includes/admin_userlist.php");
-				?>
-
-		</tbody>
-	</table>
-
-<form id="user_search" action="" method="post">
+<form id="user_search" >
 <div class="">
 
-  <div>
-  <label>First Name</label>
-  <input type="text" name="first_name" value="<?php echo htmlentities($first_name); ?>">
-  </div>
+<div>
 
-  <div>
-  <label>Middle Name</label>
-  <input type="text" name="middle_name" value="<?php echo htmlentities($middle_name); ?>">
-  </div>
+  <label>User Search</label>
+  <input type="text" onkeyup="update_userlist()" id="search" value="<?php echo htmlentities($search); ?>">
 
-  <div>
-  <label>Last Name</label>
-  <input type="text" name="last_name" value="<?php echo htmlentities($last_name); ?>">
-  </div>
-
-  <div>
-  <label>ID</label>
-  <input type="text" name="id" value="<?php echo htmlentities($id); ?>">
-  </div>
+  <select id="category" onchange="update_userlist()">
+    <option value="all" selected="selected">All</option>
+    <option value="first_name">First Name</option>
+    <option value="middle_name">Middle Name</option>
+    <option value="last_name">Last Name</option>
+    <option value="id">ID</option>
+  </select>
 
 </div>
-<input type="submit" name="submit" value="Submit">
 
 </form>
-
+  <div id="userlist">
+    <?php 
+    include("includes/userlist.php");
+    ?>
+  </div>
 </div>  
 
+<script src="js/functions.js"></script>
 
 <?php include("includes/footer.php"); ?>
