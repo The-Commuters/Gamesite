@@ -7,20 +7,36 @@
 
 <head>
 
+    <!-- Character set -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Making IE act like Edge -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Setting the viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
+    <!-- Ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
     <title>Game-Site</title>
+
+    <!-- Page description -->
+    <meta name="description" content="Description of the page less than 150 characters">
+
+    <!-- Icon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- CSS files -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- JavaScript files -->
+    <script src="js/main.js" async></script>
      
 
 </head>
-
 <body>
-
+    <div>
     <a href="index.php">Index</a>
     <a href="games.php">List of games</a>
 
@@ -43,5 +59,4 @@
     <a href="register.php">Register</a></p>
 
     <?php } ?>
-
-    <div id="wrapper">
+    </div>

@@ -7,12 +7,13 @@
 if ($session->is_signed_in()) {redirect("index.php");}
 
 if (isset($_POST['submit'])) {
-	
-	$username = trim($_POST['username']); 
+	echo "User found!";
+		
+	$email = trim($_POST['email']); 
 	$password = trim($_POST['password']);
 
 	//Sjekker om brukeren er i databasen, ved metode som ligger i User-klassen(user.php)
-	$user_found = User::verify_user($username, $password);
+	$user_found = User::verify_user($email, $password);
 
 	if ($user_found) {
 		
@@ -20,43 +21,63 @@ if (isset($_POST['submit'])) {
 		$session->login($user_found);
 		redirect("index.php");
 	} else {
-		$the_message = "Your password or username are incorrect.";
+		$the_message = "Your password or email are incorrect.";
 	}
 
 } else {
 
-		$username = "";
+		$email = "";
 		$password = "";
 		$the_message = "";
 
 	}
 ?>
 
-<div>
+<!-- Main -->
+	<main class="login-wrapper">
+		<!-- Login container-->
+		<div class="login-container">
 
-<!-- Feilmeldingen kommer til å bli vist her -->
-<h4><?php echo $the_message; ?></h4>
-	
-<form id="login-id" action="" method="post">
-	
-	<div class="">
-		<label>Username</label>
+			<!-- Login -->
+			<form class="login" id="login" action="" method="post">
 
-		<!-- htmlentities er en tryggere måte å sette inn en string på -->
-		<input type="text" name="username" value="<?php echo htmlentities($username); ?>" >
+				<!-- Title -->
+				<div class="login-title-container">
+					<h1 class="login-title">Login</h1>
+				</div>
 
-	</div>
 
-	<div class="">
-		<label>Password</label>
-		<input type="password" name="password" value="<?php echo htmlentities($password); ?>">
-		
-	</div>
+				<div class="login-input">
+					<!-- E-mail input -->
+					<div class="float-label">
+						<input type="email" name="email" id="email" placeholder="E-mail" value="<?php echo htmlentities($email); ?>">
+						<label for="email">E-mail</label>
+					</div>
 
-	<div class="">
-		<input type="submit" name="submit" value="Submit">
-	</div>
+					<!-- Password input -->
+					<div class="float-label">
+						<input type="password" name="password" id="password" placeholder="Password" value="<?php echo htmlentities($password); ?>">
+						<label for="password">Password</label>
+					</div>
+				</div>
 
-</form>
 
-</div>
+				<!-- Controlls -->
+				<div class="login-controllers">
+					<!-- Sign up -->
+					<button class="button-text">Sign up</button>
+
+					<!-- log in -->
+					<input type="submit" name="submit" class="button-contained" value="submit">
+				</div>
+
+				<!-- Feilmeldingen kommer til å bli vist her -->
+				<h4><?php echo $the_message; ?></h4>
+
+			</form>
+
+		</div>
+
+		<!-- Login image container -->
+		<div class="login-image" style="background-image: url(img/login.jpg)"></div>
+	</main>

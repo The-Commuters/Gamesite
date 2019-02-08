@@ -19,14 +19,14 @@ class User extends Db_object{
 	public $joined;
 
 	// Verifiserer at brukeren ligger i databasen, brukes ved login og kan brukes andre steder.
-	public static function verify_user($username, $password) {
+	public static function verify_user($email, $password) {
 
 		global $database;
-		$username = $database->escape_string($username);
+		$email = $database->escape_string($email);
 		$password = $database->escape_string($password);
 
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
-		$sql .= "username = '{$username}' ";
+		$sql .= "email = '{$email}' ";
 		$sql .= "AND password = '{$password}' ";
 		$sql .= "LIMIT 1";
 
