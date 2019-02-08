@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 28. Jan, 2019 23:27 PM
--- Tjener-versjon: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Feb 08, 2019 at 11:24 AM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `achievements`
+-- Table structure for table `achievements`
 --
 
 CREATE TABLE `achievements` (
@@ -35,7 +35,7 @@ CREATE TABLE `achievements` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `friend_list`
+-- Table structure for table `friend_list`
 --
 
 CREATE TABLE `friend_list` (
@@ -46,7 +46,7 @@ CREATE TABLE `friend_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `friend_list`
+-- Dumping data for table `friend_list`
 --
 
 INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `status`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `gained_achievements`
+-- Table structure for table `gained_achievements`
 --
 
 CREATE TABLE `gained_achievements` (
@@ -67,7 +67,7 @@ CREATE TABLE `gained_achievements` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `games`
+-- Table structure for table `games`
 --
 
 CREATE TABLE `games` (
@@ -82,7 +82,7 @@ CREATE TABLE `games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `games`
+-- Dumping data for table `games`
 --
 
 INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `foldername`, `filename`, `size`) VALUES
@@ -94,7 +94,7 @@ INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `folderna
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `ratings`
+-- Table structure for table `ratings`
 --
 
 CREATE TABLE `ratings` (
@@ -107,7 +107,7 @@ CREATE TABLE `ratings` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -120,22 +120,23 @@ CREATE TABLE `users` (
   `last_name` varchar(50) NOT NULL,
   `user_image` varchar(100) NOT NULL,
   `joined` date NOT NULL,
-  `privilege_level` tinyint(4) NOT NULL
+  `privilege_level` tinyint(4) NOT NULL,
+  `verify_code` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1),
-(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0),
-(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0);
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`) VALUES
+(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, ''),
+(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, ''),
+(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '');
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `user_activity`
+-- Table structure for table `user_activity`
 --
 
 CREATE TABLE `user_activity` (
@@ -148,7 +149,7 @@ CREATE TABLE `user_activity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `user_activity`
+-- Dumping data for table `user_activity`
 --
 
 INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`) VALUES
