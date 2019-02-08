@@ -55,3 +55,29 @@ function update_gamelist() {
     xmlhttp.send();
     
 }
+
+function find_friend() {
+
+    var search = document.getElementById("search").value;
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+            document.getElementById("friend_search").innerHTML = this.responseText;
+    };
+
+    xmlhttp.open("GET","includes/friend_search.php?s="+search,true);
+    xmlhttp.send();
+    
+}
+
+function send_friend_request(user_id, other_id) {
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+            document.getElementById("send_friend_request").innerHTML = this.responseText;
+    };
+
+    xmlhttp.open("GET","includes/add_friend.php?i="+user_id+"&o="+other_id,true);
+    xmlhttp.send();
+    
+}

@@ -79,7 +79,6 @@ class User extends Db_object{
 		$sql  = "INSERT INTO friend_list(user_1, user_2, status)";
 		$sql .= "VALUES ('{$user_id}', '{$friend_id}', '{$status}')";
 
-
 		if ($database->query($sql)) {
 
 			return true;
@@ -92,11 +91,32 @@ class User extends Db_object{
 
 	}
 
+			// The search function for users.
+	public function find_friend($search) {
+
+		global $database;
+
+		if ($search !== "") {
+
+			$sql  = "SELECT * FROM users WHERE ";
+			$search      = $database->escape_string($search);
+			$sql .= " username LIKE '%{$search}%' ";
+			return self::find_by_query($sql);
+		}
+
+	}
+
+
 		// The search function for users.
 	public function find_user($search, $category) {
 
+		global $database;
+
 		// Adds things to the search with.
 		$sql  = "SELECT * FROM users WHERE ";
+
+		$search      = $database->escape_string($search);
+		$category    = $database->escape_string($category);
 
 		if ($category == 'all') {
 			$sql .= " first_name LIKE '%{$search}%' OR";
@@ -202,7 +222,7 @@ class User extends Db_object{
 		$sql .= "username = '{$username}' ";
 		$sql .= "LIMIT 1";
 		$the_result_array = self::find_by_query($sql);
-		
+
 		if (!empty($the_result_array)) {
 			array_push($error_array, "The username is already in use, pick something else!");
 		}
@@ -227,15 +247,10 @@ class User extends Db_object{
 		if($password != $password_check) { 
 			array_push($error_array,  "Your passwords do not match");
 		}
-
-		/*Error message: If the passwords contain other than numbers and letters.*/
-		if(preg_match('/[^A-Za-z0-9]/', $password)) {  
-			array_push($error_array, "Your password can only contain english characters or numbers");
-		}
 		
 		/*Error message: If the password is not between 5 and 30 characters long.*/
-		if((strlen($password) > 30) || strlen($password) < 5) {  
-			array_push($error_array, "Your password must be between 5 and 30 characters");
+		if((strlen($password) > 50) || strlen($password) < 5) {  
+			array_push($error_array, "Your password must be between 5 and 50 characters");
 		}
 
      	$password = password_hash($password, PASSWORD_DEFAULT);
