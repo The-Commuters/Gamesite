@@ -72,7 +72,10 @@ if (isset($_POST['submit'])) {
 				</div>
 
 				<!-- Feilmeldingen kommer til å bli vist her -->
-				<h4><?php echo $the_message; ?></h4>
+				<div class="login-fail">
+					<h4><?php echo $the_message; ?></h4>
+				</div>
+
 
 			</form>
 
