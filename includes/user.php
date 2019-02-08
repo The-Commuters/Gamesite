@@ -7,7 +7,7 @@ class User extends Db_object{
 	protected static $db_table = "users"; //Slik at man kan endre navnet på databasetabellen.
 
 	//Array skal brukes i properies() og inneholder bruker-variablene til objektet.
-	protected static $db_table_fields = array('username', 'email', 'password', 'first_name', 'middle_name', 'last_name', 'user_image', 'joined');
+	protected static $db_table_fields = array('username', 'email', 'password', 'first_name', 'middle_name', 'last_name', 'user_image', 'joined', 'verify_code' );
 	public $id;
 	public $username;
 	public $email;
@@ -17,6 +17,7 @@ class User extends Db_object{
 	public $last_name;
 	public $user_image;
 	public $joined;
+	public $verify_code;
 
 	// Verifiserer at brukeren ligger i databasen, brukes ved login og kan brukes andre steder.
 	public static function verify_user($email, $password) {
@@ -252,6 +253,7 @@ class User extends Db_object{
 			$user->last_name   = $last_name;
 			$user->user_image  = "1.png";
 			$user->joined      = date("Y-m-d");
+			$user->verify_code = md5($username . microtime());
 
 			$user->create();
 
