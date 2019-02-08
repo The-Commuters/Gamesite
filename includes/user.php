@@ -255,7 +255,7 @@ class User extends Db_object{
 			$user->joined      = date("Y-m-d");
 			$user->verify_code = md5($username . microtime());
 
-			Email::sendActivationMail($email, $first_name);
+			Email::send_ActivationMail($email, $first_name);
 
 			$user->create();
 
