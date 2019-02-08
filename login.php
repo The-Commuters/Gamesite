@@ -7,7 +7,6 @@
 if ($session->is_signed_in()) {redirect("index.php");}
 
 if (isset($_POST['submit'])) {
-	echo "User found!";
 		
 	$email = trim($_POST['email']); 
 	$password = trim($_POST['password']);
@@ -68,7 +67,7 @@ if (isset($_POST['submit'])) {
 					<button class="button-text">Sign up</button>
 
 					<!-- log in -->
-					<input type="submit" name="submit" class="button-contained" value="submit">
+					<input type="submit" name="submit" id="submit" class="button-contained" value="submit">
 				</div>
 
 				<!-- Feilmeldingen kommer til å bli vist her -->
@@ -76,6 +75,16 @@ if (isset($_POST['submit'])) {
 					<h4><?php echo $the_message; ?></h4>
 				</div>
 
+				<!-- Script that blocks the enter button from refreshing. -->
+				<!-- Should submit the form at a later period. -->
+				<script type="text/javascript">
+					document.getElementById("login").onkeypress = function(e) {
+					  var key = e.charCode || e.keyCode || 0;     
+					  if (key == 13) {
+					    e.preventDefault();
+					  }
+					}
+				</script>
 
 			</form>
 
@@ -84,3 +93,4 @@ if (isset($_POST['submit'])) {
 		<!-- Login image container -->
 		<div class="login-image" style="background-image: url(img/login.jpg)"></div>
 	</main>
+

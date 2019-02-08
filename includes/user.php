@@ -27,20 +27,25 @@ class User extends Db_object{
 
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
 		$sql .= "email = '{$email}' ";
-		$sql .= "AND password = '{$password}' ";
 		$sql .= "LIMIT 1";
 
-
-		/* ----------------------------- HASHED PASSORD SATT PÅ VENT TIL NÅ ------------------------------*/
+		// Sends the sql into the database, gets a array with the users back, only one because limit 1.
 		$the_result_array = self::find_by_query($sql);
 
-		//$hashed_password = $the_result_array->password; 
-		//$password = password_verify($password, $hashed_password);
-		
+		// Checks if the collected array is empty or not.
 		if (!empty($the_result_array)) {
 
-			// Array shif delivers the first
-			return  array_shift($the_result_array);
+			// Collects the hashed password from the array that was collected by the sql.
+			$hashed_password = $the_result_array[0]->password; 
+		
+			// Checks here where if the hashed password fits to the password that have been inserted by user.
+			if (password_verify($password, $hashed_password)) {
+
+				// Array shift delivers the one in place 0.
+				return  array_shift($the_result_array);
+			} 
+
+			return false;
 		} else {
 
 			return false;
@@ -172,7 +177,7 @@ class User extends Db_object{
 
 		global $database;
 
-		//Creates the error array, error messages will be pushed into this, and 
+		//Creates the error array, error messages will be pushed into this, and showed on the register page.
 		$error_array       = array();
 		$username          = $database->escape_string($username);
 		$email             = $database->escape_string($email);
@@ -197,6 +202,7 @@ class User extends Db_object{
 		$sql .= "username = '{$username}' ";
 		$sql .= "LIMIT 1";
 		$the_result_array = self::find_by_query($sql);
+		
 		if (!empty($the_result_array)) {
 			array_push($error_array, "The username is already in use, pick something else!");
 		}
@@ -232,6 +238,7 @@ class User extends Db_object{
 			array_push($error_array, "Your password must be between 5 and 30 characters");
 		}
 
+     	$password = password_hash($password, PASSWORD_DEFAULT);
 
 		//Check password - bruker check_password til å sjekke om et passord fungerer, kommer til å tilkalle verify_password.
 		if (empty($error_array)) {
