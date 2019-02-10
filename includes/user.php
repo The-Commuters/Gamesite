@@ -91,7 +91,7 @@ class User extends Db_object{
 
 	}
 
-			// The search function for users.
+			// The search function for users, uses when they look trough the list to add to friends.
 	public function find_friend($search) {
 
 		global $database;
@@ -148,6 +148,12 @@ class User extends Db_object{
 		return self::find_by_query($sql);
 	}
 
+
+	public static function find_messages() {
+		
+	}
+
+
 	// checks if the user is an admin or not.
 	public static function is_admin($user_id) {
 
@@ -163,7 +169,7 @@ class User extends Db_object{
 		return !empty($the_result_array) ? true : false;
 	}
 
-	// checks if the user is an admin or not.
+	// checks if the user is an friend or not.
 	public static function is_friend($user_id, $friend_id) {
 
 		global $database;

@@ -1,3 +1,6 @@
+<!-- This will show all the messages that a user have,
+	 Friend-request is the only one for now.           -->
+
 <?php include("init.php"); ?>
 
 <?php 
@@ -35,14 +38,16 @@ if (isset($_GET['s'])) {
 						</a>
 					</td>
 
-					<td><a href="profile.php?id=<?php echo $user->id; ?>"><?php echo $user->username; ?></a></td>
+					<td><a href="profile.php?id=<?php echo $user->id; ?>"><?php echo $user->username; ?> Wants to become your friend!</a></td>
 
 					<?php if (!User::is_friend($session->user_id, $user->id)) { ?>
 										
 					<td>
 						<!-- Here the button for the friend request is placed, and the message when it is sent. -->
-						<div id="send_friend_request">
-							<button onclick="send_friend_request(<?php echo $session->user_id ?>, <?php echo $user->id ?>)">Add Friend</button>
+						<div id="handle_friend_request">
+							<button onclick="handle_friend_request(<?php echo $session->user_id ?>, <?php echo $user->id ?>, 1)">Accept</button><br>
+							<button onclick="handle_friend_request(<?php echo $session->user_id ?>, <?php echo $user->id ?>, 0)">Decline</button>
+
 						</div>
 					</td>
 

@@ -1,5 +1,5 @@
 <!-- 
-This sends a friend request into the database.
+This accepts or deletes a friend-request depending on the last _get.
 -->
 
 <?php 
