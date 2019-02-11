@@ -149,11 +149,6 @@ class User extends Db_object{
 	}
 
 
-	public static function find_messages() {
-		
-	}
-
-
 	// checks if the user is an admin or not.
 	public static function is_admin($user_id) {
 

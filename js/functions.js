@@ -82,23 +82,8 @@ function send_friend_request(user_id, other_id) {
     
 }
 
-//Shows all the message, friend-requests and others.
-function find_messages() {
-
-    var search = document.getElementById("search").value;
-
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-            document.getElementById("friend_search").innerHTML = this.responseText;
-    };
-
-    xmlhttp.open("GET","includes/friend_search.php?s="+search,true);
-    xmlhttp.send();
-    
-}
-
 //Accept one of the friend request when the user accept, changed the friend_list status to 1.
-function handle_friend_request(user_id, other_id, act) {
+function handle_friend_request(user_id, other_id, id, act) {
 
     //Act is 0 if declined and 1 if accepted.
 
@@ -107,7 +92,7 @@ function handle_friend_request(user_id, other_id, act) {
             document.getElementById("handle_friend_request").innerHTML = this.responseText;
     };
     
-    xmlhttp.open("GET","includes/handle_friend_request.php?i="+user_id+"&o="+other_id,true);
+    xmlhttp.open("GET","includes/handle_friend_request.php?ui="+user_id+"&oi="+other_id+"&a="+act+"&id="+id,true);
     xmlhttp.send();
     
 }
