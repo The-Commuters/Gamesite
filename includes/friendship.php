@@ -27,17 +27,11 @@ class Friendship extends Db_object{
 	
 	}
 
+	// Will accept or decline depending on the $status is 1 or 0.
 	public function friend_request_handler($user_1, $user_2, $status, $id) {
 
 		global $database;
 		global $session;
-
-		$sql  = "SELECT * FROM friend_list WHERE ";
-		$sql .= "user_1     = '{$user_1}' ";
-		$sql .= "AND user_2 = '{$user_2}' ";
-		$sql .= "LIMIT 1";
-
-		$the_result_array = self::find_by_query($sql);
 
 		$friendship = new Friendship();
 		$friendship->user_1 = $user_1;
@@ -45,7 +39,13 @@ class Friendship extends Db_object{
 		$friendship->status = $status;
 		$friendship->id     = $id;
 
-		$friendship->update();
+		if ($status == 1) {
+			
+			$friendship->update();
+		} else {
+
+			$friendship->delete();
+		}
 
 	}
 

@@ -62,13 +62,14 @@ class User extends Db_object{
 		$middle_name    = $database->escape_string($middle_name);
 		$last_name      = $database->escape_string($last_name);
 
-		if(strlen($first_name  ) > 30 || strlen($middle_name) > 30 || strlen($last_name) > 30) { 
+		if(strlen($first_name) > 30 || strlen($middle_name) > 30 || strlen($last_name) > 30) { 
 			array_push($error_array,  "The firstname, middlename or last name cant be longer than 30 characters each.");
 		}
 
 		return $error_array;
 	}
 
+	// 
 	public static function add_friend($user_id, $friend_id) {
 
 		global $database;
@@ -91,7 +92,7 @@ class User extends Db_object{
 
 	}
 
-			// The search function for users, uses when they look trough the list to add to friends.
+	// The search function for users, uses when they look trough the list to add to friends.
 	public function find_friend($search) {
 
 		global $database;
@@ -188,13 +189,11 @@ class User extends Db_object{
 	}
 
 	// Verifiserer at brukeren ligger i databasen, brukes ved llogin og kan brukes andre steder.
-	// Kan kuttes opp senere.
 	public static function verify_new_user($username, $email, $password, $password_check, $first_name, $middle_name, $last_name) {
 
-		/*
-		 * Legger feilmeldinger inn i error_array, error arrayet sendes så tilbake. 
+		/* Legger feilmeldinger inn i error_array, error arrayet sendes så tilbake. 
 		 * Hvis det er felmeldinger vil ikke brukeren bli laget, og feilmeldingene vil vises.
-		*/
+		 */
 
 		global $database;
 
@@ -263,9 +262,6 @@ class User extends Db_object{
 
 			//sets up the new user and creates it with create();
 			$user = new user();
-
-			/*------------------------------------ Skal brukes når hashet passord settes opp --------------------------------------------*/
-			//$password = password_hash($password, PASSWORD_BCRYPT);
 
 			$user->username    = $username;
 			$user->email       = $email;

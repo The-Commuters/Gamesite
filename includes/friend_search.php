@@ -1,4 +1,12 @@
-<?php include("init.php"); ?>
+<?php 
+
+/* 
+ * This page will be called on at he page where the search for friends is done.
+ * It will go trough all of the users that the search could find and list them.
+*/
+
+include("init.php"); 
+?>
 
 <?php 
 
@@ -6,9 +14,10 @@ $genres = array();
 
 if (isset($_GET['s'])) {
 
-	// Uses GET to collect all of the variables that the user searches for.
+	// Is placed here by the javascript function.
 	$search  = $_GET['s'];
 
+	// Collects all the users with the friend_search function, that fits with the search.
     $users = User::find_friend($search);
 
 } else {
@@ -31,11 +40,24 @@ if (isset($_GET['s'])) {
 				<tr>
 					<td>
 						<a href="profile.php?id=<?php echo $user->id; ?>">
-							<img src="<?php echo $user->get_user_image();?>" style="height: 100px; width: 100px;">
+							<img src="<?php echo $user->get_user_image();?>" style="height: 50px; width: 50px;">
 						</a>
 					</td>
 
-					<td><a href="profile.php?id=<?php echo $user->id; ?>"><?php echo $user->username; ?></a></td>
+					<td><a href="profile.php?id=<?php echo $user->id; ?>">
+
+						<?php 
+
+						// Gets the username and then makes the letters lowercase.
+						$username = strtolower($user->username);
+
+						// Switches out what is searched with the same with marks around it.
+						echo str_replace($search, '<mark>' . $search . '</mark>', $username); 
+
+						?>
+							
+					</a></td>
+
 
 					<?php if (!User::is_friend($session->user_id, $user->id)) { ?>
 										
@@ -52,6 +74,6 @@ if (isset($_GET['s'])) {
 			<?php 
 			$i++;
 			if($i == 5) break;
-		} 
-	} ?>
+			} 
+		} ?>
 	</table>
