@@ -1,22 +1,15 @@
+<!-- 
+This sends a friend request into the database.
+-->
 
-	<!-- 
-	This deletes the user when the admin clicks on it un the admin_userlist.
-	And then it sends them back to the same list after it is done.  
-	-->
+<?php include("init.php"); ?>
 
+<?php 
 
-<?php require_once("../includes/header.php") ?>
+	if (!User::is_friend($_GET['i'], $_GET['o'])) {
+		$user = User::add_friend($_GET['i'], $_GET['o']);
+	}
 
-<?php if (!$session->is_signed_in()) {redirect("login.php");} ?>
-
-<?php
-
-if (empty($_GET['id'])) {
-	redirect("../users.php");
-}
-
-$user = User::add_friend($session->user_id, $_GET['id']);
-
-redirect("../users.php");
+	echo "Friend Request Sent!";
 
 ?>

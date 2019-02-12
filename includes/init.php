@@ -16,6 +16,7 @@ require_once("game.php"); // Klassen som styrer games.
 require_once("session.php");// Kontroll over nåværende session.
 require_once("achievement.php"); // Funksjoner som er utenfor klasser. 
 require_once("rating.php"); // Klassen som omhandler ratings.
+require_once("friendship.php"); // Klassen som omhandler ratings.
 //Place paths later on here.
 
 ?>

@@ -1,4 +1,7 @@
-<?php include("init.php"); ?>
+<?php 
+/* This is where the users is shown to the admin and the admin can delete, view and update them. */
+
+include("init.php"); ?>
 
 <?php 
 
@@ -46,10 +49,48 @@ if (isset($_GET['s'])) {
 					</a>
 				</td>
 
-				<td><a href="profile.php?id=<?php echo $user->id; ?>"><?php echo $user->username; ?></a></td>
+				<td><a href="profile.php?id=<?php echo $user->id; ?>">
+						
+					<?php 
 
-				<td><?php echo $user->first_name; ?></a></td>
-				<td><?php echo $user->last_name; ?></td>
+						// Gets the username and then makes the letters lowercase.
+						$username = strtolower($user->username);
+
+						// Switches out what is searched with the same with marks around it.
+						echo str_replace($search, '<mark>' . $search . '</mark>', $username); 
+
+					?>
+					
+				</a></td>
+
+				<td>
+
+					<?php 
+		
+						// Gets the username and then makes the letters lowercase.
+						$first_name = strtolower($user->first_name);
+
+						// Switches out what is searched with the same with marks around it.
+						echo str_replace($search, '<mark>' . $search . '</mark>', $first_name); 
+
+					?>
+
+				</td>
+
+				<td>
+
+					<?php 
+
+					// Gets the username and then makes the letters lowercase.
+					$last_name = strtolower($user->last_name);
+
+					// Switches out what is searched with the same with marks around it.
+					echo str_replace($search, '<mark>' . $search . '</mark>', $last_name); 
+
+					?>
+
+				</td>
+
 				<td><?php echo $user->joined; ?></td>
 				<td><a href="admin_includes/delete_user.php?id=<?php echo $user->id; ?>" 
 					onclick="return confirm('Are you sure you want to delete <?php echo $user->username ?>?')">Delete</a></td>

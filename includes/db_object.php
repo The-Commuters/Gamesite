@@ -186,7 +186,6 @@ class Db_object {
 
 	}
 
-
 	//Oppdaterer et objekt
 	public function update() {
 		
@@ -219,14 +218,16 @@ class Db_object {
 
 
 	public function delete() {
+
 		global $database;
+		global $session;
 
 		$sql = "DELETE FROM " . static::$db_table . " WHERE id= " . $database->escape_string($this->id);
 		$sql .= " LIMIT 1";
 
 		$database->query($sql);
 
-		//Logs the creation of a object in the user activity-table on the database.
+		//Logs the creation of a object in the user activity-table on the database, adds the database-table that it belongs to.
 	    $log = $this->log_user_activity("delete", $session->user_id, $this->id, static::$db_table);
 		
 		//If the affected rows equal one, then... 
