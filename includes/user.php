@@ -260,6 +260,11 @@ class User extends Db_object{
 
 			//Check username - bruker check_username til å sjekke om brukernavnet fungerer.
 
+
+			// Creates here the uinqe string that will be added to the username.
+			$user_id_str = User::create_unique_id();
+			$username .= $user_id_str;
+
 			//sets up the new user and creates it with create();
 			$user = new user();
 
@@ -278,6 +283,19 @@ class User extends Db_object{
 
 		return $error_array;
 	
+	}
+
+	// Function that creates the string that has to be added behind the username.
+	public static function create_unique_id($length = 5) {
+		$string = "#";
+		$characters = array_merge(range('A','Z'), range('a','z'), range('0','9'));
+		$max = count($characters) - 1;
+
+		for ($i = 0; $i < $length; $i++) {
+			$random = mt_rand(0, $max);
+			$string .= $characters[$random];
+		}
+		return $string;
 	}
 }
 
