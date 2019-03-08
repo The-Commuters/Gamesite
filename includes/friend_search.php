@@ -1,7 +1,7 @@
 <?php 
 
 /* 
- * This page will be called on at he page where the search for friends is done.
+ * This page will be called on at the page where the search for friends is done.
  * It will go trough all of the users that the search could find and list them.
 */
 
@@ -12,6 +12,7 @@ include("init.php");
 
 $genres = array();
 
+// hvis det har blitt søkt på noe.
 if (isset($_GET['s'])) {
 
 	// Is placed here by the javascript function.
@@ -39,6 +40,7 @@ if (isset($_GET['s'])) {
 
 				<tr>
 					<td>
+						<!-- Places the image of the user here, with a link to the users profile page. -->
 						<a href="profile.php?id=<?php echo $user->id; ?>">
 							<img src="<?php echo $user->get_user_image();?>" style="height: 50px; width: 50px;">
 						</a>
@@ -58,7 +60,7 @@ if (isset($_GET['s'])) {
 							
 					</a></td>
 
-
+					<!-- If the user is not a friend with this uder, hten show the send friend-request button -->
 					<?php if (!User::is_friend($session->user_id, $user->id)) { ?>
 										
 					<td>

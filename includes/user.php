@@ -18,7 +18,14 @@ class User extends Db_object{
 	public $user_image;
 	public $joined;
 
-	// Verifiserer at brukeren ligger i databasen, brukes ved login og kan brukes andre steder.
+	/**
+	 * Verifiy that the user lies in the database with this email and password, used with login
+	 * but can also be used other places.
+	 *
+	 * @param $email is the email that the user have written into the form
+	 * @param $password is the password that the user have written into the form.
+	 * @return true if the user is in the database, false if not.
+	*/
 	public static function verify_user($email, $password) {
 
 		global $database;
@@ -52,7 +59,15 @@ class User extends Db_object{
 		}	
 	}
 
-	// Verifies the update of user data on the settings.php.
+	/**
+	 * Verifies the update of user data on the settings.php, checks if it follows the 
+	 * rules is that is set.
+	 *
+	 * @param $first_name is the new first name
+	 * @param $middle_name is the new middle name
+	 * @param $last_name is the new last name
+	 * @return empty or not-empty $error_array
+	*/
 	public static function verify_update($first_name, $middle_name, $last_name) {
 
 		global $database;
@@ -69,7 +84,13 @@ class User extends Db_object{
 		return $error_array;
 	}
 
-	// 
+	/**
+	 * Sends the friend request to the user by adding a new row to the database in the friend_ist
+	 * with status of 0 which means that it will be pending.
+	 *
+	 * @param $user_id is the id of the user that is logged inn.
+	 * @param $friend_id is the id of the user that request will be sent to.
+	 */
 	public static function add_friend($user_id, $friend_id) {
 
 		global $database;
@@ -107,8 +128,16 @@ class User extends Db_object{
 
 	}
 
-
-		// The search function for users.
+	/**
+	 * The search function for users, it gets in one parameter containing what the
+	 * User want to search after, and one that describes what type it category(first_name,
+	 * last_name). Then it searches trough the database with the one it is told, and sends
+	 * back the list of users that fit.
+	 *
+	 * @param $search the input of the user, example: frank
+	 * @param $category the category that they want to search in, example: firstname.
+	 * @return a list that holds the users that fits the bill.
+	 */
 	public function find_user($search, $category) {
 
 		global $database;
@@ -149,8 +178,14 @@ class User extends Db_object{
 		return self::find_by_query($sql);
 	}
 
-
-	// checks if the user is an admin or not.
+	/**
+	 * checks if the user is an admin or not, does so by collecting the privilege_level form the
+	 * user's row in the database. If it is 1, then collect it and return True, meaning that the
+	 * user with the in-parameter user_id is an admin.
+	 *
+	 * @param $user_id the id of the user you want to question if it is a Administrator. 
+	 * @return True if the user is an admin or false if the user is not. 
+	*/
 	public static function is_admin($user_id) {
 
 		global $database;

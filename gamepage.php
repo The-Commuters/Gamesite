@@ -1,4 +1,13 @@
-<?php include("includes/header.php"); ?>
+<?php 
+
+/*
+ * Dette her er siden som spillet blir lagt på, man kommer hit etter å ha 
+ * trykt på et spill i listen over spill, skal og inneholde et rating-system som
+ * ligger under spillet.
+*/
+
+
+include("includes/header.php"); ?>
     
     <?php 
         $current_game_id = $_GET['game'];
@@ -8,6 +17,10 @@
         }    
     ?>
 
+<!-- Skal her hente fram muligheten for rating om man er logget inn, må endre den 
+     og gjøre den med AJAX. -->
+
+<!--
 <?php if ($session->is_signed_in()) { ?>
    
  <form id="gamescore" onchange="rate_game(<?php echo $game->id; ?>)">
@@ -35,3 +48,4 @@ if ($score = $game->get_rating()) {
 <script src="js/functions.js"></script>
 
  <?php include("includes/footer.php"); ?>
+-->

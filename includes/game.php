@@ -34,7 +34,15 @@ class Game extends Db_object {
 	);
 
 
-	// får $_FILES['uploaded_file'] som et argument($file), sets up the file.
+
+	/**
+	 * Gets the file as an argument and then does what it needs to do to it.
+	 * Checks if the file is empty or if there is an error, makes agame if all
+	 * is okay.
+	 *
+	 * @param $file the file that information will be collected from.
+	 * @return True if all OK, false if error.
+	*/
 	public function set_file($file) {
 
 		// If file is empty, if there is no file, if type is notr array.
@@ -52,24 +60,36 @@ class Game extends Db_object {
 			$this->filename   = substr($this->foldername, 0, -3) . "php"; // kutter av zip og legger til php på der canvas ligger.
 			$this->tmp_path   = $file['tmp_name'];
 			$this->size       = $file['size'];
-
+			return true;
 		}
 	}
-
-	// Collects the placement of the game path, used when showing the picture at gameslist.
+ 
+	/**
+	 * Collects the placement of the game path, used when the game is called.
+	 *
+	 * @return the path to the games-folder where the main js is stored.
+	 */
 	public function game_path() {
 
 		return $this->upload_directory . DS . $this->foldername . DS . $this->filename;
 	}
 
-	// Collects the placement of the game path, used when showing the picture at gameslist.
+	/**
+	 * Collects the placement of the game path, used when showing the picture at gameslist.
+	 *
+	 * @return the path to the games-folder where the image id stored.
+	 */
 	public function game_image_path() {
 
 		return $this->upload_directory . DS . $this->foldername . DS . "image.png";
 	}
 
-	// Saves a game-object that has been made, the files and database-information.
-	// Also does a lot of error checking.
+	/**
+	 * Stores a game object that have been made, and the database object for it.
+	 * It also does a lot of error-checking when it does so.
+	 *
+	 * @return true if the process was finished and false if there was errors.
+	 */
 	public function save() {
 		
 		//Checks if this has a game_id, if it has the game will be updated instead.
@@ -126,7 +146,16 @@ class Game extends Db_object {
 
 		}
 	}
-
+	/**
+	 * Uses the player-choosen category, genre and input search to
+	 * look trough all the games stored in the database, to then
+	 * collect all that fits.
+	 * 
+	 * @param $category is what the user wants to search in, like title or creator. 
+	 * @param $genre is the genre of game you want to search trough.
+	 * @param $search is the input that the user have written in the form.
+	 * @return the list of games that fits to the search.
+	 */
 	public function find_game($category, $genre, $search) {
 
 		$sql  = "SELECT * FROM games WHERE ";
@@ -144,6 +173,13 @@ class Game extends Db_object {
 		return self::find_by_query($sql);
 	}
 
+	/**
+	 * Collects the average score from one of the games based on the game id,
+	 * then sends it back after making sure that the number format is a double
+	 * with two decimals.
+	 *
+	 * @return The average score of the game with two decimals.
+	 */
 	public function get_rating() {
 
 		global $database;

@@ -1,4 +1,10 @@
-<?php include("init.php"); ?>
+<?php 
+
+/*
+ * Denne siden blir hentet når man karaktersetter et spill.
+*/
+
+include("init.php"); ?>
 
 <?php 
 

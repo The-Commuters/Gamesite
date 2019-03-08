@@ -1,9 +1,14 @@
-<!-- This will show all the messages that a user have, Friend-request is the only one for now.-->
+<?php 
 
-<?php include("init.php"); ?>
+/*
+ * This will show all the messages that a user have, Friend-request is the only one for now.
+*/
+
+include("init.php"); ?>
 
 <?php 
 
+// Collects all the friends-rewuest to be able to show them.
 $requests = Friendship::find_friend_requests($session->user_id);
 
 ?>
@@ -29,8 +34,10 @@ $requests = Friendship::find_friend_requests($session->user_id);
 					<td>
 						<!-- Here the button for the friend request is placed, and the message when it is sent. -->
 						<div id="handle_friend_request">
-							<button onclick="handle_friend_request(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, <?php echo $request->id ?>, 1)">Accept</button>
-							<button onclick="handle_friend_request(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, <?php echo $request->id ?>, 0)">Decline</button>
+							<button onclick="handle_friend_request(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
+							<?php echo $request->id ?>, 1)">Accept</button>
+							<button onclick="handle_friend_request(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
+							<?php echo $request->id ?>, 0)">Decline</button>
 						</div>
 					</td>
 
