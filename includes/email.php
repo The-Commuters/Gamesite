@@ -23,16 +23,17 @@ class Email extends User{
 
 	/*
 	To do 
-	* Legge til aktiveringslink 
+	* Legge til aktiveringslink : Doneish, trenger formatering
 	* Sjekke om denne er klikket på
 	* Deretter aktivere konto.
 
+
 	*/
-	public static function send_ActivationMail($to, $first_name){
+	public static function send_ActivationMail($to, $first_name, $verify_code ){
  
 		$subject = "Hello " . $first_name . " Please activate your account at CM Games";
 
-		$txt = "Please press the link below to acitvate your new account at CM Games" . " http://localhost/gamesite/activate.php=". "somenumbers";
+		$txt = "Please press the link below to activate your new account at CM Games " . "http://localhost/gamesite/activate.php?=" . $verify_code . " Thank you for registering. ";
 		
 		
 		self::mail_sender($to, $subject, $txt);

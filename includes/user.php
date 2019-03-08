@@ -253,9 +253,9 @@ class User extends Db_object{
 			$user->last_name   = $last_name;
 			$user->user_image  = "1.png";
 			$user->joined      = date("Y-m-d");
-			$user->verify_code = md5($username . microtime());
+			$user->verify_code = md5($username .microtime());
 
-			Email::send_ActivationMail($email, $first_name);
+			Email::send_ActivationMail($user->$email, $user->first_name, $user->verify_code );
 
 			$user->create();
 
