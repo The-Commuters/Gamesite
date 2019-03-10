@@ -22,6 +22,7 @@ require_once("session.php");// Kontroll over nåværende session.
 require_once("achievement.php"); // Funksjoner som er utenfor klasser. 
 require_once("rating.php"); // Klassen som omhandler ratings.
 require_once("friendship.php"); // Klassen som omhandler vennelister..
+require_once("message.php"); // Klassen som omhandler vennelister..
 //Place paths later on here.
 
 ?>

@@ -9,6 +9,7 @@
 
 include("includes/header.php"); ?>
     
+  <div>
     <?php 
         $current_game_id = $_GET['game'];
         $game = Game::find_by_id($current_game_id);
@@ -16,11 +17,10 @@ include("includes/header.php"); ?>
             include($game->game_path());       
         }    
     ?>
+  </div>
 
-<!-- Skal her hente fram muligheten for rating om man er logget inn, må endre den 
-     og gjøre den med AJAX. -->
 
-<!--
+
 <?php if ($session->is_signed_in()) { ?>
    
  <form id="gamescore" onchange="rate_game(<?php echo $game->id; ?>)">
@@ -48,4 +48,3 @@ if ($score = $game->get_rating()) {
 <script src="js/functions.js"></script>
 
  <?php include("includes/footer.php"); ?>
--->

@@ -1,3 +1,8 @@
+
+/**
+ *
+ * @param int game_id Spillet som det gjelder sin id.
+ */
 function rate_game(game_id) {
 
     var score = document.querySelector('input[name="stars"]:checked').value;
