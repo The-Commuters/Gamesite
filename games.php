@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/views/header.php"); ?>
 
 <?php 
 
@@ -38,7 +38,7 @@ if (!isset($_GET['s'])) {
 
   <div id="gameslist">
   <?php 
-    include("includes/gamelist.php");
+    include("includes/views/gamelist.php");
   ?>
   </div>
 
@@ -46,4 +46,4 @@ if (!isset($_GET['s'])) {
 
 <script src="js/functions.js"></script>
 
-<?php include("includes/footer.php"); ?>
+<?php include("includes/views/footer.php"); ?>

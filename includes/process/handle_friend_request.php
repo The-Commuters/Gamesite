@@ -3,7 +3,11 @@ This accepts or deletes a friend-request depending on the last _get.
 Will send a message back that is either positive or negative.
 -->
 
-<?php include("init.php"); ?>
+<?php 
+$path = $_SERVER['DOCUMENT_ROOT'];
+$path .= "/gamesite/includes/init.php";
+require_once($path); 
+?> 
 
 <?php 
 	$user_1 = $_GET['ui'];

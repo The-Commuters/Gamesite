@@ -9,7 +9,7 @@ function classAutoLoader($class) {
 
 	$class = strtolower($class);
 
-	$the_path = "includes/{$class}.php";
+	$the_path = "includes/classes/{$class}.php";
 
 	if(is_file($the_path) && !class_exists($class)) {
 

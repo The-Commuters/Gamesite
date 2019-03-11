@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/views/header.php"); ?>
 
 <?php 
 //Sjekker om brukeren er logget inn, kommer ikke nødvendigvis til å være nødvendig i prosjektet.
@@ -6,6 +6,6 @@
 
 ?>
  
-<?php include("includes/index_content.php"); ?>
+<?php include("includes/views/index_content.php"); ?>
 
-<?php include("includes/footer.php"); ?>
+<?php include("includes/views/footer.php"); ?>

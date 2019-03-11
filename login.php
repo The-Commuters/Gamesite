@@ -1,4 +1,4 @@
-<?php require_once("includes/header.php") ?>
+<?php require_once("includes/views/header.php") ?>
 
 <?php 
 //Tar her inn informasjonen til personen som logger inn, sjekker om de eksisterer i databasen, tar i bruk session.php til å ta vare på session-variablene.

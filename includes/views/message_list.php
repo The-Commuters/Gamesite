@@ -4,9 +4,9 @@
  * This will show all the messages that a user have, Friend-request is the only one for now.
 */
 
-include("init.php"); ?>
-
-<?php 
+$path = $_SERVER['DOCUMENT_ROOT'];
+$path .= "/gamesite/includes/init.php";
+require_once($path); 
 
 // Collects all the friends-rewuest to be able to show them.
 $requests = Friendship::find_friend_requests($session->user_id);

@@ -1,6 +1,6 @@
 <!-- Denne siden kommer til å innholde en liste over brukerne og en søkemotor for dem. -->
 
-<?php include("includes/header.php"); ?>
+<?php include("includes/views/header.php"); ?>
 
 <?php if (!$session->is_signed_in() || !User::is_admin($session->user_id)) {redirect("login.php");} ?>
 
@@ -40,11 +40,11 @@ if (!isset($_GET['f'])) {
 </form>
   <div id="userlist">
     <?php 
-    include("includes/userlist.php");
+    include("includes/views/userlist.php");
     ?>
   </div>
 </div>  
 
 <script src="js/functions.js"></script>
 
-<?php include("includes/footer.php"); ?>
+<?php include("includes/views/footer.php"); ?>

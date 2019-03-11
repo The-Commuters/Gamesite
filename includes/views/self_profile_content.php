@@ -1,4 +1,3 @@
-<?php require_once("includes/header.php") ?>
 
 <?php 
 if (empty($_GET['id'])) {
@@ -22,7 +21,7 @@ echo "This is your profile page " . $user->username . ", but there is little for
 <!-- This is where the friend list is called -->
 <div id="friend_search">
   <?php 
-    include("includes/friend_search.php");
+    include("includes/process/friend_search.php");
   ?>
 </div>
 
@@ -30,7 +29,7 @@ echo "This is your profile page " . $user->username . ", but there is little for
 
 <div id="find_messages">
   <?php 
-    include("includes/message_list.php");
+    include("message_list.php");
   ?>
 </div>
 

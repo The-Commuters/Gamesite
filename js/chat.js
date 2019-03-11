@@ -10,7 +10,7 @@ $(document).ready(function() {
         var chatInputString = $chatInput.val();
 
         // Uses here get to call upon the write_chat php-file.
-        $.get("./includes/write_chat.php", {
+        $.get("./includes/process/write_chat.php", {
             username: userNameString,
             text: chatInputString
         });
@@ -21,7 +21,7 @@ $(document).ready(function() {
     }
 
     function retrieveMessages() {
-        $.get("./includes/read_chat.php", function(data) {
+        $.get("./includes/process/read_chat.php", function(data) {
             $chatOutput.html(data); 
         });
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10. Mar, 2019 16:57 PM
+-- Generation Time: 11. Mar, 2019 19:39 PM
 -- Server-versjon: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -55,7 +55,8 @@ INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `status`) VALUES
 (96, 1, 12, 1),
 (98, 1, 3, 1),
 (100, 1, 1, 1),
-(101, 1, 16, 0);
+(101, 1, 16, 0),
+(102, 1, 14, 0);
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,7 @@ CREATE TABLE `ratings` (
 --
 
 INSERT INTO `ratings` (`id`, `game_id`, `user_id`, `score`) VALUES
-(11, 1, 1, 2),
+(11, 1, 1, 1),
 (12, 2, 1, 5),
 (14, 3, 1, 4),
 (15, 4, 1, 5),
@@ -206,7 +207,14 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (28, 'create', '1', '0', 'user_chat', '2019-03-10 15:49:37'),
 (29, 'create', '1', '0', 'user_chat', '2019-03-10 15:50:34'),
 (30, 'create', '1', '0', 'user_chat', '2019-03-10 15:50:49'),
-(31, 'create', '1', '0', 'user_chat', '2019-03-10 15:53:21');
+(31, 'create', '1', '0', 'user_chat', '2019-03-10 15:53:21'),
+(32, 'update', '1', '11', 'ratings', '2019-03-10 16:05:46'),
+(33, 'update', '1', '11', 'ratings', '2019-03-10 16:05:48'),
+(34, 'update', '1', '11', 'ratings', '2019-03-10 16:05:50'),
+(35, 'update', '1', '11', 'ratings', '2019-03-10 16:05:53'),
+(36, 'update', '1', '11', 'ratings', '2019-03-10 16:05:55'),
+(37, 'create', '1', '0', 'user_chat', '2019-03-10 16:37:16'),
+(38, 'create', '1', '0', 'user_chat', '2019-03-10 17:26:18');
 
 -- --------------------------------------------------------
 
@@ -216,30 +224,12 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 
 CREATE TABLE `user_chat` (
   `id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `time` datetime NOT NULL,
   `text` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dataark for tabell `user_chat`
---
-
-INSERT INTO `user_chat` (`id`, `user_id`, `username`, `time`, `text`) VALUES
-(1, 1, '', '2019-03-10 14:08:34', 'dero'),
-(2, 2, 'dererer', '2019-03-10 14:10:02', 'asdsda'),
-(0, 0, 'Somebody', '0000-00-00 00:00:00', 'Hey'),
-(0, 0, 'Somebodys', '0000-00-00 00:00:00', 'Hay'),
-(0, 0, '', '0000-00-00 00:00:00', 'Lol'),
-(0, 0, '', '0000-00-00 00:00:00', 'Der,'),
-(0, 0, '', '0000-00-00 00:00:00', 'Der,'),
-(0, 0, 'WilliWonka', '0000-00-00 00:00:00', 'Hello There People'),
-(0, 0, 'WilliWonka', '0000-00-00 00:00:00', 'WilliWonkaStoner'),
-(0, 0, 'WilliWonka', '0000-00-00 00:00:00', 'ddfsf'),
-(0, 0, 'WilliWonka', '0000-00-00 00:00:00', 'FF'),
-(0, 0, 'WilliWonka', '0000-00-00 00:00:00', 'dfsdf'),
-(0, 0, 'WilliWonka', '0000-00-00 00:00:00', 'dfdfdf');
 
 --
 -- Indexes for dumped tables
@@ -295,7 +285,7 @@ ALTER TABLE `achievements`
 -- AUTO_INCREMENT for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `games`
@@ -319,7 +309,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

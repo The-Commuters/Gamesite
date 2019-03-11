@@ -6,8 +6,7 @@
  * ligger under spillet.
 */
 
-
-include("includes/header.php"); ?>
+include("includes/views/header.php"); ?>
     
   <div>
     <?php 
@@ -18,8 +17,6 @@ include("includes/header.php"); ?>
         }    
     ?>
   </div>
-
-
 
 <?php if ($session->is_signed_in()) { ?>
    
@@ -47,4 +44,4 @@ if ($score = $game->get_rating()) {
 
 <script src="js/functions.js"></script>
 
- <?php include("includes/footer.php"); ?>
+ <?php include("includes/views/footer.php"); ?>

@@ -5,7 +5,10 @@
  * It will go trough all of the users that the search could find and list them.
 */
 
-include("init.php"); 
+$path = $_SERVER['DOCUMENT_ROOT'];
+$path .= "/gamesite/includes/init.php";
+require_once($path); 
+
 ?>
 
 <?php 

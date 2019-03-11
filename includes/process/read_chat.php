@@ -1,6 +1,8 @@
 <?php
 	
-	include("init.php");
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	$path .= "/gamesite/includes/init.php";
+	require_once($path); 
 
 	$messages = Message::find_all();
 
@@ -11,7 +13,6 @@
         $time=date('G:i', strtotime($message->time));
 
         echo "<p>$time | $username: $text</p>\n";
-
 
     endforeach; 
 

@@ -19,7 +19,7 @@ function rate_game(game_id) {
         }
     };
 
-    xmlhttp.open("GET","includes/rate_game.php?s="+score+"&g="+game_id,true);
+    xmlhttp.open("GET","includes/process/rate_game.php?s="+score+"&g="+game_id,true);
     xmlhttp.send();
     }
 }
@@ -36,7 +36,7 @@ function update_userlist() {
             document.getElementById("userlist").innerHTML = this.responseText;
     };
 
-    xmlhttp.open("GET","includes/userlist.php?s="+search+"&c="+category,true);
+    xmlhttp.open("GET","includes/views/userlist.php?s="+search+"&c="+category,true);
     xmlhttp.send();
     
 }
@@ -56,7 +56,7 @@ function update_gamelist() {
             document.getElementById("gameslist").innerHTML = this.responseText;
     };
 
-    xmlhttp.open("GET","includes/gamelist.php?s="+search+"&c="+category+"&g="+genre,true);
+    xmlhttp.open("GET","includes/views/gamelist.php?s="+search+"&c="+category+"&g="+genre,true);
     xmlhttp.send();
     
 }
@@ -70,7 +70,7 @@ function find_friend() {
             document.getElementById("friend_search").innerHTML = this.responseText;
     };
 
-    xmlhttp.open("GET","includes/friend_search.php?s="+search,true);
+    xmlhttp.open("GET","includes/process/friend_search.php?s="+search,true);
     xmlhttp.send();
     
 }
@@ -82,7 +82,7 @@ function send_friend_request(user_id, other_id) {
             document.getElementById("send_friend_request").innerHTML = this.responseText;
     };
 
-    xmlhttp.open("GET","includes/add_friend.php?i="+user_id+"&o="+other_id,true);
+    xmlhttp.open("GET","includes/process/add_friend.php?i="+user_id+"&o="+other_id,true);
     xmlhttp.send();
     
 }
@@ -97,7 +97,7 @@ function handle_friend_request(user_id, other_id, id, act) {
             document.getElementById("handle_friend_request").innerHTML = this.responseText;
     };
     
-    xmlhttp.open("GET","includes/handle_friend_request.php?ui="+user_id+"&oi="+other_id+"&a="+act+"&id="+id,true);
+    xmlhttp.open("GET","includes/process/handle_friend_request.php?ui="+user_id+"&oi="+other_id+"&a="+act+"&id="+id,true);
     xmlhttp.send();
     
 }

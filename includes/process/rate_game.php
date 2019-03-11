@@ -4,7 +4,10 @@
  * Denne siden blir hentet når man karaktersetter et spill.
 */
 
-include("init.php"); ?>
+$path = $_SERVER['DOCUMENT_ROOT'];
+$path .= "/gamesite/includes/init.php";
+require_once($path); 
+?> 
 
 <?php 
 
