@@ -1,6 +1,11 @@
 <!-- Denne siden kommer til å innholde en liste over brukerne og en søkemotor for dem. -->
 
-<?php include("includes/header.php"); ?>
+<?php include("includes/header.php"); 
+
+// Email::send_ActivationMail("newuser@localhost", "Markus", "hI" );
+
+?>
+
 
 
 
