@@ -65,7 +65,7 @@ if (isset($_GET['s'])) {
   <?php 
   if ($session->is_signed_in()) {
     if (User::is_admin($session->user_id)) { ?>
-	<td><a href="admin_includes/delete_game.php?id=<?php echo $game->id; ?>" 
+	<td><a href="includes/process/delete_game.php?id=<?php echo $game->id; ?>" 
 		onclick="return confirm('Are you sure you want to delete <?php echo $game->title ?>')">Delete</a></td>
   <?php
       } 

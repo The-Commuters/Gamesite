@@ -95,7 +95,7 @@ if (isset($_GET['s'])) {
 				</td>
 
 				<td><?php echo $user->joined; ?></td>
-				<td><a href="admin_includes/delete_user.php?id=<?php echo $user->id; ?>" 
+				<td><a href="includes/process/delete_user.php?id=<?php echo $user->id; ?>" 
 					onclick="return confirm('Are you sure you want to delete <?php echo $user->username ?>?')">Delete</a></td>
 				<td><a href="settings.php?id=<?php echo $user->id; ?>">Edit</a></td>
 				<td><a href="profile.php?id=<?php echo $user->id; ?>">View</a></td>
