@@ -3,11 +3,6 @@
 	This is the index page, where people will enter the page.
 </p>
 
-	<!-- Header -->
-	<header>
-
-	</header>
-
 	<!-- Main -->
 	<main>
 
@@ -19,9 +14,5 @@
 				</div>
 			</div>
 		</div>
-
-		<?php include("userchat.php"); ?>
-
-
 
 	</main>

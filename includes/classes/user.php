@@ -113,7 +113,12 @@ class User extends Db_object{
 
 	}
 
-	// The search function for users, uses when they look trough the list to add to friends.
+	/**
+	 * The search function for users, uses when they look trough the list to add to friends.
+	 *
+	 * @param
+	 * @return
+	 */
 	public function find_friend($search) {
 
 		global $database;

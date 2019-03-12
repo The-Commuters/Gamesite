@@ -1,8 +1,8 @@
 <div class="chatcontainer">
 	<main>
 		<div class="userSettings">
-			<label for="userName">Username:</label>
-			<input id="userName" type="text" placeholder="Username" maxlength="32" value="Somebody">
+			<label id="chatid">Chat ID:</label>
+			<input id="chatId" type="text" placeholder="<?php echo $current_game_id; ?>" maxlength="32" value="<?php echo $current_game_id; ?>">
 		</div>
 		<div class="chat">
 			<div id="chatOutput"></div>

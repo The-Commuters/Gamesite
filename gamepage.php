@@ -18,30 +18,33 @@ include("includes/views/header.php"); ?>
     ?>
   </div>
 
-<?php if ($session->is_signed_in()) { ?>
-   
- <form id="gamescore" onchange="rate_game(<?php echo $game->id; ?>)">
-  <input type="radio" name="stars" value="1"> 1 star
-  <input type="radio" name="stars" value="2"> 2 star
-  <input type="radio" name="stars" value="3"> 3 star
-  <input type="radio" name="stars" value="4"> 4 star
-  <input type="radio" name="stars" value="5"> 5 star
-</form>
+  <!-- The userchat is placed here. -->
+  <?php include("includes/views/userchat.php"); ?>
 
-<?php } ?>
+  <?php if ($session->is_signed_in()) { ?>
+     
+   <form id="gamescore" onchange="rate_game(<?php echo $game->id; ?>)">
+    <input type="radio" name="stars" value="1"> 1 star
+    <input type="radio" name="stars" value="2"> 2 star
+    <input type="radio" name="stars" value="3"> 3 star
+    <input type="radio" name="stars" value="4"> 4 star
+    <input type="radio" name="stars" value="5"> 5 star
+  </form>
 
-<div id="message">
+  <?php } ?>
 
-<?php 
-if ($score = $game->get_rating()) {
-    echo $score; 
-} else {
-    echo "Game has never been rated";
-}
-?>
+  <div id="message">
 
-</div>
+  <?php 
+  if ($score = $game->get_rating()) {
+      echo $score; 
+  } else {
+      echo "Game has never been rated";
+  }
+  ?>
 
-<script src="js/functions.js"></script>
+  </div>
 
- <?php include("includes/views/footer.php"); ?>
+  <script src="js/functions.js"></script>
+
+  <?php include("includes/views/footer.php"); ?>
