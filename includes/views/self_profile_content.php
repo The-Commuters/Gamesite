@@ -34,3 +34,8 @@ echo "This is your profile page " . $user->username . ", but there is little for
 </div>
 
 <script src="js/functions.js"></script>
+
+<?php 
+   include("friendlist.php");
+?>
+

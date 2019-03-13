@@ -47,7 +47,7 @@ $(document).ready(function() {
         sendMessage();
     });
 
-    // Retrieves the messages from the database with
+    // Retrieves the messages from the database with every interval
     setInterval(function() {
         retrieveMessages();
     }, chatInterval);

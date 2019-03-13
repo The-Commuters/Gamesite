@@ -32,6 +32,25 @@ class Friendship extends Db_object{
 	}
 
 	/**
+	 * Finds all the friend that a user have or have been accepted by.
+	 *
+	 * @param Is the id of the reciever you want the friend requests to.
+	 * @return Is the friendlist of the user that is logged in.
+	 */
+	public static function find_friends($user_id) {
+		
+		global $database;
+
+		$sql = "SELECT * FROM friend_list WHERE ";
+		$sql .= "(user_1 = '{$user_id}' OR ";
+		$sql .= "user_2 = '{$user_id}') ";
+		$sql .= "AND status = '1' ";
+
+		return self::find_by_query($sql);
+	
+	}
+
+	/**
 	 * Will here accept or decline depending on wheter the input-param $status
 	 * is 1 or 0, if it is 1 then it will be accepted and the row in the database
 	 * will be updated to say so.

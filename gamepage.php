@@ -18,9 +18,6 @@ include("includes/views/header.php"); ?>
     ?>
   </div>
 
-  <!-- The userchat is placed here. -->
-  <?php include("includes/views/userchat.php"); ?>
-
   <?php if ($session->is_signed_in()) { ?>
      
    <form id="gamescore" onchange="rate_game(<?php echo $game->id; ?>)">
@@ -46,5 +43,11 @@ include("includes/views/header.php"); ?>
   </div>
 
   <script src="js/functions.js"></script>
+
+    <!-- The userchat is placed here. -->
+  <?php 
+  $chatroom_id = $current_game_id;
+  include("includes/views/userchat.php"); 
+  ?>
 
   <?php include("includes/views/footer.php"); ?>

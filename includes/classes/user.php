@@ -116,8 +116,8 @@ class User extends Db_object{
 	/**
 	 * The search function for users, uses when they look trough the list to add to friends.
 	 *
-	 * @param
-	 * @return
+	 * @param $search is the input of the user.
+	 * @return the list of users that is found.
 	 */
 	public function find_friend($search) {
 
@@ -205,7 +205,14 @@ class User extends Db_object{
 		return !empty($the_result_array) ? true : false;
 	}
 
-	// checks if the user is an friend or not.
+	// 
+	/**
+	 * checks if the user is an friend of the logged in user or not.
+	 *
+	 * @param 
+	 * @param 
+	 * @return
+	 */
 	public static function is_friend($user_id, $friend_id) {
 
 		global $database;
@@ -228,12 +235,21 @@ class User extends Db_object{
 		return "img" . DS . "profile" . DS . "default" . DS . $this->user_image;
 	}
 
-	// Verifiserer at brukeren ligger i databasen, brukes ved llogin og kan brukes andre steder.
+	/**
+	 * Verifiserer at brukeren ligger i databasen, brukes ved registrering og kan brukes andre steder.
+	 * Legger feilmeldinger inn i error_array, error arrayet sendes så tilbake. 
+     * Hvis det er felmeldinger vil ikke brukeren bli laget, og feilmeldingene vil vises.
+     *
+	 * @param $username
+	 * @param $email
+	 * @param $password
+	 * @param $password_check
+	 * @param $first_name
+	 * @param $middle_name
+	 * @param $last_name
+	 * @return the error_array, empty if all is well.
+	 */
 	public static function verify_new_user($username, $email, $password, $password_check, $first_name, $middle_name, $last_name) {
-
-		/* Legger feilmeldinger inn i error_array, error arrayet sendes så tilbake. 
-		 * Hvis det er felmeldinger vil ikke brukeren bli laget, og feilmeldingene vil vises.
-		 */
 
 		global $database;
 
@@ -325,7 +341,10 @@ class User extends Db_object{
 	
 	}
 
-	// Function that creates the string that has to be added behind the username.
+	/**
+	 * Function that creates the string that has to be added behind the username.
+	 *
+	 */
 	public static function create_unique_id($length = 5) {
 		$string = "#";
 		$characters = array_merge(range('A','Z'), range('a','z'), range('0','9'));
