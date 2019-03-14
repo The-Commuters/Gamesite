@@ -12,24 +12,15 @@
 */
 if (isset($_GET["code"])){
 	$code = ($_GET["code"]);
-	//echo htmlspecialchars($code);
-	//$sql = "select * from users WHERE '{$verify_code}' = " . $code;
-	//User::find_by_query($sql);
+
+	User::activate_user($code);
 
 }else{
 	echo "Activation could not be completed";
 }
 
 
-
-
-
-
 ?>
-
-
-
-
 
 
 <script src="js/functions.js"></script>

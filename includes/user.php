@@ -266,6 +266,35 @@ class User extends Db_object{
 		return $error_array;
 	
 	}
+	public static function find_user_by_code($code){
+	
+		global $database;
+		// Tar bort eventuele ting som ikke skal være med i stringen
+		$code = $database->escape_string($code);
+		
+		// Finner ut om verify_code også ligger i databasen
+		$sql = "SELECT * FROM ". self::$db_table ." WHERE verify_code = '{$code}' Limit 1";
+		
+		// retunerer det database objektet som blir funnet 
+		 return self::find_by_query($sql); 
+	}
+
+	public static function activate_user($code){
+		global $database;
+
+
+		$the_result_array = self::find_user_by_code($code);
+		var_dump($the_result_array);
+
+		// Får in db-objektet og ser om den er tom
+		if(!empty($the_result_array)){
+				
+		}
+
+
+
+	}
+
 }
 
 ?>
