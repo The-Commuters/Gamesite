@@ -14,4 +14,4 @@ $chatroom_id is set up wherever this is called, and will decide what room id it 
 		</div>
 	</main>
 </div>
-<script src="js/chat.js"></script>
+<script src="assets/js/chat.js"></script>

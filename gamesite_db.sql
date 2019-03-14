@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11. Mar, 2019 19:39 PM
+-- Generation Time: 14. Mar, 2019 20:01 PM
 -- Server-versjon: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -29,7 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `achievements` (
-  `id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `text` varchar(255) NOT NULL,
+  `game_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -55,8 +58,8 @@ INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `status`) VALUES
 (96, 1, 12, 1),
 (98, 1, 3, 1),
 (100, 1, 1, 1),
-(101, 1, 16, 0),
-(102, 1, 14, 0);
+(102, 1, 14, 0),
+(103, 1, 17, 0);
 
 -- --------------------------------------------------------
 
@@ -115,7 +118,7 @@ CREATE TABLE `ratings` (
 --
 
 INSERT INTO `ratings` (`id`, `game_id`, `user_id`, `score`) VALUES
-(11, 1, 1, 1),
+(11, 1, 1, 4),
 (12, 2, 1, 5),
 (14, 3, 1, 4),
 (15, 4, 1, 5),
@@ -147,14 +150,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'Willy', 'Wonka', 'Wonksensen', '1.png', '2019-01-23', 1),
+(1, 'hehe@willi.no', 'WilliWonka', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'Willy', 'Wonkas', 'Wonksensen', '1.png', '2019-01-23', 1),
 (2, 'Derp@Derpesen.no', 'Derperud', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'Dermont', 'Derp', 'Derperud', '3.png', '2019-01-23', 0),
-(3, 'heman@willi.no', 'heman', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0),
+(3, 'heman@willi.no', 'heman', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'misterio', 'universido', 'Wonkondo', '2.png', '2019-01-23', 0),
 (10, 'qwert@lol.mon', 'WilliWonkabob', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'asdoln', 'dolnes', 'papa', '1.png', '2019-02-08', 0),
 (12, 'qwert@lol.mon', 'WilliWonkabobdsd', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'asdoln', 'dolnes', 'papa', '1.png', '2019-02-08', 0),
 (13, 'qwert@lol.mon', 'WilliWonkabobdsd', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'asdoln', 'dolnes', 'papa', '1.png', '2019-02-08', 0),
 (14, 'qwert@lol.mon', 'WilliWonkabobdsdsdsd', '$2y$10$JKhFJm5uGNYIL/qCWJY2bO.3vEOY8pW3n7t6qtzrmBvE69J7sDU82', 'asdoln', 'dolnes', 'papa', '1.png', '2019-02-08', 0),
-(16, 'vovje@livve.no', 'JonasGStÃ¸re#eFl7B', '$2y$10$HXfGfnEQqrZzrtsUl.44F.YoNtB2DV46aYqS4Z6/8Sy1PohJQic6C', 'qwe', 'wer', 'ert', '1.png', '2019-02-13', 0),
 (17, 'sadad@asda.aasss', 'vaskens#8Cp3D', '$2y$10$pSdsEy68UZ1wyYl.q/4ldOVp1Gzeqq316ZFSKTvT1VQLCfilbdVDq', 'qwe', 'qwe', 'qwre', '1.png', '2019-02-13', 0);
 
 -- --------------------------------------------------------
@@ -166,8 +168,8 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middl
 CREATE TABLE `user_activity` (
   `id` int(11) NOT NULL,
   `act` varchar(25) NOT NULL,
-  `user_id` varchar(100) NOT NULL,
-  `target_id` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `target_id` int(11) NOT NULL,
   `type` varchar(25) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -177,44 +179,25 @@ CREATE TABLE `user_activity` (
 --
 
 INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`) VALUES
-(1, 'delete', '', '16', 'users', '2019-02-09 19:09:01'),
-(2, 'update', '1', '94', 'friend_list', '2019-02-11 16:54:52'),
-(3, 'update', '1', '96', 'friend_list', '2019-02-11 16:55:47'),
-(4, 'update', '1', '97', 'friend_list', '2019-02-11 16:55:49'),
-(5, 'update', '1', '95', 'friend_list', '2019-02-11 16:55:52'),
-(6, 'update', '1', '98', 'friend_list', '2019-02-11 19:16:50'),
-(7, 'update', '1', '98', 'friend_list', '2019-02-11 19:50:12'),
-(8, 'update', '1', '94', 'friend_list', '2019-02-11 19:50:17'),
-(9, 'update', '1', '97', 'friend_list', '2019-02-11 19:50:20'),
-(10, 'update', '1', '95', 'friend_list', '2019-02-11 23:33:39'),
-(11, 'update', '1', '96', 'friend_list', '2019-02-12 14:48:09'),
-(12, 'update', '1', '95', 'friend_list', '2019-02-12 15:07:18'),
-(13, 'update', '1', '96', 'friend_list', '2019-02-12 15:07:24'),
-(14, 'delete', '1', '97', 'friend_list', '2019-02-12 15:07:27'),
-(15, 'update', '1', '98', 'friend_list', '2019-02-12 15:07:29'),
-(16, 'delete', '1', '99', 'friend_list', '2019-02-12 15:07:30'),
-(17, 'create', '16', '16', 'users', '2019-02-13 14:04:57'),
-(18, 'create', '17', '17', 'users', '2019-02-13 18:54:23'),
-(19, 'update', '1', '100', 'friend_list', '2019-02-25 20:14:36'),
-(20, 'delete', '1', '15', 'users', '2019-02-25 20:16:40'),
-(21, 'create', '1', '0', 'user_chat', '2019-03-10 15:39:41'),
-(22, 'create', '1', '0', 'user_chat', '2019-03-10 15:40:50'),
-(23, 'create', '1', '0', 'user_chat', '2019-03-10 15:42:42'),
-(24, 'create', '1', '0', 'user_chat', '2019-03-10 15:44:10'),
-(25, 'create', '1', '0', 'user_chat', '2019-03-10 15:44:53'),
-(26, 'create', '1', '0', 'user_chat', '2019-03-10 15:47:46'),
-(27, 'create', '1', '0', 'user_chat', '2019-03-10 15:48:08'),
-(28, 'create', '1', '0', 'user_chat', '2019-03-10 15:49:37'),
-(29, 'create', '1', '0', 'user_chat', '2019-03-10 15:50:34'),
-(30, 'create', '1', '0', 'user_chat', '2019-03-10 15:50:49'),
-(31, 'create', '1', '0', 'user_chat', '2019-03-10 15:53:21'),
-(32, 'update', '1', '11', 'ratings', '2019-03-10 16:05:46'),
-(33, 'update', '1', '11', 'ratings', '2019-03-10 16:05:48'),
-(34, 'update', '1', '11', 'ratings', '2019-03-10 16:05:50'),
-(35, 'update', '1', '11', 'ratings', '2019-03-10 16:05:53'),
-(36, 'update', '1', '11', 'ratings', '2019-03-10 16:05:55'),
-(37, 'create', '1', '0', 'user_chat', '2019-03-10 16:37:16'),
-(38, 'create', '1', '0', 'user_chat', '2019-03-10 17:26:18');
+(42, 'update', 1, 11, 'ratings', '2019-03-14 18:23:25'),
+(43, 'update', 1, 11, 'ratings', '2019-03-14 18:23:26'),
+(44, 'create', 1, 0, 'user_chat', '2019-03-14 18:27:07'),
+(45, 'create', 1, 2, 'user_chat', '2019-03-14 18:33:08'),
+(46, 'create', 1, 3, 'user_chat', '2019-03-14 18:33:11'),
+(47, 'create', 1, 4, 'user_chat', '2019-03-14 18:37:46'),
+(48, 'create', 1, 5, 'user_chat', '2019-03-14 18:38:15'),
+(49, 'create', 1, 6, 'user_chat', '2019-03-14 18:38:55'),
+(50, 'create', 1, 7, 'user_chat', '2019-03-14 18:38:57'),
+(51, 'create', 1, 8, 'user_chat', '2019-03-14 18:39:01'),
+(52, 'create', 1, 9, 'user_chat', '2019-03-14 18:39:04'),
+(53, 'update', 1, 98, 'friend_list', '2019-03-14 18:40:06'),
+(54, 'create', 1, 10, 'user_chat', '2019-03-14 18:45:57'),
+(55, 'create', 1, 11, 'user_chat', '2019-03-14 18:46:22'),
+(56, 'update', 1, 1, 'users', '2019-03-14 18:54:50'),
+(57, 'update', 1, 1, 'users', '2019-03-14 18:54:53'),
+(58, 'delete', 1, 16, 'users', '2019-03-14 18:59:30'),
+(59, 'update', 1, 3, 'users', '2019-03-14 18:59:51'),
+(60, 'update', 1, 3, 'users', '2019-03-14 18:59:54');
 
 -- --------------------------------------------------------
 
@@ -232,6 +215,19 @@ CREATE TABLE `user_chat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dataark for tabell `user_chat`
+--
+
+INSERT INTO `user_chat` (`id`, `game_id`, `user_id`, `username`, `time`, `text`) VALUES
+(5, 2, 1, 'WilliWonka', '2019-03-14 19:38:15', 'fgdgdfgf'),
+(6, 2, 1, 'WilliWonka', '2019-03-14 19:38:55', 'sadasd'),
+(7, 2, 1, 'WilliWonka', '2019-03-14 19:38:57', 'sadsadd'),
+(8, 5, 1, 'WilliWonka', '2019-03-14 19:39:01', 'asdasd'),
+(9, 5, 1, 'WilliWonka', '2019-03-14 19:39:04', 'asdasd'),
+(10, 0, 1, 'WilliWonka', '2019-03-14 19:45:57', 'Hello'),
+(11, 2, 1, 'WilliWonka', '2019-03-14 19:46:22', 'sadsadsad');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -239,13 +235,23 @@ CREATE TABLE `user_chat` (
 -- Indexes for table `achievements`
 --
 ALTER TABLE `achievements`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `AchievementsGamesFN` (`game_id`);
 
 --
 -- Indexes for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `UsersFriend_listFN1` (`user_1`),
+  ADD KEY `UsersFriend_listFN2` (`user_2`);
+
+--
+-- Indexes for table `gained_achievements`
+--
+ALTER TABLE `gained_achievements`
+  ADD PRIMARY KEY (`id`,`user_id`) USING BTREE,
+  ADD KEY `Gained_achievementsUserFNs` (`user_id`);
 
 --
 -- Indexes for table `games`
@@ -257,7 +263,8 @@ ALTER TABLE `games`
 -- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `RatingsUserFN` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -269,7 +276,16 @@ ALTER TABLE `users`
 -- Indexes for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `User_activityUsersFN2` (`target_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `user_chat`
+--
+ALTER TABLE `user_chat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `User_chatUsersFN` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -285,7 +301,7 @@ ALTER TABLE `achievements`
 -- AUTO_INCREMENT for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `games`
@@ -309,7 +325,55 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT for table `user_chat`
+--
+ALTER TABLE `user_chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Begrensninger for dumpede tabeller
+--
+
+--
+-- Begrensninger for tabell `achievements`
+--
+ALTER TABLE `achievements`
+  ADD CONSTRAINT `AchievementsGamesFN` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Begrensninger for tabell `friend_list`
+--
+ALTER TABLE `friend_list`
+  ADD CONSTRAINT `UsersFriend_listFN1` FOREIGN KEY (`user_1`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `UsersFriend_listFN2` FOREIGN KEY (`user_2`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Begrensninger for tabell `gained_achievements`
+--
+ALTER TABLE `gained_achievements`
+  ADD CONSTRAINT `Gained_achievementsAchievementsFNs` FOREIGN KEY (`id`) REFERENCES `achievements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Gained_achievementsUserFNs` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Begrensninger for tabell `ratings`
+--
+ALTER TABLE `ratings`
+  ADD CONSTRAINT `RatingsUserFN` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Begrensninger for tabell `user_activity`
+--
+ALTER TABLE `user_activity`
+  ADD CONSTRAINT `User_activityUsersFN1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Begrensninger for tabell `user_chat`
+--
+ALTER TABLE `user_chat`
+  ADD CONSTRAINT `User_chatUsersFN` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

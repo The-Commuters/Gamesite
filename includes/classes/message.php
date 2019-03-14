@@ -7,7 +7,7 @@ class Message extends Db_object{
 	protected static $db_table = "user_chat"; //Slik at man kan endre navnet på databasetabellen.
 
 	//Array skal brukes i properies() og inneholder achivement-variablene til objektet.
-	protected static $db_table_fields = array('id', 'game_id', 'user_id', 'username', 'text', 'time');
+	protected static $db_table_fields = array('game_id', 'user_id', 'username', 'text', 'time');
 	public $id;
 	public $game_id;
 	public $user_id;

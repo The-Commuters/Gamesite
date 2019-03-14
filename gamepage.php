@@ -42,8 +42,6 @@ include("includes/views/header.php"); ?>
 
   </div>
 
-  <script src="js/functions.js"></script>
-
     <!-- The userchat is placed here. -->
   <?php 
   $chatroom_id = $current_game_id;

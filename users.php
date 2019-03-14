@@ -45,6 +45,4 @@ if (!isset($_GET['f'])) {
   </div>
 </div>  
 
-<script src="js/functions.js"></script>
-
 <?php include("includes/views/footer.php"); ?>

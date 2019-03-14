@@ -1,0 +1,95 @@
+// Dropdown
+// ---------------------------------------------------------------
+
+// Description
+// -----------
+// Simple, infinitly stackable dropdown logic to expanded upon 
+// with graphics, depending on the needs of  your project.
+// You can also use visibility instead of display to 
+// enable keyframes.
+
+// Variables
+// ---------
+$list-width:        15rem; // The width of the dropdown list
+$list-space:        100%; // The space between list and the activator
+
+// HTML structure
+// --------------
+// <nav class="navigation">
+//     <a href="#">Link</a>
+//     <div class="dropdown">
+//         <a href="#">Dropdown</a>
+//         <div class="list">
+//             <a href="#">Link</a>
+//             <a href="#">Link</a>
+//         </div> <!-- End of top level menu -->
+//     </div> <!-- End of top level dropdown -->
+//     <a href="#">Link</a>
+// </nav>
+
+.dropdown {
+    position: relative;
+
+    &:hover > .list {
+        top: $list-space;
+        left: 0;
+    }
+
+    .dropdown:hover > .list {
+        top: 0;
+        left: 100%;
+    }
+
+
+    &.-left {
+        // 1. Removing default
+        &:hover > .list {
+            right: 0;
+            left: unset; // 1
+        }
+
+        // 1. Removing default
+        .dropdown:hover > .list {
+            right: 100%;
+            left: unset; // 1
+        }
+    }
+
+    &:hover > .list {
+        display: block;
+        animation: fadeInUp 0.2s;
+    }
+}
+
+.list {
+    position: absolute;
+
+    display: none;
+
+    padding: 0.5rem;
+    border-radius: 1.2rem;
+    width: $list-width;
+
+    background-color: $color-gray-900;
+}
+
+.list > * {
+    display: block;
+}
+
+.list > a {
+    border-radius: 1rem;
+    padding: 0.5rem 2rem 0.75rem;
+
+    text-decoration-line: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    color: $color-gray-500;
+}
+
+.list > a:hover {
+    background-color: $color-gray-800;
+
+    color: $color-gray-300;
+}
+

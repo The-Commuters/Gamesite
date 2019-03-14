@@ -22,7 +22,7 @@
 %button {
 	display: inline-block;
 
-	transition: 0.3s;
+	transition: 0.3s background-color, 0.3s opacity;
 
 	border: 1px solid transparent;
 	border-radius: 0.3rem;

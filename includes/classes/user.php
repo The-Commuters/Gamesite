@@ -232,7 +232,7 @@ class User extends Db_object{
 	// Collects the placement of the game path, used when showing the picture at  the list of users.
 	public function get_user_image() {
 
-		return "img" . DS . "profile" . DS . "default" . DS . $this->user_image;
+		return "assets/" . "img/" . "profile/" . "default/" . $this->user_image;
 	}
 
 	/**

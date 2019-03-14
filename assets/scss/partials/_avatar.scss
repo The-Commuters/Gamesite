@@ -1,0 +1,42 @@
+// Avatar
+// ---------------------------------------------------------------
+
+// Description
+// -----------
+//
+
+// HTML structure
+// --------------
+// <div style="background-image: url(img/avatar.jpg)" class="avatar"></div>
+
+.avatar {
+    background-image: url(/img/backup.png); // Backup default
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: white;
+
+    border-radius: 50%;
+    width: 3.2rem;
+    height: 3.2rem;
+
+    &.-xl {
+        width: 6.4rem;
+        height: 6.4rem;
+    }
+
+    &.-l {
+        width: 4.8rem;
+        height: 4.8rem;
+    }
+
+    &.-s {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    &.-xs {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+}
