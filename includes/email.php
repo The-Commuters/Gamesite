@@ -21,7 +21,7 @@ class Email extends User{
 
 	// Denne tar inn hvilken mail det skal sendes til og fornavent til brukeren 
 
-	/*
+	/**
 	To do 
 	* Legge til aktiveringslink : Doneish, trenger formatering
 	* Sjekke om denne er klikket på
@@ -33,7 +33,7 @@ class Email extends User{
  
 		$subject = "Hello " . $first_name . " Please activate your account at CM Games";
 
-		$txt = "Please press the link below to activate your new account at CM Games " . "http://localhost/gamesite/activate.php?=" . $verify_code . " Thank you for registering. ";
+		$txt = "Please press the link below to activate your new account at CM Games " . "http://localhost/gamesite/activate.php?code=" . $verify_code . " Thank you for registering. ";
 		
 		
 		self::mail_sender($to, $subject, $txt);

@@ -1,11 +1,31 @@
-<!-- Denne siden kommer til å innholde en liste over brukerne og en søkemotor for dem. -->
+<?php include("includes/header.php"); ?>
 
-<?php include("includes/header.php"); 
+<?php 
+
 
 // Email::send_ActivationMail("newuser@localhost", "Markus", "hI" );
 
-?>
+/**
+* Sjekker om at det er noe i get variablen, 
+* burde sjekke om det er det rette som blir sendt inn
 
+*/
+if (isset($_GET["code"])){
+	$code = ($_GET["code"]);
+	//echo htmlspecialchars($code);
+	//$sql = "select * from users WHERE '{$verify_code}' = " . $code;
+	//User::find_by_query($sql);
+
+}else{
+	echo "Activation could not be completed";
+}
+
+
+
+
+
+
+?>
 
 
 
