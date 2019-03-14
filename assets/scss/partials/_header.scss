@@ -1,0 +1,126 @@
+header {
+    background-color: $color-gray-800;
+}
+
+// Bar
+.bar {
+    background-color: $color-gray-200;
+}
+
+.bar .xp {
+    transition: 0.5s width;
+
+    width: 0%;
+    height: 0.8rem;
+
+    background-color: #ccf0d1;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2354d266' fill-opacity='0.81' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+}
+
+// Header
+.header {
+    justify-content: space-between;
+    align-items: center;
+
+    display: flex;
+
+    margin: 0 auto;
+    padding: 2rem;
+    max-width: 100rem;
+}
+
+.header.-main {
+    padding-bottom: 16rem;
+}
+
+
+// Profile and Dropdown
+.header .profile {
+    align-items: center;
+
+    display: flex;
+
+    padding: 0.5rem 0;
+
+    text-decoration-line: none;
+}
+
+.header .profile .username {
+    transition: 0.3s color;
+
+    margin-right: 1.2rem;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    color: $color-gray-500;
+}
+
+.header .profile:hover .username {
+    color: $color-gray-300;
+}
+
+.header .profile .username.-active {
+    color: $color-gray-100;
+}
+
+
+// Navigation
+nav {
+    align-items: center;
+
+    display: flex;
+}
+
+nav .item {
+    transition: 0.3s color;
+
+    text-decoration-line: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    color: $color-gray-500;
+}
+
+nav .item:hover {
+    color: $color-gray-300;
+}
+
+nav .item.-active {
+    color: $color-gray-100;
+}
+
+nav .item + .item {
+    margin-left: 4rem;
+}
+
+
+// Brand
+.header .brand {
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+
+    background-color: $color-gray-100;
+}
+
+.header .brand img {
+    width: 80%;
+}
+
+
+@media (min-width: $breakpoint-tablet) {
+
+}
+
+@media (min-width: $breakpoint-laptop) {
+
+}
+
+@media (min-width: $breakpoint-desktop) {
+
+}
