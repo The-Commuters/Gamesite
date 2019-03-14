@@ -7,7 +7,7 @@ class User extends Db_object{
 	protected static $db_table = "users"; //Slik at man kan endre navnet på databasetabellen.
 
 	//Array skal brukes i properies() og inneholder bruker-variablene til objektet.
-	protected static $db_table_fields = array('username', 'email', 'password', 'first_name', 'middle_name', 'last_name', 'user_image', 'joined', 'verify_code' );
+	protected static $db_table_fields = array('username', 'email', 'password', 'first_name', 'middle_name', 'last_name', 'user_image', 'joined', 'verify_code', 'status' );
 	public $id;
 	public $username;
 	public $email;
@@ -18,6 +18,7 @@ class User extends Db_object{
 	public $user_image;
 	public $joined;
 	public $verify_code;
+	public $status;
 
 	// Verifiserer at brukeren ligger i databasen, brukes ved login og kan brukes andre steder.
 	public static function verify_user($email, $password) {
@@ -29,6 +30,8 @@ class User extends Db_object{
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
 		$sql .= "email = '{$email}' ";
 		$sql .= "AND password = '{$password}' ";
+		// Dette var bare for testing, kommer til å endre dets
+		$sql .= "AND status = 1 ";
 		$sql .= "LIMIT 1";
 
 
@@ -273,22 +276,37 @@ class User extends Db_object{
 		$code = $database->escape_string($code);
 		
 		// Finner ut om verify_code også ligger i databasen
-		$sql = "SELECT * FROM ". self::$db_table ." WHERE verify_code = '{$code}' Limit 1";
+		$sql = "SELECT * FROM ". self::$db_table ." WHERE verify_code = '{$code}' AND status = 0 Limit 1 ";
 		
 		// retunerer det database objektet som blir funnet 
-		 return self::find_by_query($sql); 
+		 return static ::find_by_query($sql); 
 	}
 
-	public static function activate_user($code){
+	public function activate_user($code){
 		global $database;
 
-
-		$the_result_array = self::find_user_by_code($code);
-		var_dump($the_result_array);
+		// Finner den brukeren som har den aktiverings koden
+		$in = self::find_user_by_code($code);
+		// Henter det neste objektet i rekken og gir det tilbake
+		
 
 		// Får in db-objektet og ser om den er tom
-		if(!empty($the_result_array)){
-				
+		// Må legge inn sjekk for at brukeren ikke er aktivert fra før 
+		if(!empty($in)){
+			$user = array_shift($in);
+			var_dump($user);
+			
+			//Denne endrer status på brukeren til aktiv eller nå bare til 1 og default er 0 
+			$user->status = 1;
+
+
+			$user->update();
+
+			
+			echo "User was acitvated";
+		}
+		else{
+			echo "This user could not be found or this user is active";
 		}
 
 

@@ -1,5 +1,7 @@
 <?php include("includes/header.php"); ?>
 
+<!-- <?php if ($session->is_signed_in()) {redirect("profile.php");} ?> -->
+
 <?php 
 
 
@@ -13,6 +15,7 @@
 if (isset($_GET["code"])){
 	$code = ($_GET["code"]);
 
+	// henter inn koden og gir den vidre til aktiverings metoden 
 	User::activate_user($code);
 
 }else{
