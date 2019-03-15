@@ -24,16 +24,3 @@ echo "This is your profile page " . $user->username . ", but there is little for
     include("includes/process/friend_search.php");
   ?>
 </div>
-
-<p>------------------------------------------------------------------------------------</p>
-
-<div id="find_messages">
-  <?php 
-    include("message_list.php");
-  ?>
-</div>
-
-<?php 
-   include("friendlist.php");
-?>
-
