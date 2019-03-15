@@ -16,9 +16,11 @@
     background-repeat: no-repeat;
     background-color: white;
 
+    //box-shadow: 0 0 0 0.2rem $color-primary;
+    box-shadow: 0 0.1rem 0.3rem hsla(0, 0%, 0%, 0.12), 0 0.1rem 0.2rem hsla(0, 0%, 0%, 0.24);
     border-radius: 50%;
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 3.8rem;
+    height: 3.8rem;
 
     &.-xl {
         width: 6.4rem;

@@ -15,7 +15,7 @@ if ($session->is_signed_in()) {
 // Collects the pagename, is useful when you need to decide what page you are on.
 /*$page = $_SERVER['REQUEST_URI'];
 $page = substr($page, 10);*/
-?> 
+?>
 
 
 <!DOCTYPE html>
@@ -27,49 +27,53 @@ $page = substr($page, 10);*/
         // Calls here in the head.php that lies in the helpers folder
         include("includes/helpers/head.php");
     ?>
-     
+
 </head>
 <body>
-        <!-- Header -->
-    <header>
-        <!-- XP Bar -->
-        <div class="bar">
-            <div class="xp" Style="width: 70%"></div>
-        </div>
+    <!-- Header -->
+	<header>
+		<!-- XP Bar -->
+		<div class="xp">
+			<div class="xp-bar" Style="width: 70%"></div>
+		</div>
 
-        <!-- Header content-->
-        <div class="header -main">
-            <!-- Branding icon-->
-            <a href="index.php" class="brand"><img src="assets/img/brand.svg" alt="Brand"></a>
+		<!-- Header content-->
+		<div class="header">
 
-            <!-- Navigation -->
-            <nav>
-                <a href="index.php" class="item -active"">Games</a>
-                <a href="index.html" class="item">About</a>
-                <a href="index.html" class="item">FAQ</a>
+			<!-- Navigation -->
+			<nav>
+				<!-- Branding icon-->
+				<a href="index.html" class="brand"><img src="assets/img/brand-green.svg" alt="Brand"></a>
+
+				<!-- Other items-->
+				<a href="index.html" class="item -active">Games</a>
+				<a href="index.html" class="item">About</a>
+				<a href="index.html" class="item">Contact</a>
             </nav>
 
             <?php if ($session->is_signed_in()) { ?>
 
-            <!-- Avatar (Only show when logged in)-->
-            <div class="profile dropdown -left">
-                <a href="profile.php?id=<?php echo $user->id;?>" class="profile">
-                    <div class="username"><?php echo $user->username; ?></div>
-                    <div style="background-image: url(<?php echo $user->get_user_image(); ?>)" class="avatar"></div>
-                </a>
+            <div class="interaction">
+				<!-- Avatar (Only show when logged in)-->
+				<div class="dropdown -center">
+					<div class="profile">
+						<div style="background-image: url(assets/img/avatar.jpg)" class="avatar"></div>
+						<div class="icon-buffer"><i class="fas fa-angle-down icon"></i></div>
+					</div>
 
-                <div class="list">
-                    <a href="profile.php?id=<?php echo $user->id;?>">Profile</a>
-                    <a href="settings.php">Settings</a>
-                    <a href="achievement.php">Achievements</a>
-                    <a href="statistics.php">Statistics</a>
-                    <a href="upload.php">Submit game</a>
-                    <?php if (User::is_admin($user->id)) { ?>
-                        <a href="users.php">Users</a>
-                    <?php } ?>
-                    <a href="logout.php">Logout</a>
-                </div>
-            </div>
+					<div class="list">
+						<a href="#"><i class="fas fa-fw fa-user"></i>Profile</a>
+						<a href="#"><i class="fas fa-fw fa-cog"></i>Settings</a>
+						<a href="#"><i class="fas fa-fw fa-envelope"></i>Messages</a>
+						<a href="#"><i class="fas fa-fw fa-sign-out-alt"></i>Sign out</a>
+						<hr class="divider">
+						<a href="#"><i class="fas fa-fw fa-heart"></i>Donate</a>
+						<a href="#"><i class="fas fa-fw fa-upload"></i>Submit game</a>
+					</div>
+				</div>
+
+				<!-- Notifications -->
+			</div>
 
             <?php } else { ?>
 
@@ -82,7 +86,7 @@ $page = substr($page, 10);*/
                 <a href="login.php#email" class="button-contained">Sign in</a>
             </div>
 
-            <?php } ?>  
+            <?php } ?>
 
-        </div>
-    </header>
+		</div>
+	</header>

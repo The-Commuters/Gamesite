@@ -10,7 +10,7 @@
 
 // Variables
 // ---------
-$list-width:        15rem; // The width of the dropdown list
+$list-width:        17rem; // The width of the dropdown list
 $list-space:        100%; // The space between list and the activator
 
 // HTML structure
@@ -55,22 +55,38 @@ $list-space:        100%; // The space between list and the activator
         }
     }
 
+    &.-center {
+        // 1. Removing default
+        &:hover > .list {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        // 1. Removing default
+        .dropdown:hover > .list {
+            right: 100%;
+            left: unset; // 1
+        }
+    }
+
     &:hover > .list {
+        animation: fadeIn 0.1s;
         display: block;
-        animation: fadeInUp 0.2s;
     }
 }
 
 .list {
     position: absolute;
+    z-index: 1000;
 
     display: none;
 
-    padding: 0.5rem;
+    box-shadow: 0 0.1rem 0.3rem hsla(0, 0%, 0%, 0.12), 0 0.1rem 0.2rem hsla(0, 0%, 0%, 0.24);
+    padding: 1.2rem 0;
     border-radius: 1.2rem;
     width: $list-width;
 
-    background-color: $color-gray-900;
+    background-color: $color-gray-100;
 }
 
 .list > * {
@@ -78,18 +94,50 @@ $list-space:        100%; // The space between list and the activator
 }
 
 .list > a {
-    border-radius: 1rem;
     padding: 0.5rem 2rem 0.75rem;
 
     text-decoration-line: none;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
-    color: $color-gray-500;
+    color: $color-gray-800;
 }
 
 .list > a:hover {
-    background-color: $color-gray-800;
+    background-color: $color-primary;
 
-    color: $color-gray-300;
+    color: $color-gray-100;
 }
 
+.dropdown > .list:after {
+    content: " ";
+
+    position: absolute;
+	bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border: solid transparent;
+    border-color: rgba(248, 249, 250, 0);
+	border-bottom-color: #f8f9fa;
+	border-width: 6px;
+    width: 0;
+	height: 0;
+
+	pointer-events: none;
+}
+
+.list .divider {
+    opacity: 0.5;
+
+    border-color: $color-gray-100;
+    width: 100%;
+}
+
+.list a svg {
+    margin-right: 0.5rem;
+}
+
+// Experiment
+.list > a:hover > .fa-heart {
+    color: $color-red;
+}
