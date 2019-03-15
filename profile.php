@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/views/header.php"); ?>
 
 <?php 
 if (!$session->is_signed_in()) {redirect("login.php");}
@@ -13,10 +13,10 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 */
 
 if ($session->user_id == $_GET['id']) {
-  include("includes/self_profile_content.php"); 
+  include("includes/views/self_profile_content.php"); 
   
 } elseif (isset($_GET['id'])) {
-  include("includes/other_profile_content.php"); 
+  include("includes/views/other_profile_content.php"); 
 
 } else {
 	redirect("logout.php");
@@ -25,4 +25,4 @@ if ($session->user_id == $_GET['id']) {
 
 ?>
 
-<?php include("includes/footer.php"); ?>
+<?php include("includes/views/footer.php"); ?>

@@ -1,11 +1,47 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/views/header.php"); ?>
 
 <?php 
-//Sjekker om brukeren er logget inn, kommer ikke nødvendigvis til å være nødvendig i prosjektet.
-//Sender dem til login ved hjelp av funksjonen redirect i "functions.php".
 
+$genres = array();
+
+//These are here so that htmlentities does not show errors, can be removed is the form is placed before it.
+
+if (!isset($_GET['s'])) {
+  $search = "";
+  $users = User::find_all();
+}
 ?>
- 
-<?php include("includes/index_content.php"); ?>
 
-<?php include("includes/footer.php"); ?>
+<div>  
+
+<form id="game_search" >
+<div class="">
+
+  <label>Game Search</label>
+  <input type="text" onkeyup="update_gamelist()" id="search" value="<?php echo htmlentities($search); ?>">
+  
+  <select id="category" onchange="update_gamelist()">
+    <option value="" selected="selected">All</option>
+    <option value="title">Title</option>
+    <option value="creator">Creator</option>
+  </select>
+
+  <select id="genre" onchange="update_gamelist()">
+    <option value="" selected="selected">All</option>
+    <option value="action">Action</option>
+    <option value="comedy">Comedy</option>
+    <option value="slice of life">Slife Of Life</option>
+  </select>
+</div>
+
+</form>
+
+  <div id="gameslist">
+  <?php 
+    include("includes/views/gamelist.php");
+  ?>
+  </div>
+
+</div>
+
+<?php include("includes/views/footer.php"); ?>

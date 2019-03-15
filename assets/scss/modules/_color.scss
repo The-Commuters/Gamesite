@@ -1,0 +1,41 @@
+// Color
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// Grayscale
+$color-light:                   #fafafa !default;
+$color-gray-100:                #f8f9fa !default;
+$color-gray-200:                #e9ecef !default;
+$color-gray-300:                #dee2e6 !default;
+$color-gray-400:                #ced4da !default;
+$color-gray-500:                #adb5bd !default;
+$color-gray-600:                #6c757d !default;
+$color-gray-700:                #495057 !default;
+$color-gray-800:                #343a40 !default;
+$color-gray-900:                #212529 !default;
+$color-dark:                    #1f1f1f !default;
+
+// General
+$color-blue:                    #007bff !default;
+$color-indigo:                  #6610f2 !default;
+$color-purple:                  #6f42c1 !default;
+$color-pink:                    #e83e8c !default;
+$color-red:                     #dc3545 !default;
+$color-orange:                  #fd7e14 !default;
+$color-yellow:                  #ffc107 !default;
+$color-green:                   #28a745 !default;
+$color-teal:                    #20c997 !default;
+$color-cyan:                    #17a2b8 !default;
+
+// Temp
+$color-primary:                 #54D266;
+
+$color-primary-100:                rgb(180, 255, 191) !default;
+$color-primary-200:                rgb(128, 240, 144) !default;
+$color-primary-300:                rgb(115, 230, 132) !default;
+$color-primary-400:                rgb(94, 219, 112) !default;
+$color-primary-500:                $color-primary !default;
+$color-primary-600:                rgb(77, 151, 88) !default;
+$color-primary-700:                rgb(54, 88, 59) !default;
+$color-primary-800:                rgb(26, 29, 26) !default;
+$color-primary-900:                hsl(120, 4%, 5%) !default;
+

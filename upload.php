@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/views/header.php"); ?>
 
 <?php  
 //Sjekker om brukeren er logget inn, kommer ikke nødvendigvis til å være nødvendig i prosjektet.
@@ -54,4 +54,4 @@ if (isset($_POST['submit'])) {
 
 </form>
 
-<?php include("includes/footer.php"); ?>
+<?php include("includes/views/footer.php"); ?>
