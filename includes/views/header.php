@@ -43,10 +43,10 @@ $page = substr($page, 10);*/
 			<!-- Navigation -->
 			<nav>
 				<!-- Branding icon-->
-				<a href="index.html" class="brand"><img src="assets/img/brand-green.svg" alt="Brand"></a>
+				<a href="index.php" class="brand"><img src="assets/img/brand-green.svg" alt="Brand"></a>
 
 				<!-- Other items-->
-				<a href="index.html" class="item -active">Games</a>
+				<a href="index.php" class="item -active">Games</a>
 				<a href="#" class="item">About</a>
 				<a href="#" class="item">Contact</a>
             </nav>
