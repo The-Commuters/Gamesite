@@ -1,8 +1,11 @@
 
 <?php 
-$path = $_SERVER['DOCUMENT_ROOT'];
+
+require_once("includes/init.php");
+
+/*$path = $_SERVER['DOCUMENT_ROOT'];
 $path .= "/gamesite/includes/init.php";
-require_once($path); 
+require_once($path); */
 
 // If a user is logged in, collect all information about that user.
 if ($session->is_signed_in()) {
@@ -10,8 +13,8 @@ if ($session->is_signed_in()) {
 }
 
 // Collects the pagename, is useful when you need to decide what page you are on.
-$page = $_SERVER['REQUEST_URI'];
-$page = substr($page, 10);
+/*$page = $_SERVER['REQUEST_URI'];
+$page = substr($page, 10);*/
 ?> 
 
 
@@ -41,9 +44,9 @@ $page = substr($page, 10);
 
             <!-- Navigation -->
             <nav>
-                <a href="index.php" class="item <?php if($page == "index.php"){echo "-active";}?>">Games</a>
-                <a href="index.html" class="item <?php if($page == "about.php"){echo "-active";}?>">About</a>
-                <a href="index.html" class="item <?php if($page == "faq.php"){echo "-active";}?>">FAQ</a>
+                <a href="index.php" class="item -active"">Games</a>
+                <a href="index.html" class="item">About</a>
+                <a href="index.html" class="item">FAQ</a>
             </nav>
 
             <?php if ($session->is_signed_in()) { ?>
