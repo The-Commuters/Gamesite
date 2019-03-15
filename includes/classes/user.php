@@ -7,7 +7,7 @@ class User extends Db_object{
 	protected static $db_table = "users"; //Slik at man kan endre navnet på databasetabellen.
 
 	//Array skal brukes i properies() og inneholder bruker-variablene til objektet.
-	protected static $db_table_fields = array('username', 'email', 'password', 'first_name', 'middle_name', 'last_name', 'user_image', 'joined');
+	protected static $db_table_fields = array('username', 'email', 'password', 'first_name', 'middle_name', 'last_name', 'user_image', 'joined', 'verify_code', 'status' );
 	public $id;
 	public $username;
 	public $email;
@@ -17,7 +17,8 @@ class User extends Db_object{
 	public $last_name;
 	public $user_image;
 	public $joined;
-
+	public $verify_code;
+	public $status;
 	/**
 	 * Verifiy that the user lies in the database with this email and password, used with login
 	 * but can also be used other places.
@@ -263,7 +264,6 @@ class User extends Db_object{
 		$middle_name       = $database->escape_string($middle_name);
 		$last_name         = $database->escape_string($last_name);
 
-
 		// Fjerner all potensiel sql kode.
 		$username          = strip_tags($username);
 		$email             = strip_tags($email);
@@ -274,8 +274,10 @@ class User extends Db_object{
 		$password_check    = strip_tags($password_check);
 
 		// Sjekker om brukernavn eller email ligger i databasen.
-		$sql  = "SELECT * FROM " . self::$db_table . " WHERE ";
-		$sql .= "username = '{$username}' ";
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
+		$sql .= "email = '{$email}' ";
+		$sql .= "AND password = '{$password}' ";
+		$sql .= "AND status = 1 ";
 		$sql .= "LIMIT 1";
 		$the_result_array = self::find_by_query($sql);
 
@@ -356,6 +358,53 @@ class User extends Db_object{
 		}
 		return $string;
 	}
+
+
+	public static function find_user_by_code($code){
+	
+		global $database;
+		// Tar bort eventuele ting som ikke skal være med i stringen
+		$code = $database->escape_string($code);
+		
+		// Finner ut om verify_code også ligger i databasen
+		$sql = "SELECT * FROM ". self::$db_table ." WHERE verify_code = '{$code}' AND status = 0 Limit 1 ";
+		
+		// retunerer det database objektet som blir funnet 
+		 return static ::find_by_query($sql); 
+	}
+
+	public function activate_user($code){
+		global $database;
+
+		// Finner den brukeren som har den aktiverings koden
+		$in = self::find_user_by_code($code);
+		// Henter det neste objektet i rekken og gir det tilbake
+		
+
+		// Får in db-objektet og ser om den er tom
+		// Må legge inn sjekk for at brukeren ikke er aktivert fra før 
+		if(!empty($in)){
+			$user = array_shift($in);
+			var_dump($user);
+			
+			//Denne endrer status på brukeren til aktiv eller nå bare til 1 og default er 0 
+			$user->status = 1;
+
+
+			$user->update();
+
+			
+			echo "User was acitvated";
+		}
+		else{
+			echo "This user could not be found or this user is active";
+		}
+
+
+
+	}
+
+
 }
 
 ?>
