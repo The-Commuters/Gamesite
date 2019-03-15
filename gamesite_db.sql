@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 14. Mar, 2019 20:01 PM
+-- Generation Time: 15. Mar, 2019 12:59 PM
 -- Server-versjon: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `achievements`
+-- Tabellstruktur for tabell `achievements`
 --
 
 CREATE TABLE `achievements` (
@@ -38,7 +38,7 @@ CREATE TABLE `achievements` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `friend_list`
+-- Tabellstruktur for tabell `friend_list`
 --
 
 CREATE TABLE `friend_list` (
@@ -48,23 +48,10 @@ CREATE TABLE `friend_list` (
   `status` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `friend_list`
---
-
-INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `status`) VALUES
-(94, 1, 2, 1),
-(95, 1, 13, 1),
-(96, 1, 12, 1),
-(98, 1, 3, 1),
-(100, 1, 1, 1),
-(102, 1, 14, 0),
-(103, 1, 17, 0);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gained_achievements`
+-- Tabellstruktur for tabell `gained_achievements`
 --
 
 CREATE TABLE `gained_achievements` (
@@ -76,7 +63,7 @@ CREATE TABLE `gained_achievements` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `games`
+-- Tabellstruktur for tabell `games`
 --
 
 CREATE TABLE `games` (
@@ -91,7 +78,7 @@ CREATE TABLE `games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `games`
+-- Dataark for tabell `games`
 --
 
 INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `foldername`, `filename`, `size`) VALUES
@@ -103,7 +90,7 @@ INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `folderna
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ratings`
+-- Tabellstruktur for tabell `ratings`
 --
 
 CREATE TABLE `ratings` (
@@ -129,7 +116,7 @@ INSERT INTO `ratings` (`id`, `game_id`, `user_id`, `score`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabellstruktur for tabell `users`
 --
 
 CREATE TABLE `users` (
@@ -143,22 +130,23 @@ CREATE TABLE `users` (
   `user_image` varchar(100) NOT NULL,
   `joined` date NOT NULL,
   `privilege_level` tinyint(4) NOT NULL,
-  `verify_code` text NOT NULL
+  `verify_code` text NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dataark for tabell `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, ''),
-(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, ''),
-(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '');
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`) VALUES
+(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 0),
+(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, '', 0),
+(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_activity`
+-- Tabellstruktur for tabell `user_activity`
 --
 
 CREATE TABLE `user_activity` (
@@ -171,7 +159,7 @@ CREATE TABLE `user_activity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_activity`
+-- Dataark for tabell `user_activity`
 --
 
 INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`) VALUES
@@ -315,13 +303,13 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
@@ -363,7 +351,7 @@ ALTER TABLE `ratings`
 -- Begrensninger for tabell `user_activity`
 --
 ALTER TABLE `user_activity`
-  ADD CONSTRAINT `User_activityUsersFN1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `User_activityUsersFN1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Begrensninger for tabell `user_chat`
