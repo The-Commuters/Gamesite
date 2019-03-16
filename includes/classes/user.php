@@ -35,7 +35,7 @@ class User extends Db_object{
 
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
 		$sql .= "email = '{$email}' ";
-		//$sql .= "AND status = 1 ";
+		$sql .= "AND status = 1 ";
 		$sql .= "LIMIT 1";
 
 		// Sends the sql into the database, gets a array with the users back, only one because limit 1.
