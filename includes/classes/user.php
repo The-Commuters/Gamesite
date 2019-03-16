@@ -35,6 +35,7 @@ class User extends Db_object{
 
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
 		$sql .= "email = '{$email}' ";
+		$sql .= "AND status = 1 ";
 		$sql .= "LIMIT 1";
 
 		// Sends the sql into the database, gets a array with the users back, only one because limit 1.
@@ -277,7 +278,6 @@ class User extends Db_object{
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
 		$sql .= "email = '{$email}' ";
 		$sql .= "AND password = '{$password}' ";
-		$sql .= "AND status = 1 ";
 		$sql .= "LIMIT 1";
 		$the_result_array = self::find_by_query($sql);
 
@@ -334,6 +334,9 @@ class User extends Db_object{
 			$user->last_name   = $last_name;
 			$user->user_image  = "1.png";
 			$user->joined      = date("Y-m-d");
+			$user->verify_code = md5($username . microtime());
+
+			Email::send_ActivationMail($email, $firstname, $user->verify_code);
 
 			$user->create();
 
