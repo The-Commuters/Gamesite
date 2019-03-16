@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 15. Mar, 2019 12:59 PM
--- Server-versjon: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: 16. Mar, 2019 18:33 PM
+-- Tjener-versjon: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,8 +45,19 @@ CREATE TABLE `friend_list` (
   `id` int(11) NOT NULL,
   `user_1` int(10) NOT NULL,
   `user_2` int(10) NOT NULL,
-  `status` tinyint(2) NOT NULL
+  `status` tinyint(2) NOT NULL,
+  `chatroom` varchar(23) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dataark for tabell `friend_list`
+--
+
+INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `status`, `chatroom`) VALUES
+(108, 1, 2, 1, '1#2'),
+(109, 1, 19, 0, '1#19'),
+(110, 1, 3, 0, ''),
+(111, 1, 1, 1, '1#1');
 
 -- --------------------------------------------------------
 
@@ -139,9 +150,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 0),
-(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, '', 0),
-(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '', 0);
+(1, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 0),
+(2, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, '', 0),
+(3, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '', 0),
+(19, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', '2019-03-15', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -181,7 +193,18 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (57, 'update', 1, 1, 'users', '2019-03-14 18:54:53'),
 (58, 'delete', 1, 16, 'users', '2019-03-14 18:59:30'),
 (59, 'update', 1, 3, 'users', '2019-03-14 18:59:51'),
-(60, 'update', 1, 3, 'users', '2019-03-14 18:59:54');
+(60, 'update', 1, 3, 'users', '2019-03-14 18:59:54'),
+(62, 'create', 19, 19, 'users', '2019-03-15 14:57:57'),
+(63, 'create', 1, 12, 'user_chat', '2019-03-15 15:57:36'),
+(64, 'update', 1, 111, 'friend_list', '2019-03-16 16:34:28'),
+(65, 'update', 1, 108, 'friend_list', '2019-03-16 16:36:07'),
+(66, 'create', 1, 13, 'user_chat', '2019-03-16 17:07:24'),
+(67, 'create', 1, 14, 'user_chat', '2019-03-16 17:07:45'),
+(68, 'create', 1, 15, 'user_chat', '2019-03-16 17:08:10'),
+(69, 'create', 2, 16, 'user_chat', '2019-03-16 17:09:19'),
+(70, 'create', 1, 17, 'user_chat', '2019-03-16 17:17:16'),
+(71, 'create', 1, 18, 'user_chat', '2019-03-16 17:17:56'),
+(72, 'create', 1, 19, 'user_chat', '2019-03-16 17:18:11');
 
 -- --------------------------------------------------------
 
@@ -191,7 +214,7 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 
 CREATE TABLE `user_chat` (
   `id` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL,
+  `room_id` varchar(23) NOT NULL,
   `user_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `time` datetime NOT NULL,
@@ -202,14 +225,22 @@ CREATE TABLE `user_chat` (
 -- Dataark for tabell `user_chat`
 --
 
-INSERT INTO `user_chat` (`id`, `game_id`, `user_id`, `username`, `time`, `text`) VALUES
-(5, 2, 1, 'WilliWonka', '2019-03-14 19:38:15', 'fgdgdfgf'),
-(6, 2, 1, 'WilliWonka', '2019-03-14 19:38:55', 'sadasd'),
-(7, 2, 1, 'WilliWonka', '2019-03-14 19:38:57', 'sadsadd'),
-(8, 5, 1, 'WilliWonka', '2019-03-14 19:39:01', 'asdasd'),
-(9, 5, 1, 'WilliWonka', '2019-03-14 19:39:04', 'asdasd'),
-(10, 0, 1, 'WilliWonka', '2019-03-14 19:45:57', 'Hello'),
-(11, 2, 1, 'WilliWonka', '2019-03-14 19:46:22', 'sadsadsad');
+INSERT INTO `user_chat` (`id`, `room_id`, `user_id`, `username`, `time`, `text`) VALUES
+(5, '2', 1, 'WilliWonka', '2019-03-14 19:38:15', 'fgdgdfgf'),
+(6, '2', 1, 'WilliWonka', '2019-03-14 19:38:55', 'sadasd'),
+(7, '2', 1, 'WilliWonka', '2019-03-14 19:38:57', 'sadsadd'),
+(8, '5', 1, 'WilliWonka', '2019-03-14 19:39:01', 'asdasd'),
+(9, '5', 1, 'WilliWonka', '2019-03-14 19:39:04', 'asdasd'),
+(10, '0', 1, 'WilliWonka', '2019-03-14 19:45:57', 'Hello'),
+(11, '2', 1, 'WilliWonka', '2019-03-14 19:46:22', 'sadsadsad'),
+(12, '19', 1, 'WilliWonka', '2019-03-15 16:57:36', 'Hello There'),
+(13, '1', 1, 'WilliWonka', '2019-03-16 18:07:24', 'Hello Derperud, Whats Up?'),
+(14, '1', 1, 'WilliWonka', '2019-03-16 18:07:45', 'I\'m kinda bored right now...'),
+(15, '1', 1, 'WilliWonka', '2019-03-16 18:08:10', '...and my parents are out...'),
+(16, '1', 2, 'Derperud', '2019-03-16 18:09:19', 'Be right there!'),
+(17, '', 1, 'WilliWonka', '2019-03-16 18:17:16', 'Hey Maddafaker?'),
+(18, '1#2', 1, 'WilliWonka', '2019-03-16 18:17:56', 'Lol mate, you dun goofed!'),
+(19, '1#1', 1, 'WilliWonka', '2019-03-16 18:18:11', 'Fak dat guy, you da boss!');
 
 --
 -- Indexes for dumped tables
@@ -285,7 +316,7 @@ ALTER TABLE `achievements`
 -- AUTO_INCREMENT for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `games`
@@ -303,19 +334,19 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
 --
 ALTER TABLE `user_chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Begrensninger for dumpede tabeller

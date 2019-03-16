@@ -1,20 +1,26 @@
 <?php 
 
-//Klassen som omgjør alt ved håndtering av brukere i databasen.
+/**
+ * This class handles friendships between users in the database.
+ * It contains the two users id, the id of the friendship and
+ * the status of it, if 0 then a friend-request is sent, if 1
+ * then they are friends.
+ */
+
 class Friendship extends Db_object{
 
-	//Klasse-variabler kalles properties.
-	protected static $db_table = "friend_list"; //Slik at man kan endre navnet på databasetabellen.
+	protected static $db_table = "friend_list";
 
-	//Array skal brukes i properies() og inneholder achivement-variablene til objektet.
-	protected static $db_table_fields = array('id', 'user_1', 'user_2', 'status');
+	protected static $db_table_fields = array('id', 'user_1', 'user_2', 'status', 'chatroom');
 	public $id;
 	public $user_1;
 	public $user_2;
 	public $status;
+	public $chatroom;
 
 	/**
-	 * Finds all the friend requests sent to the user that is not answered before by the user.
+	 * Finds all the friend requests sent to the user that is not answered 
+	 * before by the user. Then sends them 
 	 *
 	 * @param Is the id of the reciever you want the friend requests to.
 	 * @return Is the friend requests that is sent to the id in param.
@@ -33,6 +39,8 @@ class Friendship extends Db_object{
 
 	/**
 	 * Finds all the friend that a user have or have been accepted by.
+	 * Checks if the user is the one that befriended the other or visa-
+	 * versa.
 	 *
 	 * @param Is the id of the reciever you want the friend requests to.
 	 * @return Is the friendlist of the user that is logged in.
@@ -67,10 +75,11 @@ class Friendship extends Db_object{
 		global $session;
 
 		$friendship = new Friendship();
-		$friendship->user_1 = $user_1;
-		$friendship->user_2 = $user_2;
-		$friendship->status = $status;
-		$friendship->id     = $id;
+		$friendship->user_1   = $user_1;
+		$friendship->user_2   = $user_2;
+		$friendship->status   = $status;
+		$friendship->id       = $id;
+		$friendship->chatroom = $user_1 . "#" . $user_2;
 
 		if ($status == 1) {
 			
@@ -81,6 +90,31 @@ class Friendship extends Db_object{
 		}
 
 	}
+
+//---------------------------Might be deleted unless used----------------------------------
+
+	/**
+	 * Finds the friend object between two users in the database
+	 * and returns it where it is needed. 
+	 *
+	 * @param $user_id is the id of the user that is logged in
+	 * @param $friend_id is the friend's id.
+	 */
+	public function get_friendship($user_id, $friend_id) {
+
+		global $database;
+
+		$sql = "SELECT * FROM friend_list WHERE ";
+		$sql .= "(user_1 = '{$user_id}' OR ";
+		$sql .= "user_2 = '{$user_id}') ";
+		$sql .= "AND (user_1 = '{$friend_id}' OR ";
+		$sql .= "user_2 = '{$friend_id}') ";
+		$sql .= "LIMIT 1";
+
+		return self::find_by_query($sql);
+
+	}
+//------------------------------------------------------------------------------------------
 
 }
 

@@ -26,6 +26,7 @@ foreach ($friends as $friend) :
   } else {
     $user = User::find_by_id($friend->user_2);
   }
+
 ?>
 
 <tr>
@@ -40,7 +41,7 @@ foreach ($friends as $friend) :
 	<td>
 
     <!-- Here the radiobutton is placed, and pressing it will change the room-id to that persons user_id. -->
-    <input type="radio" name="roomId" value="<?php echo $user->id; ?>" onclick="document.getElementById('chatId').value=this.value">
+    <input type="radio" name="roomId" value="<?php echo $friend->chatroom; ?>" onclick="document.getElementById('chatId').value=this.value">
   
   </td>
   </div>
