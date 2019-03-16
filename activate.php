@@ -1,4 +1,5 @@
-<?php include("includes/header.php"); ?>
+<?php require_once("includes/init.php") ?>
+<?php include("includes/views/header.php"); ?>
 
 <!-- <?php if ($session->is_signed_in()) {redirect("profile.php");} ?> -->
 
@@ -28,4 +29,4 @@ if (isset($_GET["code"])){
 
 <script src="js/functions.js"></script>
 
-<?php include("includes/footer.php"); ?>
+<?php include("includes/views/footer.php"); ?>
