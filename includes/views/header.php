@@ -12,9 +12,7 @@ if ($session->is_signed_in()) {
     $user = User::find_by_id($session->user_id);
 }
 
-// Collects the pagename, is useful when you need to decide what page you are on.
-/*$page = $_SERVER['REQUEST_URI'];
-$page = substr($page, 10);*/
+
 ?>
 
 
@@ -46,7 +44,7 @@ $page = substr($page, 10);*/
 				<a href="index.php" class="brand"><img src="assets/img/brand-green.svg" alt="Brand"></a>
 
 				<!-- Other items-->
-				<a href="index.php" class="item -active">Games</a>
+				<a href="index.php" class="item <?php if($page == "index"){echo "-active";} ?>">Games</a>
 				<a href="#" class="item">About</a>
 				<a href="#" class="item">Contact</a>
             </nav>
@@ -57,7 +55,7 @@ $page = substr($page, 10);*/
 				<!-- Avatar (Only show when logged in)-->
 				<div class="dropdown -center">
 					<div class="profile">
-						<div style="background-image: url(assets/img/avatar.jpg)" class="avatar"></div>
+						<div style="background-image: url(<?php echo $user->get_user_image(); ?>)" class="avatar"></div>
 						<div class="icon-buffer"><i class="fas fa-angle-down icon"></i></div>
 					</div>
 

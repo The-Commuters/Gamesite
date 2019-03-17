@@ -67,6 +67,8 @@ class Game extends Db_object {
  
 	/**
 	 * Collects the placement of the game path, used when the game is called.
+	 * The game path is the main PHP file that needs to be included on the 
+	 * gamepage, and will only contain a canvas that get loaded in.
 	 *
 	 * @return the path to the games-folder where the main js is stored.
 	 */
@@ -77,7 +79,7 @@ class Game extends Db_object {
 
 	/**
 	 * Collects the placement of the game path, used when showing the picture 
-	 * at the gameslist.
+	 * at the gameslist. The picture needs to be named image.png at the moment.
 	 *
 	 * @return the path to the games-folder where the image id stored.
 	 */

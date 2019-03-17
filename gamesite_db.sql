@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 17. Mar, 2019 01:06 AM
+-- Generation Time: 17. Mar, 2019 20:41 PM
 -- Tjener-versjon: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -240,7 +240,9 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (75, 'create', 22, 22, 'users', '2019-03-16 23:32:47'),
 (76, 'create', 23, 23, 'users', '2019-03-16 23:35:39'),
 (77, 'create', 24, 24, 'users', '2019-03-16 23:36:49'),
-(78, 'create', 25, 25, 'users', '2019-03-16 23:38:36');
+(78, 'create', 25, 25, 'users', '2019-03-16 23:38:36'),
+(79, 'create', 1, 20, 'user_chat', '2019-03-17 09:56:33'),
+(80, 'update', 1, 12, 'ratings', '2019-03-17 12:25:34');
 
 -- --------------------------------------------------------
 
@@ -276,7 +278,8 @@ INSERT INTO `user_chat` (`id`, `room_id`, `user_id`, `username`, `time`, `text`)
 (16, '1', 2, 'Derperud', '2019-03-16 18:09:19', 'Be right there!'),
 (17, '', 1, 'WilliWonka', '2019-03-16 18:17:16', 'Hey Maddafaker?'),
 (18, '1#2', 1, 'WilliWonka', '2019-03-16 18:17:56', 'Lol mate, you dun goofed!'),
-(19, '1#1', 1, 'WilliWonka', '2019-03-16 18:18:11', 'Fak dat guy, you da boss!');
+(19, '1#1', 1, 'WilliWonka', '2019-03-16 18:18:11', 'Fak dat guy, you da boss!'),
+(20, '1#1', 1, 'WilliWonka', '2019-03-17 10:56:33', 'dawg');
 
 --
 -- Indexes for dumped tables
@@ -328,7 +331,8 @@ ALTER TABLE `genres`
 --
 ALTER TABLE `ratings`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `RatingsUserFN` (`user_id`);
+  ADD KEY `RatingsUserFN` (`user_id`),
+  ADD KEY `RatingsGameFN` (`game_id`);
 
 --
 -- Indexes for table `users`
@@ -395,13 +399,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
 --
 ALTER TABLE `user_chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Begrensninger for dumpede tabeller
@@ -438,6 +442,7 @@ ALTER TABLE `game_genre`
 -- Begrensninger for tabell `ratings`
 --
 ALTER TABLE `ratings`
+  ADD CONSTRAINT `RatingsGameFN` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `RatingsUserFN` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

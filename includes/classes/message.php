@@ -38,6 +38,6 @@ class Message extends Db_object{
 
 	}
 
-}
+} // End of Message-class
 
 ?>

@@ -1,12 +1,15 @@
 <?php 
 
-//Klassen som omgjør alt ved håndtering av brukere i databasen.
+/**
+ * The class that creates and stores user-objects, is used
+ * whenever something need's to use or store information
+ * about the user that is logged in or other users.
+ */
+
 class User extends Db_object{
 
-	//Klasse-variabler kalles properties.
-	protected static $db_table = "users"; //Slik at man kan endre navnet på databasetabellen.
+	protected static $db_table = "users";
 
-	//Array skal brukes i properies() og inneholder bruker-variablene til objektet.
 	protected static $db_table_fields = array('unique_id', 'username', 'email', 'password', 'first_name', 
 		'middle_name', 'last_name', 'user_image', 'joined', 'verify_code', 'status' );
 

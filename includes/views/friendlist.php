@@ -30,7 +30,7 @@ foreach ($friends as $friend) :
 ?>
 
 <tr>
-  <div>
+  <div id="friendDiv">
 	<td>
 		<a href="profile.php?id=<?php echo $user->id; ?>">
 			<img src="<?php echo $user->get_user_image();?>" style="height: 100px; width: 100px;">
@@ -45,7 +45,6 @@ foreach ($friends as $friend) :
   
   </td>
   </div>
-</a>
 </tr>
 
 <?php endforeach; ?>
@@ -56,7 +55,7 @@ foreach ($friends as $friend) :
 <div class="chatcontainer" style="float: left;">
   <main>
     <div class="userSettings">
-      <input id="chatId" type="text" placeholder="1" maxlength="32" value="1">
+      <input id="chatId" style="display: none;" placeholder="1" maxlength="32" value="1">
     </div>
     <div class="chat">
       <div id="chatOutput"></div>

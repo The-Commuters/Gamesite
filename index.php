@@ -1,4 +1,9 @@
-<?php include("includes/views/header.php"); ?>
+
+
+<?php 
+$page = basename(__FILE__, '.php'); // Uses this to find out what page one is on.
+include("includes/views/header.php"); 
+?>
 
 <?php 
 
