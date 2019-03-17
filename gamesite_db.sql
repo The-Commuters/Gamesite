@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 16. Mar, 2019 18:33 PM
+-- Generation Time: 17. Mar, 2019 01:06 AM
 -- Tjener-versjon: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -101,6 +101,29 @@ INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `folderna
 -- --------------------------------------------------------
 
 --
+-- Tabellstruktur for tabell `game_genre`
+--
+
+CREATE TABLE `game_genre` (
+  `game_id` int(11) NOT NULL,
+  `genre_id` int(11) NOT NULL,
+  `genre_type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `genres`
+--
+
+CREATE TABLE `genres` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellstruktur for tabell `ratings`
 --
 
@@ -132,6 +155,7 @@ INSERT INTO `ratings` (`id`, `game_id`, `user_id`, `score`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `unique_id` int(5) NOT NULL,
   `email` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -149,11 +173,17 @@ CREATE TABLE `users` (
 -- Dataark for tabell `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 0),
-(2, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, '', 0),
-(3, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '', 0),
-(19, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', '2019-03-15', 0, '', 0);
+INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`) VALUES
+(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 0),
+(2, 0, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, '', 0),
+(3, 0, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '', 0),
+(19, 0, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', '2019-03-15', 0, '', 0),
+(20, 0, 'llkjn@nws.ws', 'Hannes#27732', '$2y$10$olLRICVAlbsDXREU9ulsBOTqAhWzRb/bMEvmpdNJ474BAPftAuXNu', 'sadasd', 'hbjhb', 'hjbhbjh', '1.png', '2019-03-17', 0, '', 0),
+(21, 0, 'hehe@willi.nos', 'Hanness', '$2y$10$rKCVBxvyzi.9GLLWsiT.B.kNrSAKaD/K0UyFPXTq1YfdGSdQS4GiK', 'qwwqw', 'qwqw', 'qwqww', '1.png', '2019-03-17', 0, '', 0),
+(22, 0, 'hehe@willi.nodd', 'dscsdc', '$2y$10$.7aiv2vzoOB18HmP9rqjNOyqy1GW3cebr8oaaQ2V7T29w8o4gTuAm', 'sxc', 'xcsc', 'scsc', '1.png', '2019-03-17', 0, '', 0),
+(23, 0, 'hehe@willi.nojjj', 'dflÃ¸mj', '$2y$10$2DCi4g7B5CihWZlPbedhpeVvIi3AlPN0NoCZiWVrIrbWduIE1vSxC', 'askld', 'lasjd', 'lijlij', '1.png', '2019-03-17', 0, '', 0),
+(24, 8, 'jnkj@sds.ssdd', 'kjndskn', '$2y$10$z0l8taL9bT0lZqSVjv7mh.zKAFaN8Hf6cBpyMrNVpUSR5yXAmVNbG', 'qsm', 'klmlm', 'kmlkm', '1.png', '2019-03-17', 0, '', 0),
+(25, 76854, 'hdc@sdsd.ccd', 'ldfjvoijq', '$2y$10$3rA.M.YXUfd/KPc1JivCrenMLZt9ejKZmxtxYw6eq7W0ywGYCfLbO', 'qwe', 'jhb', 'khjb', '1.png', '2019-03-17', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -204,7 +234,13 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (69, 'create', 2, 16, 'user_chat', '2019-03-16 17:09:19'),
 (70, 'create', 1, 17, 'user_chat', '2019-03-16 17:17:16'),
 (71, 'create', 1, 18, 'user_chat', '2019-03-16 17:17:56'),
-(72, 'create', 1, 19, 'user_chat', '2019-03-16 17:18:11');
+(72, 'create', 1, 19, 'user_chat', '2019-03-16 17:18:11'),
+(73, 'create', 20, 20, 'users', '2019-03-16 23:23:07'),
+(74, 'create', 21, 21, 'users', '2019-03-16 23:28:57'),
+(75, 'create', 22, 22, 'users', '2019-03-16 23:32:47'),
+(76, 'create', 23, 23, 'users', '2019-03-16 23:35:39'),
+(77, 'create', 24, 24, 'users', '2019-03-16 23:36:49'),
+(78, 'create', 25, 25, 'users', '2019-03-16 23:38:36');
 
 -- --------------------------------------------------------
 
@@ -275,6 +311,19 @@ ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `game_genre`
+--
+ALTER TABLE `game_genre`
+  ADD PRIMARY KEY (`game_id`,`genre_id`),
+  ADD KEY `Game_genreGenresFN` (`genre_id`);
+
+--
+-- Indexes for table `genres`
+--
+ALTER TABLE `genres`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
@@ -325,6 +374,12 @@ ALTER TABLE `games`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `genres`
+--
+ALTER TABLE `genres`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
@@ -334,13 +389,13 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
@@ -371,6 +426,13 @@ ALTER TABLE `friend_list`
 ALTER TABLE `gained_achievements`
   ADD CONSTRAINT `Gained_achievementsAchievementsFNs` FOREIGN KEY (`id`) REFERENCES `achievements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Gained_achievementsUserFNs` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Begrensninger for tabell `game_genre`
+--
+ALTER TABLE `game_genre`
+  ADD CONSTRAINT `Game_genreGamesFN` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Game_genreGenresFN` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Begrensninger for tabell `ratings`
