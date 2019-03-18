@@ -1,10 +1,13 @@
-<?php require_once("includes/views/header.php") ?>
-
 <?php 
-//Tar her inn informasjonen til personen som logger inn, sjekker om de eksisterer i databasen, tar i bruk session.php til å ta vare på session-variablene.
 
+/**
+ * This is the page where people can create a new user,
+ * this have to be done to become able to use a few of 
+ * the functions on the website.
+ */
 
-/* Hvis man er logget inn blir man sendt til index.php.*/
+require_once("includes/views/header.php");
+
 if ($session->is_signed_in()) {redirect("index.php");}
 
 if (isset($_POST['submit'])) {
@@ -18,19 +21,14 @@ if (isset($_POST['submit'])) {
 	$middle_name = trim($_POST['middle_name']);
 	$last_name = trim($_POST['last_name']);
 
-	//Sjekker om brukeren er i databasen, ved metode som ligger i User-klassen(user.php)
-	//$user_found = User::verify_user($username, $password);
-
 	$error_array = User::verify_new_user($username, $email, $password, $password_check, $first_name, $middle_name, $last_name);	
 
 	if (empty($error_array)) {
 		
-		//tar i bruk login() metoden til å legge ting in i $user_if, sette $signed_in til true og sender dem til index.php.
-		//$session->login($user_found);
 		redirect("login.php");
 
 	} else {
-		// Kan gjøre det bedre her, sette et error-array foran input-boksene sån som vi gjorde ved forrige prosjekt.
+
 		$the_message = "Your information are incorrect.";
 	}
 
@@ -48,48 +46,39 @@ if (isset($_POST['submit'])) {
 
 	}
 
-
 ?>
 
-
-<!-- Formen som jeg tar i bruk. -->
 <div>
-<!-- Feilmeldinger kommer her -->
 <h4><?php echo $the_message; ?></h4>
 	
 <form id="login-id" action="" method="post">
 	
 <div class="">
 	<label>Username</label>
-	<!-- htmlentities er en tryggere måte å sette inn en string på -->
 	<input type="text" name="username" value="<?php echo htmlentities($username); ?>" >
 
 </div>
 
 <div class="">
 	<label>Email</label>
-	<!-- htmlentities er en tryggere måte å sette inn en string på -->
 	<input type="text" name="email" value="<?php echo htmlentities($email); ?>" >
 
 </div>
 
 <div class="">
 	<label>First Name</label>
-	<!-- htmlentities er en tryggere måte å sette inn en string på -->
 	<input type="text" name="first_name" value="<?php echo htmlentities($first_name); ?>" >
 
 </div>
 
 <div class="">
 	<label>Middle Name</label>
-	<!-- htmlentities er en tryggere måte å sette inn en string på -->
 	<input type="text" name="middle_name" value="<?php echo htmlentities($middle_name); ?>" >
 
 </div>
 
 <div class="">
 	<label>Last Name</label>
-	<!-- htmlentities er en tryggere måte å sette inn en string på -->
 	<input type="text" name="last_name" value="<?php echo htmlentities($last_name); ?>" >
 
 </div>
@@ -107,10 +96,11 @@ if (isset($_POST['submit'])) {
 </div>
 
 <?php 
-// Legger her ut alle error-meldingene på rad, hvis det er noen.
+
 if (!empty($error_array)) {
 	foreach ($error_array as $error_message) {
 		echo $error_message . "<br>";
+
 	}
 }
 

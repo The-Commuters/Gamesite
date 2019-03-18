@@ -1,24 +1,28 @@
-<!-- Denne siden kommer til å innholde en liste over brukerne og en søkemotor for dem. -->
-
-<?php include("includes/views/header.php"); ?>
-
-<?php if (!$session->is_signed_in() || !User::is_admin($session->user_id)) {redirect("login.php");} ?>
-
-<div >  
-
 <?php 
+
+/**
+ * This page will contain a list where the admin's
+ * can search after users, then they will be able to
+ * go to their profile, delete them or change their 
+ * information.
+ */
+
+include("includes/views/header.php");
+
+if (!$session->is_signed_in() || !User::is_admin($session->user_id)) {redirect("login.php");} 
 
 $genres = array();
 
-//These are here so that htmlentities does not show errors, can be removed is the form is placed before it.
 if (!isset($_GET['f'])) {
 
   $search = "";
   $users = User::find_all();
 
 }
+
 ?>
 
+<div >  
 <form id="user_search" >
 <div class="">
 

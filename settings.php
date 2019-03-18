@@ -1,11 +1,14 @@
-<?php require_once("includes/views/header.php") ?>
+<?php 
 
-<?php if (!$session->is_signed_in()) {redirect("login.php");} ?>
+/**
+ * This is the page where the users can change their data,
+ * Can only be reached by admins with the access to the
+ * userlist or the users themself.
+ */
 
-<?php  
-// The forms where signed in user can change their information.
-// Should be placed in a popup of some kind or another page.
-// Currently only here to place the users form they use to update their infomration.
+require_once("includes/views/header.php");
+
+if (!$session->is_signed_in()) {redirect("login.php");} 
 
 if (empty($_GET['id'])) {
 	$user = User::find_by_id($session->user_id);
