@@ -1,13 +1,18 @@
 <?php 
 
-//Klassen som omgjør alt ved håndtering av brukere i databasen.
+/**
+ * The class that creates and stores user-objects, is used
+ * whenever something need's to use or store information
+ * about the user that is logged in or other users.
+ */
+
 class User extends Db_object{
 
-	//Klasse-variabler kalles properties.
-	protected static $db_table = "users"; //Slik at man kan endre navnet på databasetabellen.
+	protected static $db_table = "users";
 
-	//Array skal brukes i properies() og inneholder bruker-variablene til objektet.
-	protected static $db_table_fields = array('username', 'email', 'password', 'first_name', 'middle_name', 'last_name', 'user_image', 'joined', 'verify_code', 'status' );
+	protected static $db_table_fields = array('unique_id', 'username', 'email', 'password', 'first_name', 
+		'middle_name', 'last_name', 'user_image', 'joined', 'verify_code', 'status' );
+
 	public $id;
 	public $username;
 	public $email;
@@ -18,7 +23,9 @@ class User extends Db_object{
 	public $user_image;
 	public $joined;
 	public $verify_code;
+	public $unique_id;
 	public $status;
+
 	/**
 	 * Verifiy that the user lies in the database with this email and password, used with login
 	 * but can also be used other places.
@@ -317,11 +324,7 @@ class User extends Db_object{
 		if (empty($error_array)) {
 
 			//Check username - bruker check_username til å sjekke om brukernavnet fungerer.
-
-
-			// Creates here the uinqe string that will be added to the username.
-			$user_id_str = User::create_unique_id();
-			$username .= $user_id_str;
+			$unique_id = User::create_unique_id();
 
 			//sets up the new user and creates it with create();
 			$user = new user();
@@ -332,6 +335,7 @@ class User extends Db_object{
 			$user->first_name  = $first_name;
 			$user->middle_name = $middle_name;
 			$user->last_name   = $last_name;
+			$user->unique_id   = $unique_id;
 			$user->user_image  = "1.png";
 			$user->joined      = date("Y-m-d");
 			$user->verify_code = md5($username . microtime());
@@ -351,15 +355,15 @@ class User extends Db_object{
 	 *
 	 */
 	public static function create_unique_id($length = 5) {
-		$string = "#";
-		$characters = array_merge(range('A','Z'), range('a','z'), range('0','9'));
+		
+		$characters = array_merge(range('0','9'));
 		$max = count($characters) - 1;
 
 		for ($i = 0; $i < $length; $i++) {
 			$random = mt_rand(0, $max);
-			$string .= $characters[$random];
+			$number .= $characters[$random];
 		}
-		return $string;
+		return $number;
 	}
 
 

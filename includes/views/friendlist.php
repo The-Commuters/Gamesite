@@ -1,17 +1,11 @@
 <?php 
 
 /**
- * This is the friendlist that will show up on the profile page
- * 
- *
+ * This is the friendlist that will show up on the chat page and the chat
+ * that will change depending on which radio-button is pressed..
  */
 
 $friends = Friendship::find_friends($session->user_id);
-?>
-
-<?php 
-$chatroom_id = "h";
-include("userchat.php"); 
 ?>
 
 <div>
@@ -21,7 +15,6 @@ include("userchat.php");
     <th>Image</th>
     <th>Username</th>
     <th>Chat</th>
-    <th>Online?</th>
   </tr>
  </thead>
 <tbody>
@@ -33,10 +26,11 @@ foreach ($friends as $friend) :
   } else {
     $user = User::find_by_id($friend->user_2);
   }
+
 ?>
 
 <tr>
-
+  <div id="friendDiv">
 	<td>
 		<a href="profile.php?id=<?php echo $user->id; ?>">
 			<img src="<?php echo $user->get_user_image();?>" style="height: 100px; width: 100px;">
@@ -44,12 +38,34 @@ foreach ($friends as $friend) :
 	</td>
 
 	<td><?php echo $user->username; ?></td>
-	<td><?php echo "Chat?"; ?></td>
-	<td><?php echo "Yes/No" ?></td>
+	<td>
 
+    <!-- Here the radiobutton is placed, and pressing it will change the room-id to that persons user_id. -->
+    <input type="radio" name="roomId" value="<?php echo $friend->chatroom; ?>" onclick="document.getElementById('chatId').value=this.value">
+  
+  </td>
+  </div>
 </tr>
 
 <?php endforeach; ?>
+
+
+<!--$chatroom_id is set up wherever this is called, and will decide what room id it is.-->
+<div id="find_messages">
+<div class="chatcontainer" style="float: left;">
+  <main>
+    <div class="userSettings">
+      <input id="chatId" style="display: none;" placeholder="1" maxlength="32" value="1">
+    </div>
+    <div class="chat">
+      <div id="chatOutput"></div>
+      <input id="chatInput" type="text" placeholder="Input Text here" maxlength="128">
+      <button id="chatSend">Send</button>
+    </div>
+  </main>
+</div>
+<script src="assets/js/chat.js"></script>
+</div>
 
 </tbody>
 </table>

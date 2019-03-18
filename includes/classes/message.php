@@ -1,15 +1,18 @@
 <?php 
 
-//Klassen som omgjør alt ved håndtering av brukere i databasen.
+/**
+ * This class will hold messages that is sent with the chat,
+ * it will also be used to control the rooms that friends and
+ * users chat in.
+ */
+
 class Message extends Db_object{
 
-	//Klasse-variabler kalles properties.
-	protected static $db_table = "user_chat"; //Slik at man kan endre navnet på databasetabellen.
+	protected static $db_table = "user_chat"; 
 
-	//Array skal brukes i properies() og inneholder achivement-variablene til objektet.
-	protected static $db_table_fields = array('game_id', 'user_id', 'username', 'text', 'time');
+	protected static $db_table_fields = array('room_id', 'user_id', 'username', 'text', 'time');
 	public $id;
-	public $game_id;
+	public $room_id;
 	public $user_id;
 	public $username;
 	public $text;
@@ -22,19 +25,19 @@ class Message extends Db_object{
 	 * @param $game_id is the id for the game.
 	 * @return the messages that belong to the chat at the side of the game.
 	 */
-	public static function find_messages($game_id) {
+	public static function find_messages($room_id) {
 
 		global $database;
-		$game_id = $database->escape_string($game_id);
+		$room_id = $database->escape_string($room_id);
 
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
-		$sql .= "game_id = '{$game_id}' ";
+		$sql .= "room_id = '{$room_id}' ";
 		$sql .= "ORDER BY id";
 
 		return static::find_by_query($sql);
 
 	}
 
-}
+} // End of Message-class
 
 ?>

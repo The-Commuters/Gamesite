@@ -1,13 +1,9 @@
 <?php 
 
-
-//Klassen som omgjør alt ved håndtering av brukere i databasen.
 class Achievement extends Db_object{
 
-	//Klasse-variabler kalles properties.
-	protected static $db_table = "gained_achievements"; //Slik at man kan endre navnet på databasetabellen.
+	protected static $db_table = "gained_achievements"; 
 
-	//Array skal brukes i properies() og inneholder achivement-variablene til objektet.
 	protected static $db_table_fields = array('id', 'user_id', 'gained');
 	public $achievements_id;
 	public $user_id;

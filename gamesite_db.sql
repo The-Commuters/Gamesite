@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 15. Mar, 2019 12:59 PM
--- Server-versjon: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: 17. Mar, 2019 20:41 PM
+-- Tjener-versjon: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,8 +45,19 @@ CREATE TABLE `friend_list` (
   `id` int(11) NOT NULL,
   `user_1` int(10) NOT NULL,
   `user_2` int(10) NOT NULL,
-  `status` tinyint(2) NOT NULL
+  `status` tinyint(2) NOT NULL,
+  `chatroom` varchar(23) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dataark for tabell `friend_list`
+--
+
+INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `status`, `chatroom`) VALUES
+(108, 1, 2, 1, '1#2'),
+(109, 1, 19, 0, '1#19'),
+(110, 1, 3, 0, ''),
+(111, 1, 1, 1, '1#1');
 
 -- --------------------------------------------------------
 
@@ -90,6 +101,29 @@ INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `folderna
 -- --------------------------------------------------------
 
 --
+-- Tabellstruktur for tabell `game_genre`
+--
+
+CREATE TABLE `game_genre` (
+  `game_id` int(11) NOT NULL,
+  `genre_id` int(11) NOT NULL,
+  `genre_type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `genres`
+--
+
+CREATE TABLE `genres` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellstruktur for tabell `ratings`
 --
 
@@ -121,6 +155,7 @@ INSERT INTO `ratings` (`id`, `game_id`, `user_id`, `score`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `unique_id` int(5) NOT NULL,
   `email` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -138,10 +173,17 @@ CREATE TABLE `users` (
 -- Dataark for tabell `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`) VALUES
-(1, 'hehe@willi.no', 'WilliWonka', 'qwerty', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 0),
-(2, 'Derp@Derpesen.no', 'Derperud', 'qwerty', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, '', 0),
-(3, 'heman@willi.no', 'heman', 'qwerty', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '', 0);
+INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`) VALUES
+(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 0),
+(2, 0, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 0, '', 0),
+(3, 0, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 0, '', 0),
+(19, 0, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', '2019-03-15', 0, '', 0),
+(20, 0, 'llkjn@nws.ws', 'Hannes#27732', '$2y$10$olLRICVAlbsDXREU9ulsBOTqAhWzRb/bMEvmpdNJ474BAPftAuXNu', 'sadasd', 'hbjhb', 'hjbhbjh', '1.png', '2019-03-17', 0, '', 0),
+(21, 0, 'hehe@willi.nos', 'Hanness', '$2y$10$rKCVBxvyzi.9GLLWsiT.B.kNrSAKaD/K0UyFPXTq1YfdGSdQS4GiK', 'qwwqw', 'qwqw', 'qwqww', '1.png', '2019-03-17', 0, '', 0),
+(22, 0, 'hehe@willi.nodd', 'dscsdc', '$2y$10$.7aiv2vzoOB18HmP9rqjNOyqy1GW3cebr8oaaQ2V7T29w8o4gTuAm', 'sxc', 'xcsc', 'scsc', '1.png', '2019-03-17', 0, '', 0),
+(23, 0, 'hehe@willi.nojjj', 'dflÃ¸mj', '$2y$10$2DCi4g7B5CihWZlPbedhpeVvIi3AlPN0NoCZiWVrIrbWduIE1vSxC', 'askld', 'lasjd', 'lijlij', '1.png', '2019-03-17', 0, '', 0),
+(24, 8, 'jnkj@sds.ssdd', 'kjndskn', '$2y$10$z0l8taL9bT0lZqSVjv7mh.zKAFaN8Hf6cBpyMrNVpUSR5yXAmVNbG', 'qsm', 'klmlm', 'kmlkm', '1.png', '2019-03-17', 0, '', 0),
+(25, 76854, 'hdc@sdsd.ccd', 'ldfjvoijq', '$2y$10$3rA.M.YXUfd/KPc1JivCrenMLZt9ejKZmxtxYw6eq7W0ywGYCfLbO', 'qwe', 'jhb', 'khjb', '1.png', '2019-03-17', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -181,7 +223,26 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (57, 'update', 1, 1, 'users', '2019-03-14 18:54:53'),
 (58, 'delete', 1, 16, 'users', '2019-03-14 18:59:30'),
 (59, 'update', 1, 3, 'users', '2019-03-14 18:59:51'),
-(60, 'update', 1, 3, 'users', '2019-03-14 18:59:54');
+(60, 'update', 1, 3, 'users', '2019-03-14 18:59:54'),
+(62, 'create', 19, 19, 'users', '2019-03-15 14:57:57'),
+(63, 'create', 1, 12, 'user_chat', '2019-03-15 15:57:36'),
+(64, 'update', 1, 111, 'friend_list', '2019-03-16 16:34:28'),
+(65, 'update', 1, 108, 'friend_list', '2019-03-16 16:36:07'),
+(66, 'create', 1, 13, 'user_chat', '2019-03-16 17:07:24'),
+(67, 'create', 1, 14, 'user_chat', '2019-03-16 17:07:45'),
+(68, 'create', 1, 15, 'user_chat', '2019-03-16 17:08:10'),
+(69, 'create', 2, 16, 'user_chat', '2019-03-16 17:09:19'),
+(70, 'create', 1, 17, 'user_chat', '2019-03-16 17:17:16'),
+(71, 'create', 1, 18, 'user_chat', '2019-03-16 17:17:56'),
+(72, 'create', 1, 19, 'user_chat', '2019-03-16 17:18:11'),
+(73, 'create', 20, 20, 'users', '2019-03-16 23:23:07'),
+(74, 'create', 21, 21, 'users', '2019-03-16 23:28:57'),
+(75, 'create', 22, 22, 'users', '2019-03-16 23:32:47'),
+(76, 'create', 23, 23, 'users', '2019-03-16 23:35:39'),
+(77, 'create', 24, 24, 'users', '2019-03-16 23:36:49'),
+(78, 'create', 25, 25, 'users', '2019-03-16 23:38:36'),
+(79, 'create', 1, 20, 'user_chat', '2019-03-17 09:56:33'),
+(80, 'update', 1, 12, 'ratings', '2019-03-17 12:25:34');
 
 -- --------------------------------------------------------
 
@@ -191,7 +252,7 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 
 CREATE TABLE `user_chat` (
   `id` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL,
+  `room_id` varchar(23) NOT NULL,
   `user_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `time` datetime NOT NULL,
@@ -202,14 +263,23 @@ CREATE TABLE `user_chat` (
 -- Dataark for tabell `user_chat`
 --
 
-INSERT INTO `user_chat` (`id`, `game_id`, `user_id`, `username`, `time`, `text`) VALUES
-(5, 2, 1, 'WilliWonka', '2019-03-14 19:38:15', 'fgdgdfgf'),
-(6, 2, 1, 'WilliWonka', '2019-03-14 19:38:55', 'sadasd'),
-(7, 2, 1, 'WilliWonka', '2019-03-14 19:38:57', 'sadsadd'),
-(8, 5, 1, 'WilliWonka', '2019-03-14 19:39:01', 'asdasd'),
-(9, 5, 1, 'WilliWonka', '2019-03-14 19:39:04', 'asdasd'),
-(10, 0, 1, 'WilliWonka', '2019-03-14 19:45:57', 'Hello'),
-(11, 2, 1, 'WilliWonka', '2019-03-14 19:46:22', 'sadsadsad');
+INSERT INTO `user_chat` (`id`, `room_id`, `user_id`, `username`, `time`, `text`) VALUES
+(5, '2', 1, 'WilliWonka', '2019-03-14 19:38:15', 'fgdgdfgf'),
+(6, '2', 1, 'WilliWonka', '2019-03-14 19:38:55', 'sadasd'),
+(7, '2', 1, 'WilliWonka', '2019-03-14 19:38:57', 'sadsadd'),
+(8, '5', 1, 'WilliWonka', '2019-03-14 19:39:01', 'asdasd'),
+(9, '5', 1, 'WilliWonka', '2019-03-14 19:39:04', 'asdasd'),
+(10, '0', 1, 'WilliWonka', '2019-03-14 19:45:57', 'Hello'),
+(11, '2', 1, 'WilliWonka', '2019-03-14 19:46:22', 'sadsadsad'),
+(12, '19', 1, 'WilliWonka', '2019-03-15 16:57:36', 'Hello There'),
+(13, '1', 1, 'WilliWonka', '2019-03-16 18:07:24', 'Hello Derperud, Whats Up?'),
+(14, '1', 1, 'WilliWonka', '2019-03-16 18:07:45', 'I\'m kinda bored right now...'),
+(15, '1', 1, 'WilliWonka', '2019-03-16 18:08:10', '...and my parents are out...'),
+(16, '1', 2, 'Derperud', '2019-03-16 18:09:19', 'Be right there!'),
+(17, '', 1, 'WilliWonka', '2019-03-16 18:17:16', 'Hey Maddafaker?'),
+(18, '1#2', 1, 'WilliWonka', '2019-03-16 18:17:56', 'Lol mate, you dun goofed!'),
+(19, '1#1', 1, 'WilliWonka', '2019-03-16 18:18:11', 'Fak dat guy, you da boss!'),
+(20, '1#1', 1, 'WilliWonka', '2019-03-17 10:56:33', 'dawg');
 
 --
 -- Indexes for dumped tables
@@ -244,11 +314,25 @@ ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `game_genre`
+--
+ALTER TABLE `game_genre`
+  ADD PRIMARY KEY (`game_id`,`genre_id`),
+  ADD KEY `Game_genreGenresFN` (`genre_id`);
+
+--
+-- Indexes for table `genres`
+--
+ALTER TABLE `genres`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `RatingsUserFN` (`user_id`);
+  ADD KEY `RatingsUserFN` (`user_id`),
+  ADD KEY `RatingsGameFN` (`game_id`);
 
 --
 -- Indexes for table `users`
@@ -285,13 +369,19 @@ ALTER TABLE `achievements`
 -- AUTO_INCREMENT for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `genres`
+--
+ALTER TABLE `genres`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -303,19 +393,19 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
 --
 ALTER TABLE `user_chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Begrensninger for dumpede tabeller
@@ -342,9 +432,17 @@ ALTER TABLE `gained_achievements`
   ADD CONSTRAINT `Gained_achievementsUserFNs` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Begrensninger for tabell `game_genre`
+--
+ALTER TABLE `game_genre`
+  ADD CONSTRAINT `Game_genreGamesFN` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Game_genreGenresFN` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Begrensninger for tabell `ratings`
 --
 ALTER TABLE `ratings`
+  ADD CONSTRAINT `RatingsGameFN` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `RatingsUserFN` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

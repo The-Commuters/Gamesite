@@ -1,25 +1,30 @@
 <?php 
 
+/**
+ * Rating-classs holds objekts that are created when a user
+ * decides to grade a game, the game_id is the id of the 
+ * rated game and the user_id is the id of the user that
+ * rated it. 
+ */
 
 class Rating extends Db_object {
 
-	//Klasse-variabler kalles properties.
-	protected static $db_table = "ratings"; //Slik at man kan endre navnet på databasetabellen.
+	protected static $db_table = "ratings"; 
 
-	//Array skal brukes i properies() og inneholder bruker-variablene til objektet.
 	protected static $db_table_fields = array('game_id', 'user_id', 'score');
 	public $id; 
 	public $game_id;
 	public $user_id;
 	public $score;
 
-	// Dette skal da være objektet som håndterer ratingene til spilleme
-	// Objekter som blir sendt til databasen blir laget her, og utregninger
-	// Av gjennomsnittlig score skal og foregå her.
-
+	/**
+	 * Whenever a logged in user decides to rate a game, and presses 
+	 * one of the radio-buttons, this method will be called. It will
+	 * place a new row in the ratings-table and or update one depending
+	 * on if the user have rated the game before.
+	 */
 	public function verify_Rating() {
 
-		// Will check if there already is a rating for the game by the user.
 		global $session;
 		global $database;
 
@@ -49,7 +54,7 @@ class Rating extends Db_object {
 
 	}
 
-} // End of ratings-class.
+} // End of Ratings-class.
 
 
 

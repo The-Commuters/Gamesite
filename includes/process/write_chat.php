@@ -14,7 +14,7 @@
 	$message           = new Message();
 
 	$message->username = $user->username;
-	$message->game_id  = substr($_GET["chatId"], 0, 20);
+	$message->room_id  = substr($_GET["chatId"], 0, 23);
 	$message->user_id  = $session->user_id;
 	$message->text     = substr($_GET["text"], 0, 128);
 	$message->time     = date("Y-m-d H:i:s");

@@ -1,11 +1,15 @@
-<?php require_once("includes/views/header.php") ?>
-
 <?php 
 
-// Kaller på en metode i session som logger en ut. 
+/**
+ * This is the logout page, that calls on the logout()
+ * method in the Session class to clean the $session
+ * properties, and then redirects the user to login.php.
+ */
+
+require_once("includes/views/header.php");
+
 $session->logout();
 
-//Funksjon som sender deg til login.
 redirect("login.php");
 
 ?>
