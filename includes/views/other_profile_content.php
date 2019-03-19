@@ -1,9 +1,9 @@
 <?php 
 
-/* This is the profile of users othen than the user that is signed in to the site.
+/**
+ * This is the profile of users othen than the user that is signed in to the site.
  * On this page the signed in user
-*/
-
+ */
 
 if (empty($_GET['id'])) {
 	redirect("users.php");

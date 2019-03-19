@@ -2,13 +2,18 @@
 
 require_once("config.php");
 
+/**
+ * The Database class handles contact between the website and 
+ * the database, both sql sent and the connection itself. It
+ * also hold the escape_string that clean the strings sent
+ * to it for SQL-injection with real_escape_string().
+ */
+
 class Database {
 
-	//Gjør den public slik at den kan brukes over hele klassen.
-	//Skal arves senere i kurset
 	public $connection;
 
-	//Construct Function, kobler opp når database-variablen bllir opprettet.
+	
 	function __construct() {
 
 		$this->open_db_connection();

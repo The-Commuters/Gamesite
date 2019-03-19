@@ -53,7 +53,7 @@ class User extends Db_object{
 
 			// Collects the hashed password from the array that was collected by the sql.
 			$hashed_password = $the_result_array[0]->password; 
-		
+
 			// Checks here where if the hashed password fits to the password that have been inserted by user.
 			if (password_verify($password, $hashed_password)) {
 
@@ -214,13 +214,12 @@ class User extends Db_object{
 		return !empty($the_result_array) ? true : false;
 	}
 
-	// 
 	/**
 	 * checks if the user is an friend of the logged in user or not.
 	 *
-	 * @param 
-	 * @param 
-	 * @return
+	 * @param $user_id is the id of the signed in user.
+	 * @param $friend_id is the id of the other user.
+	 * @return true if friend, false if not.
 	 */
 	public static function is_friend($user_id, $friend_id) {
 
@@ -238,7 +237,12 @@ class User extends Db_object{
 		return !empty($the_result_array) ? true : false;
 	}	
 
-	// Collects the placement of the game path, used when showing the picture at  the list of users.
+	/**
+	 * Collects the placement of the game path, used when showing the picture at 
+	 * the list of users. And elswhere the user-picture might need to be shown.
+	 *
+	 * @return the string where the image is stored.
+	 */
 	public function get_user_image() {
 
 		return "assets/" . "img/" . "profile/" . "default/" . $this->user_image;
@@ -318,16 +322,13 @@ class User extends Db_object{
 			array_push($error_array, "Your password must be between 5 and 50 characters");
 		}
 
-     	$password = password_hash($password, PASSWORD_DEFAULT);
+		$password = password_hash($password, PASSWORD_DEFAULT);
 
 		//Check password - bruker check_password til å sjekke om et passord fungerer, kommer til å tilkalle verify_password.
 		if (empty($error_array)) {
 
-			//Check username - bruker check_username til å sjekke om brukernavnet fungerer.
-			$unique_id = User::create_unique_id();
-
-			//sets up the new user and creates it with create();
-			$user = new user();
+			
+			$user = new user();														
 
 			$user->username    = $username;
 			$user->email       = $email;
@@ -335,7 +336,7 @@ class User extends Db_object{
 			$user->first_name  = $first_name;
 			$user->middle_name = $middle_name;
 			$user->last_name   = $last_name;
-			$user->unique_id   = $unique_id;
+			$user->unique_id   = $user->create_unique_id();
 			$user->user_image  = "1.png";
 			$user->joined      = date("Y-m-d");
 			$user->verify_code = md5($username . microtime());
@@ -347,12 +348,16 @@ class User extends Db_object{
 		} 
 
 		return $error_array;
-	
+
 	}
 
 	/**
-	 * Function that creates the string that has to be added behind the username.
+	 * Function that creates the number that has to be added behind the username.
+	 * The number will be made up by five characters and is stored into the
+	 * database seperate from the username. 
 	 *
+	 * @param $length is the length of the number.
+	 * @return the number that is created.
 	 */
 	public static function create_unique_id($length = 5) {
 		
@@ -366,9 +371,37 @@ class User extends Db_object{
 		return $number;
 	}
 
+	/**
+	 * Collects all the scores from the achievements that the user have 
+	 * earned and calculates the user-level based on it.
+	 *
+	 * @return the level of the user.
+	 */ 
+	public static function find_user_level() {
+
+	}
+
+
+
+
+
+
+
+	//--------------------------WIP---------------------------------------
+	public static function upload_profile_picture($file) {
+
+		$target_dir = "assets/images/uploads/profile_images/";
+		$target_file = $target_dir . $session->user_id . basename($_FILES["file"]["name"]);
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		$check = getimagesize($_FILES["file"]["tmp_name"]);
+
+		move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+
+	}
+	//--------------------------------------------------------------------
 
 	public static function find_user_by_code($code){
-	
+
 		global $database;
 		// Tar bort eventuele ting som ikke skal være med i stringen
 		$code = $database->escape_string($code);
@@ -377,7 +410,7 @@ class User extends Db_object{
 		$sql = "SELECT * FROM ". self::$db_table ." WHERE verify_code = '{$code}' AND status = 0 Limit 1 ";
 		
 		// retunerer det database objektet som blir funnet 
-		 return static ::find_by_query($sql); 
+		return static ::find_by_query($sql); 
 	}
 
 	public function activate_user($code){

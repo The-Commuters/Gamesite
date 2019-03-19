@@ -20,9 +20,9 @@ if (empty($_GET['id'])) {
 
 if (isset($_POST['submit'])) {
 	 
-	$first_name = trim($_POST['first_name']);
+	$first_name  = trim($_POST['first_name']);
 	$middle_name = trim($_POST['middle_name']);
-	$last_name = trim($_POST['last_name']);
+	$last_name   = trim($_POST['last_name']);
 
 	// Verify_update lies in User and check what is sent in, more parameters to be added.
 	$error_array = User::verify_update($first_name, $middle_name, $last_name);
@@ -32,6 +32,8 @@ if (isset($_POST['submit'])) {
 		$user->first_name = $first_name;
 		$user->middle_name = $middle_name;
 		$user->last_name = $last_name;
+
+		//$user->upload_profile_picture($_FILES['file_upload']);
 
 		// Updates the user-row in the database.
 		$user->update();
@@ -62,6 +64,14 @@ if (isset($_POST['submit'])) {
 	<label>Last Name</label>
 	<input type="text" name="last_name" value="<?php echo $user->last_name; ?>" >
 </div>
+
+<!-- Upload image to use as user-picture -->
+<div class="">
+  	<label>Profile Picture</label>
+    <input type="file" name="file_upload">
+</div>
+
+<!-- Change password -->
 
 <div class="">
 <input type="submit" name="submit" value="Submit">

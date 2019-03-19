@@ -1,25 +1,25 @@
-<!-- 
-This accepts or deletes a friend-request depending on the last _get.
-Will send a message back that is either positive or negative.
--->
-
 <?php 
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "/gamesite/includes/init.php";
-require_once($path); 
-?> 
 
-<?php 
-	$user_1 = $_GET['ui'];
-	$user_2 = $_GET['oi'];
-	$status = $_GET['a'];
-	$id     = $_GET['id'];
+	/**
+ 	* This accepts or deletes a friend-request depending on the last _get.
+ 	* Will send a message back that is either positive or negative.
+ 	*/
 
-	Friendship::friend_request_handler($user_1, $user_2, $status, $id);
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	$path .= "/gamesite/includes/init.php";
+	require_once($path); 
 
-	if ($status == 1) {
+
+	$user_1 = $_GET['ui']; 												// The id of the user that is logged in.
+	$user_2 = $_GET['oi']; 												// The id of the user that sent the request.
+	$status = $_GET['a'];  												// 0 if the signed in user refused, 1 if not.
+	$id     = $_GET['id']; 												// The id of the friend request.
+	Friendship::friend_request_handler($user_1, $user_2, $status, $id); // The method that handles the friendship object.
+
+	if ($status == 1) {													// Echo positive or negative depending on on $status.
 		echo "Friendship accepted!";
 	} else {
 		echo "Friendship rejected!";
 	}
+
 ?>
