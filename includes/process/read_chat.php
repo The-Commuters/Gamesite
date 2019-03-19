@@ -26,8 +26,10 @@ foreach ($messages as $message) : 					// Does this for each of the messages tha
 	$username=$message->username;					// Gather's the username from the message.
 	$text=$message->text;							// Gather's the text from the message.
 	$time=date('G:i', strtotime($message->time));	// Gather's the time from the message and cuts it down.
+	$date=date('l jS \of F Y', strtotime($message->time));
 
-
+	echo '<hr data-content="' . $date . '">';
+	
 	echo '<div class="message ' . $other . '">';
 	echo '<div><div class="avatar" style="background-image: url(' . $avatar . ')"></div></div>';
 	echo '<div class="content">';
@@ -35,7 +37,6 @@ foreach ($messages as $message) : 					// Does this for each of the messages tha
 	echo '<p class="text">' . $text . '</p>';
 	echo '</div>';
 	echo '</div>';
-
 
 endforeach; 										// Ends the foreach.
 

@@ -5,16 +5,13 @@
  */
 
 $(document).ready(function() {
-    var chatInterval = 300;               // Refresh interval in miliseconds
-    var $chatId      = $("#chatId");      // The chat-id and also the game-id
-    var $chatOutput  = $("#chatOutput");  // All the messages that have been collected from the database.
+    var chatInterval = 300;                // Refresh interval in miliseconds
+    var $chatId      = $("#chatId");       // The chat-id and also the game-id
+    var $chatOutput  = $("#chatOutput");   // All the messages that have been collected from the database.
     var $chatInput   = $("#chat-input");   // This is the string that the person writes.
-    var $chatSend    = $("#chatSend");    // this is the send button.
+    var $chatSend    = $("#chatSend");     // this is the send button.
 
-
-    /**
-     * Sends there inn the message into the database.
-     */
+    // Sends there inn the message into the database.
     function sendMessage() {
         var chatIdString = $chatId.val();
         var chatInputString = $chatInput.val();
@@ -30,9 +27,7 @@ $(document).ready(function() {
         $('input[name=chatInput').val('');
     }
 
-    /**
-     * Collects here out the messages for the chatroom.
-     */
+    // Collects here out the messages for the chatroom.
     function retrieveMessages() {
         var chatIdString = $chatId.val();
 
@@ -42,9 +37,19 @@ $(document).ready(function() {
         });
     }
 
-    // If the send button is clicked.
-    $chatSend.click(function() {
-        sendMessage();
+    // When the enter key is pressed while the focus is on the box.
+    $('#chat-input').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+
+        // If the shiftkey is NOT pressed down.
+        if (!event.shiftKey) {
+
+            // If the key pressed is the Enter key.
+            if(keycode == '13'){
+                sendMessage();
+            
+            }
+        }
     });
 
     // Retrieves the messages from the database with every interval

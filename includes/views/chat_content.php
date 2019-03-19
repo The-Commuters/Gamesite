@@ -29,7 +29,7 @@ $friends = Friendship::find_friends($session->user_id);
 					  }
                 	?>
 
-                    <div class="user">
+                    <div class="user" onclick="document.getElementById('chatId').value='<?php echo $friend->chatroom; ?>'">
                         <div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div>
                         <div class="username"><?php echo $user->username; ?></div>
                         <i class="fas fa-times close"></i>
@@ -53,7 +53,16 @@ $friends = Friendship::find_friends($session->user_id);
                     <a href="#" class="username">Daniel</a><i class="state -away"></i>
                 </div>
                 <div class="view">
-                	<div id="chatOutput">
+
+                	<div class="message -user">
+                        <div><div class="avatar" style="background-image: url(assets/img/avatar.jpg)"></div></div>
+                        <div class="content">
+                            <div class="info"><a href="#" class="name">Daniel</a><span class="time">08:30</span></div>
+                            <p class="text">secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is bein</p>
+                        </div>
+                    </div>
+
+                    <div id="chatOutput">
                 		
 
                 	</div>
@@ -68,14 +77,7 @@ $friends = Friendship::find_friends($session->user_id);
 						-->
     
 
-                    <div class="message -user">
-                        <div><div class="avatar" style="background-image: url(assets/img/avatar.jpg)"></div></div>
-                        <div class="content">
-                            <div class="info"><a href="#" class="name">Daniel</a><span class="time">08:30</span></div>
-                            <p class="text">secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is bein</p>
-                        </div>
-                    </div>
-					
+
                 </div>
                 <div class="input">
                     <textarea  rows="1" placeholder="Message" id="chat-input"></textarea>
@@ -83,8 +85,7 @@ $friends = Friendship::find_friends($session->user_id);
                 
 
    					<!-- Where the room-id is stored -->
-			     	<input id="chatId" style="display: none;" placeholder="1" maxlength="32" value="1">
-			     	<button id="chatSend">Send</button>
+			     	<input id="chatId" style="display: none;" placeholder="1" maxlength="32" value="0">
 
                 <script src="assets/js/chat.js"></script>
             </div>
