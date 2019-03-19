@@ -9,16 +9,15 @@
 	$path .= "/gamesite/includes/init.php";
 	require_once($path); 
 
-	$user = User::find_by_id($session->user_id);
+	$user = User::find_by_id($session->user_id);			// Collects the signed_in user in $user.
 	
-	$message           = new Message();
+	$message           = new Message();						// Creates a new message-object.
+	$message->username = $user->username;					// Places the signed_in username into $message.
+	$message->room_id  = substr($_GET["chatId"], 0, 23);    // Does the same with the room_id.
+	$message->user_id  = $session->user_id;					// And the user_id
+	$message->text     = substr($_GET["text"], 0, 128);		// And the 128 first characters in the text.
+	$message->time     = date("Y-m-d H:i:s");				// And the date.
 
-	$message->username = $user->username;
-	$message->room_id  = substr($_GET["chatId"], 0, 23);
-	$message->user_id  = $session->user_id;
-	$message->text     = substr($_GET["text"], 0, 128);
-	$message->time     = date("Y-m-d H:i:s");
-
-	$message->save();
+	$message->save();										// Then stores it into the database.
 
 ?>

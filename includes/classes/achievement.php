@@ -1,5 +1,9 @@
 <?php 
 
+/**
+ * Achievement-class will handle the achievements earned inside of games
+ */
+
 class Achievement extends Db_object{
 
 	protected static $db_table = "gained_achievements"; 

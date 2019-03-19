@@ -1,14 +1,15 @@
-<!-- 
-This sends a friend request into the database.
--->
-
 <?php 
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "/gamesite/includes/init.php";
-require_once($path); 
-?> 
+	
+	/**
+	 * This will send a friend-request to the user that the 
+	 * signed-in user have pressed the 'send friend request'
+	 * button on.
+	 */
 
-<?php 
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	$path .= "/gamesite/includes/init.php";
+	require_once($path); 
+
 
 	if (!User::is_friend($_GET['i'], $_GET['o'])) {
 		$user = User::add_friend($_GET['i'], $_GET['o']);

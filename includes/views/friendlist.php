@@ -2,10 +2,11 @@
 
 /**
  * This is the friendlist that will show up on the chat page and the chat
- * that will change depending on which radio-button is pressed..
+ * that will change depending on which radio-button is pressed.
  */
 
 $friends = Friendship::find_friends($session->user_id);
+
 ?>
 
 <div>

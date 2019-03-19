@@ -3,15 +3,9 @@
 
 require_once("includes/init.php");
 
-/*$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "/gamesite/includes/init.php";
-require_once($path); */
-
-// If a user is logged in, collect all information about that user.
 if ($session->is_signed_in()) {
     $user = User::find_by_id($session->user_id);
 }
-
 
 ?>
 
@@ -27,6 +21,7 @@ if ($session->is_signed_in()) {
     ?>
 
 </head>
+
 <body>
     <!-- Header -->
 	<header>
@@ -45,8 +40,8 @@ if ($session->is_signed_in()) {
 
 				<!-- Other items-->
 				<a href="index.php" class="item <?php if($page == "index"){echo "-active";} ?>">Games</a>
-				<a href="#" class="item">About</a>
-				<a href="#" class="item">Contact</a>
+				<a href="about.php" class="item <?php if($page == "about"){echo "-active";} ?>">About</a>
+				<a href="contact.php" class="item <?php if($page == "contact"){echo "-active";} ?>">Contact</a>
             </nav>
 
             <?php if ($session->is_signed_in()) { ?>
@@ -64,9 +59,17 @@ if ($session->is_signed_in()) {
 						<a href="settings.php"><i class="fas fa-fw fa-cog"></i>Settings</a>
 						<a href="chat.php"><i class="fas fa-fw fa-envelope"></i>Messages</a>
 						<a href="logout.php"><i class="fas fa-fw fa-sign-out-alt"></i>Sign out</a>
+
 						<hr class="divider">
-						<a href="#"><i class="fas fa-fw fa-heart"></i>Donate</a>
+						<a href="donate.php"><i class="fas fa-fw fa-heart"></i>Donate</a>
 						<a href="upload.php"><i class="fas fa-fw fa-upload"></i>Submit game</a>
+
+						<?php if ($user->is_admin($user->id)) { ?>
+
+						<hr class="divider">
+						<a href="users.php"><i class="fas fa-fw fa-users"></i>User list</a>
+
+						<?php } ?>
 					</div>
 				</div>
 

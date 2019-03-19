@@ -140,6 +140,7 @@ class Game extends Db_object {
 
 		}
 	}
+	
 	/**
 	 * Uses the player-choosen category, genre and input search to
 	 * look trough all the games stored in the database, to then
