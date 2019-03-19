@@ -57,12 +57,15 @@ if ($session->is_signed_in()) {
 					<div class="list">
                         <a href="profile.php?id=<?php echo $user->id;?>"><i class="fas fa-fw fa-user"></i>Profile</a>
 						<a href="settings.php"><i class="fas fa-fw fa-cog"></i>Settings</a>
+						<a href="users.php"><i class="fas fa-fw fa-user-friends"></i>Friendlist</a>
 						<a href="chat.php"><i class="fas fa-fw fa-envelope"></i>Messages</a>
-						<a href="logout.php"><i class="fas fa-fw fa-sign-out-alt"></i>Sign out</a>
 
 						<hr class="divider">
 						<a href="donate.php"><i class="fas fa-fw fa-heart"></i>Donate</a>
 						<a href="upload.php"><i class="fas fa-fw fa-upload"></i>Submit game</a>
+
+						<hr class="divider">
+						<a href="logout.php"><i class="fas fa-fw fa-sign-out-alt"></i>Sign out</a>
 
 						<?php if ($user->is_admin($user->id)) { ?>
 
