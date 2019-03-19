@@ -38,7 +38,7 @@ function update_userlist() {
 
     xmlhttp.open("GET","includes/views/userlist.php?s="+search+"&c="+category,true);
     xmlhttp.send();
-    
+
 }
 
 function update_gamelist() {

@@ -10,15 +10,18 @@
 @import "modules/color";
 
 // Partials
-@import "partials/avatar";
+@import "partials/avatar"; // new no box shadow and size
 @import "partials/base";
 @import "partials/button";
 @import "partials/card";
 @import "partials/casing";
-@import "partials/chat";
+@import "partials/chat"; // new
+@import "partials/chatlist"; // new
 @import "partials/dropdown";
 @import "partials/float-label";
-@import "partials/header";
+@import "partials/header"; // new font size
 @import "partials/login";
-@import "partials/main";
+@import "partials/game";
+@import "partials/message"; // new
+@import "partials/partition"; // new
 @import "partials/utility";
