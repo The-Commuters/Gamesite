@@ -8,7 +8,7 @@ $(document).ready(function() {
     var chatInterval = 300;               // Refresh interval in miliseconds
     var $chatId      = $("#chatId");      // The chat-id and also the game-id
     var $chatOutput  = $("#chatOutput");  // All the messages that have been collected from the database.
-    var $chatInput   = $("#chatInput");   // This is the string that the person writes.
+    var $chatInput   = $("#chat-input");   // This is the string that the person writes.
     var $chatSend    = $("#chatSend");    // this is the send button.
 
 

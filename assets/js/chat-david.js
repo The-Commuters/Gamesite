@@ -18,7 +18,7 @@ function initChatpanel(chatPanels) {
     });
 }
 
-// Make active
+// Make active and also change the current room_id
 function makeActive(active, event) {
     let close = active.children;
 
@@ -115,19 +115,24 @@ function hideChatPanel(node) {
 
 // Chat Input
 let input = document.getElementById("chat-input");
+var room = document.getElementById("chatId");
 
-let inputValue;
+
+let inputValue, room_id;
 let map = {};
 let reset = false;
 
+// On enter key pressed
 input.onkeydown = onkeyup = function(e){
     e = e || event;
     map[e.keyCode] = e.type == 'keydown';
     if (!(map[16]) && map[13]) {
-        alert("Your message has been sent");
+        alert(input.value);
         inputValue = input.value;
+        room_id = input.value;
         reset = true;
     }
+
 }
 
 input.addEventListener("input", event => {
