@@ -1,49 +1,115 @@
-/*
- * Added the part for the chat after this needs to be changed/replaced/fixed
- */
-
- *,
- *:before,
- *:after {
-  box-sizing: inherit;
-}
-
-/*Chat styling*/
-.chatcontainer {
+// Container for .chat and .userlist
+.message-center {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.userSettings {
-  margin-bottom: 20px;
+  height: calc(100vh - 7.65rem)
 }
 
 .chat {
-  max-width: 400px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    flex-direction: column;
+
+    display: flex;
+
+    overflow: hidden;
+
+    height: 100%;
 }
 
-.chat #chatOutput {
-  overflow-y: scroll;
-  height: 280px;
-  width: 100%;
-  border: 1px solid #777;
+.chat hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: none;
+    border-bottom: 0.1rem solid $color-gray-300;
 }
 
-.chat #chatOutput p {
-  margin: 0;
-  padding: 5px;
-  border-bottom: 1px solid #bbb;
-  word-break: break-all;
+.chat .header {
+    align-items: center;
+
+    display: flex;
+
+    padding: 0 2rem;
+    width: 100%;
+    height: 5.8rem;
+
+    background-color: $color-gray-800;
 }
 
-.chat #chatInput {
-  width: 75%;
+.chat .header .username {
+    transition: 0.3s color;
+
+    font-size: 2.4rem;
+    font-weight: 600;
+    text-decoration-line: none;
+    color: $color-gray-100;
 }
 
-.chat #chatSend {
-  width: 25%;
+.chat .header .username:hover {
+    color: $color-primary;
+}
+
+.chat .header .state {
+    display: block;
+
+    margin-top: 0.8rem;
+    margin-left: 0.8rem;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+
+    background-color: $color-gray-500;
+}
+
+.chat .header .state.-active {
+    background-color: $color-green;
+}
+
+.chat .header .state.-busy {
+    background-color: $color-red;
+}
+
+.chat .header .state.-away {
+    background-color: $color-yellow;
+}
+
+.chat .view {
+    flex: 1;
+    overflow-y: scroll;
+
+    margin: 0 2rem 2rem;
+    border-bottom: 0.1rem solid $color-gray-300;
+    width: calc(100% - 4rem);
+
+}
+
+.chat .input {
+    display: flex;
+
+    overflow: auto;
+
+    margin: 0 2rem 2rem;
+    box-shadow: inset 0.1rem 0.1rem hsla(0, 0%, 0%, 0.10), 0 -0.1rem 0 hsla(0, 0%, 100%, 0.15);
+    border-radius: 2rem;
+    width: calc(100% - 4rem);
+    max-height: 10rem;
+
+    background: $color-light;
+}
+
+.chat .input textarea {
+    flex-grow: 1;
+
+    resize: none;
+
+    border: none;
+    padding: 1.4rem 2.2rem 1.3rem;
+
+    background: $color-light;
+}
+
+.chat .input textarea:focus {
+    outline: none;
+}
+
+@media (max-width: $breakpoint-laptop) {
+
 }

@@ -14,10 +14,10 @@
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: white;
+    background-color: $color-light;
 
     //box-shadow: 0 0 0 0.2rem $color-primary;
-    box-shadow: 0 0.1rem 0.3rem hsla(0, 0%, 0%, 0.12), 0 0.1rem 0.2rem hsla(0, 0%, 0%, 0.24);
+    // box-shadow: 0 0.1rem 0.3rem hsla(0, 0%, 0%, 0.12), 0 0.1rem 0.2rem hsla(0, 0%, 0%, 0.24);
     border-radius: 50%;
     width: 3.8rem;
     height: 3.8rem;
@@ -33,12 +33,12 @@
     }
 
     &.-s {
-        width: 2.4rem;
-        height: 2.4rem;
+        width: 3.2rem;
+        height: 3.2rem;
     }
 
     &.-xs {
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 2rem;
+        height: 2rem;
     }
 }

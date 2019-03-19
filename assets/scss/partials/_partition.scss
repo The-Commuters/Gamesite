@@ -1,0 +1,35 @@
+// Partition
+// ---------------------------------------------------------------
+
+// Description
+// -----------
+// The partition provides a little mesage in the middle of
+// your <hr /> where you can input a small message or a word
+// for contextualization of the rule.
+
+// Variables
+// ---------
+$background-color: hsla(214, 30%, 95%, 1); // The background color of the parent
+
+// HTML structure
+// --------------
+// <hr data-content="foo" />
+
+hr[data-content] {
+    position: relative;
+
+    &::after {
+        content: attr(data-content);
+            
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    
+        background: $background-color;
+    }
+}
+

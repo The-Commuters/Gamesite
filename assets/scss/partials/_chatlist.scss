@@ -1,0 +1,123 @@
+.chatlist {
+    min-width: 25rem;
+    height: calc(100vh - 7.65rem);
+}
+
+.chatlist .header {
+    align-items: center;
+
+    display: flex;
+
+    border-right: 0.1rem solid $color-gray-700;
+    padding: 0 2rem;
+    width: 100%;
+    height: 5.8rem;
+
+    background-color: $color-gray-800;
+}
+
+.chatlist .header .title {
+    transition: 0.3s color;
+
+    font-size: 2.4rem;
+    font-weight: 600;
+    text-decoration-line: none;
+    user-select: none;
+    color: $color-gray-100;
+}
+
+.chatlist .users {
+    overflow-y: auto;
+
+    padding: 0.8rem;
+    border-right: 0.1rem solid $color-gray-300;
+    height: calc(100% - 5.8rem);
+}
+
+.chatlist .user {
+    justify-content: flex-start;
+    align-items: center;
+
+    display: flex;
+
+    cursor: pointer;
+
+    border-radius: 0.8rem;
+    padding: 1rem;
+}
+
+.chatlist .user:hover {
+    background-color: $color-gray-300;
+}
+
+.chatlist .user.-active {
+    background-color: $color-primary-100;
+}
+
+.chatlist .user.-hide {
+    display: none;
+}
+
+.chatlist .user + .user {
+    margin-top: 0.2rem;
+}
+
+.chatlist .user .username {
+    margin-left: 1rem;
+
+    font-weight: 500;
+    color: $color-gray-600;
+}
+
+.chatlist .user.-active .username {
+    color: $color-gray-900;
+}
+
+.chatlist .user:hover .username {
+    color: $color-gray-900;
+}
+
+.chatlist .user .notice {
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    user-select: none;
+
+    margin-left: 0.5rem;
+    border-radius: 5rem;
+    padding: 0.1rem 0.6rem;
+
+    background-color: $color-primary;
+
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-light;
+}
+
+.chatlist .user .close {
+    transition: 0.3s background-color, 0.3s color;
+    margin-left: auto;
+    border-radius: 50%;
+    padding: 0.4rem;
+    width: 2rem;
+    height: 2rem;
+
+    color: transparent;
+}
+
+.chatlist .user:hover .close {
+    color: $color-gray-500;
+}
+
+.chatlist .user .close:hover {
+    background-color: rgba($color-gray-500, 0.50);
+
+    color: $color-gray-800;
+}
+
+@media (max-width: $breakpoint-laptop) {
+    .chatlist {
+        display: none;
+    }
+}

@@ -1,0 +1,117 @@
+.message {
+    display: flex;
+
+    max-width:65%;
+}
+
+.message + .message {
+    margin-top: 0.5rem;
+}
+
+.message:last-child {
+    margin-bottom: 2rem;
+}
+
+.message .content {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    display: flex;
+
+    padding: 0 2rem;
+}
+
+.message .info {
+    height: 3.2rem;
+}
+
+.message .info .name {
+    transition: 0.3s text-decoration-color;
+
+    margin-right: 1rem;
+
+    font-size: 2rem;
+    font-weight: 500;
+    text-decoration-color: transparent;
+    color: $color-dark;
+}
+
+.message .info .name:hover {
+    text-decoration-color: $color-primary;
+}
+
+.message .info .time {
+    color: $color-gray-700;
+}
+
+.message .text {
+    display: inline-block;
+
+    margin: 0.2rem;
+    border-radius: 1.8rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0.8rem 1.4rem 1.2rem;
+
+    background-color: $color-primary-100;
+
+    font-weight: 400;
+    color: $color-gray-800;
+}
+
+.message .content .text:last-child {
+    border-bottom-left-radius: 2rem;
+}
+
+// USER MESSAGE
+.message.-user {
+    margin-left: auto;
+}
+
+.message.-user .content {
+    flex-direction: column;
+    align-items: flex-end;
+
+    display: flex;
+
+    padding-left: 5.8rem;
+    width: 100%;
+}
+
+.message.-user .avatar,
+.message.-user .info .name  {
+    display: none;
+}
+
+.message.-user .info .time  {
+    display: block;
+
+    text-align: right;
+}
+
+.message.-user .text {
+    border-radius: 1.8rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    background-color: $color-primary;
+
+    color: $color-light;
+}
+
+.message.-user .content .text:last-child {
+    border-bottom-right-radius: 2rem;
+}
+
+@media (max-width: $breakpoint-tablet) {
+    .message {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: $breakpoint-laptop) {
+    .message {
+        max-width: 75%;
+    }
+}
