@@ -102,3 +102,15 @@ function handle_friend_request(user_id, other_id, id, act) {
     
 }
 
+
+function close_chatroom(room_id, friendship_id) {
+
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        document.getElementById("username").innerHTML = this.responseText;
+    };
+    xmlhttp.open("GET","includes/process/close_chatroom.php?fsId="+friendship_id,true);
+    xmlhttp.send();
+    
+}

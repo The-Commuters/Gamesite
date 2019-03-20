@@ -36,7 +36,7 @@ $(document).ready(function() {
             $chatOutput.html(data); 
         });
     }
-
+    
     // When the enter key is pressed while the focus is on the box.
     $('#chat-input').keypress(function(event){
         var keycode = (event.keyCode ? event.keyCode : event.which);

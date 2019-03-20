@@ -5,7 +5,7 @@
  * resemble the facebook messenger. 
  */
 
-$friends = Friendship::find_friends($session->user_id);
+$friends = Friendship::find_active_chatrooms($session->user_id);
 
 ?>
 
@@ -29,7 +29,7 @@ $friends = Friendship::find_friends($session->user_id);
 					  }
                 	?>
 
-                    <div class="user" onclick="document.getElementById('username').innerText = '<?php echo $user->username; ?>'" value="<?php echo $friend->chatroom; ?>">
+                    <div class="user" value="<?php echo $friend->chatroom; ?>" username="<?php echo $user->username; ?>" fsId="<?php echo $friend->id; ?>">
                         <div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div>
                         <div class="username"><?php echo $user->username; ?></div>
                         <i class="fas fa-times close"></i>

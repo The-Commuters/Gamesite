@@ -27,6 +27,9 @@ function makeActive(active, event) {
         // Remove all other active
         if (active.classList.contains("-active")) {
             active.classList.remove("-active");
+            document.getElementById("chatId").value = "0";
+            document.getElementById('username').innerText = "";
+
         } else {
             Array.from(getChatpanels()).forEach(element => {
                 if (element.classList.contains("-active") && !element.classList.contains("-hide")) {
@@ -37,6 +40,7 @@ function makeActive(active, event) {
 
             // Gets the value from the div, sets it in chatId.
             document.getElementById("chatId").value = active.getAttribute('value');
+            document.getElementById('username').innerText = active.getAttribute('username');
         }
     }
 }
@@ -79,6 +83,7 @@ function initClose(closeArray) {
     });
 }
 
+
 /**
  * @node = A close button on a chatpanel.
  *
@@ -101,26 +106,39 @@ function hideChatPanel(node) {
 
                 // Gets the value from the div, sets it in chatId.
                 document.getElementById("chatId").value = parentClose.getAttribute('value');
+
+                // Sets the username at the top to become the next user.
+                document.getElementById('username').innerText = parentClose.getAttribute('username');
+
             }
 
         });
 
         node.classList.remove("-active");
         node.classList.add("-hide");
-        
+
+        // Call on the ajax function to close a chat, sends room_id.
+        close_chatroom(node.getAttribute('value'), node.getAttribute('fsId'));
+      
         // Check if a replacement for active has been found
         if (!found) {
             // ADD a add new chat button
 
             // Sets it at zero if there is none left.
             document.getElementById("chatId").value = "0";
+            document.getElementById('username').innerText = "";
+
         }
     } else {
         // Hide chatpanel
         node.classList.add("-hide");
+        
+        // Call on the ajax function to close a chat, sends room_id.
+        close_chatroom(node.getAttribute('value'), node.getAttribute('fsId'));
 
     }
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////7
 

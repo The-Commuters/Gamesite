@@ -11,12 +11,13 @@ class Friendship extends Db_object{
 
 	protected static $db_table = "friend_list";
 
-	protected static $db_table_fields = array('id', 'user_1', 'user_2', 'status', 'chatroom');
+	protected static $db_table_fields = array('id', 'user_1', 'user_2', 'status', 'chatroom', 'chatroom_status');
 	public $id;
 	public $user_1;
 	public $user_2;
 	public $status;
 	public $chatroom;
+	public $chatroom_status;
 
 	/**
 	 * Finds all the friend requests sent to the user that is not answered 
@@ -59,6 +60,25 @@ class Friendship extends Db_object{
 	}
 
 	/**
+	 * 
+	 * @param Is the id of the reciever you want the friend requests to.
+	 * @return Is the friendlist of the user that is logged in.
+	 */
+	public static function find_active_chatrooms($user_id) {
+		
+		global $database;
+
+		$sql = "SELECT * FROM friend_list WHERE ";
+		$sql .= "(user_1 = '{$user_id}' OR ";
+		$sql .= "user_2 = '{$user_id}') ";
+		$sql .= "AND status = '1' ";
+		$sql .= "AND chatroom_status = '1' ";
+
+		return self::find_by_query($sql);
+	
+	}
+
+	/**
 	 * Will here accept or decline depending on wheter the input-param $status
 	 * is 1 or 0, if it is 1 then it will be accepted and the row in the database
 	 * will be updated to say so.
@@ -79,7 +99,7 @@ class Friendship extends Db_object{
 		$friendship->user_2   = $user_2;
 		$friendship->status   = $status;
 		$friendship->id       = $id;
-		$friendship->chatroom = $user_1 . "#" . $user_2;
+		$friendship->chatroom = $user_1 . "X" . $user_2;
 
 		if ($status == 1) {
 			
