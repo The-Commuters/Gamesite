@@ -42,7 +42,10 @@ function makeActive(active, event) {
 
             // Gets the value from the div, sets it in chatId.
             document.getElementById("chatId").value = active.getAttribute('value');
-            document.getElementById('username').innerText = active.getAttribute('username');
+
+            // Sets up the title here with the <a>, does this here so that we can get the correct user-id.
+            let title = '<a href="profile.php?id=' + active.getAttribute('userId') + '" class="username">' + active.getAttribute('username') + '</a>';
+            document.getElementById('username').innerHTML = title;
         }
     }
 }
@@ -109,8 +112,9 @@ function hideChatPanel(node) {
                 // Gets the value from the div, sets it in chatId.
                 document.getElementById("chatId").value = parentClose.getAttribute('value');
 
-                // Sets the username at the top to become the next user.
-                document.getElementById('username').innerText = parentClose.getAttribute('username');
+                // Sets up the title here with the <a>, does this here so that we can get the correct user-id.
+                let title = '<a href="profile.php?id=' + parentClose.getAttribute('userId') + '" class="username">' + parentClose.getAttribute('username') + '</a>';
+                document.getElementById('username').innerHTML = title;
 
             }
 
