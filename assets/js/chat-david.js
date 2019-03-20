@@ -34,6 +34,9 @@ function makeActive(active, event) {
                 }
             });
             active.classList.add("-active");
+
+            // Gets the value from the div, sets it in chatId.
+            document.getElementById("chatId").value = active.getAttribute('value');
         }
     }
 }
@@ -83,6 +86,7 @@ function initClose(closeArray) {
  */
 function hideChatPanel(node) {
     // Execute behaviour if the active chat is closed
+
     if (node.classList.contains("-active")) {
 
         // Not found yet
@@ -94,19 +98,27 @@ function hideChatPanel(node) {
             if (!parentClose.classList.contains("-active") && !found && !parentClose.classList.contains("-hide")) {
                 found = true;
                 parentClose.classList.add("-active");
+
+                // Gets the value from the div, sets it in chatId.
+                document.getElementById("chatId").value = parentClose.getAttribute('value');
             }
+
         });
 
         node.classList.remove("-active");
         node.classList.add("-hide");
-
+        
         // Check if a replacement for active has been found
         if (!found) {
             // ADD a add new chat button
+
+            // Sets it at zero if there is none left.
+            document.getElementById("chatId").value = "0";
         }
     } else {
         // Hide chatpanel
         node.classList.add("-hide");
+
     }
 }
 
@@ -116,7 +128,7 @@ function hideChatPanel(node) {
 // Chat Input
 let input = document.getElementById("chat-input");
 
-let inputValue, room_id;
+let inputValue;
 let map = {};
 let reset = false;
 
@@ -126,7 +138,6 @@ input.onkeydown = onkeyup = function(e){
     map[e.keyCode] = e.type == 'keydown';
     if (!(map[16]) && map[13]) {
         inputValue = input.value;
-        room_id = input.value;
         reset = true;
     }
 

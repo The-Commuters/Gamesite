@@ -29,7 +29,7 @@ $friends = Friendship::find_friends($session->user_id);
 					  }
                 	?>
 
-                    <div class="user" onclick="document.getElementById('chatId').value='<?php echo $friend->chatroom; ?>'">
+                    <div class="user" onclick="document.getElementById('username').innerText = '<?php echo $user->username; ?>'" value="<?php echo $friend->chatroom; ?>">
                         <div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div>
                         <div class="username"><?php echo $user->username; ?></div>
                         <i class="fas fa-times close"></i>
@@ -41,16 +41,10 @@ $friends = Friendship::find_friends($session->user_id);
 
             </div>
 
-
-
-
-
-
-
             <!-- This is where the messages is loaded in. -->
             <div class="chat">
                 <div class="header">
-                    <a href="#" class="username">Daniel</a><i class="state -away"></i>
+                    <a href="profile.php?id=<?php echo $user->id; ?>" class="username"><span id="username"></span></a><i class="state -away"></i>
                 </div>
                 <div class="view">
 
@@ -62,36 +56,21 @@ $friends = Friendship::find_friends($session->user_id);
                         </div>
                     </div>
 
-                    <div id="chatOutput">
-                		
-
-                	</div>
-                	<!--
-                    <div class="message">
-                        <div><div class="avatar" style="background-image: url(assets/img/avatar.jpg)"></div></div>
-                        <div class="content">
-                            <div class="info"><a href="#" class="name">Daniel</a><span class="time">08:30</span></div>
-                            <p class="text">Oh wow david the chat looks really good and seems very simple to work with!</p>
-                        </div>
-                    </div>
-						-->
+                    <!-- Shows here read_chat.php -->
+                    <div id="chatOutput"></div>
     
-
-
                 </div>
+
                 <div class="input">
                     <textarea  rows="1" placeholder="Message" id="chat-input"></textarea>
                 </div>
-                
 
-   					<!-- Where the room-id is stored -->
-			     	<input id="chatId" style="display: none;" placeholder="1" maxlength="32" value="0">
+   			    <!-- Where the room-id is stored in value -->
+			    <input id="chatId" style="display: none;" value="0">
 
                 <script src="assets/js/chat.js"></script>
             </div>
 		</div>
 	</main>
-<?php 
-//   include("friendlist.php");
-?>
+
 

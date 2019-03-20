@@ -11,14 +11,15 @@ require_once($path);
 
 $room_id  = substr($_GET["chatId"], 0, 20);   		// Collects the room_id from the input where its placed.
 $messages = Message::find_messages($room_id);		// Finds all the messages that belong to this room.
+$day_check = 0;												
 
 foreach ($messages as $message) : 					// Does this for each of the messages that belong to the room.
 	$user = new User;
-	$user->find_by_id($message->user_id);
+	$user = User::find_by_id($message->user_id);
 
 	// Decides if the message belongs to signed in user or not.
 	$other = null;
-	if ($message->user_id != $session->user_id) {
+	if ($message->user_id == $session->user_id) {
 		$other = "-user";
 	}
 	
@@ -26,10 +27,16 @@ foreach ($messages as $message) : 					// Does this for each of the messages tha
 	$username=$message->username;					// Gather's the username from the message.
 	$text=$message->text;							// Gather's the text from the message.
 	$time=date('G:i', strtotime($message->time));	// Gather's the time from the message and cuts it down.
-	$date=date('l jS \of F Y', strtotime($message->time));
+	$date=date('jS \of F Y', strtotime($message->time));
 
-	echo '<hr data-content="' . $date . '">';
+	// This part controls wheter or not the day-seperator will be placed.
+	$day=date('d', strtotime($message->time));
+	if ($day !== $day_check) {
+		echo '<hr data-content="' . $date . '">';
+		$day_check = $day;
+	}
 	
+	// Here the message is echo'ed out.
 	echo '<div class="message ' . $other . '">';
 	echo '<div><div class="avatar" style="background-image: url(' . $avatar . ')"></div></div>';
 	echo '<div class="content">';
