@@ -69,6 +69,7 @@ $friends = Friendship::find_active_chatrooms($session->user_id);
 			    <input id="chatId" style="display: none;" value="0">
 
                 <script src="assets/js/chat.js"></script>
+                <script src="assets/js/chat-david.js" async></script>
             </div>
 		</div>
 	</main>

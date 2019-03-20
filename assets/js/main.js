@@ -102,8 +102,8 @@ function handle_friend_request(user_id, other_id, id, act) {
     
 }
 
-
-function close_chatroom(room_id, friendship_id) {
+// Belongs to the chat,
+function close_chatroom(friendship_id) {
 
     xmlhttp = new XMLHttpRequest();
 
@@ -113,4 +113,18 @@ function close_chatroom(room_id, friendship_id) {
     xmlhttp.open("GET","includes/process/close_chatroom.php?fsId="+friendship_id,true);
     xmlhttp.send();
     
+}
+
+// Belongs to the chat, starts a chat between two people.
+function start_chat(user_1, user_2) {
+
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        document.getElementById("chat").innerHTML = this.responseText;
+    };
+    xmlhttp.open("GET","includes/process/start_chatroom.php?u1="+user_1+"&u2="+user_2,true);
+    xmlhttp.send();
+
+    window.location.href = 'chat.php';
 }

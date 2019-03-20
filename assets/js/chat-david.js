@@ -27,6 +27,8 @@ function makeActive(active, event) {
         // Remove all other active
         if (active.classList.contains("-active")) {
             active.classList.remove("-active");
+
+            // Cleans the username and the id of the chat.
             document.getElementById("chatId").value = "0";
             document.getElementById('username').innerText = "";
 
@@ -118,7 +120,7 @@ function hideChatPanel(node) {
         node.classList.add("-hide");
 
         // Call on the ajax function to close a chat, sends room_id.
-        close_chatroom(node.getAttribute('value'), node.getAttribute('fsId'));
+        close_chatroom(node.getAttribute('fsId'));
       
         // Check if a replacement for active has been found
         if (!found) {
@@ -132,9 +134,9 @@ function hideChatPanel(node) {
     } else {
         // Hide chatpanel
         node.classList.add("-hide");
-        
+
         // Call on the ajax function to close a chat, sends room_id.
-        close_chatroom(node.getAttribute('value'), node.getAttribute('fsId'));
+        close_chatroom(node.getAttribute('fsId'));
 
     }
 }

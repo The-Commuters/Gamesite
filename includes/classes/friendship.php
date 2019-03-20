@@ -60,7 +60,9 @@ class Friendship extends Db_object{
 	}
 
 	/**
-	 * 
+	 * Gathers all of the friend's that the chatrooms are active, used
+	 * with the chat when the friends is called in from the side. 
+	 *
 	 * @param Is the id of the reciever you want the friend requests to.
 	 * @return Is the friendlist of the user that is logged in.
 	 */
