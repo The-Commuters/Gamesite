@@ -27,7 +27,7 @@ foreach ($messages as $message) : 					// Does this for each of the messages tha
 	$username=$message->username;					// Gather's the username from the message.
 	$text=$message->text;							// Gather's the text from the message.
 	$time=date('G:i', strtotime($message->time));	// Gather's the time from the message and cuts it down.
-	$date=date('jS \of F Y', strtotime($message->time));
+	$date=date('d/m/Y', strtotime($message->time));
 
 	// This part controls wheter or not the day-seperator will be placed.
 	$day=date('d', strtotime($message->time));
