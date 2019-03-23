@@ -9,8 +9,8 @@
 $friends = Friendship::find_active_chatrooms($session->user_id);
 
 // Used when the user enter the page from a profile.
-$current_user    = 0;
-$current_chat_id = 0;
+$current_user     = 0;
+$current_chat_id  = 0;
 $current_username ="";
 
 ?>

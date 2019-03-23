@@ -15,7 +15,7 @@
 	$message->username = $user->username;					// Places the signed_in username into $message.
 	$message->room_id  = substr($_GET["chatId"], 0, 23);    // Does the same with the room_id.
 	$message->user_id  = $session->user_id;					// And the user_id
-	$message->text     = substr($_GET["text"], 0, 128);		// And the 128 first characters in the text.
+	$message->text     = substr($_GET["text"], 0, 1000);	// And the 1000 first characters in the text.
 	$message->time     = date("Y-m-d H:i:s");				// And the date.
 
 	$message->save();										// Then stores it into the database.

@@ -1,7 +1,9 @@
 <?php 
 	
 	/**
-	 * 
+	 * This process-file starts a new chatroom by making it
+	 * active by changing the chatroom-status to 1. This will
+	 * make it show in the chat.
 	 */
 
 	$path = $_SERVER['DOCUMENT_ROOT'];
