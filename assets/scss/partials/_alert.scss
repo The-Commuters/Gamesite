@@ -1,0 +1,63 @@
+@keyframes alert {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+.alert {
+    z-index: 1000000000;
+    position: fixed;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: space-between;
+    align-items: center;
+
+    animation: alert 0.3s;
+
+    display: none;
+
+    box-shadow: 0 0.4rem 0.6rem hsla(0, 0%, 0%, 0.15), 0 0.2rem 0.4rem hsla(0, 0%, 0%, 0.12);
+    border-radius: 1rem;
+    padding: 1rem 2rem 1.2rem;
+    width: 80%;
+
+    user-select: none;
+    background-color: #8aefff;
+
+    font-weight: 400;
+    color: #104952;
+
+    // States
+
+    // What does the alert imply default is info
+    &.-danger {
+        background-color: #ff9da6;
+
+        color: #a50010;
+    }
+
+    &.-warning {
+        background-color: #fff0c3;
+
+        color: #c79501;
+    }
+
+    &.-success{
+        background-color: #9effb4;
+
+        color: #006317;
+    }
+
+
+    // Is active if applied
+    &.-active {
+        display: flex;
+    }
+}

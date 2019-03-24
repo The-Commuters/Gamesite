@@ -1,0 +1,44 @@
+.close {
+    position: relative;
+
+    transition: 0.3s background-color;
+
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+
+    cursor: pointer;
+
+    color: transparent;
+
+    &::after {
+        content: "\D7";
+
+        transition: 0.3s color;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-49%, -57%);
+
+        font-size: 2rem;
+        font-weight: 800;
+        color: transparent;
+    }
+}
+
+*:hover > .close {
+    background-color: rgba($color-dark, 0.05);
+
+    &::after {
+        color: rgba(black, 0.15);
+    }
+}
+
+.close:hover {
+    background-color: rgba($color-dark, 0.10);
+
+    &::after {
+        color: rgba(black, 0.40);
+    }
+}

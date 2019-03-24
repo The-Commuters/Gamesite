@@ -2574,6 +2574,66 @@ template {
     animation: unset !important;
     -webkit-transition: none !important;
     transition: none !important; } }
+@-webkit-keyframes alert {
+  from {
+    opacity: 0;
+    -webkit-transform: translate(-50%, -100%);
+            transform: translate(-50%, -100%); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0); } }
+@keyframes alert {
+  from {
+    opacity: 0;
+    -webkit-transform: translate(-50%, -100%);
+            transform: translate(-50%, -100%); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0); } }
+.alert {
+  z-index: 1000000000;
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-animation: alert 0.3s;
+          animation: alert 0.3s;
+  display: none;
+  -webkit-box-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.15), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.12);
+          box-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.15), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.12);
+  border-radius: 1rem;
+  padding: 1rem 2rem 1.2rem;
+  width: 80%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #8aefff;
+  font-weight: 400;
+  color: #104952; }
+  .alert.-danger {
+    background-color: #ff9da6;
+    color: #a50010; }
+  .alert.-warning {
+    background-color: #fff0c3;
+    color: #c79501; }
+  .alert.-success {
+    background-color: #9effb4;
+    color: #006317; }
+  .alert.-active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+
 .avatar {
   background-image: url(/img/backup.png);
   background-position: center top;
@@ -3004,6 +3064,38 @@ body {
 @media (max-width: 80rem) {
   .chatlist {
     display: none; } }
+.close {
+  position: relative;
+  -webkit-transition: 0.3s background-color;
+  transition: 0.3s background-color;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  color: transparent; }
+  .close::after {
+    content: "\D7";
+    -webkit-transition: 0.3s color;
+    transition: 0.3s color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-49%, -57%);
+            transform: translate(-49%, -57%);
+    font-size: 2rem;
+    font-weight: 800;
+    color: transparent; }
+
+*:hover > .close {
+  background-color: rgba(31, 31, 31, 0.05); }
+  *:hover > .close::after {
+    color: rgba(0, 0, 0, 0.15); }
+
+.close:hover {
+  background-color: rgba(31, 31, 31, 0.1); }
+  .close:hover::after {
+    color: rgba(0, 0, 0, 0.4); }
+
 .dropdown {
   position: relative; }
   .dropdown:hover > .list {
