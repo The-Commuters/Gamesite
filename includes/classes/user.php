@@ -107,7 +107,7 @@ class User extends Db_object{
 		// 0 in status will mean that the friend request is pending, when the reciever accepts this will be changed to 1
 		$status = 0;
 
-		$sql  = "INSERT INTO friend_list(user_1, user_2, status)";
+		$sql  = "INSERT INTO friend_list(user_1, user_2, friendship_status)";
 		$sql .= "VALUES ('{$user_id}', '{$friend_id}', '{$status}')";
 
 		if ($database->query($sql)) {

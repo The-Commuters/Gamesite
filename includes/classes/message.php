@@ -10,13 +10,14 @@ class Message extends Db_object{
 
 	protected static $db_table = "user_chat"; 
 
-	protected static $db_table_fields = array('room_id', 'user_id', 'username', 'text', 'time');
+	protected static $db_table_fields = array('room_id', 'user_id', 'username', 'text', 'time', 'viewed');
 	public $id;
 	public $room_id;
 	public $user_id;
 	public $username;
 	public $text;
 	public $time;
+	public $viewed;
 
 	/**
 	 * Finds all the messages in user_chat that has the same game_id as the param,

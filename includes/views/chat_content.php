@@ -47,13 +47,13 @@ $current_username ="";
 
                 // Sets the value in chatId to this user's room-id.
                 if ($current_user == $user->id) {
-                    $current_chat_id = $friend->chatroom;
+                    $current_chat_id = $friend->chat_id;
                     $current_username = $user->username;
                 }
                 ?>
 
                 <!-- The if inside of class will -->
-                <div class="user <?php if($_GET["user"] == $user->id) {echo "-active";} ?> " value="<?php echo $friend->chatroom; ?>" 
+                <div class="user <?php if($_GET["user"] == $user->id) {echo "-active";} ?> " value="<?php echo $friend->chat_id; ?>" 
                         username="<?php echo $user->username; ?>" userId="<?php echo $user->id; ?>" fsId="<?php echo $friend->id; ?>">
 
                     <div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div>

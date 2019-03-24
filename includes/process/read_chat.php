@@ -34,8 +34,14 @@ foreach ($messages as $key => $message) : 			// Does this for each of the messag
 	$minute=date('i', strtotime($message->time));   // Gather's the minute that the message was sent.
 
 
+	if ($session->user_id != $message->user_id) {
+		$message->viewed = 1;
+		$message->update();
+	}
+
+
 	// Here the message is echo'ed out.
-	// This if checks  how long it was since the last message was posted
+	// This 'if' checks  how long it was since the last message was posted
 	// And decides if the text should be placed inside of the content div
 	// of the previoulsy read message.
 	if (!($minute == $minute_check) || $user_check != $message->user_id) {
