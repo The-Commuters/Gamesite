@@ -39,6 +39,19 @@ class Message extends Db_object{
 
 	}
 
+	public static function count_unread_messages($room_id, $user_id) {
+
+		global $database;
+
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
+		$sql .= "room_id = '{$room_id}' AND ";
+		$sql .= "user_id = '{$user_id}' AND ";
+		$sql .= "viewed = 0 ";
+
+		return static::find_by_query($sql);
+
+	}
+
 } // End of Message-class
 
 ?>

@@ -46,7 +46,11 @@ function makeActive(active, event) {
             // Sets up the title here with the <a>, does this here so that we can get the correct user-id.
             let title = '<a href="profile.php?id=' + active.getAttribute('userId') + '" class="username">' + active.getAttribute('username') + '</a>';
             document.getElementById('username').innerHTML = title;
+
         }
+        let view = document.getElementById("view");
+        setTimeout(function(){ view.scrollTop = view.scrollHeight; }, 300);
+
     }
 }
 
@@ -115,6 +119,9 @@ function hideChatPanel(node) {
                 // Sets up the title here with the <a>, does this here so that we can get the correct user-id.
                 let title = '<a href="profile.php?id=' + parentClose.getAttribute('userId') + '" class="username">' + parentClose.getAttribute('username') + '</a>';
                 document.getElementById('username').innerHTML = title;
+                
+                let view = document.getElementById("view");
+                setTimeout(function(){ view.scrollTop = view.scrollHeight; }, 300);
 
             }
 
@@ -122,6 +129,11 @@ function hideChatPanel(node) {
 
         node.classList.remove("-active");
         node.classList.add("-hide");
+
+
+        let view = document.getElementById("view");
+        view.scrollTop = view.scrollHeight;
+
 
         // Call on the ajax function to close a chat, sends room_id.
         close_chatroom(node.getAttribute('fsId'));
@@ -133,6 +145,9 @@ function hideChatPanel(node) {
             // Sets it at zero if there is none left.
             document.getElementById("chatId").value = "0";
             document.getElementById('username').innerText = "";
+
+            let view = document.getElementById("view");
+            setTimeout(function(){ view.scrollTop = view.scrollHeight; }, 300);
 
         }
     } else {
@@ -164,24 +179,21 @@ let reset = false;
 input.onkeydown = onkeyup = function(e){
     e = e || event;
     map[e.keyCode] = e.type == 'keydown';
+
     if (!(map[16]) && map[13]) {
         inputValue = input.value;
+        setTimeout(function(){ view.scrollTop = view.scrollHeight; }, 200);
         reset = true;
     }
 
 }
 
 input.addEventListener("input", event => {
-    input.style.height = "";
-    input.style.height = input.scrollHeight + "px";
-
-    let inputParent = input.parentNode;
-    inputParent.scrollTop = inputParent.scrollHeight - inputParent.clientHeight;
 
     if (reset) {
         reset = false;
         input.value = "";
         input.style.height = "";
-        input.style.height = input.scrollHeight + "px";
     }
 });
+

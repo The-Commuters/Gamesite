@@ -33,7 +33,7 @@ foreach ($messages as $key => $message) : 			// Does this for each of the messag
 	$date=date('d/m/Y', strtotime($message->time)); // Gather's the date used when seperating messages by day.
 	$minute=date('i', strtotime($message->time));   // Gather's the minute that the message was sent.
 
-
+	// Will here check if the message is viewed or not.
 	if ($session->user_id != $message->user_id) {
 		$message->viewed = 1;
 		$message->update();

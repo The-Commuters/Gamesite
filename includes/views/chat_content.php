@@ -50,14 +50,25 @@ $current_username ="";
                     $current_chat_id = $friend->chat_id;
                     $current_username = $user->username;
                 }
+
+                // We have the user and the friendship, what we need is number of messages not viewed.
+                $unread_messages = Message::count_unread_messages($friend->chat_id, $user->id);
+                $counter = 0;
+                foreach ($unread_messages as $key) {
+                    $counter++;
+                }
                 ?>
 
                 <!-- The if inside of class will -->
                 <div class="user <?php if($_GET["user"] == $user->id) {echo "-active";} ?> " value="<?php echo $friend->chat_id; ?>" 
                         username="<?php echo $user->username; ?>" userId="<?php echo $user->id; ?>" fsId="<?php echo $friend->id; ?>">
-
                     <div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div>
                     <div class="username"><?php echo $user->username; ?></div>
+
+                    <?php if ($counter > 0): ?>
+                       <div class="notice"><?php echo $counter; ?></div>
+                    <?php endif;?>
+
                     <i class="fas fa-times close"></i>
                 </div>
 
