@@ -65,12 +65,6 @@ if (isset($_POST['submit'])) {
 	<input type="text" name="last_name" value="<?php echo $user->last_name; ?>" >
 </div>
 
-<!-- Upload image to use as user-picture -->
-<div class="">
-  	<label>Profile Picture</label>
-    <input type="file" name="file_upload">
-</div>
-
 <!-- Change password -->
 
 <div class="">
@@ -79,5 +73,16 @@ if (isset($_POST['submit'])) {
 </div>
 
 </form>
+
+<div id="drop_zone" ondrop="upload_file(event)" ondragover="return false">
+  <div id="drag_upload_file">
+    <p>File Goes here!</p>
+    <input type="button" value="Select File" onclick="find_file();">
+    <input type="file" id="selectfile">
+  </div>
+</div>
+
+<!-- The response is placed here -->
+<div id="image"></div>
 
 </div>

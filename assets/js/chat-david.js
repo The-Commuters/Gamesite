@@ -47,6 +47,14 @@ function makeActive(active, event) {
             let title = '<a href="profile.php?id=' + active.getAttribute('userId') + '" class="username">' + active.getAttribute('username') + '</a>';
             document.getElementById('username').innerHTML = title;
 
+            let signed_in = active.getAttribute('signed_in');
+            if (signed_in == 1) { 
+                document.getElementById('state').classList.remove("-away");
+                document.getElementById('state').classList.add("-active");
+            } else {
+                document.getElementById('state').classList.add("-away");
+                document.getElementById('state').classList.remove("-active");
+            }
         }
         let view = document.getElementById("view");
         setTimeout(function(){ view.scrollTop = view.scrollHeight; }, 500);

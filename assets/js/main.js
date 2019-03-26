@@ -128,3 +128,51 @@ function start_chat(user_1, user_2) {
 
     window.location.href = 'chat.php?user=' + user_2;
 }
+
+// On drop
+function upload_file(event) {
+    var file;
+    event.preventDefault();
+    file = event.dataTransfer.files[0];
+    avatar_upload(file);
+  }
+ 
+// On button
+function find_file() {
+    var file;
+    document.getElementById('selectfile').click();
+    document.getElementById('selectfile').onchange = function() {
+        file = document.getElementById('selectfile').files[0];
+      avatar_upload(file);
+    };
+  }
+ 
+// Upload avatar picture.
+function avatar_upload(file) {
+    if(file != undefined) {
+        var form_data = new FormData();                  
+        form_data.append('file', file);
+
+        xmlhttp = new XMLHttpRequest();
+        
+        xmlhttp.onreadystatechange = function() {
+            document.getElementById("image").innerHTML = this.responseText;
+        };
+
+        show_alert();
+
+        xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
+        xmlhttp.send(form_data);
+
+    }
+  }
+
+// Shows alert for 3 seconds
+function show_alert() {
+
+    setTimeout(function(){ 
+        document.getElementById('alert').classList.remove("-active");
+    }, 3000);
+
+
+}

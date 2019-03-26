@@ -23,6 +23,7 @@ if ($session->is_signed_in()) {
 </head>
 
 <body>
+
     <!-- Header -->
 	<header>
 		<!-- XP Bar -->
