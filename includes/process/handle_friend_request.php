@@ -9,7 +9,6 @@
 	$path .= "/gamesite/includes/init.php";
 	require_once($path); 
 
-
 	$user_1 = $_GET['ui']; 												// The id of the user that is logged in.
 	$user_2 = $_GET['oi']; 												// The id of the user that sent the request.
 	$status = $_GET['a'];  												// 0 if the signed in user refused, 1 if not.

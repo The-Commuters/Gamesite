@@ -3,10 +3,7 @@
 $path = $_SERVER['DOCUMENT_ROOT'];
 $path .= "/gamesite/includes/init.php";
 require_once($path); 
-?> 
 
-
-<?php 
 //Sjekker om brukeren er logget inn, kommer ikke nødvendigvis til å være nødvendig i prosjektet.
 //Sender dem til login ved hjelp av funksjonen redirect i "functions.php".
 

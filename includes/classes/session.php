@@ -74,9 +74,16 @@ class Session {
 	 * This methos is called whenever a user presses the log-out
 	 * button, it unsets the user-id that lies in session, the
 	 * user_id that lies in $session and sets the signed_in 
-	 * property to  false.
+	 * property to  false. Also changes the database-object
+	 * of the user's signed_in column to 0.
 	 */
 	public function logout() {
+
+		// Changes here the signed_in of the user to 0.
+		$user = new User();
+		$user = User::find_by_id($_SESSION['user_id']);
+		$user->signed_in = 0;
+		$user->update();
 
 		unset($_SESSION['user_id']);
 		unset($this->user_id);

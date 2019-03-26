@@ -11,12 +11,13 @@ class Friendship extends Db_object{
 
 	protected static $db_table = "friend_list";
 
-	protected static $db_table_fields = array('id', 'user_1', 'user_2', 'status', 'chatroom');
+	protected static $db_table_fields = array('id', 'user_1', 'user_2', 'friendship_status', 'chat_id', 'chatroom_status');
 	public $id;
 	public $user_1;
 	public $user_2;
-	public $status;
-	public $chatroom;
+	public $friendship_status;
+	public $chat_id;
+	public $chatroom_status;
 
 	/**
 	 * Finds all the friend requests sent to the user that is not answered 
@@ -31,7 +32,7 @@ class Friendship extends Db_object{
 
 		$sql = "SELECT * FROM friend_list WHERE ";
 		$sql .= "user_2 = '{$user_id}' ";
-		$sql .= "AND status = '0' ";
+		$sql .= "AND friendship_status = '0' ";
 
 		return self::find_by_query($sql);
 	
@@ -52,7 +53,28 @@ class Friendship extends Db_object{
 		$sql = "SELECT * FROM friend_list WHERE ";
 		$sql .= "(user_1 = '{$user_id}' OR ";
 		$sql .= "user_2 = '{$user_id}') ";
-		$sql .= "AND status = '1' ";
+		$sql .= "AND friendship_status = '1' ";
+
+		return self::find_by_query($sql);
+	
+	}
+
+	/**
+	 * Gathers all of the friend's that the chatrooms are active, used
+	 * with the chat when the friends is called in from the side. 
+	 *
+	 * @param Is the id of the reciever you want the friend requests to.
+	 * @return Is the friendlist of the user that is logged in.
+	 */
+	public static function find_active_chatrooms($user_id) {
+		
+		global $database;
+
+		$sql = "SELECT * FROM friend_list WHERE ";
+		$sql .= "(user_1 = '{$user_id}' OR ";
+		$sql .= "user_2 = '{$user_id}') ";
+		$sql .= "AND friendship_status = '1' ";
+		$sql .= "AND chatroom_status = '1' ";
 
 		return self::find_by_query($sql);
 	
@@ -77,9 +99,9 @@ class Friendship extends Db_object{
 		$friendship = new Friendship();
 		$friendship->user_1   = $user_1;
 		$friendship->user_2   = $user_2;
-		$friendship->status   = $status;
+		$friendship->friendship_status   = $status;
 		$friendship->id       = $id;
-		$friendship->chatroom = $user_1 . "#" . $user_2;
+		$friendship->chat_id = $user_1 . "X" . $user_2;
 
 		if ($status == 1) {
 			
@@ -90,8 +112,6 @@ class Friendship extends Db_object{
 		}
 
 	}
-
-//---------------------------Might be deleted unless used----------------------------------
 
 	/**
 	 * Finds the friend object between two users in the database
@@ -114,7 +134,6 @@ class Friendship extends Db_object{
 		return self::find_by_query($sql);
 
 	}
-//------------------------------------------------------------------------------------------
 
 }
 
