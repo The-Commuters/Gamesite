@@ -113,8 +113,6 @@ class Friendship extends Db_object{
 
 	}
 
-//---------------------------Might be deleted unless used----------------------------------
-
 	/**
 	 * Finds the friend object between two users in the database
 	 * and returns it where it is needed. 
@@ -136,7 +134,6 @@ class Friendship extends Db_object{
 		return self::find_by_query($sql);
 
 	}
-//------------------------------------------------------------------------------------------
 
 }
 

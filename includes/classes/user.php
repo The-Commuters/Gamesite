@@ -11,7 +11,7 @@ class User extends Db_object{
 	protected static $db_table = "users";
 
 	protected static $db_table_fields = array('unique_id', 'username', 'email', 'password', 'first_name', 
-		'middle_name', 'last_name', 'user_image', 'joined', 'verify_code', 'status' );
+		'middle_name', 'last_name', 'user_image', 'joined', 'verify_code', 'status', 'signed_in' );
 
 	public $id;
 	public $username;
@@ -25,6 +25,8 @@ class User extends Db_object{
 	public $verify_code;
 	public $unique_id;
 	public $status;
+	public $signed_in;
+
 
 	/**
 	 * Verifiy that the user lies in the database with this email and password, used with login
@@ -56,6 +58,13 @@ class User extends Db_object{
 
 			// Checks here where if the hashed password fits to the password that have been inserted by user.
 			if (password_verify($password, $hashed_password)) {
+
+				// Sets the signed_in column in the database to 1.
+				$user_id = $the_result_array[0]->id; 
+				$user = new User;
+				$user = User::find_by_id($user_id);
+				$user->signed_in = 1;
+				$user->update();
 
 				// Array shift delivers the one in place 0.
 				return  array_shift($the_result_array);
@@ -262,7 +271,7 @@ class User extends Db_object{
 	 * @param $last_name
 	 * @return the error_array, empty if all is well.
 	 */
-	public static function verify_new_user($username, $email, $password, $password_check, $first_name, $middle_name, $last_name) {
+	public static function verify_new_user($username, $email, $password, $password_check) {
 
 		global $database;
 
@@ -272,16 +281,10 @@ class User extends Db_object{
 		$email             = $database->escape_string($email);
 		$password          = $database->escape_string($password);
 		$password_check    = $database->escape_string($password_check);
-		$first_name        = $database->escape_string($first_name);
-		$middle_name       = $database->escape_string($middle_name);
-		$last_name         = $database->escape_string($last_name);
 
 		// Fjerner all potensiel sql kode.
 		$username          = strip_tags($username);
 		$email             = strip_tags($email);
-		$first_name        = strip_tags($first_name);
-		$middle_name       = strip_tags($middle_name);
-		$last_name         = strip_tags($last_name);
 		$password          = strip_tags($password);
 		$password_check    = strip_tags($password_check);
 
@@ -333,15 +336,12 @@ class User extends Db_object{
 			$user->username    = $username;
 			$user->email       = $email;
 			$user->password    = $password;
-			$user->first_name  = $first_name;
-			$user->middle_name = $middle_name;
-			$user->last_name   = $last_name;
 			$user->unique_id   = $user->create_unique_id();
 			$user->user_image  = "1.png";
 			$user->joined      = date("Y-m-d");
 			$user->verify_code = md5($username . microtime());
 
-			Email::send_ActivationMail($email, $firstname, $user->verify_code);
+			Email::send_ActivationMail($email, $username, $user->verify_code);
 
 			$user->create();
 

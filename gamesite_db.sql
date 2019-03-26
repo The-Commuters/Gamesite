@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24. Mar, 2019 19:27 PM
--- Server-versjon: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: 26. Mar, 2019 14:52 PM
+-- Tjener-versjon: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -64,7 +64,8 @@ INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `chat_id`, `friendship_stat
 (118, 19, 2, '19X2', 1, 1),
 (119, 19, 19, '19X19', 1, 0),
 (120, 19, 22, '19X22', 1, 0),
-(121, 1, 25, '', 0, 0);
+(121, 1, 25, '', 0, 0),
+(122, 1, 26, '1X26', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -174,22 +175,24 @@ CREATE TABLE `users` (
   `joined` date NOT NULL,
   `privilege_level` tinyint(4) NOT NULL,
   `verify_code` text NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `signed_in` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dataark for tabell `users`
 --
 
-INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`) VALUES
-(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 1),
-(2, 0, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 1, '', 1),
-(3, 0, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 1, '', 1),
-(19, 0, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', '2019-03-15', 1, '', 1),
-(21, 43334, 'hehe@willi.nos', 'Hanness', '$2y$10$rKCVBxvyzi.9GLLWsiT.B.kNrSAKaD/K0UyFPXTq1YfdGSdQS4GiK', 'qwwqw', 'qwqw', 'qwqww', '1.png', '2019-03-17', 1, '', 1),
-(22, 35567, 'hehe@willi.nodd', 'dscsdc', '$2y$10$.7aiv2vzoOB18HmP9rqjNOyqy1GW3cebr8oaaQ2V7T29w8o4gTuAm', 'sxcfdf', 'xcsc', 'scsc', '1.png', '2019-03-17', 1, '', 1),
-(23, 23433, 'hehe@willi.nojjj', 'dflÃ¸mj', '$2y$10$2DCi4g7B5CihWZlPbedhpeVvIi3AlPN0NoCZiWVrIrbWduIE1vSxC', 'askld', 'lasjd', 'lijlij', '1.png', '2019-03-17', 1, '', 1),
-(25, 76854, 'hdc@sdsd.ccd', 'ldfjvoijq', '$2y$10$3rA.M.YXUfd/KPc1JivCrenMLZt9ejKZmxtxYw6eq7W0ywGYCfLbO', 'qwe', 'jhb', 'khjb', '1.png', '2019-03-17', 1, '', 1);
+INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`, `signed_in`) VALUES
+(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 1, 1),
+(2, 0, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 1, '', 1, 0),
+(3, 0, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 1, '', 1, 0),
+(19, 0, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', '2019-03-15', 1, '', 1, 0),
+(21, 43334, 'hehe@willi.nos', 'Hanness', '$2y$10$rKCVBxvyzi.9GLLWsiT.B.kNrSAKaD/K0UyFPXTq1YfdGSdQS4GiK', 'qwwqw', 'qwqw', 'qwqww', '1.png', '2019-03-17', 1, '', 1, 0),
+(22, 35567, 'hehe@willi.nodd', 'dscsdc', '$2y$10$.7aiv2vzoOB18HmP9rqjNOyqy1GW3cebr8oaaQ2V7T29w8o4gTuAm', 'sxcfdf', 'xcsc', 'scsc', '1.png', '2019-03-17', 1, '', 1, 0),
+(23, 23433, 'hehe@willi.nojjj', 'dflÃ¸mj', '$2y$10$2DCi4g7B5CihWZlPbedhpeVvIi3AlPN0NoCZiWVrIrbWduIE1vSxC', 'askld', 'lasjd', 'lijlij', '1.png', '2019-03-17', 1, '', 1, 0),
+(25, 76854, 'hdc@sdsd.ccd', 'ldfjvoijq', '$2y$10$3rA.M.YXUfd/KPc1JivCrenMLZt9ejKZmxtxYw6eq7W0ywGYCfLbO', 'qwe', 'jhb', 'khjb', '1.png', '2019-03-17', 1, '', 1, 0),
+(26, 38503, 'Daniel@Daniel.Daniel', 'Daniel', '$2y$10$cClBmtVwt57.fiHrglwLxuex/nc2TEs3SQIbAOl3efZUkTwYG5fx6', 'Daniel', 'Daniels', 'Danielsen', '1.png', '2019-03-26', 1, 'bc49e6eef94b163fa9b24f163780fd24', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -205,6 +208,35 @@ CREATE TABLE `user_activity` (
   `type` varchar(25) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dataark for tabell `user_activity`
+--
+
+INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`) VALUES
+(1, 'create', 1, 127, 'user_chat', '2019-03-26 11:10:37'),
+(2, 'create', 1, 128, 'user_chat', '2019-03-26 11:10:44'),
+(3, 'create', 1, 129, 'user_chat', '2019-03-26 11:11:47'),
+(4, 'create', 26, 26, 'users', '2019-03-26 11:32:08'),
+(5, 'create', 1, 130, 'user_chat', '2019-03-26 11:35:08'),
+(6, 'create', 1, 131, 'user_chat', '2019-03-26 11:35:20'),
+(7, 'create', 26, 132, 'user_chat', '2019-03-26 11:37:42'),
+(8, 'create', 26, 133, 'user_chat', '2019-03-26 11:38:02'),
+(9, 'create', 26, 134, 'user_chat', '2019-03-26 11:38:10'),
+(10, 'create', 1, 135, 'user_chat', '2019-03-26 11:40:58'),
+(11, 'create', 1, 136, 'user_chat', '2019-03-26 11:41:04'),
+(12, 'create', 1, 137, 'user_chat', '2019-03-26 11:42:36'),
+(13, 'create', 26, 138, 'user_chat', '2019-03-26 11:44:20'),
+(14, 'create', 1, 139, 'user_chat', '2019-03-26 11:46:50'),
+(15, 'create', 1, 140, 'user_chat', '2019-03-26 11:47:36'),
+(16, 'create', 1, 141, 'user_chat', '2019-03-26 11:47:38'),
+(17, 'create', 1, 142, 'user_chat', '2019-03-26 11:47:44'),
+(18, 'create', 1, 143, 'user_chat', '2019-03-26 11:47:49'),
+(19, 'create', 1, 144, 'user_chat', '2019-03-26 11:47:52'),
+(20, 'create', 1, 145, 'user_chat', '2019-03-26 11:47:56'),
+(21, 'create', 26, 146, 'user_chat', '2019-03-26 11:58:55'),
+(22, 'create', 26, 147, 'user_chat', '2019-03-26 11:58:57'),
+(23, 'create', 26, 148, 'user_chat', '2019-03-26 11:59:01');
 
 -- --------------------------------------------------------
 
@@ -342,7 +374,29 @@ INSERT INTO `user_chat` (`id`, `room_id`, `user_id`, `username`, `time`, `text`,
 (123, '19X2', 2, 'Derperud', '2019-03-24 18:56:02', 'We have never talked before...', 1),
 (124, '19X2', 2, 'Derperud', '2019-03-24 18:56:14', '...But know that i care for you like a brother.', 1),
 (125, '1X2', 1, 'WilliWonka', '2019-03-24 18:57:29', 'Super cool mate, Super cool!', 0),
-(126, '1X19', 1, 'WilliWonka', '2019-03-24 18:57:45', 'Jebediah black.', 0);
+(126, '1X19', 1, 'WilliWonka', '2019-03-24 18:57:45', 'Jebediah black.', 0),
+(127, '1X19', 1, 'WilliWonka', '2019-03-26 12:10:37', 'Hello', 0),
+(128, '1X19', 1, 'WilliWonka', '2019-03-26 12:10:44', ' Whats up', 0),
+(129, '1X2', 1, 'WilliWonka', '2019-03-26 12:11:47', ' gfhgfhgfghfghfgfhgfhgfhg', 0),
+(130, '1X26', 1, 'WilliWonka', '2019-03-26 12:35:08', 'Hello Daniel!', 1),
+(131, '1X26', 1, 'WilliWonka', '2019-03-26 12:35:20', 'This is Willy speaking.', 1),
+(132, '1X26', 26, 'Daniel', '2019-03-26 12:37:42', 'Joho!', 1),
+(133, '1X26', 26, 'Daniel', '2019-03-26 12:38:02', 'What the hell are...', 1),
+(134, '1X26', 26, 'Daniel', '2019-03-26 12:38:10', 'Bla bla bla bla...', 1),
+(135, '1X26', 1, 'WilliWonka', '2019-03-26 12:40:58', 'Daniel!', 1),
+(136, '1X26', 1, 'WilliWonka', '2019-03-26 12:41:04', 'Take care.', 1),
+(137, '1X26', 1, 'WilliWonka', '2019-03-26 12:42:36', 'Hello', 1),
+(138, '1X26', 26, 'Daniel', '2019-03-26 12:44:20', 'Hello', 1),
+(139, '1X2', 1, 'WilliWonka', '2019-03-26 12:46:50', 'Hello hello Hello hello Hello hello Hello helloHello hello Hello hello Hello hello Hello hello Hello helloHello hello Hello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello helloHello hello', 0),
+(140, '1X2', 1, 'WilliWonka', '2019-03-26 12:47:36', ' Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello ', 0),
+(141, '1X2', 1, 'WilliWonka', '2019-03-26 12:47:38', ' Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello ', 0),
+(142, '1X19', 1, 'WilliWonka', '2019-03-26 12:47:44', ' Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello ', 0),
+(143, '1X22', 1, 'WilliWonka', '2019-03-26 12:47:49', ' Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello ', 0),
+(144, '1X23', 1, 'WilliWonka', '2019-03-26 12:47:52', ' Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello ', 0),
+(145, '1X26', 1, 'WilliWonka', '2019-03-26 12:47:56', ' Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello  Hello Hello Hello Hello ', 1),
+(146, '1X26', 26, 'Daniel', '2019-03-26 12:58:55', 'Hekko', 1),
+(147, '1X26', 26, 'Daniel', '2019-03-26 12:58:57', 'Hekko', 1),
+(148, '1X26', 26, 'Daniel', '2019-03-26 12:59:01', 'Heook', 1);
 
 --
 -- Indexes for dumped tables
@@ -432,7 +486,7 @@ ALTER TABLE `achievements`
 -- AUTO_INCREMENT for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `games`
@@ -456,19 +510,19 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
 --
 ALTER TABLE `user_chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- Begrensninger for dumpede tabeller

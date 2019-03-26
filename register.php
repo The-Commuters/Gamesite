@@ -17,11 +17,8 @@ if (isset($_POST['submit'])) {
 	$email = trim($_POST['email']);
 	$password = trim($_POST['password']);
 	$password_check = trim($_POST['password_check']);
-	$first_name = trim($_POST['first_name']);
-	$middle_name = trim($_POST['middle_name']);
-	$last_name = trim($_POST['last_name']);
 
-	$error_array = User::verify_new_user($username, $email, $password, $password_check, $first_name, $middle_name, $last_name);	
+	$error_array = User::verify_new_user($username, $email, $password, $password_check);	
 
 	if (empty($error_array)) {
 		
@@ -34,15 +31,12 @@ if (isset($_POST['submit'])) {
 
 } else {
 
-		$username = "";
-		$email = "";
-		$password = "";
+		$username       = "";
+		$email          = "";
+		$password       = "";
 		$password_check = "";
-		$the_message = "";
-		$first_name = "";
-		$middle_name = "";
-		$last_name = "";
-		$error_array = "";
+		$the_message    = "";
+		$error_array    = "";
 
 	}
 
@@ -62,24 +56,6 @@ if (isset($_POST['submit'])) {
 <div class="">
 	<label>Email</label>
 	<input type="text" name="email" value="<?php echo htmlentities($email); ?>" >
-
-</div>
-
-<div class="">
-	<label>First Name</label>
-	<input type="text" name="first_name" value="<?php echo htmlentities($first_name); ?>" >
-
-</div>
-
-<div class="">
-	<label>Middle Name</label>
-	<input type="text" name="middle_name" value="<?php echo htmlentities($middle_name); ?>" >
-
-</div>
-
-<div class="">
-	<label>Last Name</label>
-	<input type="text" name="last_name" value="<?php echo htmlentities($last_name); ?>" >
 
 </div>
 

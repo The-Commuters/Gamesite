@@ -49,7 +49,7 @@ function makeActive(active, event) {
 
         }
         let view = document.getElementById("view");
-        setTimeout(function(){ view.scrollTop = view.scrollHeight; }, 300);
+        setTimeout(function(){ view.scrollTop = view.scrollHeight; }, 500);
 
     }
 }
