@@ -10,41 +10,7 @@ require_once("includes/views/header.php");
 
 if (!$session->is_signed_in()) {redirect("login.php");} 
 
-if (empty($_GET['id'])) {
-	$user = User::find_by_id($session->user_id);
-} elseif (User::is_admin($session->user_id) && isset($_GET['id'])) {
-	$user = User::find_by_id($_GET['id']);
-} else {
-	redirect("users.php");
-}
-
-if (isset($_POST['submit'])) {
-	 
-	$first_name  = trim($_POST['first_name']);
-	$middle_name = trim($_POST['middle_name']);
-	$last_name   = trim($_POST['last_name']);
-
-	// Verify_update lies in User and check what is sent in, more parameters to be added.
-	$error_array = User::verify_update($first_name, $middle_name, $last_name);
-
-	if (empty($error_array)) {
-
-		$user->first_name = $first_name;
-		$user->middle_name = $middle_name;
-		$user->last_name = $last_name;
-
-		//$user->upload_profile_picture($_FILES['file_upload']);
-
-		// Updates the user-row in the database.
-		$user->update();
-		echo "Updated!";
-	} else {
-		echo "Not updated!";
-	}
-} 
-
 ?>
-
 
 <div>
 	
@@ -52,23 +18,23 @@ if (isset($_POST['submit'])) {
 	
 <div class="">
 	<label>First Name</label>
-	<input type="text" name="first_name" value="<?php echo $user->first_name ?>" >
+	<input id="fname" type="text" name="first_name" value="<?php echo $user->first_name ?>" >
 </div>
 
 <div class="">
 	<label>Middle Name</label>
-	<input type="text" name="middle_name" value="<?php echo $user->middle_name; ?>" >
+	<input id="mname" type="text" name="middle_name" value="<?php echo $user->middle_name; ?>" >
 </div>
 
 <div class="">
 	<label>Last Name</label>
-	<input type="text" name="last_name" value="<?php echo $user->last_name; ?>" >
+	<input id="lname" type="text" name="last_name" value="<?php echo $user->last_name; ?>" >
 </div>
 
 <!-- Change password -->
 
 <div class="">
-<input type="submit" name="submit" value="Submit">
+<input type="button" name="submit" value="Submit" onclick="update_names()">
 
 </div>
 
@@ -76,7 +42,7 @@ if (isset($_POST['submit'])) {
 
 <div id="drop_zone" ondrop="upload_file(event)" ondragover="return false">
   <div id="drag_upload_file">
-    <p>File Goes here!</p>
+    <p>Place file in the blue area!</p>
     <input type="button" value="Select File" onclick="find_file();">
     <input type="file" id="selectfile">
   </div>

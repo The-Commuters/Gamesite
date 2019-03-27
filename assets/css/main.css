@@ -3545,7 +3545,7 @@ hr[data-content] {
   display: table; }
 
 /*# sourceMappingURL=main.css.map */
-
+/*----------------------------------------drop zone for files-----------------------------------------------*/
 #drop_zone {
     background-color: #4A6A87; 
     width: 400px; 

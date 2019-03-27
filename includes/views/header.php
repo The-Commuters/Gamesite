@@ -61,6 +61,12 @@ if ($session->is_signed_in()) {
 						<a href="users.php"><i class="fas fa-fw fa-user-friends"></i>Friendlist</a>
 						<a href="chat.php"><i class="fas fa-fw fa-envelope"></i>Messages</a>
 
+						<?php if ($user->is_admin($user->id)) { ?>
+
+						<a href="users.php"><i class="fas fa-fw fa-users"></i>User list</a>
+
+						<?php } ?>
+
 						<hr class="divider">
 						<a href="donate.php"><i class="fas fa-fw fa-heart"></i>Donate</a>
 						<a href="upload.php"><i class="fas fa-fw fa-upload"></i>Submit game</a>
@@ -68,12 +74,6 @@ if ($session->is_signed_in()) {
 						<hr class="divider">
 						<a href="logout.php"><i class="fas fa-fw fa-sign-out-alt"></i>Sign out</a>
 
-						<?php if ($user->is_admin($user->id)) { ?>
-
-						<hr class="divider">
-						<a href="users.php"><i class="fas fa-fw fa-users"></i>User list</a>
-
-						<?php } ?>
 					</div>
 				</div>
 

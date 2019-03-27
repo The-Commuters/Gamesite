@@ -129,6 +129,28 @@ function start_chat(user_1, user_2) {
     window.location.href = 'chat.php?user=' + user_2;
 }
 
+// Updates the settings of a user
+function update_names() {
+
+    var first_name  = document.getElementById("fname").value;
+    var middle_name = document.getElementById("mname").value;
+    var last_name   = document.getElementById("lname").value;
+
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        document.getElementById("image").innerHTML = this.responseText;
+    };
+
+    show_alert();
+
+    xmlhttp.open("GET","includes/process/update_settings.php?fname="+first_name+"&mname="+middle_name+"&lname="+last_name,true);
+    xmlhttp.send();
+    
+}
+
+//-------------------------- Upload profile image -----------------------------
+
 // On drop
 function upload_file(event) {
     var file;
@@ -167,7 +189,7 @@ function avatar_upload(file) {
     }
   }
 
-// Shows alert for 3 seconds
+// closes alert after 3 seconds
 function show_alert() {
 
     setTimeout(function(){ 
