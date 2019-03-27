@@ -400,6 +400,21 @@ class User extends Db_object{
 	}
 	//--------------------------------------------------------------------
 
+	public static function find_user_by_email($email){
+
+		global $database;
+		// Tar bort eventuele ting som ikke skal være med i stringen
+		$email = $database->escape_string($email);
+		
+		// Finner ut om verify_code også ligger i databasen
+		$sql = "SELECT * FROM ". self::$db_table ." WHERE email = '{$email}' AND status = 1 Limit 1 ";
+		
+		// retunerer det database objektet som blir funnet 
+		return static ::find_by_query($sql); 
+	}
+
+
+
 	public static function find_user_by_code($code){
 
 		global $database;

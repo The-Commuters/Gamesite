@@ -20,8 +20,10 @@ if (isset($_GET["code"])){
 	User::activate_user($code);
 
 }else{
-	echo "Activation could not be completed";
+	echo "Activation could not be completed \n" ;
 }
+	
+	//Email::create_reset_code("newuser@localhost.com");
 
 	//Email::send_Password_resetMail("newuser@localhost", "Mark", "testcode");
 
