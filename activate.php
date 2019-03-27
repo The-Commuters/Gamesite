@@ -23,6 +23,7 @@ if (isset($_GET["code"])){
 	echo "Activation could not be completed";
 }
 
+	//Email::send_Password_resetMail("newuser@localhost", "Mark", "testcode");
 
 ?>
 

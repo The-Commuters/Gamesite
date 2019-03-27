@@ -21,19 +21,34 @@ class Email extends User{
 
 	// Denne tar inn hvilken mail det skal sendes til og fornavent til brukeren 
 
-	/**
-	To do 
-	* Legge til aktiveringslink : Doneish, trenger formatering
-	* Sjekke om denne er klikket på
-	* Deretter aktivere konto.
-
-
-	*/
-	public static function send_ActivationMail($to, $first_name, $verify_code ){
+	
+	public static function send_ActivationMail($to, $user_name, $verify_code ){
  
-		$subject = "Hello " . $first_name . " Please activate your account at CM Games";
+		$subject = "Hello " . $user_name . " Please activate your account at CM Games";
 
 		$txt = "Please press the link below to activate your new account at CM Games " . "http://localhost/gamesite/activate.php?code=" . $verify_code . " Thank you for registering. ";
+		
+		
+		self::mail_sender($to, $subject, $txt);
+	}
+
+	/**
+	 * Sends the user a password reset link 
+	 * Then the user can click on reset link 
+	 * and set their new password.
+	 *
+	 * @param $to
+	 * @param $user_name
+	 * @param $reset_code
+	 * 
+	 */
+
+
+	public static function send_Password_ResetMail($to, $user_name, $reset_code ){
+ 
+		$subject = "Hello " . $user_name . " Here is your password reset";
+
+		$txt = "Please press the link below to reset your password for your account at CM Games " . "http://localhost/gamesite/activate.php?reset_code=" . $reset_code;
 		
 		
 		self::mail_sender($to, $subject, $txt);
