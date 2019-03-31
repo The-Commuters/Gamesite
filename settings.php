@@ -40,7 +40,7 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 
 </form>
 
-<div id="drop_zone" ondrop="upload_file(event)" ondragover="return false">
+<div id="drop_zone" ondrop="upload_file(event, 1)" ondragover="return false">
   <div id="drag_upload_file">
     <p>Place file in the blue area!</p>
     <input type="button" value="Select File" onclick="find_file();">
@@ -48,7 +48,7 @@ if (!$session->is_signed_in()) {redirect("login.php");}
   </div>
 </div>
 
-<!-- The response is placed here -->
+<!-- The alert is placed here -->
 <div id="image"></div>
 
 </div>

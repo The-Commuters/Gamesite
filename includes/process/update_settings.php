@@ -1,5 +1,10 @@
 <?php 
 
+/**
+ * The process that updates the first, middle and last
+ * names of the users, tthen sends a alert to the user.
+ */
+
 $path = $_SERVER['DOCUMENT_ROOT'];
 $path .= "/gamesite/includes/init.php";
 require_once($path); 
@@ -19,14 +24,19 @@ if (empty($error_array)) {
 	$user->last_name = $last_name;
 
 	$user->update();
-
-} else {
-	echo "Not updated!";
-}
-
 ?>
 
-<!-- The alert that is shown when '-active' is placed in the classlist. -->
+<!-- If the names pass the verification. -->
 <div id="alert" class="alert -warning -active">
 	<div>Your name have been updated!</div>
 </div>
+
+<?php } else { ?>
+	
+<!-- If there is an error in the verify_update() function. -->
+<div id="alert" class="alert -warning -active">
+	<div><?php echo $error_array[0]; ?></div>
+</div>
+
+<?php } ?>
+

@@ -151,12 +151,19 @@ function update_names() {
 
 //-------------------------- Upload profile image -----------------------------
 
-// On drop
-function upload_file(event) {
+/**
+ * Happens when a file is dropped in the square, it 
+ * will call on the function that call's on the 
+ * php process.
+ *
+ * @param {event} event - The event in question.
+ */
+function upload_file(event, type) {
     var file;
     event.preventDefault();
     file = event.dataTransfer.files[0];
-    avatar_upload(file);
+    file_upload(file, type);
+    
   }
  
 // On button
@@ -170,7 +177,7 @@ function find_file() {
   }
  
 // Upload avatar picture.
-function avatar_upload(file) {
+function file_upload(file, type) {
     if(file != undefined) {
         var form_data = new FormData();                  
         form_data.append('file', file);
@@ -183,7 +190,13 @@ function avatar_upload(file) {
 
         show_alert();
 
-        xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
+        if (type == 1) {
+            xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
+        }
+        if (type == 2) {
+            xmlhttp.open("POST","includes/process/upload_game.php",true);
+        }
+        
         xmlhttp.send(form_data);
 
     }
