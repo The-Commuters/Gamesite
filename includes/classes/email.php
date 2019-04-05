@@ -66,14 +66,21 @@ class Email extends User{
 
 		global $database;
 		
+
+		$error_array       = array();
 		// Tar bort eventuele ting som ikke skal være med i stringen
 		$email = $database->escape_string($email);
 		
 		// Finner brukeren med denne eposten
 		$in = User::find_user_by_email($email);
 
-		// Legger bruker objektet inn i variabelen $user og hopper til første posisjon 		
-		$user = array_shift($in);
+		// Legger bruker objektet inn i variabelen $user og hopper til første posisjon 	
+
+		if(!empty($in)){
+			$user = array_shift($in);
+			var_dump($user);
+
+		//$user = array_shift($in);
 		// Oppretter et nytt email objekt 
 		$user_email = new Email();
 		// Setter variablene id og lager en unik kode for reseting
@@ -86,14 +93,21 @@ class Email extends User{
 		// Lagrer alt dette i databasen ved bruk av den overrida create metoden lengere nede
 		$user_email->create();
 
-		
-		return $reset_code;
-		
 
+		// Sender ut eposten til den som forespurte den skulle alt værte ok og eposten ligger i vår database
+		self::send_Password_resetMail($user->email, $user->username, $reset_code);
 		
+		return $error_array;
+
 	}
+	else{
+		array_push($error_array, "This user could not be found or this user has a password reset active");
 
-	
+		return $error_array;
+		}
+
+
+	}
 
 
 	public static function find_user_by_reset_code($code){
