@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
 			</div>
 
 
-			<!-- Controlls -->
+			<!-- Controls -->
 			<div class="login-controllers">
 				<!-- Sign up -->
 				<a href="register.php#username" class="button-text">Sign up</a>

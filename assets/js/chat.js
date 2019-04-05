@@ -1,7 +1,8 @@
 
 /**
  * Jquery for the chat, sends and retrieves the messages that
- * belong in the chatroom.
+ * belong in the chatroom with the read_chat and write_chat php
+ * files.
  */
 
 $(document).ready(function() {

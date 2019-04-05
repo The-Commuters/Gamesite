@@ -11,9 +11,9 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 
 
 /*
- * Decides wheter or not the profile is the one of the logged in user.
- * Will load in the profile_content for either the signed in user or a 
- * other user.
+ * Decides if the profile is the one of the logged in user.
+ * Will load in the profile_content for either the signed in 
+ * user or a other user.
 */
 
 if ($session->user_id == $_GET['id']) {

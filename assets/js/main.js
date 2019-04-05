@@ -128,3 +128,86 @@ function start_chat(user_1, user_2) {
 
     window.location.href = 'chat.php?user=' + user_2;
 }
+
+// Updates the settings of a user
+function update_names() {
+
+    var first_name  = document.getElementById("fname").value;
+    var middle_name = document.getElementById("mname").value;
+    var last_name   = document.getElementById("lname").value;
+
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        document.getElementById("image").innerHTML = this.responseText;
+    };
+
+    show_alert();
+
+    xmlhttp.open("GET","includes/process/update_settings.php?fname="+first_name+"&mname="+middle_name+"&lname="+last_name,true);
+    xmlhttp.send();
+    
+}
+
+//-------------------------- Upload profile image -----------------------------
+
+/**
+ * Happens when a file is dropped in the square, it 
+ * will call on the function that call's on the 
+ * php process.
+ *
+ * @param {event} event - The event in question.
+ */
+function upload_file(event, type) {
+    var file;
+    event.preventDefault();
+    file = event.dataTransfer.files[0];
+    file_upload(file, type);
+    
+  }
+ 
+// On button
+function find_file() {
+    var file;
+    document.getElementById('selectfile').click();
+    document.getElementById('selectfile').onchange = function() {
+        file = document.getElementById('selectfile').files[0];
+      avatar_upload(file);
+    };
+  }
+ 
+// Upload avatar picture.
+function file_upload(file, type) {
+    if(file != undefined) {
+        var form_data = new FormData();                  
+        form_data.append('file', file);
+
+        xmlhttp = new XMLHttpRequest();
+        
+        xmlhttp.onreadystatechange = function() {
+            document.getElementById("image").innerHTML = this.responseText;
+        };
+
+        show_alert();
+
+        if (type == 1) {
+            xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
+        }
+        if (type == 2) {
+            xmlhttp.open("POST","includes/process/upload_game.php",true);
+        }
+        
+        xmlhttp.send(form_data);
+
+    }
+  }
+
+// closes alert after 3 seconds
+function show_alert() {
+
+    setTimeout(function(){ 
+        document.getElementById('alert').classList.remove("-active");
+    }, 3000);
+
+
+}

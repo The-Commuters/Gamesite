@@ -52,7 +52,8 @@ if (isset($_GET['s'])) {
 					</a>
 				</td>
 
-				<td><a href="profile.php?id=<?php echo $user->id; ?>">
+				<td>
+					<a href="profile.php?id=<?php echo $user->id; ?>">
 						
 					<?php 
 
@@ -64,40 +65,30 @@ if (isset($_GET['s'])) {
 
 					?>
 					
-				</a></td>
-
-				<td>
-
-					<?php 
-		
-						// Gets the username and then makes the letters lowercase.
-						$first_name = strtolower($user->first_name);
-
-						// Switches out what is searched with the same with marks around it.
-						echo str_replace($search, '<mark>' . $search . '</mark>', $first_name); 
-
-					?>
-
+					</a>
 				</td>
 
 				<td>
-
 					<?php 
+						// Gets the username and then makes the letters lowercase.
+						$first_name = strtolower($user->first_name);
+						// Switches out what is searched with the same with marks around it.
+						echo str_replace($search, '<mark>' . $search . '</mark>', $first_name); 
+					?>
+				</td>
 
+				<td>
+					<?php 
 					// Gets the username and then makes the letters lowercase.
 					$last_name = strtolower($user->last_name);
-
 					// Switches out what is searched with the same with marks around it.
 					echo str_replace($search, '<mark>' . $search . '</mark>', $last_name); 
-
 					?>
-
 				</td>
 
 				<td><?php echo $user->joined; ?></td>
 				<td><a href="includes/process/delete_user.php?id=<?php echo $user->id; ?>" 
 					onclick="return confirm('Are you sure you want to delete <?php echo $user->username ?>?')">Delete</a></td>
-				<td><a href="settings.php?id=<?php echo $user->id; ?>">Edit</a></td>
 				<td><a href="profile.php?id=<?php echo $user->id; ?>">View</a></td>
 
 			</tr>

@@ -61,7 +61,8 @@ $current_username ="";
 
                     <!-- The if inside of class will -->
                     <div class="user <?php if($_GET["user"] == $user->id) {echo "-active";} ?> " value="<?php echo $friend->chat_id; ?>" 
-                        username="<?php echo $user->username; ?>" userId="<?php echo $user->id; ?>" fsId="<?php echo $friend->id; ?>">
+                        username="<?php echo $user->username; ?>" userId="<?php echo $user->id; ?>" fsId="<?php echo $friend->id; ?>" 
+                        signed_in="<?php echo $user->signed_in; ?>">
                         <div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div>
                         <div class="username"><?php echo $user->username; ?></div>
 
@@ -85,15 +86,14 @@ $current_username ="";
             <!-- The <a> is sent by the javascript that control the Html and css -->
                 <span id="username">
 
-                    <?php 
-                    // This is here to show of the correct user's name when one enter the page from the menu.
-                    if ($current_username != ""): ?>
+                    <?php if ($current_username != ""): ?>
 
                         <a href="profile.php?id='<?php echo $current_user ?> '" class="username"><?php echo $current_username ?></a>;
 
                     <?php endif; ?>
 
-                </span><i class="state -away"></i>
+                </span>
+                <i id="state" class="state -away"></i>
             </div>
             <div class="view" id="view">
 

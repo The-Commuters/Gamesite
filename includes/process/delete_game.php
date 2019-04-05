@@ -1,5 +1,10 @@
 <?php 
 
+	/**
+	 * Delete's the game from the database when this 
+	 * process is called with ajax, is used when a 
+	 * admin presses the button to delete a game. 
+	 */
 
 
 	$path = $_SERVER['DOCUMENT_ROOT'];
