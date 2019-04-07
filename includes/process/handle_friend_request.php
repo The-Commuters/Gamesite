@@ -15,10 +15,21 @@
 	$id     = $_GET['id']; 												// The id of the friend request.
 	Friendship::friend_request_handler($user_1, $user_2, $status, $id); // The method that handles the friendship object.
 
-	if ($status == 1) {													// Echo positive or negative depending on on $status.
-		echo "Friendship accepted!";
-	} else {
-		echo "Friendship rejected!";
-	}
+	if ($status == 1) {													// Echo positive or negative depending on on $status.	
+    ?>
 
+	<div id="alert" class="alert -warning -active">
+		<div>Friendship accepted!</div>
+	</div>
+
+    <?php
+	} else {
+	?>
+
+    <div id="alert" class="alert -warning -active">
+		<div>Friendship rejected!</div>
+    </div>
+
+    <?php
+	}
 ?>

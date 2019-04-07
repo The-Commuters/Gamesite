@@ -45,14 +45,6 @@ if (isset($_POST['submit'])) {
 		<input type="text" name="title" placeholder="Insert game-title">
 	</div>
 
-	<div id="drop_zone" ondrop="upload_game(event, 2)" ondragover="return false">
-		<div id="drag_upload_file">
-			<p>Place file in the blue area!</p>
-			<input type="button" value="Select File" onclick="find_file();">
-			<input type="file" id="selectfile">
-		</div>
-	</div>
-
 	<div>
 		<input type="file" name="file_upload">
 	</div>

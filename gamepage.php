@@ -11,6 +11,10 @@ include("includes/views/header.php"); ?>
 <div>
   <?php 
   
+  /**
+   * Collects the id of the game from the URL and includes
+   * the link to the canvas
+   */
   $current_game_id = $_GET['game'];
   $game = Game::find_by_id($current_game_id);
   if (isset($game)) {
@@ -48,8 +52,8 @@ include("includes/views/header.php"); ?>
 
 <?php 
 
-$chatroom_id = $current_game_id;
-include("includes/views/userchat.php"); 
+//$chatroom_id = $current_game_id;
+//include("includes/views/userchat.php"); 
 
 include("includes/views/footer.php"); 
 

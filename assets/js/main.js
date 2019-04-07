@@ -1,5 +1,8 @@
 
 /**
+ * The ajax function that rates the game when one of the input
+ * boxes is checked, is used whenever a user rates a game on 
+ * the gamesite.
  *
  * @param int game_id Spillet som det gjelder sin id.
  */
@@ -79,8 +82,11 @@ function send_friend_request(user_id, other_id) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-            document.getElementById("send_friend_request").innerHTML = this.responseText;
+            document.getElementById("friend_search").innerHTML = this.responseText;
+            document.getElementById("search").value = "";
     };
+
+    hide_alert();
 
     xmlhttp.open("GET","includes/process/add_friend.php?i="+user_id+"&o="+other_id,true);
     xmlhttp.send();
@@ -94,9 +100,12 @@ function handle_friend_request(user_id, other_id, id, act) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-            document.getElementById("handle_friend_request").innerHTML = this.responseText;
+            document.getElementById("friend_search").innerHTML = this.responseText;
+
     };
     
+    hide_alert();
+
     xmlhttp.open("GET","includes/process/handle_friend_request.php?ui="+user_id+"&oi="+other_id+"&a="+act+"&id="+id,true);
     xmlhttp.send();
     
@@ -115,19 +124,6 @@ function close_chatroom(friendship_id) {
     
 }
 
-// Belongs to the chat, starts a chat between two people.
-function start_chat(user_1, user_2) {
-
-    xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        document.getElementById("chat").innerHTML = this.responseText;
-    };
-    xmlhttp.open("GET","includes/process/start_chatroom.php?u1="+user_1+"&u2="+user_2,true);
-    xmlhttp.send();
-
-    window.location.href = 'chat.php?user=' + user_2;
-}
 
 // Updates the settings of a user
 function update_names() {
@@ -142,12 +138,27 @@ function update_names() {
         document.getElementById("image").innerHTML = this.responseText;
     };
 
-    show_alert();
+    hide_alert();
 
     xmlhttp.open("GET","includes/process/update_settings.php?fname="+first_name+"&mname="+middle_name+"&lname="+last_name,true);
     xmlhttp.send();
     
 }
+
+// Belongs to the chat, starts a chat between two people.
+function earn_achievement(achievement_id) {
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        document.getElementById("info").innerHTML = this.responseText;
+    };
+
+    hide_alert();
+    
+    xmlhttp.open("GET","includes/process/add_achievement.php?aId="+achievement_id,true);
+    xmlhttp.send();
+}
+
 
 //-------------------------- Upload profile image -----------------------------
 
@@ -188,7 +199,7 @@ function file_upload(file, type) {
             document.getElementById("image").innerHTML = this.responseText;
         };
 
-        show_alert();
+        hide_alert();
 
         if (type == 1) {
             xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
@@ -203,7 +214,7 @@ function file_upload(file, type) {
   }
 
 // closes alert after 3 seconds
-function show_alert() {
+function hide_alert() {
 
     setTimeout(function(){ 
         document.getElementById('alert').classList.remove("-active");

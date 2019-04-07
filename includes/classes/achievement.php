@@ -22,15 +22,41 @@ class Achievement extends Db_object{
 	*
 	* @param $achievement_id will be the id thats bind the user together to the achievement.  
 	*/
-	public function verify_gained_achivement($achievement_id) {
+	public function verify_gained_achivement() {
 
 		global $session;
 
+		$id = $this->id;
+
 		$this->gained  = date("Y-m-d");
 		$this->user_id = $session->user_id;
-		$this->id      = $achievement_id;
 
 		$this->create();
+
+	}
+
+	/**
+	 *
+	 *
+	 */
+	public function check_if_gained() {
+
+		global $session;
+
+		$id = $this->id;
+		$user_id = $session->user_id;
+
+		$sql = "SELECT * FROM gained_achievements WHERE ";
+		$sql .= "id = '{$id}' ";
+		$sql .= "AND user_id = '{$user_id}' ";
+		$sql .= "LIMIT 1";
+
+		$result = self::find_by_query($sql);
+
+		if (!empty($result)) {
+			return false;
+		}
+		return true;
 
 	}
 

@@ -18,6 +18,9 @@
 	$message->text     = strip_tags(substr($_GET["text"], 0, 1000)) ;	// And the 1000 first characters in the text.
 	$message->time     = date("Y-m-d H:i:s");							// And the date.
 
-	$message->save();													// Then stores it into the database.
+	if ($message->room_id != 0) {										// If the room id is 0, stops the message.
+		$message->save();												// Then stores it into the database.
+	}
+	
 
 ?>
