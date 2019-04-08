@@ -29,7 +29,7 @@ $current_username ="";
                 <?php 
 
                 /**
-                 * Inside of this div the list of friends that have an 
+                 * Inside of this div is the list of friends that have an 
                  * active userchat open. The user can click on one of
                  * them to show their chat.
                  */
@@ -59,11 +59,9 @@ $current_username ="";
 
                     // We have the user and the friendship, what we need is number of messages not viewed.
                     $unread_messages = Message::count_unread_messages($friend->chat_id, $user->id);
-                    $counter = 0;
+                    $counter = count($unread_messages);
                     // Counts all of the unread messages, and make 
-                    foreach ($unread_messages as $key) {
-                        $counter++;
-                    }
+                    //foreach ($unread_messages as $key) {$counter++;}
                     ?>
 
                     <!-- The if inside of class will decide if it is active or not, stores collectable information in this div, called parent in the chat-js-->

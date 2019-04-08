@@ -124,6 +124,19 @@ function close_chatroom(friendship_id) {
     
 }
 
+// Belongs to the chat, starts a chat between two people. 
+function start_chat(user_1, user_2) { 
+ 
+    xmlhttp = new XMLHttpRequest(); 
+ 
+    xmlhttp.onreadystatechange = function() { 
+        document.getElementById("chat").innerHTML = this.responseText; 
+    }; 
+    xmlhttp.open("GET","includes/process/start_chatroom.php?u1="+user_1+"&u2="+user_2,true); 
+    xmlhttp.send(); 
+ 
+    window.location.href = 'chat.php'; 
+} 
 
 // Updates the settings of a user
 function update_names() {
