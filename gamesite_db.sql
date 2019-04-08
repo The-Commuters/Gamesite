@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26. Mar, 2019 14:52 PM
+-- Generation Time: 08. Apr, 2019 12:58 PM
 -- Tjener-versjon: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -30,10 +30,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `achievements` (
   `id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `text` varchar(255) NOT NULL,
-  `game_id` int(11) NOT NULL
+  `image` varchar(255) NOT NULL,
+  `text` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dataark for tabell `achievements`
+--
+
+INSERT INTO `achievements` (`id`, `game_id`, `title`, `image`, `text`) VALUES
+(1, 5, 'Escape!', '', 'With determined digging you forced your way outside, congratulations!');
 
 -- --------------------------------------------------------
 
@@ -74,10 +82,17 @@ INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `chat_id`, `friendship_stat
 --
 
 CREATE TABLE `gained_achievements` (
-  `id` int(11) NOT NULL,
+  `achievement_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `gained` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dataark for tabell `gained_achievements`
+--
+
+INSERT INTO `gained_achievements` (`achievement_id`, `user_id`, `gained`) VALUES
+(1, 1, '2019-04-08 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -103,8 +118,7 @@ CREATE TABLE `games` (
 INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `foldername`, `filename`, `size`) VALUES
 (1, 'The Coin-eating Snake', 'Action', '', 'Mona Clairvoyant', 'snakegame.zip', 'snakegame.php', 1455),
 (2, 'There Can Only Be One', 'Slice Of Life', '', 'Clinter Coyote', 'breakout.zip', 'breakout.php', 1390),
-(3, 'The Grand Card-game', 'Comedy', '', 'Mama Nokso', 'cardgame.zip', 'cardgame.php', 1117580),
-(4, 'Collect The Diamonds', 'Goat Simulator', '', 'Heman Bermont', '2dgame.zip', '2dgame.php', 1634029);
+(5, 'Shovel Game', 'Slice of life', 'You have to get away from the dungeon that you are stuck in, but your shovels are made of soap, get out of there as fast as possible.', 'Daniel Larssen', 'adventureGame', 'shovelGame.php', 110222);
 
 -- --------------------------------------------------------
 
@@ -149,12 +163,10 @@ CREATE TABLE `ratings` (
 INSERT INTO `ratings` (`id`, `game_id`, `user_id`, `score`) VALUES
 (11, 1, 1, 2),
 (12, 2, 1, 5),
-(14, 3, 1, 4),
-(15, 4, 1, 5),
 (16, 1, 3, 4),
 (17, 2, 3, 2),
-(18, 4, 3, 4),
-(19, 1, 2, 4);
+(19, 1, 2, 4),
+(20, 5, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -184,7 +196,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`, `signed_in`) VALUES
-(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1.png', '2019-01-23', 1, '', 1, 1),
+(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1554714604_databaseTilkoblingD1.PNG', '2019-01-23', 1, '', 1, 1),
 (2, 0, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 1, '', 1, 0),
 (3, 0, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 1, '', 1, 0),
 (19, 0, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', '2019-03-15', 1, '', 1, 0),
@@ -236,7 +248,17 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (20, 'create', 1, 145, 'user_chat', '2019-03-26 11:47:56'),
 (21, 'create', 26, 146, 'user_chat', '2019-03-26 11:58:55'),
 (22, 'create', 26, 147, 'user_chat', '2019-03-26 11:58:57'),
-(23, 'create', 26, 148, 'user_chat', '2019-03-26 11:59:01');
+(23, 'create', 26, 148, 'user_chat', '2019-03-26 11:59:01'),
+(24, 'create', 1, 0, 'gained_achievements', '2019-04-08 09:20:53'),
+(25, 'create', 1, 20, 'ratings', '2019-04-08 09:21:03'),
+(26, 'create', 1, 0, 'gained_achievements', '2019-04-08 09:33:25'),
+(27, 'create', 1, 0, 'gained_achievements', '2019-04-08 09:50:56'),
+(28, 'create', 1, 0, 'gained_achievements', '2019-04-08 09:53:02'),
+(29, 'create', 1, 0, 'gained_achievements', '2019-04-08 09:55:25'),
+(30, 'create', 1, 0, 'gained_achievements', '2019-04-08 10:40:13'),
+(31, 'create', 1, 0, 'gained_achievements', '2019-04-08 10:43:09'),
+(32, 'create', 1, 0, 'gained_achievements', '2019-04-08 10:49:32'),
+(33, 'create', 1, 0, 'gained_achievements', '2019-04-08 10:53:04');
 
 -- --------------------------------------------------------
 
@@ -421,7 +443,7 @@ ALTER TABLE `friend_list`
 -- Indexes for table `gained_achievements`
 --
 ALTER TABLE `gained_achievements`
-  ADD PRIMARY KEY (`id`,`user_id`) USING BTREE,
+  ADD PRIMARY KEY (`achievement_id`,`user_id`) USING BTREE,
   ADD KEY `Gained_achievementsUserFNs` (`user_id`);
 
 --
@@ -480,7 +502,7 @@ ALTER TABLE `user_chat`
 -- AUTO_INCREMENT for table `achievements`
 --
 ALTER TABLE `achievements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `friend_list`
@@ -492,7 +514,7 @@ ALTER TABLE `friend_list`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `genres`
@@ -504,7 +526,7 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -516,7 +538,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
@@ -545,7 +567,7 @@ ALTER TABLE `friend_list`
 -- Begrensninger for tabell `gained_achievements`
 --
 ALTER TABLE `gained_achievements`
-  ADD CONSTRAINT `Gained_achievementsAchievementsFNs` FOREIGN KEY (`id`) REFERENCES `achievements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Gained_achievementsAchievementsFNs` FOREIGN KEY (`achievement_id`) REFERENCES `achievements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Gained_achievementsUserFNs` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
