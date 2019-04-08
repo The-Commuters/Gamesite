@@ -6,6 +6,7 @@
 
 	if ($session->is_signed_in()) {
 
+		// Places the id in a new Gained_Achievement-object.
 		$gained_achievement = new Gained_Achievement();
 		$gained_achievement->achievement_id = $_GET["aId"];
 		

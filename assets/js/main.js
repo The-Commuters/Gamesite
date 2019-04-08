@@ -155,17 +155,40 @@ function earn_achievement(achievement_id) {
 
     hide_alert();
     
+    
     xmlhttp.open("GET","includes/process/add_achievement.php?aId="+achievement_id,true);
     xmlhttp.send();
 }
+
+/**
+ * Refreshes the header picture that shows of the users
+ * avatar, is called in file_upload and used when a user
+ * upload a new avatar. 
+ */
+function refresh_header_picture() {
+
+    // Timeout to ensure that the new avatar have been placed in the database.
+    setTimeout(function(){ 
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            document.getElementById("profile").innerHTML = this.responseText;
+        };
+        
+        xmlhttp.open("GET","includes/process/refresh_header_picture.php",true);
+        xmlhttp.send();
+    }, 200);
+
+}
+
+
+
 
 
 //-------------------------- Upload profile image -----------------------------
 
 /**
- * Happens when a file is dropped in the square, it 
- * will call on the function that call's on the 
- * php process.
+ * Happens when a file is dropped in the square, it will call 
+ * on the function that call's on the php process.
  *
  * @param {event} event - The event in question.
  */
@@ -199,15 +222,17 @@ function file_upload(file, type) {
             document.getElementById("image").innerHTML = this.responseText;
         };
 
+        
         hide_alert();
 
         if (type == 1) {
             xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
+
         }
         if (type == 2) {
             xmlhttp.open("POST","includes/process/upload_game.php",true);
         }
-        
+        refresh_header_picture();
         xmlhttp.send(form_data);
 
     }

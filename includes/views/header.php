@@ -50,11 +50,13 @@ if ($session->is_signed_in()) {
             <div class="interaction">
 				<!-- Avatar (Only show when logged in)-->
 				<div class="dropdown -center">
-					<div class="profile">
+					<!-- The id is placed there as it is only used whenever the profile image is updated -->
+					<div class="profile" id="profile">
 						<div style="background-image: url(<?php echo $user->get_user_image(); ?>)" class="avatar"></div>
 						<div class="icon-buffer"><i class="fas fa-angle-down icon"></i></div>
 					</div>
 
+					<!-- The list that becomes visible when a signed in user hovers over the profile picture. -->
 					<div class="list">
                         <a href="profile.php?id=<?php echo $user->id;?>"><i class="fas fa-fw fa-user"></i>Profile</a>
 						<a href="settings.php"><i class="fas fa-fw fa-cog"></i>Settings</a>
