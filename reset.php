@@ -8,7 +8,12 @@
 
 if (isset($_POST['submit'])) {
 
-	// Fjerner eventuelle tagger og stringer som kan skade databasen	 
+	// Fjerner eventuelle tagger og stringer som kan skade databasen
+
+	echo "<script>
+	hide('passord_setting');
+	</script>";
+
 	$email = trim($_POST['email']);
 
 	//Putter brukerens email inni metoden create_reset_code
@@ -31,6 +36,8 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
+
+
 
 <div id="email_reset">
 	<h4><?php echo $the_message; ?></h4>
@@ -71,22 +78,63 @@ if (isset($_POST['submit'])) {
 
 </div>
 
+
+<?php 
+
+if (isset($_POST['submit_password'])) {
+
+
+	$password = trim($_POST['password']);
+	$password_check = trim($_POST['password_check']);
+
+
+	if (empty($error_array)) {
+
+		//var_dump($password);
+
+		$the_message="Password set";
+		
+	} else {
+
+		$the_message = "Your passwords do not match.";
+	}
+
+} else {
+	$password       = "";
+	$password_check = "";
+	$the_message 	= "";
+	$error_array    = "";
+
+
+}
+
+?>
+
+
 <div id="passord_setting">
 	<form id="" method="post" action="" >
 		
-		<div>
+		<div class="">
 			<label>Password</label>
-			<input type="" name="password" value="<?php echo htmlentities($password); ?>" required  >
+			<input type="password" name="password" value="<?php echo htmlentities($password); ?>">
 
 		</div>
 
+		<div class="">
+			<label>Password Check</label>
+			<input type="password" name="password_check" value="<?php echo htmlentities($password_check); ?>">
+	
+		</div>
+
+		<div class="">
+			<input type="submit" name="submit_password" value="Submit">
+
+</div>
 	</form>
 
 </div>
 
-<script>
-	hide('passord_setting');
-	</script>"
+
 
 <?php 
 
