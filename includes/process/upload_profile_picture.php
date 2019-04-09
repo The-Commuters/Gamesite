@@ -20,24 +20,31 @@ if (in_array($_FILES['file']['type'], $file_types)) {
 		mkdir($image_storage, 0777);
 	}
 
+	// Creates the new name of the image, adds the time to make it unique.
 	$image_name = time() . '_' . $_FILES['file']['name'];
 	$image_dir = $image_storage . DS . $image_name;
 
 	$user = new User;
 	$user = User::find_by_id($session->user_id);
+
+	// Deletes the old profile image here.
+	unlink($image_storage . DS . $user->user_image);
+
+	// Places the new image name in the image folder.
 	$user->user_image = $image_name;
 	$user->update();
 
+	// Moves the uploaded file to $image_dir.
 	move_uploaded_file($_FILES['file']['tmp_name'], $image_dir);
 
 ?>
-
+<!-- The profile picture have been sucessfully updated. -->
 <div id="alert" class="alert -warning -active">
 	<div>Your profile picture have been updated!</div>
 </div>
 
 <?php } else { ?>
-
+<!-- The picture upload have been rejected because of unsupported filetype. -->
 <div id="alert" class="alert -warning -active">
 	<div>The filetype of the image is not accepted!</div>
 </div>

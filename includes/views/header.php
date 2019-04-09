@@ -1,14 +1,14 @@
-
 <?php 
 
+// Includes teh php-file that defines the path's and includes the object classes.
 require_once("includes/init.php");
 
+//If somone is signed in, place the signed in user in the $user variable.
 if ($session->is_signed_in()) {
     $user = User::find_by_id($session->user_id);
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,15 +50,17 @@ if ($session->is_signed_in()) {
             <div class="interaction">
 				<!-- Avatar (Only show when logged in)-->
 				<div class="dropdown -center">
-					<div class="profile">
+					<!-- The id is placed there as it is only used whenever the profile image is updated -->
+					<div class="profile" id="profile">
 						<div style="background-image: url(<?php echo $user->get_user_image(); ?>)" class="avatar"></div>
 						<div class="icon-buffer"><i class="fas fa-angle-down icon"></i></div>
 					</div>
 
+					<!-- The list that becomes visible when a signed in user hovers over the profile picture. -->
 					<div class="list">
                         <a href="profile.php?id=<?php echo $user->id;?>"><i class="fas fa-fw fa-user"></i>Profile</a>
 						<a href="settings.php"><i class="fas fa-fw fa-cog"></i>Settings</a>
-						<a href="users.php"><i class="fas fa-fw fa-user-friends"></i>Friendlist</a>
+						<a href="friends.php"><i class="fas fa-fw fa-user-friends"></i>Friendlist</a>
 						<a href="chat.php"><i class="fas fa-fw fa-envelope"></i>Messages</a>
 
 						<?php if ($user->is_admin($user->id)) { ?>

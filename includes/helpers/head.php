@@ -20,6 +20,7 @@
 
     <!-- CSS files -->
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/rating-addtomainlater.css">
 
     <!-- JavaScript files -->
     <script src="assets/js/main.js" async></script>

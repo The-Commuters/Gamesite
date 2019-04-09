@@ -11,11 +11,10 @@ class Rating extends Db_object {
 
 	protected static $db_table = "ratings"; 
 
-	protected static $db_table_fields = array('game_id', 'user_id', 'score');
+	protected static $db_table_fields = array('game_id', 'user_id');
 	public $id; 
 	public $game_id;
 	public $user_id;
-	public $score;
 
 	/**
 	 * Whenever a logged in user decides to rate a game, and presses 
@@ -28,13 +27,11 @@ class Rating extends Db_object {
 		global $session;
 		global $database;
 
-		$score   = $database->escape_string($this->score);
 		$game_id = $database->escape_string($this->game_id);
 		$user_id = $session->user_id;
 
 		$rating  = new Rating();
 
-		$rating->score   = $score;
 		$rating->game_id = $game_id;
 		$rating->user_id = $user_id;
 	
@@ -47,12 +44,30 @@ class Rating extends Db_object {
 
 		if (!empty($the_result_array)) {
 			$rating->id = $the_result_array[0]->id;
-			$rating->update();
+			$rating->delete();
 		} else {
 			$rating->create();
 		}
 
 	}
+
+	public function check_if_rated($game_id, $user_id) {
+
+		global $session;
+		global $database;
+
+		$game_id = $database->escape_string($game_id);
+		$user_id = $session->user_id;
+
+		$sql  = "SELECT * FROM " . self::$db_table . " WHERE ";
+		$sql .= "user_id = '{$user_id}' ";
+		$sql .= "AND game_id = '{$game_id}' ";
+		$sql .= "LIMIT 1";
+
+		return static::find_by_query($sql);
+
+	}
+
 
 } // End of Ratings-class.
 

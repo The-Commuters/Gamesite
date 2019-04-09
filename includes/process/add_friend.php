@@ -15,6 +15,8 @@
 		$user = User::add_friend($_GET['i'], $_GET['o']);
 	}
 
-	echo "Friend Request Sent!";
-
 ?>
+
+<div id="alert" class="alert -warning -active">
+	<div>Friend Request Sent!</div>
+</div>

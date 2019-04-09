@@ -1,27 +1,24 @@
 
 /**
+ * The ajax function that rates the game when one of the input
+ * boxes is checked, is used whenever a user rates a game on 
+ * the gamesite.
  *
  * @param int game_id Spillet som det gjelder sin id.
  */
 function rate_game(game_id) {
 
-    var score = document.querySelector('input[name="stars"]:checked').value;
-
-    if (score == "") {
-        document.getElementById("message").innerHTML = "";
-        return;
-    } else { 
-
     xmlhttp = new XMLHttpRequest();
+    
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("message").innerHTML = this.responseText;
         }
     };
 
-    xmlhttp.open("GET","includes/process/rate_game.php?s="+score+"&g="+game_id,true);
+    xmlhttp.open("GET","includes/process/rate_game.php?g="+game_id,true);
     xmlhttp.send();
-    }
+
 }
 
 function update_userlist() {
@@ -79,8 +76,11 @@ function send_friend_request(user_id, other_id) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-            document.getElementById("send_friend_request").innerHTML = this.responseText;
+            document.getElementById("friend_search").innerHTML = this.responseText;
+            document.getElementById("search").value = "";
     };
+
+    hide_alert();
 
     xmlhttp.open("GET","includes/process/add_friend.php?i="+user_id+"&o="+other_id,true);
     xmlhttp.send();
@@ -94,9 +94,12 @@ function handle_friend_request(user_id, other_id, id, act) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-            document.getElementById("handle_friend_request").innerHTML = this.responseText;
+            document.getElementById("friend_search").innerHTML = this.responseText;
+
     };
     
+    hide_alert();
+
     xmlhttp.open("GET","includes/process/handle_friend_request.php?ui="+user_id+"&oi="+other_id+"&a="+act+"&id="+id,true);
     xmlhttp.send();
     
@@ -115,19 +118,19 @@ function close_chatroom(friendship_id) {
     
 }
 
-// Belongs to the chat, starts a chat between two people.
-function start_chat(user_1, user_2) {
-
-    xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-        document.getElementById("chat").innerHTML = this.responseText;
-    };
-    xmlhttp.open("GET","includes/process/start_chatroom.php?u1="+user_1+"&u2="+user_2,true);
-    xmlhttp.send();
-
-    window.location.href = 'chat.php?user=' + user_2;
-}
+// Belongs to the chat, starts a chat between two people. 
+function start_chat(user_1, user_2) { 
+ 
+    xmlhttp = new XMLHttpRequest(); 
+ 
+    xmlhttp.onreadystatechange = function() { 
+        document.getElementById("chat").innerHTML = this.responseText; 
+    }; 
+    xmlhttp.open("GET","includes/process/start_chatroom.php?u1="+user_1+"&u2="+user_2,true); 
+    xmlhttp.send(); 
+ 
+    window.location.href = 'chat.php'; 
+} 
 
 // Updates the settings of a user
 function update_names() {
@@ -142,19 +145,57 @@ function update_names() {
         document.getElementById("image").innerHTML = this.responseText;
     };
 
-    show_alert();
+    hide_alert();
 
     xmlhttp.open("GET","includes/process/update_settings.php?fname="+first_name+"&mname="+middle_name+"&lname="+last_name,true);
     xmlhttp.send();
     
 }
 
+// Belongs to the chat, starts a chat between two people.
+function earn_achievement(achievement_id) {
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        document.getElementById("info").innerHTML = this.responseText;
+    };
+
+    hide_alert();
+    
+    
+    xmlhttp.open("GET","includes/process/add_achievement.php?aId="+achievement_id,true);
+    xmlhttp.send();
+}
+
+/**
+ * Refreshes the header picture that shows of the users
+ * avatar, is called in file_upload and used when a user
+ * upload a new avatar. 
+ */
+function refresh_header_picture() {
+
+    // Timeout to ensure that the new avatar have been placed in the database.
+    setTimeout(function(){ 
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            document.getElementById("profile").innerHTML = this.responseText;
+        };
+        
+        xmlhttp.open("GET","includes/process/refresh_header_picture.php",true);
+        xmlhttp.send();
+    }, 200);
+
+}
+
+
+
+
+
 //-------------------------- Upload profile image -----------------------------
 
 /**
- * Happens when a file is dropped in the square, it 
- * will call on the function that call's on the 
- * php process.
+ * Happens when a file is dropped in the square, it will call 
+ * on the function that call's on the php process.
  *
  * @param {event} event - The event in question.
  */
@@ -188,22 +229,24 @@ function file_upload(file, type) {
             document.getElementById("image").innerHTML = this.responseText;
         };
 
-        show_alert();
+        
+        hide_alert();
 
         if (type == 1) {
             xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
+
         }
         if (type == 2) {
             xmlhttp.open("POST","includes/process/upload_game.php",true);
         }
-        
+        refresh_header_picture();
         xmlhttp.send(form_data);
 
     }
   }
 
 // closes alert after 3 seconds
-function show_alert() {
+function hide_alert() {
 
     setTimeout(function(){ 
         document.getElementById('alert').classList.remove("-active");

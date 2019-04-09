@@ -17,13 +17,14 @@ defined('PROCESS_PATH')  ? null : define('PROCESS_PATH', INCLUDES_PATH . DS . 'p
 require_once("helpers/functions.php");              // Funksjoner som er utenfor klasser. 
 require_once("helpers/config.php");                 // Inneholder database konstantene.
 require_once("helpers/database.php");               // Database-klassen ligger her.
-require_once("classes/db_object.php");      // Parent klasse for db_objekter.
-require_once("classes/user.php");           // User-klassen ligger her.
-require_once("classes/game.php");           // Klassen som styrer games.
-require_once("classes/session.php");        // Kontroll over nåværende session.
-require_once("classes/achievement.php");    // Funksjoner som er utenfor klasser. 
-require_once("classes/rating.php");         // Klassen som omhandler ratings.
-require_once("classes/friendship.php");     // Klassen som omhandler vennelister..
-require_once("classes/message.php");        // Klassen som omhandler vennelister..
+require_once("classes/db_object.php");  		    // Parent klasse for db_objekter.
+require_once("classes/user.php");     	            // User-klassen ligger her.
+require_once("classes/game.php");      		        // Klassen som styrer games.
+require_once("classes/session.php");     		    // Kontroll over nåværende session.
+require_once("classes/achievement.php");    		// Funksjoner som er utenfor klasser. 
+require_once("classes/gained_achievement.php");     // Funksjoner som er utenfor klasser. 
+require_once("classes/rating.php");      		    // Klassen som omhandler ratings.
+require_once("classes/friendship.php");   		    // Klassen som omhandler vennelister..
+require_once("classes/message.php");    		    // Klassen som omhandler vennelister..
 
 ?>

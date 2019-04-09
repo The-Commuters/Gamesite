@@ -28,6 +28,12 @@ $current_username ="";
 
                 <?php 
 
+                /**
+                 * Inside of this div is the list of friends that have an 
+                 * active userchat open. The user can click on one of
+                 * them to show their chat.
+                 */
+
                 // For each of the objects placed in the $friends array.
                 foreach ($friends as $friend) : 
 
@@ -53,26 +59,28 @@ $current_username ="";
 
                     // We have the user and the friendship, what we need is number of messages not viewed.
                     $unread_messages = Message::count_unread_messages($friend->chat_id, $user->id);
-                    $counter = 0;
-                    foreach ($unread_messages as $key) {
-                        $counter++;
-                    }
+                    $counter = count($unread_messages);
+                    // Counts all of the unread messages, and make 
+                    //foreach ($unread_messages as $key) {$counter++;}
                     ?>
 
-                    <!-- The if inside of class will -->
+                    <!-- The if inside of class will decide if it is active or not, stores collectable information in this div, called parent in the chat-js-->
                     <div class="user <?php if($_GET["user"] == $user->id) {echo "-active";} ?> " value="<?php echo $friend->chat_id; ?>" 
                         username="<?php echo $user->username; ?>" userId="<?php echo $user->id; ?>" fsId="<?php echo $friend->id; ?>" 
                         signed_in="<?php echo $user->signed_in; ?>">
+
+                        <!-- Places the avatar inside of the div, then places the username. -->
                         <div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div>
                         <div class="username"><?php echo $user->username; ?></div>
 
-                        <?php if ($counter > 0): ?>
-
+                        <!-- This shows number of unread messages that the user have, if they have any. -->
+                        <?php if ($counter > 0): ?> 
                         <div class="notice"><?php echo $counter; ?></div>
-
                         <?php endif;?>
 
+                        <!-- Closes the chat if the X is clicked. -->
                         <i class="fas fa-times close"></i>
+
                     </div>
 
                 <?php endforeach; ?>
@@ -87,9 +95,7 @@ $current_username ="";
                 <span id="username">
 
                     <?php if ($current_username != ""): ?>
-
                         <a href="profile.php?id='<?php echo $current_user ?> '" class="username"><?php echo $current_username ?></a>;
-
                     <?php endif; ?>
 
                 </span>
