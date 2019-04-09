@@ -128,3 +128,8 @@ function start_chat(user_1, user_2) {
 
     window.location.href = 'chat.php?user=' + user_2;
 }
+
+function hide(div){
+    document.getElementById(div).style.display="none";
+    //console.log("ho");
+}
