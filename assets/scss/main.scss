@@ -10,7 +10,8 @@
 @import "modules/color";
 
 // Partials
-@import "partials/alert"; // new
+@import "partials/about";
+@import "partials/alert";
 @import "partials/avatar";
 @import "partials/base";
 @import "partials/button";
@@ -18,12 +19,15 @@
 @import "partials/casing";
 @import "partials/chat";
 @import "partials/chatlist";
-@import "partials/close"; // new
+@import "partials/chip";
+@import "partials/close";
 @import "partials/dropdown";
 @import "partials/float-label";
 @import "partials/header";
+@import "partials/img";
 @import "partials/login";
 @import "partials/game";
 @import "partials/message";
 @import "partials/partition";
+@import "partials/rating";
 @import "partials/utility";

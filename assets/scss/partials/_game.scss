@@ -1,9 +1,68 @@
 .games {
-    margin-top: -15rem;
+    margin-top: -14rem;
 }
 
-.category-title {
-    margin-top: 0;
+.category {
+    grid-template-rows: auto 1fr;
+    grid-gap: 1rem;
 
-    color: $color-gray-100;
+    display: grid;
+
+    padding: 1rem;
+}
+
+.category > header {
+    grid-template-columns: auto 1fr auto;
+    grid-gap: 1rem;
+
+    display: grid;
+
+    font-size: 2rem;
+    font-weight: 500;
+    color: $color-light;
+
+    .search,
+    .sort {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+
+        width: 3.5rem;
+        height: 3.5rem;
+
+        cursor: pointer;
+    }
+}
+
+.category-searchbar {
+    grid-template-columns: 1fr auto;
+
+    overflow: hidden;
+
+    display: grid;
+
+    box-shadow: inset 0.1rem 0.1rem hsla(0, 0%, 0%, 0.10), 0 -0.1rem 0 hsla(0, 0%, 100%, 0.15);
+    border-radius: 0.5rem;
+
+    background-color: $color-light;
+
+    .bar {
+        border: none;
+        padding: 0 1rem;
+        min-width: 10rem;
+
+        background-color: transparent;
+
+        font-size: 1.6rem;
+        color: $color-dark;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .search {
+        color: $color-dark;
+    }
 }

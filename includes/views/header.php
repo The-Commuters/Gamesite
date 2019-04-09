@@ -25,14 +25,14 @@ if ($session->is_signed_in()) {
 <body>
 
     <!-- Header -->
-	<header>
+	<header class="body-header">
 		<!-- XP Bar -->
 		<div class="xp">
 			<div class="xp-bar" Style="width: 70%"></div>
 		</div>
 
 		<!-- Header content-->
-		<div class="header">
+		<div class="header -big">
 
 			<!-- Navigation -->
 			<nav>

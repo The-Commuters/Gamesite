@@ -1,0 +1,56 @@
+.about p {
+    font-size: 2.1rem;
+    font-weight: 400;
+}
+
+.about .row {
+    display: flex;
+
+    margin: 0 auto;
+    max-width: 120rem;
+}
+
+.about .fancy {
+    background-color: $color-primary;
+
+    color: $color-light;
+}
+
+.about .art {
+    margin: 0 2rem;
+    max-width: 40rem;
+}
+
+.about .text-container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.about .hero {
+    width: 100%;
+
+    background-color: black;
+}
+
+.about .hero-image {
+    margin: 0 auto;
+    max-width: 120rem;
+    height: 20rem;
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+@media (max-width: $breakpoint-tablet) {
+    .about p {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: $breakpoint-laptop) {
+    .about .art {
+        display: none;
+    }
+}
