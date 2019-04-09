@@ -71,6 +71,23 @@ if (isset($_POST['submit'])) {
 
 </div>
 
+<div id="passord_setting">
+	<form id="" method="post" action="" >
+		
+		<div>
+			<label>Password</label>
+			<input type="" name="password" value="<?php echo htmlentities($password); ?>" required  >
+
+		</div>
+
+	</form>
+
+</div>
+
+<script>
+	hide('passord_setting');
+	</script>"
+
 <?php 
 
 
