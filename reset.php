@@ -25,10 +25,10 @@ if (isset($_POST['submit'])) {
 	}
 
 } else {
-		$email          = "";
-		$the_message 	= "";
-		$error_array    = "";
-	}
+	$email          = "";
+	$the_message 	= "";
+	$error_array    = "";
+}
 
 ?>
 
@@ -39,33 +39,33 @@ if (isset($_POST['submit'])) {
 Åpner en form for slik at brukeren kan skrive inne sin epost for å så kunne få til sent en passord tilbakestillingsepost
 
 -->
-	
-<form id="reset-password" action="" method="post">
 
-<div class="">
-	<label>Email</label>
-	<input type="email" name="email" value="<?php echo htmlentities($email); ?>" required  >
+<form id="email_form" action="" method="post">
 
-</div>
+	<div>
+		<label>Email</label>
+		<input type="email" name="email" value="<?php echo htmlentities($email); ?>" required  >
 
- <?php 
+	</div>
 
-/*Hvis det er meldinger i errorarray blir de skrivt ut til brukeren med ny linje*/
+	<?php 
 
-if (!empty($error_array)) {
-	foreach ($error_array as $error_message) {
-		echo $error_message . "<br>";
+	/*Hvis det er meldinger i errorarray blir de skrivt ut til brukeren med ny linje*/
 
+	if (!empty($error_array)) {
+		foreach ($error_array as $error_message) {
+			echo $error_message . "<br>";
+
+		}
 	}
-}
 
-?>
+	?>
 
-<!-- Div tagger for knapper -->
-<div class="">
-<input type="submit" name="submit" value="Submit">
+	<!-- Div tagger for knapper -->
+	<div class="">
+		<input type="submit" name="submit" value="Submit">
 
-</div>
+	</div>
 
 </form>
 
