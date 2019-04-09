@@ -85,7 +85,7 @@ class Game extends Db_object {
 	 */
 	public function game_image_path() {
 
-		return $this->upload_directory . DS . $this->foldername . DS . "image.png";
+		return $this->upload_directory . "/" . $this->foldername . "/" . "image.png";
 	}
 
 	/**

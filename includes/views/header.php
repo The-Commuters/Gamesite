@@ -42,7 +42,6 @@ if ($session->is_signed_in()) {
 				<!-- Other items-->
 				<a href="index.php" class="item <?php if($page == "index"){echo "-active";} ?>">Games</a>
 				<a href="about.php" class="item <?php if($page == "about"){echo "-active";} ?>">About</a>
-				<a href="contact.php" class="item <?php if($page == "contact"){echo "-active";} ?>">Contact</a>
             </nav>
 
             <?php if ($session->is_signed_in()) { ?>
