@@ -9,6 +9,7 @@
 include("includes/views/header.php"); ?>
 
 <div>
+
   <?php 
   
   /**
@@ -26,20 +27,18 @@ include("includes/views/header.php"); ?>
   
 </div>
 
+<!-- The rating checkbox only shows if the user is signed int -->
 <?php if ($session->is_signed_in()) { ?>
 
- <form id="gamescore" onchange="rate_game(<?php echo $game->id; ?>)">
-  <input type="radio" name="stars" value="1"> 1 star
-  <input type="radio" name="stars" value="2"> 2 star
-  <input type="radio" name="stars" value="3"> 3 star
-  <input type="radio" name="stars" value="4"> 4 star
-  <input type="radio" name="stars" value="5"> 5 star
-</form>
+    <!-- If the checkbox is pressed the heart will be red, on click rate_game() will happen -->
+    <input id="heart" type="checkbox" onchange="rate_game(<?php echo $game->id; ?>)" 
+      <?php echo (empty(Rating::check_if_rated($game->id, $user->id)) ? "" : "checked");?>/>
+    <label for="heart">❤</label>
 
 <?php } ?>
 
 <div id="message">
-
+<!--
   <?php 
   if ($score = $game->get_rating()) {
     echo $score; 
@@ -47,7 +46,7 @@ include("includes/views/header.php"); ?>
     echo "Game has never been rated";
   }
   ?>
-
+-->
 </div>
 
 <?php 

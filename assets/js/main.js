@@ -8,23 +8,17 @@
  */
 function rate_game(game_id) {
 
-    var score = document.querySelector('input[name="stars"]:checked').value;
-
-    if (score == "") {
-        document.getElementById("message").innerHTML = "";
-        return;
-    } else { 
-
     xmlhttp = new XMLHttpRequest();
+    
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("message").innerHTML = this.responseText;
         }
     };
 
-    xmlhttp.open("GET","includes/process/rate_game.php?s="+score+"&g="+game_id,true);
+    xmlhttp.open("GET","includes/process/rate_game.php?g="+game_id,true);
     xmlhttp.send();
-    }
+
 }
 
 function update_userlist() {

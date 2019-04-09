@@ -1,0 +1,37 @@
+/**
+ * The like button under a game, is a checkbox
+ * hidden with visibility: hidden; Needs to be placed in the 
+ */
+
+[id="heart"] {
+visibility: hidden;
+}
+
+[for="heart"] {
+  color: grey;
+  cursor: pointer;
+  font-size: 3em;
+  transition: color 0.2s ease-in-out;
+}
+
+[for="heart"]:hover {
+  color: grey;
+}
+
+[for="heart"]::selection {
+  color: none;
+  background: transparent;
+}
+
+[for="heart"]::moz-selection {
+  color: none;
+  background: transparent;
+}
+
+[id="heart"]:checked + label {
+  color: red;
+  will-change: font-size;
+
+}
+
+
