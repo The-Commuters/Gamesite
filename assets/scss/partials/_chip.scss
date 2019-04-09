@@ -1,0 +1,52 @@
+.chip {
+    display: inline-block;
+
+    border-radius: 2rem;
+    padding: 0 1rem 0.1rem;
+
+    background-color: $color-dark;
+
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: $color-light;
+
+    &.-blue {
+        background-color: $color-blue;
+    }
+
+    &.-indigo {
+        background-color: $color-indigo;
+    }
+
+    &.-purple {
+        background-color: $color-purple;
+    }
+
+    &.-pink {
+        background-color: $color-pink;
+    }
+
+    &.-red {
+        background-color: $color-red;
+    }
+
+    &.-orange {
+        background-color: $color-orange;
+    }
+
+    &.-yellow {
+        background-color: $color-yellow;
+    }
+
+    &.-green {
+        background-color: $color-green;
+    }
+
+    &.-teal {
+        background-color: $color-teal;
+    }
+
+    &.-cyan {
+        background-color: $color-cyan;
+    }
+}
