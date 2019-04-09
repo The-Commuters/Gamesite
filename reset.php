@@ -1,5 +1,6 @@
 <?php require_once("includes/init.php") ?>
 <?php include("includes/views/header.php"); ?>
+<script src='assets/js/main.js'></script>
 
 <!-- <?php if ($session->is_signed_in()) {redirect("profile.php");} ?> -->
 
@@ -31,8 +32,8 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<div>
-<h4><?php echo $the_message; ?></h4>
+<div id="email_reset">
+	<h4><?php echo $the_message; ?></h4>
 
 <!-- 
 Åpner en form for slik at brukeren kan skrive inne sin epost for å så kunne få til sent en passord tilbakestillingsepost
@@ -75,6 +76,11 @@ if (!empty($error_array)) {
 
 
 if (isset($_GET["reset_code"])) {
+
+	// Gjør at div taggen inni ikke vises til brukeren
+	echo "<script>
+	hide('email_reset');
+	</script>";
 
 	$reset_code = ($_GET["reset_code"]);
 
