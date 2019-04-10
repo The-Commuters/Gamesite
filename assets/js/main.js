@@ -87,7 +87,10 @@ function send_friend_request(user_id, other_id) {
     
 }
 
-//Accept one of the friend request when the user accept, changed the friend_list status to 1.
+/**
+ *Accept one of the friend request when the user 
+ * accept, changed the friend_list status to 1.
+ */
 function handle_friend_request(user_id, other_id, id, act) {
 
     //Act is 0 if declined and 1 if accepted.
@@ -187,7 +190,28 @@ function refresh_header_picture() {
 
 }
 
+/**
+ * Registers the user if the information is correct,
+ * Opens up the process register_user.php on the 
+ * register.php.
+ */
+function register_user() {
 
+    var password_check   = document.getElementById("password_check").value;
+    var password         = document.getElementById("password").value;
+    var email            = document.getElementById("email").value;
+    var username         = document.getElementById("username").value;
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        document.getElementById("image").innerHTML = this.responseText;
+    };
+
+    hide_alert();
+    
+    xmlhttp.open("GET","includes/process/register_user.php?pc="+ password_check +"&p=" + password + "&u=" + username + "&e=" + email,true);
+    xmlhttp.send();
+}
 
 
 

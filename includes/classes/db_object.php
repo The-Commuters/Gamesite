@@ -149,7 +149,6 @@ class Db_object {
 
 	}
 
-
 	/**
 	 * A method that logs any change done to the database done on the website. This is
 	 * stored in the 'user_activity' table in the database. Decided to do it here rather
@@ -180,8 +179,6 @@ class Db_object {
 			return false;
 
 		}
-
-
 	}
 
 
@@ -194,7 +191,6 @@ class Db_object {
 	public function save() {
 		
 		return isset($this->id) ? $this->update() : $this->create();
-
 	}
 
 
