@@ -4,7 +4,11 @@
 
 <!-- <?php if ($session->is_signed_in()) {redirect("profile.php");} ?> -->
 
+
+
 <?php 
+
+
 
 if (isset($_POST['submit'])) {
 
@@ -12,9 +16,7 @@ if (isset($_POST['submit'])) {
 
 
 	// Skjuler passord setting når den andre er i bruk 
-	echo "<script>
-	hide('passord_setting');
-	</script>";
+	
 
 	$email = trim($_POST['email']);
 
@@ -41,7 +43,9 @@ if (isset($_POST['submit'])) {
 
 
 
+
 <div id="email_reset">
+	
 	<h4><?php echo $the_message; ?></h4>
 
 <!-- 
@@ -57,19 +61,7 @@ if (isset($_POST['submit'])) {
 
 	</div>
 
-	<?php 
-
-	/*Hvis det er meldinger i errorarray blir de skrivt ut til brukeren med ny linje*/
-
-	if (!empty($error_array)) {
-		foreach ($error_array as $error_message) {
-			echo $error_message . "<br>";
-
-		}
-	}
-
-	?>
-
+	
 	<!-- Div tagger for knapper -->
 	<div class="">
 		<input type="submit" name="submit" value="Submit">
@@ -81,11 +73,9 @@ if (isset($_POST['submit'])) {
 </div>
 
 
-<!-- Password reset form 
-Here the user will put in their new password twice and submit it for checks agianst our database 
--->
 
 <?php 
+
 
 if (isset($_GET["reset_code"])) {
 
@@ -96,59 +86,67 @@ if (isset($_GET["reset_code"])) {
 
 	$reset_code = ($_GET["reset_code"]);
 
+
 	// henter inn koden og gir den vidre til aktiverings metoden 
 	$code = Email::find_user_by_reset_code($reset_code);
-	
-	$shifted_code = array_shift($code);
-	$user_id = $shifted_code->id;
 
-	$user = User::find_by_id($user_id);
-	
-	//var_dump($user);
+	if($code == true) {
 
-}
-else{
+		//var_dump($error_array);
+		$the_message="Please set your password";
 
-}
+		$user_id = $code->id;
 
-	//Email::create_reset_code("newuser@localhost.com");
+		$user = User::find_by_id($user_id);
 
-	//Email::send_Password_resetMail("newuser@localhost", "Mark", "testcode");
+		if (isset($_POST['submit_password'])) {
 
+			$password = trim($_POST['password']);
+			$password_check = trim($_POST['password_check']);
 
-if (isset($_POST['submit_password'])) {
+			// I am unsure where i want to place this, because i need to get the id or the user object to this method 
+			$error_array = User::verify_password_update($user->id,$password, $password_check );
 
 
-	$password = trim($_POST['password']);
-	$password_check = trim($_POST['password_check']);
+			if (empty($error_array)) {
 
-	// I am unsure where i want to place this, because i need to get the id or the user object to this method 
-	User::verify_password_update($user->id,$password, $password_check );
+				var_dump($user);
 
-	if (empty($error_array)) {
+				$the_message="Password set";
 
-		//var_dump($password);
+			} else {
 
-		$the_message="Password set";
-		
-	} else {
+				$the_message= "Your new password could not be set";
+			}
 
-		$the_message = "Your passwords do not match.";
+		} else {
+
+			$password       = "";
+			$password_check = "";
+			$the_message 	= "";
+			$error_array    = "";
+
+
+		}
+
 	}
+	else {
 
-} else {
+	echo "<script>
+	hide('password_setting');
+	</script>";
+
 	$password       = "";
 	$password_check = "";
-	$the_message 	= "";
-	$error_array    = "";
-
+	$the_message = "Your link is broken/incorrect.";
+	}
 
 }
-
 ?>
 
 
-<div id="passord_setting">
+<div id='password_setting'>
+	<h4><?php echo $the_message; ?></h4>
 	<form id="" method="post" action="" >
 		
 		<div class="">
@@ -160,26 +158,37 @@ if (isset($_POST['submit_password'])) {
 		<div class="">
 			<label>Password Check</label>
 			<input type="password" name="password_check" value="<?php echo htmlentities($password_check); ?>">
-	
+
 		</div>
+
+
 
 		<div class="">
 			<input type="submit" name="submit_password" value="Submit">
 
-</div>
+		</div>
 	</form>
 
 </div>
 
+<!-- Password reset form 
+Here the user will put in their new password twice and submit it for checks agianst our database 
+-->
 
 <?php 
 
+/*Hvis det er meldinger i errorarray blir de skrivt ut til brukeren med ny linje*/
 
+if (!empty($error_array)) {
+	foreach ($error_array as $error_message) {
+		echo $error_message . "<br>";
 
-
+	}
+}
 
 ?>
 
 
 
 <?php include("includes/views/footer.php"); ?>
+
