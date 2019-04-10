@@ -1,0 +1,26 @@
+.status {
+    display: block;
+
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+
+    // Offline
+    background-color: $color-gray-500;
+
+    // Online
+    &.-active {
+        background-color: $color-green;
+    }
+
+    // Do Not Disturb
+    &.-busy {
+        background-color: $color-red;
+    }
+
+    // Idle
+    &.-away {
+        background-color: $color-yellow;
+    }
+}
+
