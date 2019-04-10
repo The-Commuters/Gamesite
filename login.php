@@ -7,7 +7,17 @@
  */
 
 require_once("includes/init.php");
+?>
+<head>
 
+	<?php
+
+	include("includes/helpers/head.php");
+
+	?>    
+
+</head>
+<?php
 if ($session->is_signed_in()) {redirect("index.php");}
 
 if (isset($_POST['submit'])) {
@@ -22,28 +32,22 @@ if (isset($_POST['submit'])) {
 		redirect("index.php");
 
 	} else {
-		$the_message = "Your password or email are incorrect.";
 
+		?>
+		<div id="alert" class="alert -warning -active">
+			<div>Your password or email are incorrect.</div>
+		</div>
+
+		<?php
 	}
 
 } else {
 	$email = "";
 	$password = "";
-	$the_message = "";
-
 }
 
 ?>
 
-<head>
-
-	<?php
-
-	include("includes/helpers/head.php");
-
-	?>    
-
-</head>
 
 <!-- Main -->
 <main class="login-wrapper">
@@ -81,10 +85,6 @@ if (isset($_POST['submit'])) {
 
 				<!-- log in -->
 				<input type="submit" name="submit" id="submit" class="button-contained" value="submit">
-			</div>
-
-			<div class="login-fail">
-				<h4><?php echo $the_message; ?></h4>
 			</div>
 
 			<script type="text/javascript">

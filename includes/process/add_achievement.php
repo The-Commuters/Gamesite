@@ -4,6 +4,7 @@
 	$path .= "/gamesite/includes/init.php";
 	require_once($path); 
 
+	// Only does this if the user is signed in.
 	if ($session->is_signed_in()) {
 
 		// Places the id in a new Gained_Achievement-object.
@@ -21,12 +22,19 @@
 			$achievement = new Achievement();
 			$achievement = Achievement::find_by_id($achievement_id);
 
+			// Adds here the experience points to the user's experience_points in their row.
+			$user = new User();
+			$user = User::find_by_id($session->user_id);
+			$user->experience_points += $achievement->experience_points;
+			$user->update();
 
 			// Posts the alert for the earned achievement on the screen
 			?>
 			<div id="alert" class="alert -warning -active">
 				<img style="width: 100px; height: 100px;">
-				<div>Gained an achievement!</div>
+				<div><?php echo $achievement->title ?></div>
+				<div><?php echo $achievement->text ?></div>
+				<div></div>
 			</div>
 			<?php
 

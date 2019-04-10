@@ -7,7 +7,6 @@
  */
 
 class Db_object {
-	
 
 	protected static $db_table = "users"; 
 

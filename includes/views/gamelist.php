@@ -25,54 +25,33 @@ if (isset($_GET['s'])) {
 }
 ?>
 
- <table>
-  <thead>
-   <tr>
-    <th>Game</th>
-    <th>Id</th>
-    <th>File Name</th>
-    <th>Title</th>
-    <th>Genre</th>
-    <th>Creator</th>
-    <th>Size</th>
-  </tr>
- </thead>
-<tbody>
-
-<!-- For each loop that runs trough all the elements in the $games array. -->
-<?php foreach ($games as $game) : ?>
-
-<tr>
-
-	<td>
-		<a href="<?php echo $game->game_path();?>">
-			<img src="<?php echo $game->game_image_path();?>" style="height: 100px; width: 100px;">
-		</a>
-	</td>
-
-	<td><?php echo $game->id; ?></td>
-	
-	<!-- The <a> leads to the canvas that the game is played in. -->
-	<td><a href="gamepage.php?game=<?php echo $game->id; ?>"><?php echo $game->filename; ?></a></td>
-	<td><?php echo $game->title; ?></td>
-	<td><?php echo $game->genre; ?></td>
-  <td><?php echo $game->creator; ?></td>
-  <td><?php echo $game->size; ?></td>
-
-  <?php 
-  if ($session->is_signed_in()) {
-    if (User::is_admin($session->user_id)) { ?>
-	<td><a href="includes/process/delete_game.php?id=<?php echo $game->id; ?>" 
-		onclick="return confirm('Are you sure you want to delete <?php echo $game->title ?>')">Delete</a></td>
-  <?php
-      } 
-    } 
-  ?>
+    <div class="cards">
+  <!-- For each loop that runs trough all the elements in the $games array. -->
+  <?php foreach ($games as $game) : ?>
 
 
-</tr>
+      <a href="gamepage.php?game=<?php echo $game->id; ?>" class="card">
+        <div class="card-image" style="background-image: url(<?php echo $game->game_image_path() ?>)">
+          <div class="card-image-content">
+            <div>
+              <div class="title"><?php echo $game->title; ?></div>
+              <div class="author"><?php echo $game->creator; ?></div>
+            </div>
+            <div class="rating"><i class="fas fa-fw fa-heart"></i><span class="rating-placement"><?php echo $game->rating; ?></span></div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <section class="scroller"><?php echo $game->description; ?></section>
+
+          <footer>
+            <div class="chip -red"><?php echo $game->genre; ?></div>
+            <div class="chip -teal">Adventure</div>
+          </footer>
+        </div>
+      </a>
+
 
 <?php endforeach; ?>
 
-</tbody>
-</table>
+    </div>

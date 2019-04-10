@@ -24,3 +24,5 @@ echo "This is your profile page " . $user->username . ", but there is little for
     include("includes/views/friend_request_list.php");
   ?>
 </div>
+
+

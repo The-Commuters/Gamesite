@@ -36,8 +36,9 @@ class Gained_Achievement extends Db_object{
 	}
 
 	/**
-	 *
-	 *
+	 * Checks if the user have already gained the achievement,
+	 * is used to stop the user from earning a achievement and
+	 * experience points two times.
 	 */
 	public function check_if_gained() {
 
@@ -59,7 +60,6 @@ class Gained_Achievement extends Db_object{
 		return true;
 
 	}
-
 
 }
 

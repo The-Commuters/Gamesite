@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09. Apr, 2019 19:16 PM
+-- Generation Time: 10. Apr, 2019 12:36 PM
 -- Server-versjon: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -33,15 +33,16 @@ CREATE TABLE `achievements` (
   `game_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `text` varchar(255) NOT NULL
+  `text` varchar(255) NOT NULL,
+  `experience_points` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dataark for tabell `achievements`
 --
 
-INSERT INTO `achievements` (`id`, `game_id`, `title`, `image`, `text`) VALUES
-(1, 5, 'Passed the first level!', '', 'You passed the first level of the shovel-game!');
+INSERT INTO `achievements` (`id`, `game_id`, `title`, `image`, `text`, `experience_points`) VALUES
+(1, 5, 'Passed the first level!', '', 'You passed the first level of the shovel-game!', 50);
 
 -- --------------------------------------------------------
 
@@ -87,13 +88,6 @@ CREATE TABLE `gained_achievements` (
   `gained` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dataark for tabell `gained_achievements`
---
-
-INSERT INTO `gained_achievements` (`achievement_id`, `user_id`, `gained`) VALUES
-(1, 1, '2019-04-09 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -108,17 +102,18 @@ CREATE TABLE `games` (
   `creator` varchar(100) NOT NULL,
   `foldername` varchar(25) NOT NULL,
   `filename` varchar(255) NOT NULL,
-  `size` int(11) NOT NULL
+  `size` int(11) NOT NULL,
+  `rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dataark for tabell `games`
 --
 
-INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `foldername`, `filename`, `size`) VALUES
-(1, 'The Coin-eating Snake', 'Action', '', 'Mona Clairvoyant', 'snakegame.zip', 'snakegame.php', 1455),
-(2, 'There Can Only Be One', 'Slice Of Life', '', 'Clinter Coyote', 'breakout.zip', 'breakout.php', 1390),
-(5, 'Shovel Game', 'Slice of life', 'You have to get away from the dungeon that you are stuck in, but your shovels are made of soap, get out of there as fast as possible.', 'Daniel Larssen', 'adventureGame', 'shovelGame.php', 110222);
+INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `foldername`, `filename`, `size`, `rating`) VALUES
+(1, 'The Coin-eating Snake', 'Action', '', 'Mona Clairvoyant', 'snakegame.zip', 'snakegame.php', 1455, 0),
+(2, 'There Can Only Be One', 'Slice Of Life', '', 'Clinter Coyote', 'breakout.zip', 'breakout.php', 1390, 0),
+(5, 'Shovel Game', 'Slice of life', 'You have to get away from the dungeon that you are stuck in, but your shovels are made of soap, get out of there as fast as possible.', 'Daniel Larssen', 'adventureGame', 'shovelGame.php', 110222, 1);
 
 -- --------------------------------------------------------
 
@@ -146,6 +141,27 @@ CREATE TABLE `genres` (
 -- --------------------------------------------------------
 
 --
+-- Tabellstruktur for tabell `level`
+--
+
+CREATE TABLE `level` (
+  `id` int(11) NOT NULL,
+  `needed_xp` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dataark for tabell `level`
+--
+
+INSERT INTO `level` (`id`, `needed_xp`) VALUES
+(1, 25),
+(2, 50),
+(3, 100),
+(4, 200);
+
+-- --------------------------------------------------------
+
+--
 -- Tabellstruktur for tabell `ratings`
 --
 
@@ -160,7 +176,7 @@ CREATE TABLE `ratings` (
 --
 
 INSERT INTO `ratings` (`id`, `game_id`, `user_id`) VALUES
-(36, 5, 1);
+(42, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -178,6 +194,7 @@ CREATE TABLE `users` (
   `middle_name` varchar(100) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `user_image` varchar(100) NOT NULL,
+  `experience_points` int(11) NOT NULL,
   `joined` date NOT NULL,
   `privilege_level` tinyint(4) NOT NULL,
   `verify_code` text NOT NULL,
@@ -189,17 +206,17 @@ CREATE TABLE `users` (
 -- Dataark for tabell `users`
 --
 
-INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `joined`, `privilege_level`, `verify_code`, `status`, `signed_in`) VALUES
-(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1554821045_BGEnding.png', '2019-01-23', 1, '', 1, 1),
-(2, 0, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', '2019-01-23', 1, '', 1, 0),
-(3, 0, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', '2019-01-23', 1, '', 1, 0),
-(19, 0, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', '2019-03-15', 1, '', 1, 0),
-(21, 43334, 'hehe@willi.nos', 'Hanness', '$2y$10$rKCVBxvyzi.9GLLWsiT.B.kNrSAKaD/K0UyFPXTq1YfdGSdQS4GiK', 'qwwqw', 'qwqw', 'qwqww', '1.png', '2019-03-17', 1, '', 1, 0),
-(22, 35567, 'hehe@willi.nodd', 'dscsdc', '$2y$10$.7aiv2vzoOB18HmP9rqjNOyqy1GW3cebr8oaaQ2V7T29w8o4gTuAm', 'sxcfdf', 'xcsc', 'scsc', '1.png', '2019-03-17', 1, '', 1, 0),
-(23, 23433, 'hehe@willi.nojjj', 'dflÃ¸mj', '$2y$10$2DCi4g7B5CihWZlPbedhpeVvIi3AlPN0NoCZiWVrIrbWduIE1vSxC', 'askld', 'lasjd', 'lijlij', '1.png', '2019-03-17', 1, '', 1, 0),
-(25, 76854, 'hdc@sdsd.ccd', 'ldfjvoijq', '$2y$10$3rA.M.YXUfd/KPc1JivCrenMLZt9ejKZmxtxYw6eq7W0ywGYCfLbO', 'qwe', 'jhb', 'khjb', '1.png', '2019-03-17', 1, '', 1, 0),
-(26, 38503, 'Daniel@Daniel.Daniel', 'Daniel', '$2y$10$cClBmtVwt57.fiHrglwLxuex/nc2TEs3SQIbAOl3efZUkTwYG5fx6', 'Daniel', 'Daniels', 'Danielsen', '1.png', '2019-03-26', 1, 'bc49e6eef94b163fa9b24f163780fd24', 1, 0),
-(27, 43737, 'sadad@asda.aa', 'WilliWonkanom', '$2y$10$ZJkHttv9Mpyx3Yoh9A9gXOVKGkkQBnFLDLm7Q2XpDTPErmIN7d1Ee', '', '', '', '1.png', '2019-04-08', 0, '1c8818bcb422b45bfe95713ea768b4e9', 0, 0);
+INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `experience_points`, `joined`, `privilege_level`, `verify_code`, `status`, `signed_in`) VALUES
+(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1554821045_BGEnding.png', 50, '2019-01-23', 1, '', 1, 1),
+(2, 0, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', 0, '2019-01-23', 1, '', 1, 0),
+(3, 0, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', 0, '2019-01-23', 1, '', 1, 0),
+(19, 0, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', 0, '2019-03-15', 1, '', 1, 0),
+(21, 43334, 'hehe@willi.nos', 'Hanness', '$2y$10$rKCVBxvyzi.9GLLWsiT.B.kNrSAKaD/K0UyFPXTq1YfdGSdQS4GiK', 'qwwqw', 'qwqw', 'qwqww', '1.png', 0, '2019-03-17', 1, '', 1, 0),
+(22, 35567, 'hehe@willi.nodd', 'dscsdc', '$2y$10$.7aiv2vzoOB18HmP9rqjNOyqy1GW3cebr8oaaQ2V7T29w8o4gTuAm', 'sxcfdf', 'xcsc', 'scsc', '1.png', 0, '2019-03-17', 1, '', 1, 0),
+(23, 23433, 'hehe@willi.nojjj', 'dflÃ¸mj', '$2y$10$2DCi4g7B5CihWZlPbedhpeVvIi3AlPN0NoCZiWVrIrbWduIE1vSxC', 'askld', 'lasjd', 'lijlij', '1.png', 0, '2019-03-17', 1, '', 1, 0),
+(25, 76854, 'hdc@sdsd.ccd', 'ldfjvoijq', '$2y$10$3rA.M.YXUfd/KPc1JivCrenMLZt9ejKZmxtxYw6eq7W0ywGYCfLbO', 'qwe', 'jhb', 'khjb', '1.png', 0, '2019-03-17', 1, '', 1, 0),
+(26, 38503, 'Daniel@Daniel.Daniel', 'Daniel', '$2y$10$cClBmtVwt57.fiHrglwLxuex/nc2TEs3SQIbAOl3efZUkTwYG5fx6', 'Daniel', 'Daniels', 'Danielsen', '1.png', 0, '2019-03-26', 1, 'bc49e6eef94b163fa9b24f163780fd24', 1, 0),
+(27, 43737, 'sadad@asda.aa', 'WilliWonkanom', '$2y$10$ZJkHttv9Mpyx3Yoh9A9gXOVKGkkQBnFLDLm7Q2XpDTPErmIN7d1Ee', '', '', '', '1.png', 0, '2019-04-08', 0, '1c8818bcb422b45bfe95713ea768b4e9', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -287,7 +304,24 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (64, 'create', 1, 35, 'ratings', '2019-04-09 17:11:08'),
 (65, 'delete', 1, 35, 'ratings', '2019-04-09 17:11:08'),
 (66, 'create', 1, 36, 'ratings', '2019-04-09 17:11:09'),
-(67, 'create', 1, 0, 'gained_achievements', '2019-04-09 17:14:59');
+(67, 'create', 1, 0, 'gained_achievements', '2019-04-09 17:14:59'),
+(68, 'create', 1, 37, 'ratings', '2019-04-09 18:26:14'),
+(69, 'create', 1, 38, 'ratings', '2019-04-09 18:26:17'),
+(70, 'delete', 1, 37, 'ratings', '2019-04-09 18:26:19'),
+(71, 'create', 1, 0, 'gained_achievements', '2019-04-09 19:04:31'),
+(72, 'create', 1, 0, 'gained_achievements', '2019-04-09 21:31:08'),
+(73, 'create', 1, 0, 'gained_achievements', '2019-04-09 21:34:36'),
+(74, 'delete', 1, 38, 'ratings', '2019-04-09 23:00:29'),
+(75, 'create', 1, 39, 'ratings', '2019-04-09 23:00:31'),
+(76, 'delete', 1, 39, 'ratings', '2019-04-09 23:00:36'),
+(77, 'delete', 1, 36, 'ratings', '2019-04-10 09:45:58'),
+(78, 'create', 1, 40, 'ratings', '2019-04-10 09:45:59'),
+(79, 'create', 1, 41, 'ratings', '2019-04-10 09:46:02'),
+(80, 'delete', 1, 40, 'ratings', '2019-04-10 09:46:06'),
+(81, 'create', 1, 42, 'ratings', '2019-04-10 10:34:11'),
+(82, 'create', 1, 43, 'ratings', '2019-04-10 10:34:30'),
+(83, 'delete', 1, 41, 'ratings', '2019-04-10 10:34:35'),
+(84, 'delete', 1, 43, 'ratings', '2019-04-10 10:34:52');
 
 -- --------------------------------------------------------
 
@@ -495,6 +529,12 @@ ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `level`
+--
+ALTER TABLE `level`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ratings`
 --
 ALTER TABLE `ratings`
@@ -552,10 +592,16 @@ ALTER TABLE `genres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `level`
+--
+ALTER TABLE `level`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -567,7 +613,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
