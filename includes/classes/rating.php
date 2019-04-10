@@ -42,12 +42,19 @@ class Rating extends Db_object {
 
 		$the_result_array = self::find_by_query($sql);
 
+		$game = new Game();
+		$game = Game::find_by_id($game_id);
+
 		if (!empty($the_result_array)) {
 			$rating->id = $the_result_array[0]->id;
 			$rating->delete();
+			$game->rating -= 1;
 		} else {
 			$rating->create();
+			$game->rating += 1;
 		}
+		
+		$game->update();
 
 	}
 

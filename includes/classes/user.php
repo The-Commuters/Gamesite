@@ -11,7 +11,7 @@ class User extends Db_object{
 	protected static $db_table = "users";
 
 	protected static $db_table_fields = array('unique_id', 'username', 'email', 'password', 'first_name', 
-		'middle_name', 'last_name', 'user_image', 'joined', 'verify_code', 'status', 'signed_in' );
+		'middle_name', 'last_name', 'user_image', 'experience_points', 'joined', 'verify_code', 'status', 'signed_in' );
 
 	public $id;
 	public $username;
@@ -21,6 +21,7 @@ class User extends Db_object{
 	public $middle_name;
 	public $last_name;
 	public $user_image;
+	public $experience_points;
 	public $joined;
 	public $verify_code;
 	public $unique_id;
@@ -370,20 +371,6 @@ class User extends Db_object{
 		}
 		return $number;
 	}
-
-	/**
-	 * Collects all the scores from the achievements that the user have 
-	 * earned and calculates the user-level based on it.
-	 *
-	 * @return the level of the user.
-	 */ 
-	public static function find_user_level() {
-
-	}
-
-
-
-
 
 
 

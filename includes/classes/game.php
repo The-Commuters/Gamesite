@@ -11,7 +11,7 @@ class Game extends Db_object {
 
 	protected static $db_table = "games"; 
 
-	protected static $db_table_fields = array('id', 'title', 'description', 'foldername', 'filename', 'genre', 'creator', 'size');
+	protected static $db_table_fields = array('id', 'title', 'description', 'foldername', 'filename', 'genre', 'creator', 'size', 'rating');
 	public $id; 
 	public $title;
 	public $description;
@@ -20,6 +20,7 @@ class Game extends Db_object {
 	public $size;
 	public $genre;
 	public $creator;
+	public $rating;
 
 	public $tmp_path; 
 	public $upload_directory = "games";

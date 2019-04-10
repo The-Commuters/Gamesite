@@ -8,16 +8,13 @@
  * the game.
  */
 
-class Achievement extends Db_object{
+class Level extends Db_object{
 
-	protected static $db_table = "achievements"; 
+	protected static $db_table = "level"; 
 
-	protected static $db_table_fields = array('id', 'title', 'text', 'game_id', 'experience_points');
+	protected static $db_table_fields = array('needed_xp');
 	public $id;
-	public $title;
-	public $text;
-	public $game_id;
-	public $experience_points;
+	public $needed_xi;
 
 }
 
