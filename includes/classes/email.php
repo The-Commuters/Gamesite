@@ -127,7 +127,7 @@ class Email extends User{
 
 		
 		// retunerer det database objektet som blir funnet 
-		return !empty($the_result_array) ? array_shift($the_result_array) :  array_push($error_array, "This reset could not be found or this password reset is inactive");
+		return !empty($the_result_array) ? array_shift($the_result_array) :  false;
 	}
 
 
