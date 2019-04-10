@@ -10,6 +10,8 @@ if (isset($_POST['submit'])) {
 
 	// Fjerner eventuelle tagger og stringer som kan skade databasen
 
+
+	// Skjuler passord setting når den andre er i bruk 
 	echo "<script>
 	hide('passord_setting');
 	</script>";
@@ -79,6 +81,10 @@ if (isset($_POST['submit'])) {
 </div>
 
 
+<!-- Password reset form 
+Here the user will put in their new password twice and submit it for checks agianst our database 
+-->
+
 <?php 
 
 if (isset($_POST['submit_password'])) {
@@ -87,8 +93,8 @@ if (isset($_POST['submit_password'])) {
 	$password = trim($_POST['password']);
 	$password_check = trim($_POST['password_check']);
 
+	// I am unsure where i want to place this, because i need to get the id or the user object to this method 
 	User::verify_password_update('27',$password, $password_check );
-
 
 	if (empty($error_array)) {
 
@@ -135,7 +141,6 @@ if (isset($_POST['submit_password'])) {
 	</form>
 
 </div>
-
 
 
 <?php 
