@@ -20,10 +20,12 @@ class Database {
 	}
 
 
-	//Funksjonen som brukes for å koble til databasen.
+	/**
+	 * The connection to the database, is called
+	 * on in the construct and happens on every load
+	 * in.
+	 */
 	public function open_db_connection() {
-
-		//$this->connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 		$this->connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -34,8 +36,11 @@ class Database {
 
 	}
 
-	/* Metoden query henter inn sql, sender den inn til databasen, og sender 
-	det tilbake som $result, denne skal alltid brukes til å kontakte databasen med queries. */
+	/** 
+	 * The method that sends a query trough the connection
+	 * to the database and gets it back as $result, all
+	 * contact with the database go trough here.
+	 */
 	public function query($sql) {
 
 		$result = $this->connection->query($sql);
@@ -45,7 +50,11 @@ class Database {
 		return $result;
 	}
 
-	//Sjekker om $result er gyldig
+	
+	/**
+	 * Checks if the result of the query is something
+	 * and not nothing, kills the process if its not.
+	 */
 	private function confirm_query($result) {
 
 		if(!$result) {
@@ -56,7 +65,10 @@ class Database {
 
 	}
 
-    //rydder opp dataene som blir sent til databasen, legger / foran potensiel farlige kode.
+   	/**
+	 * Cleans up all that is sent to the database with real_escape_string(),
+	 * Makes the SQL in the text not dangerous to the database.
+	 */
 	public function escape_string($string) {
 
 		$escaped_string = $this->connection->real_escape_string($string);
@@ -65,7 +77,9 @@ class Database {
 
 	}
 
-
+	/**
+	 *
+	 */
 	public function the_insert_id() {
 
 		return mysqli_insert_id($this->connection);
@@ -74,6 +88,11 @@ class Database {
 
 } //End of the Database-class
 
+/** 
+ * A database-object is created here, which means that it is done 
+ * every time this page is included. And it is included in the init
+ * at the top of each page.
+ */
 $database = new Database();
 
 

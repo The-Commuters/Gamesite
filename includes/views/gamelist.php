@@ -37,16 +37,15 @@ if (isset($_GET['s'])) {
               <div class="title"><?php echo $game->title; ?></div>
               <div class="author"><?php echo $game->creator; ?></div>
             </div>
-            <div class="rating"><i class="fas fa-fw fa-heart"></i><span class="rating-placement">#1</span></div>
+            <div class="rating"><i class="fas fa-fw fa-heart"></i><span class="rating-placement"><?php echo $game->rating; ?></span></div>
           </div>
         </div>
 
         <div class="card-body">
-          <section class="scroller">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat accusantium voluptate in impedit ab? Dolores 
-          ratione ducimus veritatis aliquam libero vel! Quas sint quam placeat nesciunt sit suscipit, non ipsam!</section>
+          <section class="scroller"><?php echo $game->description; ?></section>
 
           <footer>
-            <div class="chip -red">Action</div>
+            <div class="chip -red"><?php echo $game->genre; ?></div>
             <div class="chip -teal">Adventure</div>
           </footer>
         </div>

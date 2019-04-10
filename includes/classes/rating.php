@@ -30,8 +30,8 @@ class Rating extends Db_object {
 		$game_id = $database->escape_string($this->game_id);
 		$user_id = $session->user_id;
 
+		// Creates a new rating object and places the game_id and user_id into it.
 		$rating  = new Rating();
-
 		$rating->game_id = $game_id;
 		$rating->user_id = $user_id;
 	
@@ -42,6 +42,7 @@ class Rating extends Db_object {
 
 		$the_result_array = self::find_by_query($sql);
 
+		// Collect's the game object, so that the rating can be changed.
 		$game = new Game();
 		$game = Game::find_by_id($game_id);
 
@@ -49,11 +50,13 @@ class Rating extends Db_object {
 			$rating->id = $the_result_array[0]->id;
 			$rating->delete();
 			$game->rating -= 1;
+
 		} else {
 			$rating->create();
 			$game->rating += 1;
+			
 		}
-		
+
 		$game->update();
 
 	}

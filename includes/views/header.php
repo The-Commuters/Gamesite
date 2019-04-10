@@ -31,8 +31,8 @@ if ($session->is_signed_in()) {
 			<div class="xp-bar" Style="width: 70%"></div>
 		</div>
 
-		<!-- Header content-->
-		<div class="header -big">
+		<!-- Header content, -big in class if on the index -->
+		<div class="header <?php if($page == "index"){echo "-big";} ?>">
 
 			<!-- Navigation -->
 			<nav>
