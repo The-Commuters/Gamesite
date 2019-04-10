@@ -131,8 +131,9 @@ function start_chat(user_1, user_2) {
     }; 
     xmlhttp.open("GET","includes/process/start_chatroom.php?u1="+user_1+"&u2="+user_2,true); 
     xmlhttp.send(); 
- 
-    window.location.href = 'chat.php'; 
+    setTimeout(function(){ 
+        window.location.href = 'chat.php'; 
+    }, 1000);
 } 
 
 // Updates the settings of a user
