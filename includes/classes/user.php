@@ -351,6 +351,33 @@ class User extends Db_object{
 
 	}
 
+	public function verify_password_update($id, $password, $password_check)
+	{
+		global $database;
+		$error_array       = array();
+		$password          = $database->escape_string($password);
+		$password_check    = $database->escape_string($password_check);
+
+
+
+		$password          = strip_tags($password);
+		$password_check    = strip_tags($password_check);
+
+
+
+		$user = self::find_by_id($id);
+
+
+		$user->password = $password;
+
+		$user->update();
+
+
+
+
+
+	}
+
 	/**
 	 * Function that creates the number that has to be added behind the username.
 	 * The number will be made up by five characters and is stored into the

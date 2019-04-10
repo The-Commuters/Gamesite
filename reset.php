@@ -87,6 +87,8 @@ if (isset($_POST['submit_password'])) {
 	$password = trim($_POST['password']);
 	$password_check = trim($_POST['password_check']);
 
+	User::verify_password_update('27',$password, $password_check );
+
 
 	if (empty($error_array)) {
 
