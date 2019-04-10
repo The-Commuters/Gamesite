@@ -355,27 +355,35 @@ class User extends Db_object{
 	{
 		global $database;
 		$error_array       = array();
-		$password          = $database->escape_string($password);
+		$password          = $database->escape_string($password); 
 		$password_check    = $database->escape_string($password_check);
 
+		$password          = strip_tags($password); 
+		$password_check    = strip_tags($password_check); 
+
+		if($password != $password_check) { 
+			array_push($error_array, "Your passwords do not match");
+				//var_dump($error_array);
+		}
 
 
-		$password          = strip_tags($password);
-		$password_check    = strip_tags($password_check);
+
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 
+		if(empty($error_array)){
 
+
+		
 		$user = self::find_by_id($id);
 
-
-		$user->password = $password;
+		$user->password = $hashed_password;
 
 		$user->update();
+		
+		}
 
-
-
-
-
+		return $error_array;
 	}
 
 	/**
