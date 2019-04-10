@@ -342,7 +342,8 @@ class User extends Db_object{
 			$user->joined      = date("Y-m-d");
 			$user->verify_code = md5($username . microtime());
 
-			Email::send_ActivationMail($email, $username, $user->verify_code);
+			// Closing this out for now as it brings a error without the setup.
+			// Email::send_ActivationMail($email, $username, $user->verify_code);
 
 			$user->create();
 
@@ -364,7 +365,7 @@ class User extends Db_object{
 		
 		$characters = array_merge(range('0','9'));
 		$max = count($characters) - 1;
-
+		$number = 0;
 		for ($i = 0; $i < $length; $i++) {
 			$random = mt_rand(0, $max);
 			$number .= $characters[$random];
