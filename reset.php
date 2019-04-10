@@ -87,6 +87,35 @@ Here the user will put in their new password twice and submit it for checks agia
 
 <?php 
 
+if (isset($_GET["reset_code"])) {
+
+	// Gjør at div taggen inni ikke vises til brukeren
+	echo "<script>
+	hide('email_reset');
+	</script>";
+
+	$reset_code = ($_GET["reset_code"]);
+
+	// henter inn koden og gir den vidre til aktiverings metoden 
+	$code = Email::find_user_by_reset_code($reset_code);
+	
+	$shifted_code = array_shift($code);
+	$user_id = $shifted_code->id;
+
+	$user = User::find_by_id($user_id);
+	
+	//var_dump($user);
+
+}
+else{
+
+}
+
+	//Email::create_reset_code("newuser@localhost.com");
+
+	//Email::send_Password_resetMail("newuser@localhost", "Mark", "testcode");
+
+
 if (isset($_POST['submit_password'])) {
 
 
@@ -94,7 +123,7 @@ if (isset($_POST['submit_password'])) {
 	$password_check = trim($_POST['password_check']);
 
 	// I am unsure where i want to place this, because i need to get the id or the user object to this method 
-	User::verify_password_update('27',$password, $password_check );
+	User::verify_password_update($user->id,$password, $password_check );
 
 	if (empty($error_array)) {
 
@@ -147,33 +176,7 @@ if (isset($_POST['submit_password'])) {
 
 
 
-if (isset($_GET["reset_code"])) {
 
-	// Gjør at div taggen inni ikke vises til brukeren
-	echo "<script>
-	hide('email_reset');
-	</script>";
-
-	$reset_code = ($_GET["reset_code"]);
-
-	// henter inn koden og gir den vidre til aktiverings metoden 
-	$code = Email::find_user_by_reset_code($reset_code);
-	
-	$shifted_code = array_shift($code);
-	$user_id = $shifted_code->id;
-
-	$user = User::find_by_id($user_id);
-	
-	//var_dump($user);
-
-}
-else{
-
-}
-
-	//Email::create_reset_code("newuser@localhost.com");
-
-	//Email::send_Password_resetMail("newuser@localhost", "Mark", "testcode");
 
 ?>
 
