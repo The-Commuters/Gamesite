@@ -113,14 +113,21 @@ class Email extends User{
 	public static function find_user_by_reset_code($code){
 
 		global $database;
+
+		$error_array    = array();
+
 		// Tar bort eventuele ting som ikke skal være med i stringen
 		$code = $database->escape_string($code);
 		
 		// Finner ut om reset_code også ligger i databasen
 		$sql = "SELECT * FROM ". self::$db_table ." WHERE reset_code = '{$code}' Limit 1 ";
+
+		// Prøver på noe som daniel har brukt, Ternary 
+		$the_result_array = static::find_by_query($sql);
+
 		
 		// retunerer det database objektet som blir funnet 
-		return static ::find_by_query($sql); 
+		return !empty($the_result_array) ? array_shift($the_result_array) :  array_push($error_array, "This reset could not be found or this password reset is inactive");
 	}
 
 
