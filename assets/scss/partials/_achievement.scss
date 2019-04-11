@@ -1,0 +1,41 @@
+.achievement {
+    grid-template-columns: 7.5rem 1fr;
+    grid-gap: 1rem;
+
+    display: grid;
+
+    overflow: hidden;
+
+    border-radius: 0.5rem;
+    padding: 1rem;
+
+    background-color: $color-dark;
+}
+
+.achievement-image {
+    border-radius: 0.5rem;
+
+    background-image: url(/img/backup.png); // Backup default
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: $color-light;
+}
+
+.achievement-content {
+
+    > .title {
+
+        font-size: 1.8rem;
+        font-weight: 400;
+        color: $color-primary-500;
+    }
+
+    > .description {
+        overflow: auto;
+
+        height: 5rem;
+
+        color: $color-light;
+    }
+}
