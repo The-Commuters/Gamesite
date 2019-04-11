@@ -2622,6 +2622,7 @@ template {
   display: grid;
   overflow: hidden;
   border-radius: 0.5rem;
+  margin-bottom: 1rem;
   padding: 1rem;
   background-color: #1f1f1f; }
 

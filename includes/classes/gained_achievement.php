@@ -9,7 +9,7 @@ class Gained_Achievement extends Db_object{
 	protected static $db_table = "gained_achievements"; 
 
 	protected static $db_table_fields = array('achievement_id', 'user_id', 'gained');
-	public $achievements_id;
+	public $achievement_id;
 	public $user_id;
 	public $gained;
 
@@ -58,6 +58,17 @@ class Gained_Achievement extends Db_object{
 			return false;
 		}
 		return true;
+
+	}
+
+	public function get_gained_achievements($user_id) {
+
+		global $database;
+
+		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
+		$sql .= "user_id = '{$user_id}' ";
+
+		return static::find_by_query($sql);
 
 	}
 
