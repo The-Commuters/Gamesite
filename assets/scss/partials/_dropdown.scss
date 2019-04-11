@@ -91,12 +91,12 @@ $list-space:        100%; // The space between list and the activator
 
 .list > * {
     display: block;
-
-    cursor: pointer;
 }
 
-.list > * {
+.list > a, .list > div {
     padding: 0.5rem 2rem 0.75rem;
+
+    cursor: pointer;
 
     text-decoration-line: none;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -104,7 +104,7 @@ $list-space:        100%; // The space between list and the activator
     color: $color-gray-800;
 }
 
-.list > *:hover {
+.list > a:hover, .list > div:hover {
     background-color: $color-primary;
 
     color: $color-gray-100;
@@ -131,6 +131,7 @@ $list-space:        100%; // The space between list and the activator
 .list .divider {
     opacity: 0.5;
 
+    margin: 0;
     border-color: $color-gray-100;
     width: 100%;
 }
@@ -140,11 +141,11 @@ $list-space:        100%; // The space between list and the activator
 }
 
 // Experiment
-.list > *:hover > .fa-heart {
+.list > a:hover > .fa-heart, .list > div:hover > .fa-heart {
     color: $color-red;
 }
 
-.list > *.active {
+.list > a.active, .list > div.active {
     background-color: $color-primary;
 
     color: $color-gray-100;
