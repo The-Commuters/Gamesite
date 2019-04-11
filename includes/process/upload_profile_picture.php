@@ -28,7 +28,7 @@ if (in_array($_FILES['file']['type'], $file_types)) {
 	$user = User::find_by_id($session->user_id);
 
 	// Deletes the old profile image here.
-	unlink($image_storage . DS . $user->user_image);
+	try {unlink($image_storage . DS . $user->user_image);} catch (exception $e) {}
 
 	// Places the new image name in the image folder.
 	$user->user_image = $image_name;
@@ -39,13 +39,13 @@ if (in_array($_FILES['file']['type'], $file_types)) {
 
 ?>
 <!-- The profile picture have been sucessfully updated. -->
-<div id="alert" class="alert -warning -active">
+<div id="alert" class="alert -success -active">
 	<div>Your profile picture have been updated!</div>
 </div>
 
 <?php } else { ?>
 <!-- The picture upload have been rejected because of unsupported filetype. -->
-<div id="alert" class="alert -warning -active">
+<div id="alert" class="alert -danger -active">
 	<div>The filetype of the image is not accepted!</div>
 </div>
 

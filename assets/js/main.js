@@ -215,7 +215,6 @@ function register_user() {
 }
 
 
-
 //-------------------------- Upload profile image -----------------------------
 
 /**
