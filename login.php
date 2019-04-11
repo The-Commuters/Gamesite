@@ -83,6 +83,9 @@ if (isset($_POST['submit'])) {
 				<!-- Sign up -->
 				<a href="register.php#username" class="button-text">Sign up</a>
 
+				<!-- password reset -->
+				<a href="reset.php" class="button-text">Lost Password?</a>
+
 				<!-- log in -->
 				<input type="submit" name="submit" id="submit" class="button-contained" value="submit">
 			</div>

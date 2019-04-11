@@ -279,3 +279,8 @@ function hide_alert() {
 
 
 }
+
+function hide(div){
+    document.getElementById(div).style.display="none";
+    //console.log("ho");
+}

@@ -353,6 +353,41 @@ class User extends Db_object{
 
 	}
 
+	public function verify_password_update($id, $password, $password_check)
+	{
+		global $database;
+		$error_array       = array();
+		$password          = $database->escape_string($password); 
+		$password_check    = $database->escape_string($password_check);
+
+		$password          = strip_tags($password); 
+		$password_check    = strip_tags($password_check); 
+
+		if($password != $password_check) { 
+			array_push($error_array, "Your passwords do not match");
+				//var_dump($error_array);
+		}
+
+
+
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+
+		if(empty($error_array)){
+
+
+		
+		$user = self::find_by_id($id);
+
+		$user->password = $hashed_password;
+
+		$user->update();
+		
+		}
+
+		return $error_array;
+	}
+
 	/**
 	 * Function that creates the number that has to be added behind the username.
 	 * The number will be made up by five characters and is stored into the
@@ -387,6 +422,21 @@ class User extends Db_object{
 
 	}
 	//--------------------------------------------------------------------
+
+	public static function find_user_by_email($email){
+
+		global $database;
+		// Tar bort eventuele ting som ikke skal være med i stringen
+		$email = $database->escape_string($email);
+		
+		// Finner ut om verify_code også ligger i databasen
+		$sql = "SELECT * FROM ". self::$db_table ." WHERE email = '{$email}' AND status = 1 Limit 1 ";
+		
+		// retunerer det database objektet som blir funnet 
+		return static ::find_by_query($sql); 
+	}
+
+
 
 	public static function find_user_by_code($code){
 
