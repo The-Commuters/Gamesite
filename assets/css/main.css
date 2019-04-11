@@ -2616,6 +2616,32 @@ template {
 @media (max-width: 80rem) {
   .about .art {
     display: none; } }
+.achievement {
+  grid-template-columns: 7.5rem 1fr;
+  grid-gap: 1rem;
+  display: grid;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #1f1f1f; }
+
+.achievement-image {
+  border-radius: 0.5rem;
+  background-image: url(/img/backup.png);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #fafafa; }
+
+.achievement-content > .title {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #54D266; }
+.achievement-content > .description {
+  overflow: auto;
+  height: 5rem;
+  color: #fafafa; }
+
 @-webkit-keyframes alert {
   from {
     opacity: 0;
@@ -2625,6 +2651,7 @@ template {
     opacity: 1;
     -webkit-transform: translate(-50%, 0);
             transform: translate(-50%, 0); } }
+
 @keyframes alert {
   from {
     opacity: 0;
@@ -3891,6 +3918,69 @@ hr[data-content] {
     padding-left: 0.5rem;
     background: #eef2f6; }
 
+.profile {
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 120rem; }
+
+.profile-user {
+  grid-template-columns: auto 1fr auto;
+  grid-gap: 1rem;
+  display: grid;
+  padding: 1rem;
+  background-color: #343a40; }
+  .profile-user > .username {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #fafafa; }
+  .profile-user > .action {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 0.5rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    background-color: #212529;
+    cursor: pointer;
+    font-size: 1.4rem;
+    -webkit-text-decoration-line: none;
+            text-decoration-line: none;
+    color: #fafafa; }
+    .profile-user > .action:hover {
+      background-color: #495057; }
+
+.profile-content {
+  background-color: #e9ecef; }
+  .profile-content > .title {
+    display: block;
+    margin: 0;
+    padding: 1rem 2rem;
+    background-color: #54D266;
+    color: #fafafa; }
+  .profile-content > .content {
+    margin-bottom: 1rem;
+    padding: 1rem 2rem; }
+
+.profile-info {
+  margin-bottom: 1rem; }
+  .profile-info .tag {
+    font-size: 1.2rem;
+    color: #343a40; }
+  .profile-info .info {
+    font-weight: 400; }
+
 .rating {
   -webkit-box-align: start;
       -ms-flex-align: start;
@@ -3975,5 +4065,4 @@ hr[data-content] {
   margin: 0 auto;
   padding: 2rem;
   max-width: 70rem; }
-
 /*# sourceMappingURL=main.css.map */

@@ -30,6 +30,10 @@
             </div>
 
             <div class="friend-actions">
+                <a href="profile.php?id=<?php echo $user->id; ?>" class="action">
+                    <i class="fas fa-user"></i>
+                </a>
+                
                 <a class="action" onclick="start_chat(<?php echo $session->user_id . ", " . $user->id ?>)">
                     <i class="fas fa-fw fa-comment-alt"></i>
                 </a>
