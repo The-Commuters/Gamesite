@@ -72,7 +72,6 @@ if ($session->is_signed_in()) {
 					<!-- The list that becomes visible when a signed in user hovers over the profile picture. -->
 					<div class="list">
                         <a href="profile.php?id=<?php echo $user->id;?>"><i class="fas fa-fw fa-user"></i>Profile</a>
-						<a href="settings.php"><i class="fas fa-fw fa-cog"></i>Settings</a>
 						<a href="friends.php"><i class="fas fa-fw fa-user-friends"></i>Friendlist</a>
 						<a href="chat.php"><i class="fas fa-fw fa-envelope"></i>Messages</a>
 
