@@ -28,7 +28,7 @@ header .header {
     display: flex;
 
     margin: 0 auto;
-    padding: 0.6rem 7.4rem 0.6rem 4rem;
+    padding: 0.6rem 7.4rem;
     max-width: 120rem;
     min-height: 7rem;
 }
@@ -79,15 +79,32 @@ header .header .profile {
     color: $color-primary;
 }
 
+// Navigation for Mobile
+nav.mobile {
 
-// Navigation
-nav {
+}
+
+nav .hamburger {
+    justify-content: center;
     align-items: center;
 
     display: flex;
+
+    width: 6.2rem;
+    height: 6.2rem;
+
+    font-size: 2rem;
+    color: $color-light;
 }
 
-nav .item {
+// Navigation for PC
+nav.pc {
+    align-items: center;
+
+    display: none;
+}
+
+nav.pc > .item {
     transition: 0.3s color;
 
     text-decoration-line: none;
@@ -97,11 +114,11 @@ nav .item {
     color: $color-gray-500;
 }
 
-nav .item:hover {
+nav.pc > .item:hover {
     color: $color-gray-300;
 }
 
-nav .item.-active {
+nav.pc > .item.-active {
     color: $color-gray-100;
 }
 
@@ -123,4 +140,14 @@ nav > * + * {
 
 .header .brand img {
     width: 100%;
+}
+
+@media (min-width: $breakpoint-laptop) {
+    nav.mobile {
+        display: none;
+    }
+
+    nav.pc {
+        display: flex;
+    }
 }
