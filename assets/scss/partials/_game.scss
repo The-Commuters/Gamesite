@@ -2,6 +2,80 @@
     margin-top: -14rem;
 }
 
+.game-search {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+
+    display: flex;
+
+    overflow: hidden;
+
+    box-shadow: 0 6px 8px 0 hsla(0, 0%, 0%, 0.2);
+    border-radius: 1rem;
+
+    &:hover > .search-input {
+        padding: 1.6rem;
+        width: calc(100vw - 9rem);
+    }
+
+    .search-button {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+
+        width: 5rem;
+        height: 5rem;
+
+        background-color: $color-primary-500;
+
+        color: $color-light;
+    }
+
+    .search-input {
+        transition: 0.1s linear width, 0.1s linear padding;
+
+        border: none;
+        padding: 0;
+        width: 0;
+
+        color: $color-dark;
+
+        &:focus {
+            outline: none;
+            padding: 1.6rem;
+            width: calc(100vw - 9rem);
+        }
+    }
+}
+
+.game-options {
+
+    display: flex;
+
+    .option {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+
+        width: 5rem;
+        height: 5rem;
+
+        cursor: pointer;
+
+        & + .list {
+            font-size: 1.6rem;
+        }
+
+        & + .list::after {
+            right: 1.25rem;
+            left: auto;
+        }
+    }
+}
+
 .category {
     grid-template-rows: auto 1fr;
     grid-gap: 1rem;
@@ -12,7 +86,7 @@
 }
 
 .category > header {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr;
     grid-gap: 1rem;
 
     display: grid;
@@ -21,48 +95,7 @@
     font-weight: 500;
     color: $color-light;
 
-    .search,
-    .sort {
-        justify-content: center;
-        align-items: center;
-
-        display: flex;
-
-        width: 3.5rem;
-        height: 3.5rem;
-
-        cursor: pointer;
-    }
-}
-
-.category-searchbar {
-    grid-template-columns: 1fr auto;
-
-    overflow: hidden;
-
-    display: grid;
-
-    box-shadow: inset 0.1rem 0.1rem hsla(0, 0%, 0%, 0.10), 0 -0.1rem 0 hsla(0, 0%, 100%, 0.15);
-    border-radius: 0.5rem;
-
-    background-color: $color-light;
-
-    .bar {
-        border: none;
-        padding: 0 1rem;
-        min-width: 10rem;
-
-        background-color: transparent;
-
-        font-size: 1.6rem;
-        color: $color-dark;
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-    .search {
-        color: $color-dark;
+    &:first-child {
+        grid-template-columns: 1fr auto;
     }
 }

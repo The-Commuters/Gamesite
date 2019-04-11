@@ -6,7 +6,7 @@
  * properties, and then redirects the user to login.php.
  */
 
-require_once("includes/views/header.php");
+require_once("includes/init.php");
 
 $session->logout();
 
