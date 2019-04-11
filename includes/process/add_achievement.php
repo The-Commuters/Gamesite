@@ -30,8 +30,8 @@
 
 			// Posts the alert for the earned achievement on the screen
 			?>
-			<div id="alert" class="alert -warning -active">
-				<img style="width: 100px; height: 100px;">
+			<div id="alert" class="alert -success -active">
+				<img style="width: 100px; height: 100px;" src="<?php echo $achievement->get_achievement_image(); ?>">
 				<div><?php echo $achievement->title ?></div>
 				<div><?php echo $achievement->text ?></div>
 				<div></div>

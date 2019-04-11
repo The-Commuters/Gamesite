@@ -345,6 +345,10 @@ function player() {
       case SHOVEL:                           // If the player walks on the square with a shovel.
         this.shovels++;                      // gain one more shovel.
         map[spriteOnNewPos] = FLOOR;         // Then remove the shovel from the canvas.
+        if (this.shovels == 1) {earn_achievement(achievement_id_2);break;}
+        if (this.shovels == 2) {earn_achievement(achievement_id_3);break;}
+        if (this.shovels == 3) {earn_achievement(achievement_id_4);break;}
+        if (this.shovels == 4) {earn_achievement(achievement_id_5);break;}
         break;
       default:
         break;
@@ -376,6 +380,10 @@ var canvas, context;            // Var for the canvas and the 2d context of it.
 var p1 = new player();          // Creates here the new player-character.
 var score = 0;                  // Score that is used in the game.
 var achievement_id_1 = 1;         // The id of the achievement for reaching the end of the first level.
+var achievement_id_2 = 2; 
+var achievement_id_3 = 3; 
+var achievement_id_4 = 4; 
+var achievement_id_5 = 5; 
 
 /**
  * This happens whenever the game is loaded onto the page.

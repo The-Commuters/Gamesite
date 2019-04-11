@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10. Apr, 2019 12:36 PM
+-- Generation Time: 11. Apr, 2019 22:16 PM
 -- Server-versjon: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -42,7 +42,11 @@ CREATE TABLE `achievements` (
 --
 
 INSERT INTO `achievements` (`id`, `game_id`, `title`, `image`, `text`, `experience_points`) VALUES
-(1, 5, 'Passed the first level!', '', 'You passed the first level of the shovel-game!', 50);
+(1, 3, 'Passed the first level!', '7.png', 'You won the shovel game!', 50),
+(2, 3, 'Baby\'s first shovel!', '1.png', 'Congratulations on finding your first shovel, I remember finding my own, when I was five years younger than you...', 50),
+(3, 3, 'Baby\'s second shovel!', '2.png', 'Finding two shovels is pretty good... For a child with no legs and brain damage!', 50),
+(4, 3, 'They grow up so fast ;(', '3.png', 'Incredible, three shovels? It feels like it was only 1.44 second since you got your first.', 50),
+(5, 3, 'I have no idea what to write here.', '4.png', 'Nicely done, I guess?', 50);
 
 -- --------------------------------------------------------
 
@@ -66,7 +70,7 @@ CREATE TABLE `friend_list` (
 INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `chat_id`, `friendship_status`, `chatroom_status`) VALUES
 (108, 1, 2, '1X2', 1, 1),
 (109, 1, 19, '1X19', 1, 1),
-(110, 1, 3, '1X3', 1, 0),
+(110, 1, 3, '1X3', 1, 1),
 (111, 1, 1, '1X1', 1, 0),
 (112, 1, 22, '1X22', 1, 1),
 (113, 1, 23, '1X23', 1, 1),
@@ -74,7 +78,8 @@ INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `chat_id`, `friendship_stat
 (119, 19, 19, '19X19', 1, 0),
 (120, 19, 22, '19X22', 1, 0),
 (121, 1, 25, '', 0, 0),
-(122, 1, 26, '1X26', 1, 1);
+(122, 1, 26, '1X26', 1, 1),
+(123, 1, 21, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -111,9 +116,17 @@ CREATE TABLE `games` (
 --
 
 INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `foldername`, `filename`, `size`, `rating`) VALUES
-(1, 'The Coin-eating Snake', 'Action', '', 'Mona Clairvoyant', 'snakegame.zip', 'snakegame.php', 1455, 0),
-(2, 'There Can Only Be One', 'Slice Of Life', '', 'Clinter Coyote', 'breakout.zip', 'breakout.php', 1390, 0),
-(5, 'Shovel Game', 'Slice of life', 'You have to get away from the dungeon that you are stuck in, but your shovels are made of soap, get out of there as fast as possible.', 'Daniel Larssen', 'adventureGame', 'shovelGame.php', 110222, 1);
+(1, 'The Coin-eating Snake', 'Action', 'The SELECT TOP clause is useful on large tables with thousands of records. Returning a large number of records can impact on performance.', 'Mona Clairvoyant', 'snakegame.zip', 'snakegame.php', 1455, 345),
+(2, 'There Can Only Be One', 'Slice Of Life', 'Text message, a short electronic message designed for communication between mobile phone users. Nowadays, text messages can include media (such as photos, music and videos) and are also called media messages.', 'Clinter Coyote', 'breakout.zip', 'breakout.php', 1390, 4),
+(3, 'Shovel Game', 'Slice Of Life', 'You have to get away from the dungeon that you are stuck in, but your shovels are made of soap, get out of there as fast as possible.', 'Daniel Larssen', 'adventureGame', 'shovelGame.php', 110222, 6545),
+(15, 'Stormlords', 'Adventure', 'An exiting plantformer veare you eat all those other munchers. Go get em!', 'Unilax', '8BitMonster.zip', '8BitMonster.php', 0, 23),
+(16, 'Cookie Champion 4', 'Idle', 'Need lots of cookie to munch on. So get baking!', 'cookie monster', 'CookieChampion4.zip', 'CookieChampion4.php', 0, 982),
+(17, 'CYBERCRACKER XXIV', 'Adventure', 'A wonderful joint into the world of an AI trying to break out of its digital prison.\r\n', 'Zep Smith', 'CYBERCRACKERXXIV.zip', 'CYBERCRACKERXXIV.php', 0, 372),
+(18, 'Stormlords', 'Adventure', 'Partake in the legend of the stormlord Azrael as he attempts to join his peers in legend.', 'Jane Andre', 'Stormlords.zip', 'Stormlords.php', 0, 122),
+(19, 'Triviamaster', 'Strategy', 'Think you know a lot? Then test yourself with Triviamaster and answer the most obscure questions ever.', 'Anonymous', 'Triviamaster.zip', 'Triviamaster.php', 0, 108),
+(20, 'Round runner', 'Sport', 'First to the end, who is the fastest?', 'Frank Russel', 'RoundRunner.zip', 'RoundRunner.php', 0, 1223),
+(21, 'Ngurrulbs grand pool', 'Romance', 'Lovecraftian dating sim with great character customization', 'Superman22', 'NgurrulbsGrandPool.zip', 'NgurrulbsGrandPool.php', 0, 12),
+(22, 'Spook troop', 'Rouglike', 'Spook troop is a single-player role-playing exploring game using Roguelike mechanics', 'N1tr0', 'SpookTroop.zip', 'SpookTroop.php', 0, 234);
 
 -- --------------------------------------------------------
 
@@ -176,7 +189,8 @@ CREATE TABLE `ratings` (
 --
 
 INSERT INTO `ratings` (`id`, `game_id`, `user_id`) VALUES
-(42, 5, 1);
+(46, 2, 1),
+(49, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -207,7 +221,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `experience_points`, `joined`, `privilege_level`, `verify_code`, `status`, `signed_in`) VALUES
-(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '1554821045_BGEnding.png', 50, '2019-01-23', 1, '', 1, 1),
+(1, 0, 'hehe@willi.no', 'WilliWonka', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Willy', 'Wonka', 'Wonksense', '3.png', 1450, '2019-01-23', 1, '', 1, 1),
 (2, 0, 'Derp@Derpesen.no', 'Derperud', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Dermont', 'Derp', 'Derperu', '3.png', 0, '2019-01-23', 1, '', 1, 0),
 (3, 0, 'heman@willi.no', 'heman', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'misterio', 'universio', 'Wonkondo', '2.png', 0, '2019-01-23', 1, '', 1, 0),
 (19, 0, 'DoubleD@DD.Dn', 'DonnieDarko#hYZKc', '$2y$10$YerzCgB5wCTW723mUghP3.9xgu3cuKTaiIOLUy4665xtSOgRQiTe2', 'Nini', 'Nono', 'Naanaa', '1.png', 0, '2019-03-15', 1, '', 1, 0),
@@ -216,7 +230,19 @@ INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_
 (23, 23433, 'hehe@willi.nojjj', 'dflÃ¸mj', '$2y$10$2DCi4g7B5CihWZlPbedhpeVvIi3AlPN0NoCZiWVrIrbWduIE1vSxC', 'askld', 'lasjd', 'lijlij', '1.png', 0, '2019-03-17', 1, '', 1, 0),
 (25, 76854, 'hdc@sdsd.ccd', 'ldfjvoijq', '$2y$10$3rA.M.YXUfd/KPc1JivCrenMLZt9ejKZmxtxYw6eq7W0ywGYCfLbO', 'qwe', 'jhb', 'khjb', '1.png', 0, '2019-03-17', 1, '', 1, 0),
 (26, 38503, 'Daniel@Daniel.Daniel', 'Daniel', '$2y$10$cClBmtVwt57.fiHrglwLxuex/nc2TEs3SQIbAOl3efZUkTwYG5fx6', 'Daniel', 'Daniels', 'Danielsen', '1.png', 0, '2019-03-26', 1, 'bc49e6eef94b163fa9b24f163780fd24', 1, 0),
-(27, 43737, 'sadad@asda.aa', 'WilliWonkanom', '$2y$10$ZJkHttv9Mpyx3Yoh9A9gXOVKGkkQBnFLDLm7Q2XpDTPErmIN7d1Ee', '', '', '', '1.png', 0, '2019-04-08', 0, '1c8818bcb422b45bfe95713ea768b4e9', 0, 0);
+(27, 43737, 'sadad@asda.aa', 'WilliWonkanom', '$2y$10$ZJkHttv9Mpyx3Yoh9A9gXOVKGkkQBnFLDLm7Q2XpDTPErmIN7d1Ee', '', '', '', '1.png', 0, '2019-04-08', 0, '1c8818bcb422b45bfe95713ea768b4e9', 1, 0),
+(28, 38596, 'voje@live.nosadss', 'asdsad', '$2y$10$IfIlYqolqpugaDQHRIwaT.hN19vd/11TaaVOj9Jt8HPJ16ke5t2ii', '', '', '', '1.png', 0, '2019-04-10', 0, '6f4ace1e0305d18d9e2a1694ee22ab15', 1, 0),
+(29, 55491, 'voje@live.nosadssa', 'asdsad', '$2y$10$BMz8iSdmRKXNUwg6AQTEs.TPOcn.MXWyJnAILdyRvFM7uGXFve.y6', '', '', '', '1.png', 0, '2019-04-10', 0, 'a99d847337d71a82a185a2f2becc7929', 1, 0),
+(30, 53866, 'hehe@willi.noss', 'sadasdsad', '$2y$10$nlBJcgV1bl2aU4NRGsyctu5TDw3m2G1LohdL..qRu5cStig4nUnEW', '', '', '', '1.png', 0, '2019-04-10', 0, '5f037b0ede7f7e637bdada8ad74b55f3', 1, 0),
+(31, 98126, 'hehe@willi.nosss', 'sadasdsad', '$2y$10$6GW8Zwk2Ir0w7SUKrBTFLe1aOCgTq.togz/k7X7N8cMLWgPdWmpDK', '', '', '', '1.png', 0, '2019-04-10', 0, 'dbc3556232a8068dac9945d5b8ea1385', 1, 0),
+(32, 26604, 'hehe@willi.nossss', 'sadasdsad', '$2y$10$1Op3gC8y1LUAcFD28jAEle/.8D.5qBkvZ23.NBSfRS1UjYad8eeB6', '', '', '', '1.png', 0, '2019-04-10', 0, '7fc06c280f63312384783c9e49213aba', 1, 0),
+(33, 11909, 'hehe@willi.nossssg', 'sadasdsad', '$2y$10$HF7yD7uLPSWRg68UnnKnWek/Amp6KnO/xK64caUlg4cEGbDpvp7Q6', '', '', '', '1.png', 0, '2019-04-10', 0, '2bae974ebb8cd97ee5918ccb3c146a16', 1, 0),
+(34, 40877, 'qwert@lol.monaa', 'sdfsdfgggnbmnmss', '$2y$10$VU8BhliDqPbACskdr6xMhONnbFzR0e8LvRes2StirubGVkeO0Nrp6', '', '', '', '1.png', 0, '2019-04-10', 0, 'f1a1412cf0e5d738b550bfdb335a3e1a', 1, 0),
+(35, 74476, 'qwert@lol.monaas', 'sdfsdfgggnbmnmss', '$2y$10$xJkxzfj5T1WTekuVQol97OHs2oVAN4QYWospxXVvRiE824AchjGv2', '', '', '', '1.png', 0, '2019-04-10', 0, '32dc22a9a29a8145134b624034331a25', 1, 0),
+(36, 43219, 'qwert@lol.monaass', 'sdfsdfgggnbmnmss', '$2y$10$FOUKE6MqqCSuvroO9kqeEevIFFG/SK5g1OdKxjL7id8BEvCEVN94q', '', '', '', '1.png', 0, '2019-04-10', 0, '5dd5a978f838706a19eafd9e45bca7a6', 1, 0),
+(37, 47043, 'qwert@lol.monaasss', 'sdfsdfgggnbmnmss', '$2y$10$6aZLcYh1OsSWT3qg07gtGuw8Ua3/P8dZOxxAkvlRQNrfZjf2giPvC', '', '', '', '1.png', 0, '2019-04-10', 0, 'a7390dc9ce2db29b5fd5930d057088c7', 1, 0),
+(38, 23497, 'voje@live.noss', 'vaskens', '$2y$10$86P.xINWB5W4KArqNc2r7ONfOpJoyYD4V5q7e4xEqmJJsQFIYgX4q', '', '', '', '1.png', 0, '2019-04-10', 0, '46921b7a245db10ade0803d7d36aa0da', 1, 0),
+(39, 67621, 'voje@live.nosss', 'vaskens', '$2y$10$WpDdjJ3ppXwaELU6TNCNrefUWIa3y6NuDwUcMrzNcZDx2lcXqOtbe', '', '', '', '1.png', 0, '2019-04-10', 0, '5face8b7c4affdc20daa31a8a8e30452', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -321,7 +347,59 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 (81, 'create', 1, 42, 'ratings', '2019-04-10 10:34:11'),
 (82, 'create', 1, 43, 'ratings', '2019-04-10 10:34:30'),
 (83, 'delete', 1, 41, 'ratings', '2019-04-10 10:34:35'),
-(84, 'delete', 1, 43, 'ratings', '2019-04-10 10:34:52');
+(84, 'delete', 1, 43, 'ratings', '2019-04-10 10:34:52'),
+(85, 'delete', 1, 42, 'ratings', '2019-04-10 10:45:06'),
+(86, 'create', 1, 44, 'ratings', '2019-04-10 10:56:11'),
+(87, 'create', 1, 45, 'ratings', '2019-04-10 11:20:30'),
+(88, 'create', 1, 46, 'ratings', '2019-04-10 11:20:34'),
+(89, 'delete', 1, 45, 'ratings', '2019-04-10 11:25:14'),
+(90, 'delete', 1, 44, 'ratings', '2019-04-10 14:10:59'),
+(91, 'create', 1, 47, 'ratings', '2019-04-10 14:10:59'),
+(92, 'delete', 1, 47, 'ratings', '2019-04-10 14:11:00'),
+(93, 'create', 1, 48, 'ratings', '2019-04-10 14:12:03'),
+(94, 'delete', 1, 48, 'ratings', '2019-04-10 14:12:04'),
+(95, 'create', 1, 49, 'ratings', '2019-04-10 14:12:06'),
+(96, 'create', 28, 28, 'users', '2019-04-10 16:17:11'),
+(97, 'create', 29, 29, 'users', '2019-04-10 16:18:15'),
+(98, 'create', 30, 30, 'users', '2019-04-10 16:19:11'),
+(99, 'create', 31, 31, 'users', '2019-04-10 16:20:24'),
+(100, 'create', 32, 32, 'users', '2019-04-10 16:20:40'),
+(101, 'create', 33, 33, 'users', '2019-04-10 16:21:30'),
+(102, 'create', 34, 34, 'users', '2019-04-10 16:24:30'),
+(103, 'create', 35, 35, 'users', '2019-04-10 16:24:55'),
+(104, 'create', 36, 36, 'users', '2019-04-10 16:25:38'),
+(105, 'create', 37, 37, 'users', '2019-04-10 16:59:05'),
+(106, 'create', 38, 38, 'users', '2019-04-10 16:59:20'),
+(107, 'create', 39, 39, 'users', '2019-04-10 16:59:40'),
+(108, 'create', 1, 50, 'ratings', '2019-04-11 15:18:56'),
+(109, 'create', 1, 0, 'gained_achievements', '2019-04-11 19:38:24'),
+(110, 'create', 1, 0, 'gained_achievements', '2019-04-11 19:47:53'),
+(111, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:03:49'),
+(112, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:03:49'),
+(113, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:03:49'),
+(114, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:03:49'),
+(115, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:04:54'),
+(116, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:05:46'),
+(117, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:06:01'),
+(118, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:06:32'),
+(119, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:06:34'),
+(120, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:06:40'),
+(121, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:06:56'),
+(122, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:07:24'),
+(123, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:09:40'),
+(124, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:09:44'),
+(125, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:12:29'),
+(126, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:12:33'),
+(127, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:13:02'),
+(128, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:13:06'),
+(129, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:13:13'),
+(130, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:14:25'),
+(131, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:14:43'),
+(132, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:15:29'),
+(133, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:15:34'),
+(134, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:15:39'),
+(135, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:15:55'),
+(136, 'create', 1, 0, 'gained_achievements', '2019-04-11 20:16:12');
 
 -- --------------------------------------------------------
 
@@ -571,19 +649,19 @@ ALTER TABLE `user_chat`
 -- AUTO_INCREMENT for table `achievements`
 --
 ALTER TABLE `achievements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `friend_list`
 --
 ALTER TABLE `friend_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `genres`
@@ -601,19 +679,19 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `user_chat`
