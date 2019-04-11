@@ -34,8 +34,22 @@ if ($session->is_signed_in()) {
 		<!-- Header content, -big in class if on the index -->
 		<div class="header <?php if($page == "index"){echo "-big";} ?>">
 
-			<!-- Navigation -->
-			<nav>
+			<!-- Navigation mobile -->
+			<nav class="mobile">
+				<div class="dropdown -center">
+					<div class="hamburger"><i class="fas fa-bars"></i></div>
+					<div class="list">
+						<a href="index.php" class="item <?php if($page == "index"){echo "-active";} ?>">Games</a>
+						<a href="about.php" class="item <?php if($page == "about"){echo "-active";} ?>">About</a>
+					</div>
+				</div>
+				<div class="list">
+
+				</div>
+			</nav>
+
+			<!-- Navigation computer -->
+			<nav class="pc">
 				<!-- Branding icon-->
 				<a href="index.php" class="brand"><img src="assets/img/brand-green.svg" alt="Brand"></a>
 
@@ -62,15 +76,16 @@ if ($session->is_signed_in()) {
 						<a href="friends.php"><i class="fas fa-fw fa-user-friends"></i>Friendlist</a>
 						<a href="chat.php"><i class="fas fa-fw fa-envelope"></i>Messages</a>
 
-						<?php if ($user->is_admin($user->id)) { ?>
-
-						<a href="users.php"><i class="fas fa-fw fa-users"></i>User list</a>
-
-						<?php } ?>
-
 						<hr class="divider">
 						<a href="donate.php"><i class="fas fa-fw fa-heart"></i>Donate</a>
 						<a href="upload.php"><i class="fas fa-fw fa-upload"></i>Submit game</a>
+
+						<?php if ($user->is_admin($user->id)) { ?>
+
+						<hr class="divider">
+						<a href="users.php"><i class="fas fa-fw fa-users"></i>User list</a>
+
+						<?php } ?>
 
 						<hr class="divider">
 						<a href="logout.php"><i class="fas fa-fw fa-sign-out-alt"></i>Sign out</a>
