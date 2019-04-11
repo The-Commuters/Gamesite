@@ -4,25 +4,16 @@
 
 <!-- <?php if ($session->is_signed_in()) {redirect("profile.php");} ?> -->
 
-
-
 <?php 
-
-
 
 if (isset($_POST['submit'])) {
 
 	// Fjerner eventuelle tagger og stringer som kan skade databasen
-
-
+	$email = trim($_POST['email']);
 	// Skjuler passord setting når den andre er i bruk 
 	
-
-	$email = trim($_POST['email']);
-
 	//Putter brukerens email inni metoden create_reset_code
 	$error_array = Email::create_reset_code($email);
-
 
 	if (empty($error_array)) {
 
@@ -41,9 +32,6 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-
-
-
 <div id="email_reset">
 	
 	<h4><?php echo $the_message; ?></h4>
@@ -60,7 +48,6 @@ if (isset($_POST['submit'])) {
 		<input type="email" name="email" value="<?php echo htmlentities($email); ?>" required  >
 
 	</div>
-
 	
 	<!-- Div tagger for knapper -->
 	<div class="">
@@ -72,20 +59,17 @@ if (isset($_POST['submit'])) {
 
 </div>
 
-
-
 <?php 
 
 
 if (isset($_GET["reset_code"])) {
 
-	// Gjør at div taggen inni ikke vises til brukeren
+	// Gjør at det som er inni div taggen ikke vises til brukeren
 	echo "<script>
 	hide('email_reset');
 	</script>";
 
 	$reset_code = ($_GET["reset_code"]);
-
 
 	// henter inn koden og gir den vidre til aktiverings metoden 
 	$code = Email::find_user_by_reset_code($reset_code);
@@ -126,7 +110,6 @@ if (isset($_GET["reset_code"])) {
 			$the_message 	= "";
 			$error_array    = "";
 
-
 		}
 
 	}
@@ -144,6 +127,9 @@ if (isset($_GET["reset_code"])) {
 }
 ?>
 
+<!-- Password reset form 
+Here the user will put in their new password twice and submit it for checks agianst our database 
+-->
 
 <div id='password_setting'>
 	<h4><?php echo $the_message; ?></h4>
@@ -161,8 +147,6 @@ if (isset($_GET["reset_code"])) {
 
 		</div>
 
-
-
 		<div class="">
 			<input type="submit" name="submit_password" value="Submit">
 
@@ -170,10 +154,6 @@ if (isset($_GET["reset_code"])) {
 	</form>
 
 </div>
-
-<!-- Password reset form 
-Here the user will put in their new password twice and submit it for checks agianst our database 
--->
 
 <?php 
 
@@ -188,7 +168,4 @@ if (!empty($error_array)) {
 
 ?>
 
-
-
 <?php include("includes/views/footer.php"); ?>
-
