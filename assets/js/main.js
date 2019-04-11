@@ -280,7 +280,7 @@ function hide_alert() {
 
 }
 
-function hide(div){
-    document.getElementById(div).style.display="none";
+function hide(id){
+    document.getElementById(id).style.display="none";
     //console.log("ho");
 }
