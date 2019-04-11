@@ -56,6 +56,7 @@ if (!isset($_GET['s'])) {
                     <!--
                       --  Action red
                       --  Adventure teal
+                      --  Comedy yellow
                       --  Fantasy purple
                       --  Idle indigo
                       --  Romance pink
@@ -67,13 +68,14 @@ if (!isset($_GET['s'])) {
                     <div class="list">
                         <div>Adventure</div>
                         <div>Action</div>
+                        <div>Comedy</div>
+                        <div>Fantasy</div>
+                        <div>Idle</div>
                         <div>Romance</div>
                         <div>Rouglike</div>
+                        <div>Sport</div>
                         <div class="active">Simulation</div>
                         <div>Strategy</div>
-                        <div>Sport</div>
-                        <div>Idle</div>
-                        <div>Fantasy</div>
                     </div>
                 </div>
 

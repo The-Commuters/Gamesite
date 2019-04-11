@@ -86,7 +86,7 @@
 }
 
 .category > header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     grid-gap: 1rem;
 
     display: grid;
@@ -94,4 +94,8 @@
     font-size: 2rem;
     font-weight: 500;
     color: $color-light;
+
+    &:first-child {
+        grid-template-columns: 1fr auto;
+    }
 }
