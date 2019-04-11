@@ -18,10 +18,12 @@
 
 	if (empty($error_array)) {
 		
-		redirect("../../login.php");
-
 		?>
-
+		<div id="alert" class="alert -success -active">
+			<?php 
+				echo "The user creation have been sucsessfully finished, an activation email have been sent to your email!";
+			?>
+		</div>
 
 		<?php
 
@@ -40,6 +42,7 @@
 			?>
 		</div>
 	</div>
+
 	<?php
 }
 ?>

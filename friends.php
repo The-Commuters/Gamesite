@@ -16,8 +16,29 @@ if (!isset($_GET['f'])) {
 }
 ?>
 
+
 <main class="friendlist">
     <h1 class="friendlist-title">Friends</h1>
+
+
+    <!----------------------------------- Friend search---------------------------------------->
+
+    <!-- Add friend stuff starts here -->
+	<div>
+	<label>Add Friend Function</label>
+	<input type="text" onkeyup="find_friend()" id="search" value="">
+	</div>
+
+	<!-- This is where the friend list is called -->
+	<div id="friend_search">
+	  <?php 
+	    include("includes/views/friend_request_list.php");
+	  ?>
+	</div>
+
+	<!----------------------------------- Friend search---------------------------------------->
+
+
     
     <?php include("includes/views/friendlist_content.php"); ?>
 
