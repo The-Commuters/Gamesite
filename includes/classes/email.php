@@ -56,7 +56,7 @@ class Email extends User{
 
 		$subject = "Hello " . $user_name . " Here is your password reset";
 
-		$txt = "Please press the link below to reset your password for your account at CM Games " . "http://localhost/gamesite/activate.php?reset_code=" . $reset_code;
+		$txt = "Please press the link below to reset your password for your account at CM Games " . "http://localhost/gamesite/reset.php?reset_code=" . $reset_code;
 		
 		
 		self::mail_sender($to, $subject, $txt);
