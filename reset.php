@@ -64,11 +64,9 @@ if (isset($_POST['submit'])) {
 
 if (isset($_GET["reset_code"])) {
 
-	// Gjør at det som er inni div taggen ikke vises til brukeren
-	echo "<script>
-	hide('email_reset');
-	</script>";
 
+	// Gjør at det som er inni div taggen ikke vises til brukeren
+	
 	$reset_code = ($_GET["reset_code"]);
 
 	// henter inn koden og gir den vidre til aktiverings metoden 
@@ -114,26 +112,24 @@ if (isset($_GET["reset_code"])) {
 
 	}
 	else {
-
-	echo "<script>
-	hide('password_setting');
-	</script>";
-
 	$password       = "";
 	$password_check = "";
+
 	$the_message = "Your link is broken/incorrect.";
 	}
-
 }
+
 ?>
 
 <!-- Password reset form 
 Here the user will put in their new password twice and submit it for checks agianst our database 
 -->
 
-<div id='password_setting'>
+
+
+<div id="password_setting">
 	<h4><?php echo $the_message; ?></h4>
-	<form id="" method="post" action="" >
+	<form id="password_form" method="post" action="" >
 		
 		<div class="">
 			<label>Password</label>
@@ -155,7 +151,22 @@ Here the user will put in their new password twice and submit it for checks agia
 
 </div>
 
+
 <?php 
+
+if (!isset($_GET["reset_code"])){
+
+			echo "<script>
+			hide('password_setting');
+			</script>";  
+		}	
+
+else{
+	echo "<script>
+	hide('email_reset');
+	</script>";
+}
+	
 
 /*Hvis det er meldinger i errorarray blir de skrivt ut til brukeren med ny linje*/
 
