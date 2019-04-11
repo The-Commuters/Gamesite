@@ -2698,6 +2698,14 @@ template {
     width: 2rem;
     height: 2rem; }
 
+.banner {
+  margin-top: 0;
+  padding: 1rem 2rem;
+  background-color: #343a40;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #f8f9fa; }
+
 *,
 *:after,
 *:before {
@@ -3832,6 +3840,46 @@ hr[data-content] {
   .status.-away {
     background-color: #ffc107; }
 
+.upload-container {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 120rem; }
+  .upload-container > form {
+    grid-template-rows: 1fr;
+    grid-gap: 1rem;
+    display: grid; }
+
+.upload {
+  position: relative;
+  border: 0.1rem dashed #54D266;
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 20rem; }
+
+.upload-tag {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
+
+.upload-file {
+  opacity: 0;
+  width: 100%;
+  height: 100%; }
+  .upload-file:focus ~ .upload-tag {
+    color: green; }
+
+.upload-title {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  width: 100%;
+  font-size: 1.8rem;
+  color: #1f1f1f; }
+  .upload-title:focus {
+    outline: none; }
+
 .float-left {
   float: left; }
 
@@ -3847,4 +3895,5 @@ hr[data-content] {
   margin: 0 auto;
   padding: 2rem;
   max-width: 70rem; }
+
 /*# sourceMappingURL=main.css.map */
