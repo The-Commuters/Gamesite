@@ -24,22 +24,21 @@ if (!isset($_GET['f'])) {
     <!----------------------------------- Friend search---------------------------------------->
 
     <!-- Add friend stuff starts here -->
-	<div>
-	<label>Add Friend Function</label>
-	<input type="text" onkeyup="find_friend()" id="search" value="">
-	</div>
-
-	<!-- This is where the friend list is called -->
-	<div id="friend_search">
-	  <?php 
-	    include("includes/views/friend_request_list.php");
-	  ?>
-	</div>
-
-	<!----------------------------------- Friend search---------------------------------------->
+		<div class="friendlist-container friendlist-search">
+            <input type="text" onkeyup="find_friend()" id="search" value="" class="search-input">
+            
 
 
-    
+            <!-- This is where the friend list is called -->
+		    <div class="new-friends-container">
+                <div id="friend_search" class="new-friends"></div>
+		    </div>
+        </div>
+
+
+        <?php include("includes/views/friend_request_list.php"); ?>
+		<!----------------------------------- Friend search---------------------------------------->
+
     <?php include("includes/views/friendlist_content.php"); ?>
 
 </main>
