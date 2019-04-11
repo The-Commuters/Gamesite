@@ -2902,6 +2902,7 @@ body {
   overflow: auto;
   padding: 1rem 1rem 0;
   font-size: 1.5rem;
+  font-weight: 400;
   color: #343a40; }
 
 .card-body > footer {
@@ -3152,6 +3153,10 @@ body {
   border-radius: 2rem;
   padding: 0 1rem 0.1rem;
   background-color: #1f1f1f;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   font-weight: 400;
   font-size: 1.2rem;
   color: #fafafa; }
@@ -3246,9 +3251,10 @@ body {
   background-color: #f8f9fa; }
 
 .list > * {
-  display: block; }
+  display: block;
+  cursor: pointer; }
 
-.list > a {
+.list > * {
   padding: 0.5rem 2rem 0.75rem;
   -webkit-text-decoration-line: none;
           text-decoration-line: none;
@@ -3256,7 +3262,7 @@ body {
   font-weight: 500;
   color: #343a40; }
 
-.list > a:hover {
+.list > *:hover {
   background-color: #54D266;
   color: #f8f9fa; }
 
@@ -3280,11 +3286,15 @@ body {
   border-color: #f8f9fa;
   width: 100%; }
 
-.list a svg {
+.list * svg {
   margin-right: 0.5rem; }
 
-.list > a:hover > .fa-heart {
+.list > *:hover > .fa-heart {
   color: #dc3545; }
+
+.list > *.active {
+  background-color: #54D266;
+  color: #f8f9fa; }
 
 .float-label {
   position: relative; }
@@ -3648,21 +3658,21 @@ img {
 .games {
   margin-top: -14rem; }
 
-.category {
-  grid-template-rows: auto 1fr;
-  grid-gap: 1rem;
-  display: grid;
-  padding: 1rem; }
-
-.category > header {
-  grid-template-columns: auto 1fr auto;
-  grid-gap: 1rem;
-  display: grid;
-  font-size: 2rem;
-  font-weight: 500;
-  color: #fafafa; }
-  .category > header .search,
-  .category > header .sort {
+.game-search {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  -webkit-box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 1rem; }
+  .game-search:hover > .search-input {
+    padding: 1.6rem;
+    width: calc(100vw - 9rem); }
+  .game-search .search-button {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -3672,29 +3682,58 @@ img {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    width: 3.5rem;
-    height: 3.5rem;
-    cursor: pointer; }
-
-.category-searchbar {
-  grid-template-columns: 1fr auto;
-  overflow: hidden;
-  display: grid;
-  -webkit-box-shadow: inset 0.1rem 0.1rem rgba(0, 0, 0, 0.1), 0 -0.1rem 0 rgba(255, 255, 255, 0.15);
-          box-shadow: inset 0.1rem 0.1rem rgba(0, 0, 0, 0.1), 0 -0.1rem 0 rgba(255, 255, 255, 0.15);
-  border-radius: 0.5rem;
-  background-color: #fafafa; }
-  .category-searchbar .bar {
+    width: 5rem;
+    height: 5rem;
+    background-color: #54D266;
+    color: #fafafa; }
+  .game-search .search-input {
+    -webkit-transition: 0.1s linear width, 0.1s linear padding;
+    transition: 0.1s linear width, 0.1s linear padding;
     border: none;
-    padding: 0 1rem;
-    min-width: 10rem;
-    background-color: transparent;
-    font-size: 1.6rem;
+    padding: 0;
+    width: 0;
     color: #1f1f1f; }
-    .category-searchbar .bar:focus {
-      outline: none; }
-  .category-searchbar .search {
-    color: #1f1f1f; }
+    .game-search .search-input:focus {
+      outline: none;
+      padding: 1.6rem;
+      width: calc(100vw - 9rem); }
+
+.game-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .game-options .option {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer; }
+    .game-options .option + .list {
+      font-size: 1.6rem; }
+    .game-options .option + .list::after {
+      right: 1.25rem;
+      left: auto; }
+
+.category {
+  grid-template-rows: auto 1fr;
+  grid-gap: 1rem;
+  display: grid;
+  padding: 1rem; }
+
+.category > header {
+  grid-template-columns: 1fr auto;
+  grid-gap: 1rem;
+  display: grid;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #fafafa; }
 
 .message {
   display: -webkit-box;
