@@ -91,9 +91,11 @@ $list-space:        100%; // The space between list and the activator
 
 .list > * {
     display: block;
+
+    cursor: pointer;
 }
 
-.list > a {
+.list > * {
     padding: 0.5rem 2rem 0.75rem;
 
     text-decoration-line: none;
@@ -102,7 +104,7 @@ $list-space:        100%; // The space between list and the activator
     color: $color-gray-800;
 }
 
-.list > a:hover {
+.list > *:hover {
     background-color: $color-primary;
 
     color: $color-gray-100;
@@ -133,11 +135,17 @@ $list-space:        100%; // The space between list and the activator
     width: 100%;
 }
 
-.list a svg {
+.list * svg {
     margin-right: 0.5rem;
 }
 
 // Experiment
-.list > a:hover > .fa-heart {
+.list > *:hover > .fa-heart {
     color: $color-red;
+}
+
+.list > *.active {
+    background-color: $color-primary;
+
+    color: $color-gray-100;
 }
