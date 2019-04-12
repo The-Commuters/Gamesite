@@ -36,7 +36,7 @@
     max-width: 40rem;
 }
 
-.login input[type=password], .login input[type=email] {
+.login input[type=password], .login input[type=email], .login input[type=text] {
     margin-bottom: 1rem;
     box-shadow: inset 0.1rem 0.1rem hsla(0, 0%, 0%, 0.10), 0 -0.1rem 0 hsla(0, 0%, 100%, 0.15);
     border-radius: 5000rem;
@@ -98,6 +98,10 @@
     background-color: white;
 }
 
+.password-reset {
+    text-decoration-line: none;
+    color: $color-primary-500;
+}
 
 @media (min-width: 60rem) {
     .login-container {
@@ -110,4 +114,8 @@
 
         width: 61.8%;
     }
+}
+
+.login-spacing {
+    margin-top: 3rem;
 }
