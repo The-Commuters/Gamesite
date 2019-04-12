@@ -6,7 +6,12 @@
 
 	$path = $_SERVER['DOCUMENT_ROOT'];
 	$path .= "/gamesite/includes/init.php";
-	require_once($path); 
+	require_once($path);
+
+	$email_path = $_SERVER['DOCUMENT_ROOT'];
+	$email_path .="/gamesite/includes/classes/email.php";
+
+	require_once($email_path);
 
 
 	$username = trim($_GET['u']); 
