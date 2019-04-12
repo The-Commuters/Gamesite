@@ -3401,6 +3401,7 @@ body {
     .friendlist-search .search-input:focus {
       outline: none; }
   .friendlist-search .new-friends-container {
+    z-index: 100000000;
     position: absolute;
     top: 100%;
     left: 0;
