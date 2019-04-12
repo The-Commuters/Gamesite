@@ -35,8 +35,6 @@ if (!isset($_GET['f'])) {
 		    </div>
         </div>
 
-
-        <?php include("includes/views/friend_request_list.php"); ?>
 		<!----------------------------------- Friend search---------------------------------------->
 
     <?php include("includes/views/friendlist_content.php"); ?>
