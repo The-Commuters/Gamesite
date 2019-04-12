@@ -18,8 +18,11 @@ if (isset($_POST['submit'])) {
 	$error_array = Email::create_reset_code($email);
 
 	if (empty($error_array)) {
-
-		$the_message="Email sent";
+		?>
+		<div id="alert" class="alert -success -active">
+				<div>Email sent</div>
+			</div>
+		<?php
 		
 	} else {
 		?>
@@ -109,9 +112,7 @@ if (isset($_GET["reset_code"])) {
 
 			if (empty($error_array)) {
 
-				var_dump($user);
 				?>
-
 				<div id="alert" class="alert -success -active">
 					<div>Password set.</div>
 				</div>
@@ -143,6 +144,13 @@ if (isset($_GET["reset_code"])) {
 	else {
 	$password       = "";
 	$password_check = "";
+
+	?>
+				<div id="alert" class="alert -warning -active">
+					<div>Your link is broken/incorrect.</div>
+				</div>
+	
+			<?php
 
 	$the_message = "Your link is broken/incorrect.";
 	}
@@ -184,7 +192,7 @@ Here the user will put in their new password twice and submit it for checks agia
 	<!-- Controls -->
 	<div class="login-controllers">
 		<!-- Sign up -->
-		<input type="submit" name="submit" class="button-contained" value="Reset password">
+		<input type="submit" name="submit_password" class="button-contained" value="Reset password">
 	</div>
 
 </form>

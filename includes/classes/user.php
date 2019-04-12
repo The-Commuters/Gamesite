@@ -343,7 +343,7 @@ class User extends Db_object{
 			$user->verify_code = md5($username . microtime());
 
 			// Closing this out for now as it brings a error without the setup.
-			// Email::send_ActivationMail($email, $username, $user->verify_code);
+			 //Email::send_ActivationMail($email, $username, $user->verify_code);
 
 			$user->create();
 
@@ -463,7 +463,7 @@ class User extends Db_object{
 		// Må legge inn sjekk for at brukeren ikke er aktivert fra før 
 		if(!empty($in)){
 			$user = array_shift($in);
-			var_dump($user);
+			//var_dump($user);
 			
 			//Denne endrer status på brukeren til aktiv eller nå bare til 1 og default er 0 
 			$user->status = 1;
