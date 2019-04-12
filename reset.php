@@ -22,7 +22,13 @@ if (isset($_POST['submit'])) {
 		$the_message="Email sent";
 		
 	} else {
+		?>
 
+			<div id="alert" class="alert -warning -active">
+				<div>Your information is incorrect.</div>
+			</div>
+
+		<?php
 		$the_message = "Your information is incorrect.";
 	}
 
@@ -36,7 +42,7 @@ if (isset($_POST['submit'])) {
 
 <div id="email_reset">
 	
-	<h4><?php echo $the_message; ?></h4>
+	<h4></h4>
 
 <!-- 
 Åpner en form for slik at brukeren kan skrive inne sin epost for å så kunne få til sent en passord tilbakestillingsepost
@@ -60,10 +66,10 @@ if (isset($_POST['submit'])) {
 
 	
 </div>
-<!-- Controls -->
-<div class="login-controllers">
+	<!-- Controls -->
+	<div class="login-controllers">
 		<!-- Sign up -->
-		<input type="button" name="submit" class="button-contained" value="Submit" onclick="register_user()">
+		<input type="submit" name="submit" class="button-contained" value="Submit">
 	</div>
 
 </form>
@@ -104,11 +110,23 @@ if (isset($_GET["reset_code"])) {
 			if (empty($error_array)) {
 
 				var_dump($user);
+				?>
 
+				<div id="alert" class="alert -success -active">
+					<div>Password set.</div>
+				</div>
+	
+			<?php
 				$the_message="Password set";
 
 			} else {
+				?>
 
+				<div id="alert" class="alert -warning -active">
+					<div>Your new password could not be set</div>
+				</div>
+	
+			<?php
 				$the_message= "Your new password could not be set";
 			}
 
@@ -139,7 +157,9 @@ Here the user will put in their new password twice and submit it for checks agia
 
 
 <div id="password_setting">
-	<form class="login login-spacing" id="password_form" method="post" action="">
+	
+
+<form class="login login-spacing" id="password_form" method="post" action="">
 
 	<!-- Title -->
 	<div class="login-title-container">
@@ -164,10 +184,10 @@ Here the user will put in their new password twice and submit it for checks agia
 	<!-- Controls -->
 	<div class="login-controllers">
 		<!-- Sign up -->
-		<input type="button" name="submit" class="button-contained" value="Reset password" onclick="register_user()">
+		<input type="submit" name="submit" class="button-contained" value="Reset password">
 	</div>
 
-	</form>
+</form>
 
 </div>
 

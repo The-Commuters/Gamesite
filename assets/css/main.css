@@ -2777,6 +2777,7 @@ body {
   border: 1px solid transparent;
   border-radius: 0.3rem;
   padding: 1rem 1.6rem 0.9rem;
+  cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
