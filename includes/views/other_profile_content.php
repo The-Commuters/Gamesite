@@ -17,6 +17,7 @@ $user = User::find_by_id($_GET['id']);
 <?php 
 // Chat with if friend
 if (User::is_friend($session->user_id, $user->id)) {
+
 ?>
 
 <main>

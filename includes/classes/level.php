@@ -14,7 +14,8 @@ class Level extends Db_object{
 
 	protected static $db_table_fields = array('needed_xp');
 	public $id;
-	public $needed_xi;
+	public $needed_xp;
+
 
 }
 
