@@ -78,7 +78,7 @@ class Email extends User{
 
 		if(!empty($in)){
 			$user = array_shift($in);
-			var_dump($user);
+			//var_dump($user);
 
 		//$user = array_shift($in);
 		// Oppretter et nytt email objekt 
