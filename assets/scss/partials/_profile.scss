@@ -80,3 +80,34 @@
         font-weight: 400;
     }
 }
+
+.drop-zone {
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+
+    margin: 0;
+    border: 0.2rem dashed $color-primary-500;
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 200px;
+
+    font-weight: 400;
+}
+
+#drag_upload_file #selectfile {
+    display: none;
+}
+
+.drop-zone-actions {
+    align-items: center;
+    
+    display: flex;
+
+    color: $color-dark;
+
+    > *:first-child {
+        margin-right: 1rem;
+    }
+}

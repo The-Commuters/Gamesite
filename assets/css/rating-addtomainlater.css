@@ -36,19 +36,9 @@ visibility: hidden;
 
 
 /*----------------------------------------drop zone for files-----------------------------------------------*/
-#drop_zone {
-    background-color: #4A6A87; 
-    width: 400px; 
-    height: 200px;
-    padding: 10px;
-    font-size: 15px;
-}
 
 #upload_file {
   width:50%;
   margin:0 auto;
 }
 
-#drag_upload_file #selectfile {
-  display: none;
-}

@@ -4,6 +4,8 @@
 
 <!-- <?php if ($session->is_signed_in()) {redirect("profile.php");} ?> -->
 
+<main>
+	<h1 class="banner">Reset password</h1>
 <?php 
 
 if (isset($_POST['submit'])) {
@@ -41,18 +43,27 @@ if (isset($_POST['submit'])) {
 
 -->
 
-<form id="email_form" action="" method="post">
+<form class="login login-spacing" id="email_form" action="" method="post">
 
-	<div>
-		<label>Email</label>
-		<input type="email" name="email" value="<?php echo htmlentities($email); ?>" required  >
+<!-- Title -->
+<div class="login-title-container">
+	<h2 class="login-title">Reset password</h2>
+</div>
 
+
+<div class="login-input">
+	<!-- E-mail input -->
+	<div class="float-label">
+		<input type="email" name="email" placeholder="E-mail" id="email" value="<?php echo htmlentities($email); ?>" required  >
+		<label for="email">E-mail</label>
 	</div>
-	
-	<!-- Div tagger for knapper -->
-	<div class="">
-		<input type="submit" name="submit" value="Submit">
 
+	
+</div>
+<!-- Controls -->
+<div class="login-controllers">
+		<!-- Sign up -->
+		<input type="button" name="submit" class="button-contained" value="Submit" onclick="register_user()">
 	</div>
 
 </form>
@@ -128,25 +139,34 @@ Here the user will put in their new password twice and submit it for checks agia
 
 
 <div id="password_setting">
-	<h4><?php echo $the_message; ?></h4>
-	<form id="password_form" method="post" action="" >
-		
-		<div class="">
-			<label>Password</label>
-			<input type="password" name="password" value="<?php echo htmlentities($password); ?>">
+	<form class="login login-spacing" id="password_form" method="post" action="">
 
+	<!-- Title -->
+	<div class="login-title-container">
+		<h2 class="login-title">Enter new password</h2>
+	</div>
+
+
+	<div class="login-input">
+		<!-- Password input -->
+		<div class="float-label">
+			<input type="password" name="password" placeholder="Password" id="password" value="<?php echo htmlentities($password); ?>" rquired>
+			<label for="password">Password</label>
 		</div>
 
-		<div class="">
-			<label>Password Check</label>
-			<input type="password" name="password_check" value="<?php echo htmlentities($password_check); ?>">
-
+		<!-- Password input check -->
+		<div class="float-label">
+			<input type="password" name="password_check" placeholder="Password" id="password_check" value="<?php echo htmlentities($password_check); ?>" rquired>
+			<label for="password_check">Password check</label>
 		</div>
+	</div>
 
-		<div class="">
-			<input type="submit" name="submit_password" value="Submit">
+	<!-- Controls -->
+	<div class="login-controllers">
+		<!-- Sign up -->
+		<input type="button" name="submit" class="button-contained" value="Reset password" onclick="register_user()">
+	</div>
 
-		</div>
 	</form>
 
 </div>
@@ -172,11 +192,12 @@ else{
 
 if (!empty($error_array)) {
 	foreach ($error_array as $error_message) {
-		echo $error_message . "<br>";
-
+		echo '<div class="alert -warning -shown">' . $error_message .'</div>';
 	}
 }
 
 ?>
+
+</main>
 
 <?php include("includes/views/footer.php"); ?>
