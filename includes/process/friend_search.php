@@ -37,8 +37,11 @@ if (isset($_GET['s'])) {
 	if (isset($users)) {
 
 	// Places here in the number of users that you decide at the end of this foreach.
-	$i= 0;
-	foreach ($users as $user) { ?>
+	foreach ($users as $user) { 
+
+		// Stops the user from encountering themselves in when searching for users.
+		if ($user->id !== $session->user_id) {
+		?>
 
 		<div class="friend">
             <div class="friend-info">
@@ -86,7 +89,9 @@ if (isset($_GET['s'])) {
 
 				
 			<?php
-			$i++;
-			if($i == 5) break;
+
+
+		}
+
 			}
 		} ?>
