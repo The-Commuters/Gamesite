@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11. Apr, 2019 22:16 PM
--- Server-versjon: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: Apr 12, 2019 at 08:46 AM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `achievements`
+-- Table structure for table `achievements`
 --
 
 CREATE TABLE `achievements` (
@@ -38,7 +38,7 @@ CREATE TABLE `achievements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `achievements`
+-- Dumping data for table `achievements`
 --
 
 INSERT INTO `achievements` (`id`, `game_id`, `title`, `image`, `text`, `experience_points`) VALUES
@@ -51,7 +51,31 @@ INSERT INTO `achievements` (`id`, `game_id`, `title`, `image`, `text`, `experien
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `friend_list`
+-- Table structure for table `email_codes`
+--
+
+CREATE TABLE `email_codes` (
+  `id` int(11) NOT NULL,
+  `reset_code` varchar(64) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `email_codes`
+--
+
+INSERT INTO `email_codes` (`id`, `reset_code`, `time`) VALUES
+(28, '05024cf14670782e54f58b4b1cc26b44', '2019-04-11 13:55:12'),
+(26, '06ad94dcb60f29a9238a7ccbed01c542', '2019-04-11 13:54:07'),
+(28, '3a6658a422e46a4a77c01e455b3b6283', '2019-04-11 11:37:23'),
+(28, '59381689fc1bb1e88947693b88c69b6a', '2019-04-11 12:28:20'),
+(28, 'a9c272f3fe0d449c41c2495b864d627a', '2019-04-11 12:27:57'),
+(26, 'be993c4439b66efb331c74d1e51aee80', '2019-04-11 13:52:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friend_list`
 --
 
 CREATE TABLE `friend_list` (
@@ -64,7 +88,7 @@ CREATE TABLE `friend_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `friend_list`
+-- Dumping data for table `friend_list`
 --
 
 INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `chat_id`, `friendship_status`, `chatroom_status`) VALUES
@@ -84,7 +108,7 @@ INSERT INTO `friend_list` (`id`, `user_1`, `user_2`, `chat_id`, `friendship_stat
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `gained_achievements`
+-- Table structure for table `gained_achievements`
 --
 
 CREATE TABLE `gained_achievements` (
@@ -96,7 +120,7 @@ CREATE TABLE `gained_achievements` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `games`
+-- Table structure for table `games`
 --
 
 CREATE TABLE `games` (
@@ -112,7 +136,7 @@ CREATE TABLE `games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `games`
+-- Dumping data for table `games`
 --
 
 INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `foldername`, `filename`, `size`, `rating`) VALUES
@@ -131,7 +155,7 @@ INSERT INTO `games` (`id`, `title`, `genre`, `description`, `creator`, `folderna
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `game_genre`
+-- Table structure for table `game_genre`
 --
 
 CREATE TABLE `game_genre` (
@@ -143,7 +167,7 @@ CREATE TABLE `game_genre` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `genres`
+-- Table structure for table `genres`
 --
 
 CREATE TABLE `genres` (
@@ -154,7 +178,7 @@ CREATE TABLE `genres` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `level`
+-- Table structure for table `level`
 --
 
 CREATE TABLE `level` (
@@ -163,7 +187,7 @@ CREATE TABLE `level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `level`
+-- Dumping data for table `level`
 --
 
 INSERT INTO `level` (`id`, `needed_xp`) VALUES
@@ -175,7 +199,7 @@ INSERT INTO `level` (`id`, `needed_xp`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `ratings`
+-- Table structure for table `ratings`
 --
 
 CREATE TABLE `ratings` (
@@ -185,7 +209,7 @@ CREATE TABLE `ratings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `ratings`
+-- Dumping data for table `ratings`
 --
 
 INSERT INTO `ratings` (`id`, `game_id`, `user_id`) VALUES
@@ -195,7 +219,7 @@ INSERT INTO `ratings` (`id`, `game_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -217,7 +241,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `user_image`, `experience_points`, `joined`, `privilege_level`, `verify_code`, `status`, `signed_in`) VALUES
@@ -247,7 +271,7 @@ INSERT INTO `users` (`id`, `unique_id`, `email`, `username`, `password`, `first_
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `user_activity`
+-- Table structure for table `user_activity`
 --
 
 CREATE TABLE `user_activity` (
@@ -260,7 +284,7 @@ CREATE TABLE `user_activity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `user_activity`
+-- Dumping data for table `user_activity`
 --
 
 INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`) VALUES
@@ -404,7 +428,7 @@ INSERT INTO `user_activity` (`id`, `act`, `user_id`, `target_id`, `type`, `date`
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `user_chat`
+-- Table structure for table `user_chat`
 --
 
 CREATE TABLE `user_chat` (
@@ -418,7 +442,7 @@ CREATE TABLE `user_chat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dataark for tabell `user_chat`
+-- Dumping data for table `user_chat`
 --
 
 INSERT INTO `user_chat` (`id`, `room_id`, `user_id`, `username`, `time`, `text`, `viewed`) VALUES
@@ -573,6 +597,12 @@ ALTER TABLE `achievements`
   ADD KEY `AchievementsGamesFN` (`game_id`);
 
 --
+-- Indexes for table `email_codes`
+--
+ALTER TABLE `email_codes`
+  ADD PRIMARY KEY (`reset_code`);
+
+--
 -- Indexes for table `friend_list`
 --
 ALTER TABLE `friend_list`
@@ -700,51 +730,51 @@ ALTER TABLE `user_chat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
--- Begrensninger for dumpede tabeller
+-- Constraints for dumped tables
 --
 
 --
--- Begrensninger for tabell `achievements`
+-- Constraints for table `achievements`
 --
 ALTER TABLE `achievements`
   ADD CONSTRAINT `AchievementsGamesFN` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Begrensninger for tabell `friend_list`
+-- Constraints for table `friend_list`
 --
 ALTER TABLE `friend_list`
   ADD CONSTRAINT `UsersFriend_listFN1` FOREIGN KEY (`user_1`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `UsersFriend_listFN2` FOREIGN KEY (`user_2`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Begrensninger for tabell `gained_achievements`
+-- Constraints for table `gained_achievements`
 --
 ALTER TABLE `gained_achievements`
   ADD CONSTRAINT `Gained_achievementsAchievementsFNs` FOREIGN KEY (`achievement_id`) REFERENCES `achievements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Gained_achievementsUserFNs` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Begrensninger for tabell `game_genre`
+-- Constraints for table `game_genre`
 --
 ALTER TABLE `game_genre`
   ADD CONSTRAINT `Game_genreGamesFN` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Game_genreGenresFN` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Begrensninger for tabell `ratings`
+-- Constraints for table `ratings`
 --
 ALTER TABLE `ratings`
   ADD CONSTRAINT `RatingsGameFN` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `RatingsUserFN` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Begrensninger for tabell `user_activity`
+-- Constraints for table `user_activity`
 --
 ALTER TABLE `user_activity`
   ADD CONSTRAINT `User_activityUsersFN1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Begrensninger for tabell `user_chat`
+-- Constraints for table `user_chat`
 --
 ALTER TABLE `user_chat`
   ADD CONSTRAINT `User_chatUsersFN` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
