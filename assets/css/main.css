@@ -3506,6 +3506,13 @@ body {
     .friend-actions .action + .action {
       margin-left: 0.5rem; }
 
+.friend-request-notification {
+  margin-left: 1rem;
+  border-radius: 5rem;
+  padding: 0 0.8rem;
+  background-color: #54D266;
+  color: #fafafa; }
+
 @media (min-width: 40rem) {
   .friend {
     grid-gap: 3rem; }

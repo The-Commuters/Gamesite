@@ -179,6 +179,16 @@
     }
 }
 
+.friend-request-notification {
+    margin-left: 1rem;
+    border-radius: 5rem;
+    padding: 0 0.8rem;
+
+    background-color: $color-primary-500;
+
+    color: $color-light;
+}
+
 @media (min-width: $breakpoint-tablet) {
     .friend {
         grid-gap: 3rem;
