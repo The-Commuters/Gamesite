@@ -2705,6 +2705,7 @@ template {
     display: flex; }
 
 .avatar {
+  position: relative;
   background-image: url(/img/backup.png);
   background-position: center top;
   background-size: cover;
@@ -2725,6 +2726,27 @@ template {
   .avatar.-xs {
     width: 2rem;
     height: 2rem; }
+
+.avatar-level {
+  position: absolute;
+  right: 75%;
+  bottom: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 2rem;
+  padding: 0 0.4rem;
+  height: 2rem;
+  background-color: #54D266;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fafafa; }
 
 .banner {
   margin-top: 0;

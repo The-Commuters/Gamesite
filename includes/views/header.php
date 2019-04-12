@@ -86,7 +86,9 @@ if ($session->is_signed_in()) {
 				<div class="dropdown -center">
 					<!-- The id is placed there as it is only used whenever the profile image is updated -->
 					<div class="profile" id="profile">
-						<div style="background-image: url(<?php echo $user->get_user_image(); ?>)" class="avatar"></div>
+						<div style="background-image: url(<?php echo $user->get_user_image(); ?>)" class="avatar">
+							<div class="avatar-level">22</div>
+						</div>
 						<div class="icon-buffer"><i class="fas fa-angle-down icon"></i></div>
 					</div>
 
