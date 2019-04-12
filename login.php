@@ -66,15 +66,17 @@ if (isset($_POST['submit'])) {
 			<div class="login-input">
 				<!-- E-mail input -->
 				<div class="float-label">
-					<input type="email" name="email" id="email" placeholder="E-mail" value="<?php echo htmlentities($email); ?>">
+					<input type="email" name="email" id="email" placeholder="E-mail" value="<?php echo htmlentities($email); ?>" required>
 					<label for="email">E-mail</label>
 				</div>
 
 				<!-- Password input -->
 				<div class="float-label">
-					<input type="password" name="password" id="password" placeholder="Password" value="<?php echo htmlentities($password); ?>">
+					<input type="password" name="password" id="password" placeholder="Password" value="<?php echo htmlentities($password); ?>" required>
 					<label for="password">Password</label>
 				</div>
+				<!-- password reset -->
+				<a href="reset.php" class="password-reset">Lost Password?</a>
 			</div>
 
 
@@ -83,11 +85,8 @@ if (isset($_POST['submit'])) {
 				<!-- Sign up -->
 				<a href="register.php#username" class="button-text">Sign up</a>
 
-				<!-- password reset -->
-				<a href="reset.php" class="button-text">Lost Password?</a>
-
 				<!-- log in -->
-				<input type="submit" name="submit" id="submit" class="button-contained" value="submit">
+				<input type="submit" name="submit" id="submit" class="button-contained" value="Sign in">
 			</div>
 
 			<script type="text/javascript">
