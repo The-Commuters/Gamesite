@@ -40,24 +40,20 @@ if (isset($_GET['s'])) {
 	$i= 0;
 	foreach ($users as $user) { ?>
 
-
-		
-
-
 		<div class="friend">
             <div class="friend-info">
 				<div style="background-image: url(<?php echo $user->get_user_image(); ?>" class="avatar -s"></div>
 				
                 <div href="profile.php?id=<?php echo $user->id; ?>" class="username"><?php
 
-// Gets the username and then makes the letters lowercase.
-$username = strtolower($user->username);
+				// Gets the username and then makes the letters lowercase.
+				$username = strtolower($user->username);
 
-// Switches out what is searched with the same with marks around it.
-echo str_replace($search, '<mark>' . $search . '</mark>', $username); 
+				// Switches out what is searched with the same with marks around it.
+				echo str_replace($search, '<mark>' . $search . '</mark>', $username); 
 
-?></div>
-            </div>
+				?></div>
+			</div>
 
             <div class="friend-status">
                 <div class="status <?php echo $signed_in ?>"></div>
