@@ -17,7 +17,7 @@ if ($session->is_signed_in()) {
 		foreach ($levels as $level) {
 			if ($level->needed_xp >= $user_xp) {
 				$current_needed_xp = $level->needed_xp;
-
+				$current_user_level = $level->id-1;
 				// Breaks out of the foreach.
 				break; 
 			}
@@ -87,7 +87,7 @@ if ($session->is_signed_in()) {
 					<!-- The id is placed there as it is only used whenever the profile image is updated -->
 					<div class="profile" id="profile">
 						<div style="background-image: url(<?php echo $user->get_user_image(); ?>)" class="avatar">
-							<div class="avatar-level">22</div>
+							<div class="avatar-level"><?php echo $current_user_level; ?></div>
 						</div>
 						<div class="icon-buffer"><i class="fas fa-angle-down icon"></i></div>
 					</div>
