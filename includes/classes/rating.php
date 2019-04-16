@@ -11,7 +11,7 @@ class Rating extends Db_object {
 
 	protected static $db_table = "ratings"; 
 
-	protected static $db_table_fields = array('game_id', 'user_id');
+	protected static $db_table_column = array('game_id', 'user_id');
 	public $id; 
 	public $game_id;
 	public $user_id;

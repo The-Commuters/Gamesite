@@ -12,7 +12,7 @@ class Level extends Db_object{
 
 	protected static $db_table = "level"; 
 
-	protected static $db_table_fields = array('needed_xp');
+	protected static $db_table_column = array('needed_xp');
 	public $id;
 	public $needed_xp;
 

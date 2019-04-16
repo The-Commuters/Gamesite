@@ -8,7 +8,7 @@
 
 class Db_object {
 
-	protected static $db_table = "users"; 
+	protected static $db_table = ""; 
 
 	/**
 	 * Collects all of the objects of this variation from the database-table
@@ -43,7 +43,7 @@ class Db_object {
 
 	/**
 	 * Middle-point between the query-Database-method, creates an array and uses the
-	 * instantation-method to make an array of objekter and then send them out like
+	 * instantation-method to make an array of objects and then send them out like
 	 * an object array, as all of the rows is made into objects before stored into the
 	 * array.
 	 *
@@ -53,10 +53,10 @@ class Db_object {
 	public static function find_by_query($sql) {
 
 		global $database;
-		$result_set = $database->query($sql);
+		$result = $database->query($sql);
 		$the_object_array = array(); 
 
-		while ($row = mysqli_fetch_array($result_set)) { 
+		while ($row = mysqli_fetch_array($result)) { 
 			$the_object_array[] = static::instantation($row);
 		}
 
@@ -68,21 +68,25 @@ class Db_object {
 	 * the class they should be, by finding out the type of the object and then place
 	 * each of the items in the $the_record-array into the object. 
 	 *  
-	 * @param $the_record is one row of the rows collected in find_by_query().
-	 * @return $the_object which is the finished object with the values of hte row.
+	 * @param $row is one row of the rows collected in find_by_query().
+	 * @return $object which is the finished object with the values of hte row.
 	 */
-	public static function instantation($the_record) {
+	public static function instantation($row) {
 
-		$calling_call = get_called_class(); // "Late Static Binding" is this called.
-		$the_object = new $calling_call;    // New 'User', 'Game' or any of the other classes.
+		// get_called_class() collects the class that 'this' object is part of.
+		$object_class = get_called_class(); // "Late Static Binding" is this called.
+		$object = new $object_class;    // New 'User', 'Game' or any of the other classes.
 
-		foreach ($the_record as $the_attribute => $value) {
-			if($the_object->has_the_attribute($the_attribute)) { 
-				$the_object->$the_attribute = $value;
+		// For each of the collected rows, the attribute and its value.
+		foreach ($row as $attribute => $value) {
+
+			// If the object have the attribute, then...
+			if($object->has_attribute($attribute)) { 
+				$object->$attribute = $value;
 			}
 		}
 
-		return $the_object;
+		return $object;
 
 	}
 
@@ -92,14 +96,14 @@ class Db_object {
 	 * asks if this attribute is in the objects object-properties created at the top of the object-
 	 * classes.
 	 *
-	 * @param $the_attribute is one of the attributes of the object, like 'id' or 'username'
-	 * @return true if $the_attribute exists inside of the $object_properties.
+	 * @param $attribute is one of the attributes of the object, like 'id' or 'username'
+	 * @return true if $attribute exists inside of the $object_properties.
 	 */
-	private function has_the_attribute($the_attribute) {
+	private function has_attribute($attribute) {
 
-		$object_properties = get_object_vars($this);
+		$properties = get_object_vars($this);
 
-		return array_key_exists($the_attribute, $object_properties); 
+		return array_key_exists($attribute, $properties); 
 
 	}
 
@@ -107,7 +111,7 @@ class Db_object {
 	 * All of the classes has arrays with the table fields in the database at the top of them,
 	 * and these is also reflected in the object-properties. This class-method makes an array
 	 * filled with the properties the object holds something in, used when one wants to place
-	 * and objectt into the database.
+	 * an object into the database.
 	 *
 	 * @return $properties an array filled with the fields that an object holds.
 	 */
@@ -115,8 +119,9 @@ class Db_object {
 		
 		$properties = array();
 
-		foreach (static::$db_table_fields as $db_field) {
+		foreach (static::$db_table_column as $db_field) {
 			
+			// property exists checks if 
 			if (property_exists($this, $db_field)) {
 				$properties[$db_field] = $this->$db_field;
 			}
@@ -137,12 +142,14 @@ class Db_object {
 
 		global $database;
 
+		// Creates a array that will hold the cleaned properties.
 		$clean_properties = array();
 
-		foreach ($this->properties() as $key => $value) {
-			
-			$clean_properties[$key] = $database->escape_string($value);
+		// For each of the arrays this object have...
+		foreach ($this->get_properties() as $key => $value) {
 
+			// Clean the value and place it in the properties array made above.
+			$clean_properties[$key] = $database->escape_string($value);
 		}
 
 		return $clean_properties;
@@ -170,7 +177,7 @@ class Db_object {
 
 		if ($database->query($sql)) {
 			
-			$this->id = $database->the_insert_id();
+			$this->id = $database->get_last_insert_id();
 
 			return true;
 
@@ -215,7 +222,7 @@ class Db_object {
 
 		if ($database->query($sql)) {
 			
-			$this->id = $database->the_insert_id();
+			$this->id = $database->get_last_insert_id();
 			$user_id = isset($session->user_id) ? $session->user_id : $this->id;
 
 			$log = $this->log_user_activity("create", $user_id, $this->id, static::$db_table);

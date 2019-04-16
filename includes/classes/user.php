@@ -10,7 +10,7 @@ class User extends Db_object{
 
 	protected static $db_table = "users";
 
-	protected static $db_table_fields = array('unique_id', 'username', 'email', 'password', 'first_name', 
+	protected static $db_table_column = array('unique_id', 'username', 'email', 'password', 'first_name', 
 		'middle_name', 'last_name', 'user_image', 'experience_points', 'joined', 'verify_code', 'status', 'signed_in' );
 
 	public $id;
@@ -407,21 +407,7 @@ class User extends Db_object{
 		}
 		return $number;
 	}
-
-
-
-	//--------------------------WIP---------------------------------------
-	public static function upload_profile_picture($file) {
-
-		$target_dir = "assets/images/uploads/profile_images/";
-		$target_file = $target_dir . $session->user_id . basename($_FILES["file"]["name"]);
-		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-		$check = getimagesize($_FILES["file"]["tmp_name"]);
-
-		move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-
-	}
-	//--------------------------------------------------------------------
+	
 
 	public static function find_user_by_email($email){
 

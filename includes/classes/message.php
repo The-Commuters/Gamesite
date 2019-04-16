@@ -10,7 +10,7 @@ class Message extends Db_object{
 
 	protected static $db_table = "user_chat"; 
 
-	protected static $db_table_fields = array('room_id', 'user_id', 'username', 'text', 'time', 'viewed');
+	protected static $db_table_column = array('room_id', 'user_id', 'username', 'text', 'time', 'viewed');
 	public $id;
 	public $room_id;
 	public $user_id;

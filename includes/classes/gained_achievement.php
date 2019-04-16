@@ -8,7 +8,7 @@ class Gained_Achievement extends Db_object{
 
 	protected static $db_table = "gained_achievements"; 
 
-	protected static $db_table_fields = array('achievement_id', 'user_id', 'gained');
+	protected static $db_table_column = array('achievement_id', 'user_id', 'gained');
 	public $achievement_id;
 	public $user_id;
 	public $gained;
@@ -39,6 +39,8 @@ class Gained_Achievement extends Db_object{
 	 * Checks if the user have already gained the achievement,
 	 * is used to stop the user from earning a achievement and
 	 * experience points two times.
+	 *
+	 * @return false if the achievement is gained, false if true.
 	 */
 	public function check_if_gained() {
 
@@ -61,6 +63,11 @@ class Gained_Achievement extends Db_object{
 
 	}
 
+	/**
+	 *
+	 *
+	 *
+	 */
 	public function get_gained_achievements($user_id) {
 
 		global $database;
