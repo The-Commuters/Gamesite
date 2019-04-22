@@ -55,8 +55,9 @@ class Database {
 	 * The method that sends a query trough the connection
 	 * to the database and gets it back as $result, all
 	 * contact with the database go trough here.
-	 *
-	 * @return $result the result of the query to the database.
+	 *	
+	 * @param $sql is the string of SQL that will be sent to the database.
+	 * @return the result of the query to the database.
 	 */
 	public function query($sql) {
 
@@ -66,7 +67,12 @@ class Database {
 
    	/**
 	 * Cleans up all that is sent to the database with real_escape_string(),
-	 * Makes the SQL in the text not dangerous to the database.
+	 * Makes the SQL in the text not dangerous to the database. Escapes 
+	 * special characters in a string for use in an SQL statement, taking 
+	 * into account the current charset of the connection
+	 *
+	 * @param $string is the SQL that will be sent to the database.
+	 * @return is the SQL after is have gone trough real_escape_string().
 	 */
 	public function escape_string($string) {
 

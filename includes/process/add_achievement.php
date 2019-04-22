@@ -1,4 +1,10 @@
 <?php
+	
+	/**
+	 * This file will add an achievement to the user
+	 * by creating a gained_achievement row in the table
+	 * that connects the user an dachievement together.
+	 */
 
 	$path = $_SERVER['DOCUMENT_ROOT'];
 	$path .= "/gamesite/includes/init.php";

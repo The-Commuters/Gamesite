@@ -265,7 +265,6 @@ class Db_object {
 		$sql .= " WHERE id= " . $database->escape_string($this->id);
 
 		$database->query($sql);
-		//$log = $this->log_user_activity("update", $session->user_id, $this->id, static::$db_table);
 		return (mysqli_affected_rows($database->connection) == 1) ? true : false;
 
 	}
@@ -291,7 +290,7 @@ class Db_object {
 
 	}
 
-}// This is the end of the db_object-class.
+}// This is the end of the class.
 
 
 

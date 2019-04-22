@@ -25,28 +25,31 @@ if (!isset($_GET['f'])) {
 
     <!-- Add friend stuff starts here -->
 		<div class="friendlist-container friendlist-search">
+
+            <!-- The search bar for users to send friend request to. -->
             <input type="text" onkeyup="find_friend()" id="search" value="" class="search-input">
-            
 
-
-            <!-- This is where the friend list is called -->
+            <!-- This is where the friend list is sent in the AJAX-function -->
 		    <div class="new-friends-container">
                 <div id="friend_search" class="new-friends"></div>
 		    </div>
         </div>
 
-		<!----------------------------------- Friend search---------------------------------------->
+	<!----------------------------------- /Friend search---------------------------------------->
 
-    <?php include("includes/views/friendlist_content.php"); ?>
+    <?php 
+    /**
+     * Includes the view that holds the list of recieved
+     * friend-requests and the list of friends under it.
+     */
+    include("includes/views/friendlist_content.php"); 
+    ?>
+
 
 </main>
 
-<!-- Used for running the process files in for start chatroom and delete user. -->
+<!-- Used for running the process files in for start chatroom and delete user ajax-functions. -->
 <div id="chat"></div>
-
-
-
-
 
 
 <?php include("includes/views/footer.php"); ?>

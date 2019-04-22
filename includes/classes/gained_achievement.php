@@ -1,7 +1,9 @@
 <?php 
 
 /**
- * Achievement-class will handle the achievements earned inside of games
+ * gained_achievement-class will handle the achievements earned inside of games,
+ * will resemble the achievement-class and work close to it, as things will be
+ * collected from that class, will bind together a user and a achievement.
  */
 
 class Gained_Achievement extends Db_object{
@@ -64,8 +66,9 @@ class Gained_Achievement extends Db_object{
 	}
 
 	/**
-	 *
-	 *
+	 * Collects the gained achievements that a user have, and
+	 * is used in the achievement list on the profile. Sends
+	 * back an array of gained_achievements-objects.
 	 *
 	 */
 	public function get_gained_achievements($user_id) {
