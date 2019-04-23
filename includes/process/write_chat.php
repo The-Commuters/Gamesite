@@ -8,7 +8,7 @@
 	$path = $_SERVER['DOCUMENT_ROOT'];
 	$path .= "/gamesite/includes/init.php";
 	require_once($path); 
-
+	echo "Finished!";
 	$user = User::find_by_id($session->user_id);						// Collects the signed_in user in $user.
 	
 	$message           = new Message();									// Creates a new message-object.
@@ -19,7 +19,7 @@
 	$message->time     = date("Y-m-d H:i:s");							// And the date.
 
 	if ($message->room_id != 0) {										// If the room id is 0, stops the message.
-		$message->save();												// Then stores it into the database.
+		$message->create();												// Then stores it into the database.
 	}
 	
 

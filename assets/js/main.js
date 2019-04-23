@@ -132,7 +132,7 @@ function start_chat(user_1, user_2) {
     xmlhttp.open("GET","includes/process/start_chatroom.php?u1="+user_1+"&u2="+user_2,true); 
     xmlhttp.send(); 
     setTimeout(function(){ 
-        window.location.href = 'chat.php'; 
+        window.location.href = 'chat.php?user='+user_2; 
     }, 1000);
 } 
 

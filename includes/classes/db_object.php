@@ -115,7 +115,7 @@ class Db_object {
 	 *
 	 * @return $properties an array filled with the fields that an object holds.
 	 */
-	protected function properties() {
+	protected function get_properties() {
 		
 		$properties = array();
 
@@ -251,7 +251,7 @@ class Db_object {
 		global $database;
 		global $session;
 
-		$properties = $this->properties();
+		$properties = $this->get_properties();
 		$propteries_pairs = array();
 
 		foreach ($properties as $key => $value) {
