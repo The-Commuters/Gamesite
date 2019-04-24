@@ -6,10 +6,9 @@
  * when the process is done.
  */
 
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "/gamesite/includes/init.php";
-require_once($path); 
-
+$path = __DIR__ ."\..\init.php";
+	require_once($path);
+	
 // Checks if the uploaded file if of a acceptable type.
 $file_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
 if (in_array($_FILES['file']['type'], $file_types)) {
