@@ -12,6 +12,8 @@
 
 .gamepage-chat {
     background-color: rgba($color-gray-300, 0.5);
+    max-height: 600px;
+    max-width: 400px;
 
     > .view {
         margin-right: 0;

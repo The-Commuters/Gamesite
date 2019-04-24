@@ -89,14 +89,6 @@ if (isset($_POST['submit'])) {
 				<input type="submit" name="submit" id="submit" class="button-contained" value="Sign in">
 			</div>
 
-			<script type="text/javascript">
-				document.getElementById("login").onkeypress = function(e) {
-					var key = e.charCode || e.keyCode || 0;     
-					if (key == 13) {
-						e.preventDefault();
-					}
-				}
-			</script>
 
 		</form>
 

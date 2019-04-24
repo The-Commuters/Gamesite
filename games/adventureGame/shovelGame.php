@@ -116,7 +116,7 @@ function movement(key, player, status) {
  */
 function keyPressed(event) {
   movement(event.keyCode, p1, true); // Sends inn the key pressed, the player object and true.
-  event.preventDefault(); // This stops the default action from happeninh, which is scrolling down on the paghe.
+  //event.preventDefault(); // This stops the default action from happeninh, which is scrolling down on the paghe.
 }
 
 /**

@@ -66,7 +66,7 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 		      	<div class="profile-info">
 		        	<div class="tag">Change photo</div>
 
-		        	<div class="drop-zone" id="drop_zone" ondrop="upload_file(event, 1)" ondragover="return false">
+		        	<div class="drop-zone" id="drop_zone" ondrop="upload_file(event)" ondragover="return false">
 		          		<div id="drag_upload_file">
 		            		<div class="drop-zone-actions">
 		              			<div>Drag a file or press the button</div>

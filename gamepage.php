@@ -13,7 +13,7 @@ $current_game_id = $_GET['game'];
 $game = Game::find_by_id($current_game_id);?>
 
 <main class="gamepage">
-	<div class="banner">Game title
+	<div class="banner"><?php echo $game->title; ?>
     <!-- The rating checkbox only shows if the user is signed int -->
   <?php if ($session->is_signed_in()) { ?>
 
@@ -31,7 +31,7 @@ $game = Game::find_by_id($current_game_id);?>
     <div class="gamepage-game">
     <?php
     // Includes the link to the canvas
-    if (isset($game)) { include($game->game_path()); }
+    if (isset($game) && file_exists($game->game_path())) { include($game->game_path()); }
     ?>
     </div>
 
@@ -41,25 +41,24 @@ $game = Game::find_by_id($current_game_id);?>
             <div class="username">Chat</div>;
             <i id="state" class="state -away"></i>
         </div>
-            <div class="view" id="view">
+          <div class="view" id="view">
 
-                <!-- Shows all the messages sent by read_chat.php inside here -->
-                <div id="chatOutput"></div>
+              <!-- Shows all the messages sent by read_chat.php inside here -->
+              <div id="chatOutput"></div>
 
-            </div>
+          </div>
 
-            <div class="input">
-                <textarea  rows="1" placeholder="Message" id="chat-input"></textarea>
-            </div>
+          <div class="input">
+              <textarea  rows="1" placeholder="Message" id="chat-input"></textarea>
+          </div>
 
-            <!-- Where room-id is stored in the value property -->
-            <input id="chatId" style="display: none;" value="<?php echo $current_chat_id; ?>">
+          <!-- Where room-id is stored in the value property -->
+          <input id="chatId" style="display: none;" value="<?php echo $game->id; ?>">
 
-            <!-- The javascript-file that holds the functions needed for the chat -->
-            <script src="assets/js/chat.js"></script>
-        </div>
+          <!-- The javascript-file that holds the functions needed for the chat -->
+          <script src="assets/js/chat_backend.js"></script>
+      </div>
     </div>
-  </div>
 </main>
 
 

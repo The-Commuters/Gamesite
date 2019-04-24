@@ -3539,7 +3539,9 @@ body {
   display: block; }
 
 .gamepage-chat {
-  background-color: rgba(222, 226, 230, 0.5); }
+  background-color: rgba(222, 226, 230, 0.5); 
+  max-height: 600px; 
+  max-width: 400px;}
   .gamepage-chat > .view {
     margin-right: 0;
     width: initial; }

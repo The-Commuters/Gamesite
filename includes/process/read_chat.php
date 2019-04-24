@@ -59,7 +59,7 @@
 			echo '<div class="message ' . $other . '">';
 			echo '<div><div class="avatar" style="background-image: url(' . $avatar . ')"></div></div>';
 			echo '<div class="content">';
-			echo '<div class="info"><a href="#" class="name">' . $username . '</a><span class="time">' . $time . '</span></div>';
+			echo '<div class="info"><a href="profile.php?id=' . $user->id . '" class="name">' . $username . '</a><span class="time">' . $time . '</span></div>';
 			echo '<p class="text">' . $text . '</p>';
 			$minute_check = $minute;
 		} else {

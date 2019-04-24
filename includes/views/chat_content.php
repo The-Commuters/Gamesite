@@ -113,7 +113,8 @@ if (!isset($_GET["user"])) {
             <input id="chatId" style="display: none;" value="<?php echo $current_chat_id; ?>">
 
             <!-- The javascript-file that holds the functions needed for the chat -->
-            <script src="assets/js/chat.js"></script>
+            <script src="assets/js/chat_frontend.js"></script>
+            <script src="assets/js/chat_backend.js"></script>
         </div>
     </div>
 </main>

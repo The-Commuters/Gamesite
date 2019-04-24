@@ -58,6 +58,24 @@ function update_gamelist() {
     
 }
 
+/**
+ * updates the friendlist after a user friend have been
+ * deleted from it, is called upon in the delete_friend()
+ * function. 
+ */
+function update_friendlist() {
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+            document.getElementById("friendlist_content-ajax").innerHTML = this.responseText;
+
+    };
+
+    xmlhttp.open("GET","includes/views/friendlist_content.php",true);
+    xmlhttp.send();
+    
+}
+
 function find_friend() {
 
     var search = document.getElementById("search").value;
@@ -68,6 +86,25 @@ function find_friend() {
     };
 
     xmlhttp.open("GET","includes/process/friend_search.php?s="+search,true);
+    xmlhttp.send();
+    
+}
+
+/**
+ *
+ */
+function delete_friend(user_id, friend_id) {
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+            document.getElementById("friendlist-ajax").innerHTML = this.responseText;
+
+    };
+    
+    // Updates the friendlist in 0.1 second, giving the process time to finish.
+    setTimeout(function(){ update_friendlist(); }, 100);
+
+    xmlhttp.open("GET","includes/process/delete_friend.php?user_id="+user_id+"&friend_id="+friend_id,true);
     xmlhttp.send();
     
 }
@@ -97,11 +134,14 @@ function handle_friend_request(user_id, other_id, id, act) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-            document.getElementById("friend_search").innerHTML = this.responseText;
+            document.getElementById("friendlist-ajax").innerHTML = this.responseText;
 
     };
     
     hide_alert();
+
+    // Updates the friendlist in 0.1 second, giving the process time to finish.
+    setTimeout(function(){ update_friendlist(); }, 100);
 
     xmlhttp.open("GET","includes/process/handle_friend_request.php?ui="+user_id+"&oi="+other_id+"&a="+act+"&id="+id,true);
     xmlhttp.send();
@@ -127,7 +167,7 @@ function start_chat(user_1, user_2) {
     xmlhttp = new XMLHttpRequest(); 
  
     xmlhttp.onreadystatechange = function() { 
-        document.getElementById("chat").innerHTML = this.responseText; 
+        document.getElementById("friendlist-ajax").innerHTML = this.responseText; 
     }; 
     xmlhttp.open("GET","includes/process/start_chatroom.php?u1="+user_1+"&u2="+user_2,true); 
     xmlhttp.send(); 
@@ -223,11 +263,11 @@ function register_user() {
  *
  * @param {event} event - The event in question.
  */
-function upload_file(event, type) {
+function upload_file(event) {
     var file;
     event.preventDefault();
     file = event.dataTransfer.files[0];
-    file_upload(file, type);
+    file_upload(file);
     
   }
  
@@ -237,12 +277,12 @@ function find_file() {
     document.getElementById('selectfile').click();
     document.getElementById('selectfile').onchange = function() {
         file = document.getElementById('selectfile').files[0];
-      avatar_upload(file);
+      file_upload(file);
     };
   }
  
 // Upload avatar picture.
-function file_upload(file, type) {
+function file_upload(file) {
     if(file != undefined) {
         var form_data = new FormData();                  
         form_data.append('file', file);
@@ -256,13 +296,10 @@ function file_upload(file, type) {
         
         hide_alert();
 
-        if (type == 1) {
-            xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
 
-        }
-        if (type == 2) {
-            xmlhttp.open("POST","includes/process/upload_game.php",true);
-        }
+        xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
+
+
         refresh_header_picture();
         xmlhttp.send(form_data);
 

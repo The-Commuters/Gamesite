@@ -10,10 +10,6 @@ include("includes/views/header.php");
 
 if (!$session->is_signed_in()) {redirect("login.php");} 
 
-if (!isset($_GET['f'])) {
-  $search = "";
-  $friends = Friendship::find_friends($user->id);
-}
 ?>
 
 
@@ -33,9 +29,12 @@ if (!isset($_GET['f'])) {
 		    <div class="new-friends-container">
                 <div id="friend_search" class="new-friends"></div>
 		    </div>
-        </div>
+    </div>
 
 	<!----------------------------------- /Friend search---------------------------------------->
+
+    <!-- Div that is used to update friendlist with ajax -->
+    <div id="friendlist_content-ajax">
 
     <?php 
     /**
@@ -45,11 +44,12 @@ if (!isset($_GET['f'])) {
     include("includes/views/friendlist_content.php"); 
     ?>
 
-
+    </div>
+ 
 </main>
 
 <!-- Used for running the process files in for start chatroom and delete user ajax-functions. -->
-<div id="chat"></div>
+<div id="friendlist-ajax"></div>
 
 
 <?php include("includes/views/footer.php"); ?>

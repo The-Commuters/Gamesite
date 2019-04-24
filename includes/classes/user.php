@@ -176,27 +176,37 @@ class User extends Db_object{
 			$sql .= " first_name LIKE '%{$search}%' OR";
 			$sql .= " middle_name LIKE '%{$search}%' OR";
 			$sql .= " last_name LIKE '%{$search}%' OR";
+			$sql .= " email LIKE '%{$search}%' OR";
+			$sql .= " username LIKE '%{$search}%' OR";
+			$sql .= " joined LIKE '%{$search}%' OR";
 			$sql .= " id LIKE '%{$search}%'";
 		}
 
 		//Creator - name or parts of name
-		if ($category == 'first_name') {
-			$sql .= " first_name LIKE '%{$search}%'";
+		if ($category == 'name') {
+			$sql .= " first_name LIKE '%{$search}%' OR";
+			$sql .= " middle_name LIKE '%{$search}%' OR";
+			$sql .= " last_name LIKE '%{$search}%'";
 		}
 		
 		//Creator - name or parts of name
-		if ($category == 'middle_name') {
-			$sql .= " middle_name LIKE '%{$search}%'";
+		if ($category == 'username') {
+			$sql .= " username LIKE '%{$search}%'";
 		}
 
 		//Creator - name or parts of name
-		if ($category == 'last_name') {
-			$sql .= " last_name LIKE '%{$search}%'";
+		if ($category == 'email') {
+			$sql .= " email LIKE '%{$search}%'";
 		}
 
 		//Creator - name or parts of name
 		if ($category == 'id') {
 			$sql .= " id LIKE '%{$search}%'";
+		}
+
+		//Creator - name or parts of name
+		if ($category == 'date') {
+			$sql .= " joined LIKE '%{$search}%'";
 		}
 
 		return self::find_by_query($sql);

@@ -1,6 +1,15 @@
         <?php 
 
         /**
+         * As friendlist_content is renewed as someone delete a
+         * user, this need's to be placed here, as it cant find
+         * the classes without.
+         */
+        $path = $_SERVER['DOCUMENT_ROOT'];
+        $path .= "/gamesite/includes/init.php";
+        require_once($path); 
+
+        /**
          * The upper container holds the friend-requests and shows
          * them up for the user to decide what he/she want to do.
          * They can accept and refuse the request, or visit the  
@@ -64,6 +73,11 @@
          * the user can choose to go to their profile, open 
          * a chatroom and delete from from the friendlist.
          */
+
+        if (!isset($_GET['f'])) {
+          $friends = Friendship::find_friends($session->user_id);
+        }
+
         foreach ($friends as $friend) :
             
             if ($friend->user_1 !== $session->user_id) {
@@ -103,7 +117,7 @@
                     <i class="fas fa-fw fa-comment-alt"></i>
                 </a>
 
-                <div class="action -delete">
+                <div class="action -delete" onclick="delete_friend(<?php echo $session->user_id . ", " . $user->id ?>)">
                     <i class="fas fa-fw fa-user-times"></i>
                 </div>
             </div>
