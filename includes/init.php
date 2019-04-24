@@ -26,5 +26,7 @@ require_once("classes/gained_achievement.php");     // Funksjoner som er utenfor
 require_once("classes/rating.php");      		    // Klassen som omhandler ratings.
 require_once("classes/friendship.php");   		    // Klassen som omhandler vennelister..
 require_once("classes/message.php");    		    // Klassen som omhandler vennelister..
+require_once("classes/email.php"); 
+		//Email klassen ligger her
 
 ?>
