@@ -2,33 +2,32 @@
 
 // Includes teh php-file that defines the path's and includes the object classes.
 require_once("includes/init.php");
-$user_xp = 0;
-$user_level = 0;
+$user_xp = 1;
+$user_level = 1;
 $current_user_level = 1;
+$current_needed_xp = 100;
 //If somone is signed in, place the signed in user in the $user variable.
 if ($session->is_signed_in()) {
     $user = User::find_by_id($session->user_id);
 
-	// Chat with if friend
-	if (User::is_friend($session->user_id, $user->id)) {
 		$user_xp = $user->experience_points;
 		$levels = Level::find_all();
 
-		// Collects the needed xp to get to the next level
+		// Collects the needed xp to get to the next level, and the level of the user.
 		foreach ($levels as $level) {
-			if ($level->needed_xp >= $user_xp && $user->experience_points !== 0) {
-				$current_needed_xp = $level->needed_xp;
-				$current_user_level = $level->id;
+			if ($level->needed_xp >= $user_xp && $user_xp !== 0) {
+				$current_needed_xp = $level->needed_xp+1;
+				$current_user_level = $level->id-1;	
+
 				// Breaks out of the foreach.
 				break; 
 			}
 		}
-
 		// Calculates the percentage of to the next level.
-		$user_xp = ($user_xp/$current_needed_xp)*100;
+		$user_xp = ($user_xp/$current_needed_xp)*100;	
 	}
 
-}
+
 
 ?>
 
