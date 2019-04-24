@@ -7,7 +7,7 @@
  */
 
 $path = __DIR__ ."\..\init.php";
-	require_once($path);
+require_once($path);
 	
 // Checks if the uploaded file if of a acceptable type.
 $file_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];

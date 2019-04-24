@@ -5,9 +5,9 @@
 	 * It makes a new message and sends it into the database.
 	 */
 
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	$path .= "/gamesite/includes/init.php";
+	$path = __DIR__ ."\..\init.php";
 	require_once($path); 
+
 	echo "Finished!";
 	$user = User::find_by_id($session->user_id);						// Collects the signed_in user in $user.
 	

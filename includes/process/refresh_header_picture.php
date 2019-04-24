@@ -5,9 +5,7 @@
  * is used when the profile-picture is updated on 
  * the settings page, is placed in the id 'profile'.
  */
-
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "/gamesite/includes/init.php";
+$path = __DIR__ ."\..\init.php";
 require_once($path); 
 
 $user = User::find_by_id($session->user_id);
