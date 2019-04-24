@@ -66,7 +66,7 @@ class Db_object {
 	/**
 	 * This class makes the rows collected with query in find_by_query() into objects of
 	 * the class they should be, by finding out the type of the object and then place
-	 * each of the items in the $the_record-array into the object. 
+	 * each of the items in the $row-array into the object. 
 	 *  
 	 * @param $row is one row of the rows collected in find_by_query().
 	 * @return $object which is the finished object with the values of hte row.

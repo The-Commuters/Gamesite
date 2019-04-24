@@ -14,14 +14,15 @@ include("includes/views/header.php"); ?>
   
   /**
    * Collects the id of the game from the URL and includes
-   * the link to the canvas
+   * the link to the canvas, if there is no game nothing 
+   * will be shown.
    */
   $current_game_id = $_GET['game'];
   $game = Game::find_by_id($current_game_id);
-  if (isset($game)) {
+  if (isset($game) && $game->filename != "") {
     include($game->game_path());    
 
-  }    
+  } 
 
   ?>
   
