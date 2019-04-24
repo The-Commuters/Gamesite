@@ -13,12 +13,6 @@ $user = User::find_by_id($_GET['id']);
 
 ?>
 
-
-<?php 
-// Chat with if friend
-if (User::is_friend($session->user_id, $user->id)) {
-?>
-
 <main>
 	<h1 class="banner">Profile</h1>
 
@@ -29,6 +23,12 @@ if (User::is_friend($session->user_id, $user->id)) {
 			<a class="action" onclick="start_chat(<?php echo $session->user_id .',' . $user->id?>)"><i class="fas fa-fw fa-comment-alt"></i></a>
 		</div>
 		<div class="profile-content">
+
+			<?php 
+			// Chat with if friend
+			if (User::is_friend($session->user_id, $user->id)) {
+			?>
+			
 			<h2 class="title">Personal information</h2>
 			<div class="content">
 				<div class="profile-info">
@@ -46,6 +46,10 @@ if (User::is_friend($session->user_id, $user->id)) {
 					<div class="info"><?php echo $user->last_name;?></div>
 				</div>
 			</div>
+
+			<?php
+			}
+			?>
 
 			<h2 class="title">Achievements</h2>
 			<div class="content">
@@ -76,6 +80,3 @@ if (User::is_friend($session->user_id, $user->id)) {
 
 </main>
 
-<?php
-}
-?>
