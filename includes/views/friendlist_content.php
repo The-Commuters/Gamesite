@@ -8,6 +8,7 @@
          */
         $requests = Friendship::find_friend_requests($session->user_id);
         foreach ($requests as $request) : 
+
             // Collects all the information of the user that sent the request
             $user = User::find_by_id($request->user_1);
             if ($user->signed_in == 1) {
@@ -17,7 +18,6 @@
                 $signed_in = "";
                 $status = "Offline";
             }
-
             ?>
 
  

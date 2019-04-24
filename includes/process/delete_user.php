@@ -9,14 +9,13 @@
 	$path .= "/gamesite/includes/init.php";
 	require_once($path); 
 
-	if (!$session->is_signed_in()) {redirect("login.php");} 
-
+	// Sends the user back if there is no id in the _GET
 	if (empty($_GET['id'])) {
-		redirect("../users.php");
+		redirect("../../users.php");
 	}
 
+	// Deletes the user with the id from the database.
 	$user = User::find_by_id($_GET['id']);
-
 	$user->delete();
 
 	redirect("../../users.php");

@@ -11,7 +11,7 @@ class Friendship extends Db_object{
 
 	protected static $db_table = "friend_list";
 
-	protected static $db_table_fields = array('id', 'user_1', 'user_2', 'friendship_status', 'chat_id', 'chatroom_status');
+	protected static $db_table_column = array('id', 'user_1', 'user_2', 'friendship_status', 'chat_id', 'chatroom_status');
 	public $id;
 	public $user_1;
 	public $user_2;

@@ -70,7 +70,7 @@
 		// Sets the $user_check to become the id of the user that sent this message.
 		$user_check = $message->user_id;
 
-	endforeach; 							// Ends the foreach.
+	endforeach; 										// Ends the foreach.
 
 	echo '</div>';
 	echo '</div>';

@@ -42,42 +42,41 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 		<div class="profile-content">
 			<h2 class="title">Personal information</h2>
 			<div class="content">
-        <form>
-				<div class="profile-info">
-					<div class="tag">First Name</div>
-					<input id="fname" type="text" name="first_name" value="<?php echo $user->first_name ?>" >
-				</div>
+	        	<form>
+					<div class="profile-info">
+						<div class="tag">First Name</div>
+						<input id="fname" type="text" name="first_name" value="<?php echo $user->first_name ?>" >
+					</div>
 
-				<div class="profile-info">
-					<div class="tag">Middle Name</div>
-					<input id="mname" type="text" name="middle_name" value="<?php echo $user->middle_name; ?>" >
-				</div>
+					<div class="profile-info">
+						<div class="tag">Middle Name</div>
+						<input id="mname" type="text" name="middle_name" value="<?php echo $user->middle_name; ?>" >
+					</div>
 
-				<div class="profile-info">
-					<div class="tag">Last Name</div>
-					<input id="lname" type="text" name="last_name" value="<?php echo $user->last_name; ?>" >
-        </div>
-        
-        <div class="profile-info">
-          <input type="button" name="submit" value="Submit" onclick="update_names()">
-        </div>
-      </form>
+					<div class="profile-info">
+						<div class="tag">Last Name</div>
+						<input id="lname" type="text" name="last_name" value="<?php echo $user->last_name; ?>" >
+	  			    </div>
+	        
+			        <div class="profile-info">
+			          <input type="button" name="submit" value="Submit" onclick="update_names()">
+			        </div>
+	      		</form>
 
-      <div class="profile-info">
-        <div class="tag">Change photo</div>
+		      	<div class="profile-info">
+		        	<div class="tag">Change photo</div>
 
-        <div class="drop-zone" id="drop_zone" ondrop="upload_file(event, 1)" ondragover="return false">
-          <div id="drag_upload_file">
-            <div class="drop-zone-actions">
-              <div>Drag a file or press the button</div>
-              <input type="button" value="Select File" onclick="find_file();" class="button-outlined">
-            </div>
-
-            <input type="file" id="selectfile">
-          </div>
-        </div>
-      </div>
-</div>
+		        	<div class="drop-zone" id="drop_zone" ondrop="upload_file(event, 1)" ondragover="return false">
+		          		<div id="drag_upload_file">
+		            		<div class="drop-zone-actions">
+		              			<div>Drag a file or press the button</div>
+		              			<input type="button" value="Select File" onclick="find_file();" class="button-outlined">
+		            		</div>
+		            		<input type="file" id="selectfile">
+		          		</div>
+		        	</div>
+		      	</div>
+			</div>
 
 			<h2 class="title">Achievements</h2>
 			<div class="content">

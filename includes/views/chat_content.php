@@ -9,9 +9,15 @@
 $friends = Friendship::find_active_chatrooms($session->user_id);
 
 // Used when the user enter the page from a profile.
-$current_user     = 0;
 $current_chat_id  = 0;
 $current_username ="";
+
+// If the user is set, then place the room-id in $current_user.
+if (!isset($_GET["user"])) {
+    $current_user = 0;
+} else {
+    $current_user = $_GET["user"];
+}
 
 ?>
 
@@ -44,28 +50,19 @@ $current_username ="";
                         $user = User::find_by_id($friend->user_2);
                     }
 
-                    // If the user is set, then place the room-id in $current_user.
-                    if (!isset($_GET["user"])) {
-                        $current_user = 0;
-                    } else {
-                        $current_user = $_GET["user"];
-                    }
-
                     // Sets the value in chatId to this user's room-id.
                     if ($current_user == $user->id) {
                         $current_chat_id = $friend->chat_id;
                         $current_username = $user->username;
                     }
 
-                    // We have the user and the friendship, what we need is number of messages not viewed.
+                    // Will collect and count all of the unread messages that the current user have.
                     $unread_messages = Message::count_unread_messages($friend->chat_id, $user->id);
                     $counter = count($unread_messages);
-                    // Counts all of the unread messages, and make 
-                    //foreach ($unread_messages as $key) {$counter++;}
                     ?>
 
                     <!-- The if inside of class will decide if it is active or not, stores collectable information in this div, called parent in the chat-js-->
-                    <div class="user <?php if($_GET["user"] == $user->id) {echo "-active";} ?> " value="<?php echo $friend->chat_id; ?>" 
+                    <div class="user <?php if($current_user == $user->id) {echo "-active";} ?> " value="<?php echo $friend->chat_id; ?>" 
                         username="<?php echo $user->username; ?>" userId="<?php echo $user->id; ?>" fsId="<?php echo $friend->id; ?>" 
                         signed_in="<?php echo $user->signed_in; ?>">
 
@@ -115,8 +112,8 @@ $current_username ="";
             <!-- Where room-id is stored in the value property -->
             <input id="chatId" style="display: none;" value="<?php echo $current_chat_id; ?>">
 
+            <!-- The javascript-file that holds the functions needed for the chat -->
             <script src="assets/js/chat.js"></script>
-            <script src="assets/js/chat-david.js" async></script>
         </div>
     </div>
 </main>

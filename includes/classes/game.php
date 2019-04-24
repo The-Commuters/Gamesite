@@ -10,8 +10,8 @@
 class Game extends Db_object {
 
 	protected static $db_table = "games"; 
-
-	protected static $db_table_fields = array('id', 'title', 'description', 'foldername', 'filename', 'genre', 'creator', 'size', 'rating');
+	protected static $db_table_column = array('id', 'title', 'description', 'foldername', 'filename', 'genre', 'creator', 'size', 'rating');
+	
 	public $id; 
 	public $title;
 	public $description;

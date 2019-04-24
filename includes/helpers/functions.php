@@ -1,11 +1,30 @@
 <?php 
-//Denne siden inneholder individuelle funksjoner som ikke er inne i klasser.
 
+/**
+ * This is where all the php-functions outside of classes is
+ * placed.
+ */
 
-//Funksjon som sjekker om vi har glemt å legge ved de riktige includes, safety-net.
-//Scanner application og leter etter udeklarerte objekter, sier ifra hvis man ikke finner filer.
-// Gjør applikasjonen mer roburst.
-function classAutoLoader($class) {
+/**
+ * Function that uses the header to send the user to the page
+ * that the string $location says, is cleaner than placing 
+ * static header()'s everywhere. 
+ */
+function redirect($location) {
+	
+	header("Location: {$location}");
+
+}
+
+/** 
+ * This function allows you to register multiple functions 
+ * (or static methods from your own Autoload class) that PHP 
+ * will put into a stack/queue and call sequentially when a 
+ * "new Class" is declared. The classes is called after 
+ * each other's on the init, so this need's to be used.
+ * Simply, puts the classes to be loaded in into a stack.
+ */
+function class_auto_loader($class) {
 
 	$class = strtolower($class);
 
@@ -18,15 +37,7 @@ function classAutoLoader($class) {
 	} 
 }
 
-//Laget denne da det er enklere å ta denne i bruk enn statiske headere, man skriver in hvor man ønsker at bruker skal bli ledet hen i kallet på funksjonen.
-function redirect($location) {
-	
-	header("Location: {$location}");
-
-}
-
-
-spl_autoload_register('classAutoLoader');
-
+// Registers the auto-loader for the php-classes.
+spl_autoload_register('class_auto_loader');
 
 ?>

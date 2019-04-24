@@ -9,13 +9,9 @@ $path = $_SERVER['DOCUMENT_ROOT'];
 $path .= "/gamesite/includes/init.php";
 require_once($path); 
 
-?>
-
-<?php 
-
 $genres = array();
 
-// hvis det har blitt søkt på noe.
+// If something have been placed in the search-bar.
 if (isset($_GET['s'])) {
 
 	// Is placed here by the javascript function.
@@ -25,7 +21,6 @@ if (isset($_GET['s'])) {
     $users = User::find_friend($search);
 
 } else {
-
   $search = "";
 
 }
@@ -41,6 +36,15 @@ if (isset($_GET['s'])) {
 
 		// Stops the user from encountering themselves in when searching for users.
 		if ($user->id !== $session->user_id) {
+
+		    if ($user->signed_in == 1) {
+		        $signed_in = "-active";
+		        $status = "Online";
+		    } else {
+		        $signed_in = "";
+		        $status = "Offline";
+		    }
+
 		?>
 
 		<div class="friend">
@@ -60,17 +64,13 @@ if (isset($_GET['s'])) {
 
             <div class="friend-status">
                 <div class="status <?php echo $signed_in ?>"></div>
-                <div class="description">Description</div>
+                <div class="description"><?php echo $status ?></div>
             </div>
 
             <div class="friend-actions">
 				<a href="profile.php?id=<?php echo $user->id; ?>" class="action">
                     <i class="fas fa-user"></i>
 				</a>
-				
-                <a class="action" onclick="start_chat(<?php echo $session->user_id . ", " . $user->id ?>)">
-                    <i class="fas fa-fw fa-comment-alt"></i>
-                </a>
 
 				<!-- Here the button for the friend request is placed, and the message when it is sent. -->
 				

@@ -12,7 +12,7 @@ class Email extends User{
 	public $user_id;
 	public $reset_code;
 
-	protected static $db_table_fields = array('id','reset_code' );
+	protected static $db_table_column = array('id','reset_code' );
 
 
 	public static function mail_Sender($to, $subject, $txt){

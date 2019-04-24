@@ -1,8 +1,9 @@
 <?php 
 
 	/**
- 	* This accepts or deletes a friend-request depending on the last _get.
- 	* Will send a message back that is either positive or negative.
+ 	* This accepts or deletes a friend-request depending 
+ 	* on the last _get. Will send a message back that is 
+ 	* either positive or negative.
  	*/
 
 	$path = $_SERVER['DOCUMENT_ROOT'];
