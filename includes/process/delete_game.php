@@ -7,8 +7,7 @@
 	 */
 
 
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	$path .= "/gamesite/includes/init.php";
+	$path = __DIR__ ."\..\init.php";
 	require_once($path); 
 
 	if (!$session->is_signed_in()) {redirect("login.php");} 

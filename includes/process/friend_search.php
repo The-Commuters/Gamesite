@@ -5,9 +5,8 @@
  * It will go trough all of the users that the search could find and list them.
 */
 
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "/gamesite/includes/init.php";
-require_once($path); 
+$path = __DIR__ ."\..\init.php";
+require_once($path);  
 
 $genres = array();
 
