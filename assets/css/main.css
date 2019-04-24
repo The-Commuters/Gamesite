@@ -2749,12 +2749,22 @@ template {
   color: #fafafa; }
 
 .banner {
+  position: relative;
   margin-top: 0;
   padding: 1rem 2rem;
   background-color: #343a40;
   font-size: 2.4rem;
   font-weight: 600;
   color: #f8f9fa; }
+
+.heart-thing {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%); }
+  .heart-thing > label {
+    font-size: 2.5rem; }
 
 *,
 *:after,
@@ -3519,6 +3529,27 @@ body {
 
   .friend-status .description {
     display: block; } }
+.gamepage-container {
+  grid-template-columns: auto 1fr;
+  display: grid;
+  margin: 2rem auto;
+  max-width: 120rem; }
+
+.gamepage-game > canvas {
+  display: block; }
+
+.gamepage-chat {
+  background-color: rgba(222, 226, 230, 0.5); }
+  .gamepage-chat > .view {
+    margin-right: 0;
+    width: initial; }
+
+.achievementer {
+  position: absolute; }
+
+@media (max-width: 80rem) {
+  .gamepage {
+    display: none; } }
 .body-header {
   background-color: #212529; }
 
@@ -4120,6 +4151,29 @@ hr[data-content] {
   color: #1f1f1f; }
   .upload-title:focus {
     outline: none; }
+
+.user-list {
+  margin: 2rem auto;
+  max-width: 120rem; }
+
+.user-list-search > label {
+  display: block;
+  font-size: 1.4rem;
+  color: #495057; }
+.user-list-search > .user-list-input {
+  grid-template-columns: 1fr auto;
+  grid-gap: 1rem;
+  display: grid; }
+.user-list-search input, .user-list-search select {
+  -webkit-box-shadow: inset 0.1rem 0.1rem rgba(0, 0, 0, 0.1), 0 -0.1rem 0 rgba(255, 255, 255, 0.15);
+          box-shadow: inset 0.1rem 0.1rem rgba(0, 0, 0, 0.1), 0 -0.1rem 0 rgba(255, 255, 255, 0.15);
+  border: 0;
+  border-radius: 1rem;
+  padding: 1rem; }
+  .user-list-search input:focus, .user-list-search select:focus {
+    outline: none; }
+.user-list-search input {
+  padding: 1rem 1.6rem; }
 
 .float-left {
   float: left; }

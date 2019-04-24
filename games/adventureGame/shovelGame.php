@@ -1,6 +1,6 @@
 
 <!-- Ajax call to achievement here -->
-<p id="info"></p>
+<p class="achievementer" id="info"></p>
 
 <!-- The game canvas that the players will see -->
 <canvas id="canvas" width="800" height="600"></canvas>

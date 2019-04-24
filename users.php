@@ -22,26 +22,36 @@ if (!isset($_GET['f'])) {
 
 ?>
 
-<div >  
-<form id="user_search" >
-<div class="">
+<main>
+    <div class="banner">User list</div>
+
+    <div class="user-list">
+        <form id="user_search" class="user-list-search" >
+
+            <label>User Search</label>
+
+            <div class="user-list-input">
+                <input type="text" placeholder="Search" onkeyup="update_userlist()" id="search" value="<?php echo htmlentities($search); ?>">
+
+                <select id="category" onchange="update_userlist()">
+                    <option value="all" selected="selected">All</option>
+                    <option value="id">ID</option>
+                    <option value="name">Name</option>
+                    <option value="username">Username</option>
+                    <option value="email">Email</option>
+                    <option value="date">Date</option>
+                </select>
+            </div>
+        </form>
+
+        <div class="other">
+
+        </div>
+    </div>
+
+</main>
 
 <div>
-
-  <label>User Search</label>
-  <input type="text" onkeyup="update_userlist()" id="search" value="<?php echo htmlentities($search); ?>">
-
-  <select id="category" onchange="update_userlist()">
-    <option value="all" selected="selected">All</option>
-    <option value="first_name">First Name</option>
-    <option value="middle_name">Middle Name</option>
-    <option value="last_name">Last Name</option>
-    <option value="id">ID</option>
-  </select>
-
-</div>
-
-</form>
   <div id="userlist">
     <?php 
     include("includes/views/userlist.php");

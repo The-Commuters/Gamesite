@@ -1,0 +1,30 @@
+.gamepage-container {
+    grid-template-columns: auto 1fr;
+    display: grid;
+
+    margin: 2rem auto;
+    max-width: 120rem;
+}
+
+.gamepage-game > canvas {
+    display: block;
+}
+
+.gamepage-chat {
+    background-color: rgba($color-gray-300, 0.5);
+
+    > .view {
+        margin-right: 0;
+        width: initial;
+    }
+}
+
+.achievementer {
+    position: absolute;
+}
+
+@media (max-width: $breakpoint-laptop) {
+    .gamepage {
+        display: none;
+    }
+}
