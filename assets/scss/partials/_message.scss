@@ -48,11 +48,14 @@
 .message .text {
     display: inline-block;
 
+    overflow-wrap: break-word;
+
     margin: 0.2rem;
     border-radius: 1.8rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding: 0.8rem 1.4rem 1.2rem;
+    max-width: 100%;
 
     background-color: $color-primary-100;
 
