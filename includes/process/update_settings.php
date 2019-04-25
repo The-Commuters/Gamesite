@@ -5,7 +5,7 @@
  * names of the users, tthen sends a alert to the user.
  */
 
-$path = __DIR__ ."\..\init.php";
+$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
 require_once($path);
 
 $first_name  = trim($_GET['fname']);

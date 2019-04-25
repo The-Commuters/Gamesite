@@ -5,7 +5,7 @@
 <?php 
 /* This is where the users is shown to the admin and the admin can delete, view and update them. */
 
-$path = __DIR__ ."\..\init.php";
+$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
 require_once($path); 
 ?> 
 

@@ -5,7 +5,7 @@
 	 * And then it sends them back to the same list after it is done.  
 	 */
 
-	$path = __DIR__ ."\..\init.php";
+	$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
 	require_once($path); 
 
 	// Sends the user back if there is no id in the _GET

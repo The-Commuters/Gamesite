@@ -6,7 +6,7 @@
 	 * make it show in the chat.
 	 */
 
-	$path = __DIR__ ."\..\init.php";
+	$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
 	require_once($path);
 
 	// Gathers the id needed to find the friend_list row.

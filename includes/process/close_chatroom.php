@@ -6,8 +6,7 @@
 	 * button on.
 	 */
 
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	$path .= "/gamesite/includes/init.php";
+	$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
 	require_once($path); 
 
 	// Gathers the id needed to find the friend_list row.
