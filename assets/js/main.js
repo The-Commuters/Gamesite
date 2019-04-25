@@ -21,6 +21,25 @@ function rate_game(game_id) {
 
 }
 
+/**
+ *
+ */
+function delete_user(user_id) {
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+            document.getElementById("userlist-ajax").innerHTML = this.responseText;
+
+    };
+    
+    // Updates the friendlist in 0.1 second, giving the process time to finish.
+    setTimeout(function(){ update_userlist(); }, 100);
+
+    xmlhttp.open("GET","includes/process/delete_user.php?id="+user_id,true);
+    xmlhttp.send();
+    
+}
+
 function update_userlist() {
 
     var search = document.getElementById("search").value;
