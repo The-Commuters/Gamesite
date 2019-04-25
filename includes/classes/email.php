@@ -9,11 +9,6 @@
 	require 'PHPMailer/PHPMailer.php';
 	require 'PHPMailer/SMTP.php';
 
-
-	$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
-	require_once($path); 
-
-
 class Email extends User{
 
 	// Denne styrer hvilken mail som eposten blir sent fra 
@@ -44,15 +39,6 @@ class Email extends User{
 
 		static function mail_Sender($mail, $to, $subject, $txt){
 		
-	
-	// Denne setter avsender adresses ved bruk av variablen fromEmail
-	//$headers = "From:". self::$fromEmail . "\r\n";
-
-	/* PHP sin egen mail sender, den bruker standard SMTP Port for mail sending som er 25, disse kan endres i php sine instillinger.
-	Virker kun på lokale adresser for øyeblikket. 
-	*/
-	//mail($to, $subject, $txt, $headers);
-
 		
         /* Set the mail sender. */
 	   $mail->setFrom('no-reply@cm-games.com', 'CM-Games');
@@ -69,36 +55,49 @@ class Email extends User{
 	  /* Tells PHPMailer to use SMTP. */
 	   $mail->isSMTP();
 	   
-	   /* SMTP server address. */
+	   
+	   // * For local use *
+	   // If you want to use it localy you need a local mailserver that has a smtp server localhost with port 25 and a mail client that can connect to the server and read these mails.
+	  
+	   // SMTP server address. 
+	   $mail->Host = 'localhost';
+
+	   $mail->Port = 25;  
+
+	   
+	   /*
+
+	   // * For Sendgrid use or any other mail provider online*
+
+	  // SMTP Host
 	   $mail->Host = 'smtp.sendgrid.net';
 
-	   /* Use SMTP authentication. */
+	  // Use SMTP authentication. 
 	   $mail->SMTPAuth = true;
 
 	   $mail->Username = 'apikey';
 
-	   $mail->Password = '';
+	   // Here you need to insert a api key
+	   $mail->Password = 'OUR API KEY HERE, message me to get it or get your own';
+
+	   // Set the encryption system. 
+	   //$mail->SMTPSecure = 'tls';
+
+	   //Set the SMTP port. 
+	   //$mail->Port = 587;
+
+
+	 	*/
+
+	   $mail->SMTPDebug = 0;
 	   
-	   $mail->SMTPDebug = 4;
-	   
-	   /* Set the encryption system. */
-	   $mail->SMTPSecure = 'tls';
-	   
-	   /* Set the SMTP port. */
-	   $mail->Port = 587;
-	   
-	   
-	   //var_dump($mail);
 	  
 	   /* Finally send the mail. */
-	   
-	   
-	  //var_dump($mail);
-	  
+
 	  if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-    echo "Message sent!";
+    //echo "Message sent!";
 }
 	}
  
@@ -122,7 +121,7 @@ class Email extends User{
 
 		$subject = "Hello " . $user_name . " Please activate your account at CM Games";
 
-		$txt = "Please press the link below to activate your new account at CM Games " . "https://fenes.no/gamesite/activate.php?code=" . $verify_code . " Thank you for registering. ";
+		$txt = "Please press the link below to activate your new account at CM Games " . "http://localhost/gamesite/activate.php?code=" . $verify_code . " Thank you for registering. ";
 		
 		
 		self::mail_sender($mail, $to, $subject, $txt);
@@ -159,7 +158,7 @@ class Email extends User{
 
 		$subject = "Hello " . $user_name . " Here is your password reset";
 
-		$txt = "Please press the link below to reset your password for your account at CM Games " . "https://fenes.no/gamesite/reset.php?reset_code=" . $reset_code;
+		$txt = "Please press the link below to reset your password for your account at CM Games " . "http://localhost/gamesite/reset.php?reset_code=" . $reset_code;
 		
 		
 		self::mail_sender($mail, $to, $subject, $txt);
