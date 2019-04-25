@@ -6,7 +6,7 @@
  	* either positive or negative.
  	*/
 
-	$path = __DIR__ ."\..\init.php";
+	$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
     require_once($path); 
 	
 	$user_1 = $_GET['ui']; 												// The id of the user that is logged in.

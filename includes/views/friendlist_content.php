@@ -4,10 +4,11 @@
          * As friendlist_content is renewed as someone delete a
          * user, this need's to be placed here, as it cant find
          * the classes without.
-         */
-        $path = $_SERVER['DOCUMENT_ROOT'];
-        $path .= "/gamesite/includes/init.php";
+        */
+
+        $path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
         require_once($path); 
+        
 
         /**
          * The upper container holds the friend-requests and shows

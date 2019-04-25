@@ -5,7 +5,7 @@
  * is used when the profile-picture is updated on 
  * the settings page, is placed in the id 'profile'.
  */
-$path = __DIR__ ."\..\init.php";
+$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
 require_once($path); 
 
 $user = User::find_by_id($session->user_id);

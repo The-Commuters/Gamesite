@@ -5,7 +5,7 @@
  * It will go trough all of the users that the search could find and list them.
 */
 
-$path = __DIR__ ."\..\init.php";
+$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
 require_once($path);  
 
 $genres = array();
