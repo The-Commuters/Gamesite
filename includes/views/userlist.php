@@ -5,8 +5,7 @@
 <?php 
 /* This is where the users is shown to the admin and the admin can delete, view and update them. */
 
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "/gamesite/includes/init.php";
+$path = __DIR__ ."\..\init.php";
 require_once($path); 
 ?> 
 

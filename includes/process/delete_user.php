@@ -5,8 +5,7 @@
 	 * And then it sends them back to the same list after it is done.  
 	 */
 
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	$path .= "/gamesite/includes/init.php";
+	$path = __DIR__ ."\..\init.php";
 	require_once($path); 
 
 	// Sends the user back if there is no id in the _GET

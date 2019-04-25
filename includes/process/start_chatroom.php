@@ -6,9 +6,8 @@
 	 * make it show in the chat.
 	 */
 
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	$path .= "/gamesite/includes/init.php";
-	require_once($path); 
+	$path = __DIR__ ."\..\init.php";
+	require_once($path);
 
 	// Gathers the id needed to find the friend_list row.
 

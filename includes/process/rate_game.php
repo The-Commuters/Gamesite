@@ -6,8 +6,7 @@
 	 * users rating in the database.
 	*/
 
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	$path .= "/gamesite/includes/init.php";
+	$path = __DIR__ ."\..\init.php";
 	require_once($path); 
 
 	$rating          = new Rating;		  			// Creates here a new Rating-object.

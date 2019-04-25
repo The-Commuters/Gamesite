@@ -5,9 +5,8 @@
  * names of the users, tthen sends a alert to the user.
  */
 
-$path = $_SERVER['DOCUMENT_ROOT'];
-$path .= "/gamesite/includes/init.php";
-require_once($path); 
+$path = __DIR__ ."\..\init.php";
+require_once($path);
 
 $first_name  = trim($_GET['fname']);
 $middle_name = trim($_GET['mname']);

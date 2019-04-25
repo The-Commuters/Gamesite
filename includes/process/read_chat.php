@@ -5,8 +5,7 @@
 	 * places them into it for the users to read.
 	 */
 
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	$path .= "/gamesite/includes/init.php";
+	$path = __DIR__ ."\..\init.php";
 	require_once($path); 
 
 	$room_id  = substr($_GET["chatId"], 0, 20);   		// Collects the room_id from the input where its placed.
