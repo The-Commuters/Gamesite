@@ -353,7 +353,7 @@ class User extends Db_object{
 			$user->verify_code = md5($username . microtime());
 
 			// Closing this out for now as it brings a error without the setup.
-			 //Email::send_ActivationMail($email, $username, $user->verify_code);
+			 Email::send_ActivationMail($email, $username, $user->verify_code);
 
 			$user->create();
 
