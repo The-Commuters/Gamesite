@@ -7,7 +7,7 @@
 */
 
 defined('DS')            ? null : define('DS', DIRECTORY_SEPARATOR);  // Backslash in windows, annet i mac.
-defined('SITE_ROOT')     ? null : define('SITE_ROOT', DS . basename(dirname(__DIR__ ,3 )). DS . basename(dirname(__DIR__ ,2 )) . DS . basename(dirname(__DIR__ ,1 ) ));  // Dette er plassering fil folderen, må endres ettersom hvor den er plassert.
+defined('SITE_ROOT')     ? null : define('SITE_ROOT', dirname(__DIR__ ,1 ));  // Dette er plassering fil folderen, må endres ettersom hvor den er plassert.
 defined('INCLUDES_PATH') ? null : define('INCLUDES_PATH', SITE_ROOT . DS . 'includes');  // Definer INCLUDES_PATH omg den ikke er definert allerede. 
 defined('CLASSES_PATH')  ? null : define('CLASSES_PATH', INCLUDES_PATH . DS . 'classes' . DS);  // Definer CLASSES_PATH hvis den ikke er definert allerede.
 defined('PROCESS_PATH')  ? null : define('PROCESS_PATH', INCLUDES_PATH . DS . 'process' . DS);  // Definer CLASSES_PATH hvis den ikke er definert allerede.
