@@ -178,7 +178,6 @@ let view = document.getElementById("view");
 
 // Chat Input
 let input = document.getElementById("chat-input");
-
 let inputValue;
 let map = {};
 let reset = false;
@@ -193,14 +192,19 @@ input.onkeydown = onkeyup = function(e){
         setTimeout(function(){ view.scrollTop = view.scrollHeight; }, 200);
         reset = true;
     }
-
 }
 
 input.addEventListener("input", event => {
+    input.style.height = "";
+    input.style.height = input.scrollHeight + "px";
+
+    let inputParent = input.parentNode;
+    inputParent.scrollTop = inputParent.scrollHeight - inputParent.clientHeight;
 
     if (reset) {
         reset = false;
         input.value = "";
         input.style.height = "";
+        input.style.height = input.scrollHeight + "px";
     }
 });
