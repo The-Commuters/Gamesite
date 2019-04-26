@@ -56,7 +56,7 @@ if (isset($_GET['s'])) {
 				$username = strtolower($user->username);
 
 				// Switches out what is searched with the same with marks around it.
-				echo str_replace($search, '<mark>' . $search . '</mark>', $username); 
+				echo str_replace($search, '<span class="friend-highlight">' . $search . '</span>', $username); 
 
 				?></div>
 			</div>

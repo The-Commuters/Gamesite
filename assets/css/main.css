@@ -3439,12 +3439,12 @@ body {
   display: grid;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  padding: 1rem; }
+  padding: 1rem;
+  color: #1f1f1f; }
   .friend:hover {
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    background-color: #343a40;
-    color: #fafafa; }
+    background-color: #dee2e6; }
   .friend:hover > .friend-actions > .action {
     visibility: visible; }
 
@@ -3529,6 +3529,9 @@ body {
 
   .friend-status .description {
     display: block; } }
+.friend-highlight {
+  color: #54D266; }
+
 .gamepage-container {
   grid-template-columns: auto 1fr;
   display: grid;
@@ -4320,4 +4323,5 @@ hr[data-content] {
   margin: 0 auto;
   padding: 2rem;
   max-width: 70rem; }
+
 /*# sourceMappingURL=main.css.map */

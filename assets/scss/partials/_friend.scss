@@ -78,12 +78,12 @@
     border-radius: 0.5rem;
     padding: 1rem;
 
+    color: $color-dark;
+
     &:hover {
         box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.2);
 
-        background-color: $color-gray-800;
-
-        color: $color-light;
+        background-color: $color-gray-300;
     }
 
     &:hover > .friend-actions > .action {
@@ -193,4 +193,8 @@
     .friend-status .description {
         display: block;
     }
+}
+
+.friend-highlight {
+    color: $color-primary-500;
 }
