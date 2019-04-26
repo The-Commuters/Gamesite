@@ -3,9 +3,7 @@
 //Klassen som omgjør alt ved håndtering av epost sending til brukere på siden.
 	/* Namespace alias. */
 	use PHPMailer\PHPMailer\PHPMailer;
-	use PHPMailer\PHPMailer\Exception;
-
-	require 'PHPMailer/Exception.php';
+	
 	require 'PHPMailer/PHPMailer.php';
 	require 'PHPMailer/SMTP.php';
 
