@@ -63,7 +63,10 @@
 }
 
 .chatlist .user .username {
+    overflow: hidden;
+
     margin-left: 1rem;
+    max-width: 14rem;
 
     font-weight: 500;
     color: $color-gray-600;

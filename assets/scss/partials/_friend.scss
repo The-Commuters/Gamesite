@@ -30,6 +30,10 @@
         &:focus {
             outline: none;
         }
+
+        &:focus + .new-friends-container {
+            display: block;
+        }
     }
 
     .new-friends-container {
@@ -38,8 +42,14 @@
         top: 100%;
         left: 0;
 
+        display: none;
+
         padding: 1rem;
         width: 100%;
+
+        &:hover {
+            display: block;
+        }
 
         .new-friends {
             overflow: auto;
@@ -74,7 +84,6 @@
 
     display: grid;
 
-    margin-bottom: 1rem;
     border-radius: 0.5rem;
     padding: 1rem;
 
@@ -185,6 +194,10 @@
     color: $color-light;
 }
 
+.friend-highlight {
+    color: $color-primary-500;
+}
+
 @media (min-width: $breakpoint-tablet) {
     .friend {
         grid-gap: 3rem;
@@ -193,8 +206,4 @@
     .friend-status .description {
         display: block;
     }
-}
-
-.friend-highlight {
-    color: $color-primary-500;
 }
