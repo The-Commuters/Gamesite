@@ -99,7 +99,6 @@ if ($session->is_signed_in()) {
 						<a href="chat.php"><i class="fas fa-fw fa-envelope"></i>Messages</a>
 
 						<hr class="divider">
-						<a href="donate.php"><i class="fas fa-fw fa-heart"></i>Donate</a>
 						<a href="upload.php"><i class="fas fa-fw fa-upload"></i>Submit game</a>
 
 						<?php if ($user->is_admin($user->id)) { ?>

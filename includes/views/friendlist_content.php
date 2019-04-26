@@ -31,7 +31,7 @@
             ?>
 
  
-            <div class="friendlist-container">
+            
                 <div class="friend">
                     <div class="friend-info">
                         <div style="background-image: url(<?php echo $user->get_user_image(); ?>" class="avatar -s"></div>
@@ -62,7 +62,7 @@
 
                     </div>
                 </div>
-            </div>
+     
             
         <?php 
         endforeach; 

@@ -12,6 +12,7 @@
 	$messages = Message::find_messages($room_id);		// Finds all the messages that belong to this room.
 	$day_check = 0;										// Used when checking where the date-lines should be placed.
 	$minute_check = 0;									// Used when checking wheter the messages should be lumped together.
+	$user_check = 0; 									// Used when checking if the user was the one that posted the last message.
 
 	foreach ($messages as $message) : 					// Does this for each of the messages that belong to the room.
 		
