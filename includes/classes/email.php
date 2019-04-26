@@ -3,7 +3,7 @@
 //Klassen som omgjør alt ved håndtering av epost sending til brukere på siden.
 	/* Namespace alias. */
 	use PHPMailer\PHPMailer\PHPMailer;
-	
+
 	require 'PHPMailer/PHPMailer.php';
 	require 'PHPMailer/SMTP.php';
 
@@ -35,14 +35,14 @@ class Email extends User{
 	}
 	*/
 
-		static function mail_Sender($mail, $to, $subject, $txt){
+		static function mail_Sender($mail, $to, $user_name, $subject, $txt){
 		
 		
         /* Set the mail sender. */
 	   $mail->setFrom('no-reply@cm-games.com', 'CM-Games');
 
 	   /* Add a recipient. */
-	   $mail->addAddress($to, 'Test');
+	   $mail->addAddress($to, $user_name);
 
 	   /* Set the subject. */
 	   $mail->Subject = $subject;
@@ -123,7 +123,7 @@ class Email extends User{
 		$txt = "Please press the link below to activate your new account at CM Games " . "http://localhost/gamesite/activate.php?code=" . $verify_code . " Thank you for registering. ";
 		
 		
-		self::mail_sender($mail, $to, $subject, $txt);
+		self::mail_sender($mail, $to, $user_name , $subject, $txt);
 	}
 	
 	/**
@@ -160,7 +160,7 @@ class Email extends User{
 		$txt = "Please press the link below to reset your password for your account at CM Games " . "http://localhost/gamesite/reset.php?reset_code=" . $reset_code;
 		
 		
-		self::mail_sender($mail, $to, $subject, $txt);
+		self::mail_sender($mail, $to, $user_name, $subject, $txt);
 	}
 
 	public function create_reset_code($email){
@@ -168,7 +168,7 @@ class Email extends User{
 		global $database;
 		
 
-		$error_array       = array();
+		$error_array = array();
 		// Tar bort eventuele ting som ikke skal være med i stringen
 		$email = $database->escape_string($email);
 		
