@@ -1,15 +1,19 @@
 <?php 
 
-//Klassen som omgjør alt ved håndtering av epost sending til brukere på siden.
-	/* Namespace alias. */
-	use PHPMailer\PHPMailer\PHPMailer;
+/**
+ * This class does the email handling 
+ * and sending to the users on the page.
+ *
+ */
 
-	require 'PHPMailer/PHPMailer.php';
-	require 'PHPMailer/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
 
 class Email extends User{
 
-	// Denne styrer hvilken mail som eposten blir sent fra 
+	// This controls which email adress, the emails created by this class is sent from
 	private static $fromEmail = "no-reply@cm-games.com" ;
 
 	protected static $db_table = "email_codes";
@@ -35,7 +39,28 @@ class Email extends User{
 	}
 	*/
 
-		static function mail_Sender($mail, $to, $user_name, $subject, $txt){
+	/**
+	* A method that will take in the users mail from either 
+	* the sendactivationmail function or the sendresetmail function  
+	* and then send mail to it using the PHPMailer library
+	* 
+	* It has 2 options either local mail-sending 
+	* or sending using a remote SMTP server.
+	* The remote option currently uses SendGrids API 
+	* and therefore needs a api key to function 
+	* 
+	* These can be switched between by uncommenting 
+	* the other option and vice versa.  
+	* 
+	* @param $mail
+	* @param $to
+	* @param $user_name
+	* @param $subject
+	* @param $txt
+	* 
+	*/
+
+	public static function mail_Sender($mail, $to, $user_name, $subject, $txt){
 		
 		
         /* Set the mail sender. */
@@ -55,35 +80,41 @@ class Email extends User{
 	   
 	   
 	   // * For local use *
-	   // If you want to use it localy you need a local mailserver that has a smtp server localhost with port 25 and a mail client that can connect to the server and read these mails.
-	  
+	   /* If you want to use it localy 
+	   *  you need a local mailserver that has a 
+	   *  SMTP server running on localhost with port 25 
+	   *  and a mail client that can connect to the server 
+	   *  and read these mails.
+	   */
+
 	   // SMTP server address. 
 	   $mail->Host = 'localhost';
 
 	   $mail->Port = 25;  
 
-	   
 
-	   // * For Sendgrid use or any other mail provider online*
 
-	   /*
-	  // SMTP Host
+	// * For Sendgrid use or any other mail provider online*
+
+	/*
+
+	// SMTP Host
 	   $mail->Host = 'smtp.sendgrid.net';
 
-	  // Use SMTP authentication. 
+	// Uses SMTP authentication. 
 	   $mail->SMTPAuth = true;
-
+	
+	// Username and password / api key
 	   $mail->Username = 'apikey';
 
-	   // Here you need to insert a api key
-
+	// A file that needs to contain an key or a password for connecting to the SMTP server
 	   require 'safe.php';
 	   $mail->Password = $api;
 
-	   // Set the encryption system. 
+	// Sets the encryption system. 
 	   $mail->SMTPSecure = 'tls';
 
-	   //Set the SMTP port. 
+	// Sets the SMTP port. 
 	   $mail->Port = 587;
 
 	*/
@@ -91,7 +122,7 @@ class Email extends User{
 	   $mail->SMTPDebug = 0;
 	   
 	  
-	   /* Finally send the mail. */
+	/* Finally , it will send the mail. */
 
 	  if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
@@ -99,11 +130,9 @@ class Email extends User{
     //echo "Message sent!";
 }
 	}
- 
 
-	// Denne tar inn hvilken mail det skal sendes til og fornavent til brukeren 
+ 	/*
 
-	/*
 	public static function send_ActivationMail($to, $user_name, $verify_code ){
 
 		$subject = "Hello " . $user_name . " Please activate your account at CM Games";
@@ -113,6 +142,19 @@ class Email extends User{
 		
 		self::mail_sender($to, $subject, $txt);
 	}
+	*/
+
+	/**
+	* This method will take the users email in and 
+	* then, it will send a activation mail with their unique verify-code to 
+	* the mail that they put in when signed up for our site.
+	* 
+	* It uses the mail_sender method to do this. 
+	* 
+	* @param $to
+	* @param $user_name
+	* @param $verify_code
+	* 
 	*/
 
 	public static function send_ActivationMail($to, $user_name, $verify_code ){
@@ -126,16 +168,7 @@ class Email extends User{
 		self::mail_sender($mail, $to, $user_name , $subject, $txt);
 	}
 	
-	/**
-	 * Sends the user a password reset link 
-	 * Then the user can click on reset link 
-	 * and set their new password.
-	 *
-	 * @param $to
-	 * @param $user_name
-	 * @param $reset_code
-	 * 
-	 */
+	
 
 	/*
 
@@ -151,6 +184,20 @@ class Email extends User{
 
 	*/
 
+	/**
+	 * This method sends the user a password reset link 
+	 * using the mail_Sender method with their username 
+	 * and their code from the create_reset_code method,
+	 * 
+	 * Then the user can click on reset link 
+	 * and set their new password.
+	 *
+	 * @param $to
+	 * @param $user_name
+	 * @param $reset_code
+	 * 
+	 */
+
 	// PHPMailer version
 	public static function send_Password_ResetMail($to, $user_name, $reset_code ){
 		$mail = new PHPMailer();
@@ -163,26 +210,33 @@ class Email extends User{
 		self::mail_sender($mail, $to, $user_name, $subject, $txt);
 	}
 
+	/**
+	* This method will take in the users email, check if 
+	* it is in the database, and if it is in the database, 
+	* it will create a unique code for them to 
+	* reset their password with, and then it will send it using 
+	* the send_Password_resetMail method.
+	*
+	* @param $email
+	*/
+
 	public function create_reset_code($email){
 
 		global $database;
 		
 
 		$error_array = array();
-		// Tar bort eventuele ting som ikke skal være med i stringen
+		// Removes any code that should not be included in the string
 		$email = $database->escape_string($email);
 		
-		// Finner brukeren med denne eposten
+		// Finds the user with this specific email 
 		$in = User::find_user_by_email($email);
-
-		// Legger bruker objektet inn i variabelen $user og hopper til første posisjon 	
-
+	
+		// Adds the user object to the variable $user and jumps to the first position.
 		if(!empty($in)){
 			$user = array_shift($in);
-			//var_dump($user);
 
-		//$user = array_shift($in);
-		// Oppretter et nytt email objekt 
+		// Creates a new email object 
 		$user_email = new Email();
 		// Setter variablene id og lager en unik kode for reseting
 		$user_email->id = $user->id;
@@ -210,6 +264,19 @@ class Email extends User{
 
 	}
 
+	/**
+	* Method that will take in the reset code from the user 
+	* and then it will try to locate this reset code in the database 
+	* and if it finds it, it will allow the user to 
+	* set a new password of their choice thru the 
+	* method verify_password_update in the user class  . 
+	*
+	* If it cant find it it will let 
+	* the user know that the code is invalid.
+	*
+	* @param $code
+	*/
+
 
 	public static function find_user_by_reset_code($code){
 
@@ -236,7 +303,7 @@ class Email extends User{
 
 
 	/**
-	 * This is the clas that create database-rows for any of the objects that have
+	 * This is the class that create database-rows for any of the objects that have
 	 * their own object-classes, this checks and stores rows in the database to be 
 	 * used later, and is like the other classes abstract so that it works for all
 	 * the classes. It also uses the log_user_activity to create a new row in the 
