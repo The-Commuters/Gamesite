@@ -4058,6 +4058,13 @@ hr[data-content] {
     color: #343a40; }
   .profile-info .info {
     font-weight: 400; }
+  .profile-info > input[type=text] {
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem 1.6rem;
+    width: 100%; }
+    .profile-info > input[type=text]:focus {
+      outline: none; }
 
 .drop-zone {
   -webkit-box-pack: center;

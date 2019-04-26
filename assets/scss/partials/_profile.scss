@@ -79,6 +79,18 @@
     .info {
         font-weight: 400;
     }
+
+    > input[type=text] {
+
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem 1.6rem;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+    }
 }
 
 .drop-zone {

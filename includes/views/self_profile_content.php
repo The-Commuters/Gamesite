@@ -57,9 +57,9 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 						<div class="tag">Last Name</div>
 						<input id="lname" type="text" name="last_name" value="<?php echo $user->last_name; ?>" >
 	  			    </div>
-	        
+
 			        <div class="profile-info">
-			          <input type="button" name="submit" value="Submit" onclick="update_names()">
+			          <input class="button-contained" type="button" name="submit" value="Submit" onclick="update_names()">
 			        </div>
 	      		</form>
 

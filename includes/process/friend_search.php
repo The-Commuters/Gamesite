@@ -49,7 +49,7 @@ if (isset($_GET['s'])) {
 		<div class="friend">
             <div class="friend-info">
 				<div style="background-image: url(<?php echo $user->get_user_image(); ?>" class="avatar -s"></div>
-				
+
                 <div href="profile.php?id=<?php echo $user->id; ?>" class="username"><?php
 
 				// Gets the username and then makes the letters lowercase.
@@ -72,7 +72,7 @@ if (isset($_GET['s'])) {
 				</a>
 
 				<!-- Here the button for the friend request is placed, and the message when it is sent. -->
-				
+
 					<!-- If the user is not a friend with this uder, hten show the send friend-request button -->
 				<?php if (!User::is_friend($session->user_id, $user->id)) { ?>
 				<button class="action -add" onclick="send_friend_request(<?php echo $session->user_id ?>, <?php echo $user->id ?>)">

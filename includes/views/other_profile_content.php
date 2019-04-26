@@ -28,7 +28,7 @@ $user = User::find_by_id($_GET['id']);
 			// Chat with if friend
 			if (User::is_friend($session->user_id, $user->id)) {
 			?>
-			
+
 			<h2 class="title">Personal information</h2>
 			<div class="content">
 				<div class="profile-info">
