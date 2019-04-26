@@ -65,10 +65,10 @@ class Email extends User{
 	   $mail->Port = 25;  
 
 	   
-	   /*
 
 	   // * For Sendgrid use or any other mail provider online*
 
+	   /*
 	  // SMTP Host
 	   $mail->Host = 'smtp.sendgrid.net';
 
@@ -78,17 +78,18 @@ class Email extends User{
 	   $mail->Username = 'apikey';
 
 	   // Here you need to insert a api key
-	   $mail->Password = 'OUR API KEY HERE, message me to get it or get your own';
+
+	   require 'safe.php';
+	   $mail->Password = $api;
 
 	   // Set the encryption system. 
-	   //$mail->SMTPSecure = 'tls';
+	   $mail->SMTPSecure = 'tls';
 
 	   //Set the SMTP port. 
-	   //$mail->Port = 587;
+	   $mail->Port = 587;
 
-
-	 	*/
-
+	*/
+	 	
 	   $mail->SMTPDebug = 0;
 	   
 	  
