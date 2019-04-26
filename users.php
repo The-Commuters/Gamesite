@@ -44,47 +44,19 @@ if (!isset($_GET['f'])) {
             </div>
         </form>
 
-        <table class="user-list-list">
-          <thead>
-            <tr>
-              <th>Avatar</th>
-              <th>Username</th>
-              <th class="user-list-hide-laptop">Name</th>
-              <th class="user-list-hide-tablet">Email</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
 
-          <tbody>
-            <tr>
-              <td><div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div></td>
-              <td>WilliWonka</td>
-              <td class="user-list-hide-laptop">Willi Wonka</td>
-              <td class="user-list-hide-tablet">hehe@willi.no</td>
-              <td>
-                <div class="user-list-actions">
-                  <a href="profile.php" data-tooltip="Profile" class="user-list-action tooltip"><i class="fas fa-user"></i></a>
 
-                  <!-- Legg till en sjekk for om de virkelig vil slette denne brukeren -->
-                  <button data-tooltip="Delete" class="user-list-action -delete tooltip"><i class="fas fa-user-times"></i></button>
-
-                  <!-- Legg till en sjekk for om de virkelig vil promote denne brukeren -->
-                  <button data-tooltip="Promote" class="user-list-action -promote tooltip"><i class="fas fa-user-tie"></i></button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-
-</main>
-
-<div>
   <div id="userlist">
     <?php 
     include("includes/views/userlist.php");
     ?>
   </div>
-</div>  
+ 
+    </div>
+
+</main>
+
+<!-- Used for running the process files in for start chatroom and delete user ajax-functions. -->
+<div id="userlist-ajax"></div>
 
 <?php include("includes/views/footer.php"); ?>

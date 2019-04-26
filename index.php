@@ -19,18 +19,19 @@ if (!isset($_GET['s'])) {
 <main class="games">
 
     <form action="">
-        <!-- Temporary solution -->
-        <select id="category" onchange="update_gamelist()">
-            <option value="" selected="selected">Category</option>
-            <option value="title">Title</option>
-            <option value="creator">Creator</option>
-        </select>
-
-        <select id="genre" onchange="update_gamelist()">
+        
+        <select id="genre" class="hide-element" onchange="update_gamelist()">
             <option value="" selected="selected">Genre</option>
-            <option value="action">Action</option>
-            <option value="comedy">Comedy</option>
-            <option value="slice of life">Slife Of Life</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Idle">Idle</option>
+            <option value="Rougelike">Rougelike</option>
+            <option value="Sport">Sport</option>
+            <option value="Simulation">Simulation</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Romance">Romance</option>
         </select>
     </form>
 
@@ -65,34 +66,22 @@ if (!isset($_GET['s'])) {
                       --  Simulation orange
                       --  Strategy cyan
                     -->
-                    <div class="list">
-                        <div>Adventure</div>
-                        <div>Action</div>
-                        <div>Comedy</div>
-                        <div>Fantasy</div>
-                        <div>Idle</div>
-                        <div>Romance</div>
-                        <div>Rouglike</div>
-                        <div>Sport</div>
-                        <div class="active">Simulation</div>
-                        <div>Strategy</div>
+                    <div id="genrelist" class="list">
+                        <div class="genre active"data-genre="">All Genres</div>
+                        <div class="genre" data-genre="Adventure">Adventure</div>
+                        <div class="genre" data-genre="Action">Action</div>
+                        <div class="genre" data-genre="Comedy">Comedy</div>
+                        <div class="genre" data-genre="Fantasy">Fantasy</div>
+                        <div class="genre" data-genre="Idle">Idle</div>
+                        <div class="genre" data-genre="Romance">Romance</div>
+                        <div class="genre" data-genre="Rougelike">Rougelike</div>
+                        <div class="genre" data-genre="Sport">Sport</div>
+                        <div class="genre" data-genre="Simulation">Simulation</div>
+                        <div class="genre" data-genre="Strategy">Strategy</div>
                     </div>
                 </div>
 
-                <!-- Sort -->
-                <div class="dropdown -left">
-                    <div class="option">
-                        <i class="fas fa-fw fa-sort"></i>
-                    </div>
-
-                    <div class="list">
-                        <div>Popularity</div>
-                        <div>Title</div>
-                        <div>Creator</div>
-                        <div>Newest</div>
-                        <div class="active">Oldest</div>
-                    </div>
-                </div>
+                <script src="assets/js/gamelist_sorting.js"></script>
             </div>
         </header>
 

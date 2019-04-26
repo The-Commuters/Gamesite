@@ -17,6 +17,4 @@
 	$user = User::find_by_id($_GET['id']);
 	$user->delete();
 
-	redirect("../../users.php");
-
 ?>

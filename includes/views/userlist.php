@@ -19,83 +19,66 @@ if (isset($_GET['s'])) {
 	$search  = $_GET['s'];
 	$category = $_GET['c'];
 
-    $users = User::find_user($search, $category);
+	$users = User::find_user($search, $category);
 
 } else {
 
-  $search = "";
-  $users = User::find_all();
+	$search = "";
+	$users = User::find_all();
 
 }
 
 ?>
 
-	<table>
-		<thead>
 
-			<tr>
-				<th>Image</th>
-				<th>Username</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Joined</th>
-			</tr>
 
-		</thead>
-		<tbody>
+<table class="user-list-list">
+	<thead>
+		<tr>
+			<th>Avatar</th>
+			<th>Username</th>
+			<th class="user-list-hide-laptop">Name</th>
+			<th class="user-list-hide-tablet">Email</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+
+	<tbody>
+
 
 		<!-- For each loop that runs trough all the elements in the $games array. -->
-		<?php foreach ($users as $user) : ?>
+		<?php foreach ($users as $user) : 
 
-			<tr>
+			// Gets the username and then makes the letters lowercase.
+			$username = strtolower($user->username);
+			$email = strtolower($user->email);
+			$first_name = strtolower($user->first_name);
+			$middle_name = strtolower($user->middle_name);
+			$last_name = strtolower($user->last_name);
+			$full_name = $first_name . " " . $middle_name . " " . $last_name;
 
-				<td>
-					<a href="profile.php?id=<?php echo $user->id; ?>">
-						<img src="<?php echo $user->get_user_image();?>" style="height: 100px; width: 100px;">
-					</a>
-				</td>
+		?>
 
-				<td>
-					<a href="profile.php?id=<?php echo $user->id; ?>">
-						
-					<?php 
+		<tr>
+			<td><div class="avatar -s" style="background-image: url(<?php echo $user->get_user_image(); ?>)"></div></td>
+			<td><?php echo str_replace($search, '<span class="friend-highlight">' . $search . '</span>', $username); ?></td>
+			<td class="user-list-hide-laptop"><?php echo str_replace($search, '<span class="friend-highlight">' . $search . '</span>', $full_name); ?></td>
+			<td class="user-list-hide-tablet"><?php echo str_replace($search, '<span class="friend-highlight">' . $search . '</span>', $email); ?></td>
+			<td>
+				<div class="user-list-actions">
+					<a href="profile.php?id=<?php echo $user->id ?>" data-tooltip="Profile" class="user-list-action tooltip"><i class="fas fa-user"></i></a>
 
-						// Gets the username and then makes the letters lowercase.
-						$username = strtolower($user->username);
+					<!-- Legg till en sjekk for om de virkelig vil slette denne brukeren -->
+					<button data-tooltip="Delete" class="user-list-action -delete tooltip" 
+						onclick="return confirm('Are you sure you want to delete user <?php echo $username; ?>?')?delete_user(<?php echo $user->id; ?>):'';"><i class="fas fa-user-times"></i></button>
 
-						// Switches out what is searched with the same with marks around it.
-						echo str_replace($search, '<mark>' . $search . '</mark>', $username); 
-
-					?>
-					
-					</a>
-				</td>
-
-				<td>
-					<?php 
-						// Gets the username and then makes the letters lowercase.
-						$first_name = strtolower($user->first_name);
-						// Switches out what is searched with the same with marks around it.
-						echo str_replace($search, '<mark>' . $search . '</mark>', $first_name); 
-					?>
-				</td>
-
-				<td>
-					<?php 
-					// Gets the username and then makes the letters lowercase.
-					$last_name = strtolower($user->last_name);
-					// Switches out what is searched with the same with marks around it.
-					echo str_replace($search, '<mark>' . $search . '</mark>', $last_name); 
-					?>
-				</td>
-
-				<td><?php echo $user->joined; ?></td>
-				<td><a href="includes/process/delete_user.php?id=<?php echo $user->id; ?>" 
-					onclick="return confirm('Are you sure you want to delete <?php echo $user->username ?>?')">Delete</a></td>
-				<td><a href="profile.php?id=<?php echo $user->id; ?>">View</a></td>
-
-			</tr>
+					<!-- Legg till en sjekk for om de virkelig vil promote denne brukeren -->
+					<button data-tooltip="Promote" class="user-list-action -promote tooltip"><i class="fas fa-user-tie"></i></button>
+				</div>
+			</td>
+		</tr>
 
 		<?php endforeach; ?>
+
 		</tbody>
 	</table>

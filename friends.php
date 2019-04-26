@@ -35,15 +35,15 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 
     <!-- Div that is used to update friendlist with ajax -->
     <div id="friendlist_content-ajax">
-
-    <?php 
-    /**
-     * Includes the view that holds the list of recieved
-     * friend-requests and the list of friends under it.
-     */
-    include("includes/views/friendlist_content.php"); 
-    ?>
-
+        <div class="friendlist-container">
+            <?php 
+            /**
+             * Includes the view that holds the list of recieved
+             * friend-requests and the list of friends under it.
+             */
+            include("includes/views/friendlist_content.php"); 
+            ?>
+        </div>
     </div>
  
 </main>

@@ -21,6 +21,25 @@ function rate_game(game_id) {
 
 }
 
+/**
+ *
+ */
+function delete_user(user_id) {
+
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+            document.getElementById("userlist-ajax").innerHTML = this.responseText;
+
+    };
+    
+    // Updates the friendlist in 0.1 second, giving the process time to finish.
+    setTimeout(function(){ update_userlist(); }, 100);
+
+    xmlhttp.open("GET","includes/process/delete_user.php?id="+user_id,true);
+    xmlhttp.send();
+    
+}
+
 function update_userlist() {
 
     var search = document.getElementById("search").value;
@@ -45,15 +64,15 @@ function update_gamelist() {
     var selector = document.getElementById("genre");
     var genre = selector.options[selector.selectedIndex].value;
 
-    var selector = document.getElementById("category");
-    var category = selector.options[selector.selectedIndex].value;
+    var selector = document.getElementById("sort");
+    var sort = ""; //selector.options[selector.selectedIndex].value;
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
             document.getElementById("gameslist").innerHTML = this.responseText;
     };
 
-    xmlhttp.open("GET","includes/views/gamelist.php?s="+search+"&c="+category+"&g="+genre,true);
+    xmlhttp.open("GET","includes/views/gamelist.php?s="+search+"&c="+sort+"&g="+genre,true);
     xmlhttp.send();
     
 }

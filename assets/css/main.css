@@ -4330,5 +4330,8 @@ hr[data-content] {
   margin: 0 auto;
   padding: 2rem;
   max-width: 70rem; }
-
 /*# sourceMappingURL=main.css.map */
+
+.hide-element {
+  display:none;
+}
