@@ -167,7 +167,8 @@ class User extends Db_object{
 		global $database;
 
 		// Adds things to the search with.
-		$sql  = "SELECT * FROM users WHERE ";
+		$sql  = "SELECT * FROM users WHERE";
+		$sql .= " privilege_level = '0' AND (";
 
 		$search      = $database->escape_string($search);
 		$category    = $database->escape_string($category);
@@ -208,7 +209,7 @@ class User extends Db_object{
 		if ($category == 'date') {
 			$sql .= " joined LIKE '%{$search}%'";
 		}
-
+		$sql .= ")";
 		return self::find_by_query($sql);
 	}
 

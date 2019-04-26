@@ -24,7 +24,7 @@ if (isset($_GET['s'])) {
 } else {
 
 	$search = "";
-	$users = User::find_all();
+	$users = User::find_user("", "all");
 
 }
 

@@ -28,29 +28,29 @@ if (isset($_GET['s'])) {
   <!-- For each loop that runs trough all the elements in the $games array. -->
   <?php foreach ($games as $game) : 
 
-    $color = "red";
+
     switch ($game->genre) {
-      case 'Action': $color = "red";
+      case 'Action': $color = "-red";
       break;
-      case 'Adventure': $color = "teal";
+      case 'Adventure': $color = "-teal";
       break;
-      case 'Comedy': $color = "yellow";
+      case 'Comedy': $color = "-yellow";
       break;
-      case 'Fantasy': $color = "purple";
+      case 'Fantasy': $color = "-purple";
       break;
-      case 'Idle': $color = "indigo";
+      case 'Idle': $color = "-indigo";
       break;
-      case 'Romance': $color = "pink";
+      case 'Romance': $color = "-pink";
       break;
-      case 'Rouglike': $color = "green";
+      case 'Rouglike': $color = "-green";
       break;
-      case 'Sport': $color = "blue";
+      case 'Sport': $color = "-blue";
       break;
-      case 'Simulation': $color = "orange";
+      case 'Simulation': $color = "-orange";
       break;
-      case 'Strategy': $color = "cyan";
+      case 'Strategy': $color = "-cyan";
       break;
-      default:
+      default: $color = "";
       break;
     }
 
@@ -75,7 +75,6 @@ if (isset($_GET['s'])) {
           </footer>
         </div>
       </a>
-
 
 <?php endforeach; ?>
 
