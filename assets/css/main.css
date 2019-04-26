@@ -3157,7 +3157,9 @@ body {
   margin-top: 0.2rem; }
 
 .chatlist .user .username {
+  overflow: hidden;
   margin-left: 1rem;
+  max-width: 14rem;
   font-weight: 500;
   color: #6c757d; }
 
@@ -3410,13 +3412,18 @@ body {
     width: 100%; }
     .friendlist-search .search-input:focus {
       outline: none; }
+    .friendlist-search .search-input:focus + .new-friends-container {
+      display: block; }
   .friendlist-search .new-friends-container {
     z-index: 100000000;
     position: absolute;
     top: 100%;
     left: 0;
+    display: none;
     padding: 1rem;
     width: 100%; }
+    .friendlist-search .new-friends-container:hover {
+      display: block; }
     .friendlist-search .new-friends-container .new-friends {
       overflow: auto;
       -webkit-box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
@@ -3437,7 +3444,6 @@ body {
   grid-template-columns: auto 1fr auto;
   grid-gap: 1rem;
   display: grid;
-  margin-bottom: 1rem;
   border-radius: 0.5rem;
   padding: 1rem;
   color: #1f1f1f; }
@@ -3523,15 +3529,15 @@ body {
   background-color: #54D266;
   color: #fafafa; }
 
+.friend-highlight {
+  color: #54D266; }
+
 @media (min-width: 40rem) {
   .friend {
     grid-gap: 3rem; }
 
   .friend-status .description {
     display: block; } }
-.friend-highlight {
-  color: #54D266; }
-
 .gamepage-container {
   grid-template-columns: auto 1fr;
   display: grid;
@@ -3542,12 +3548,14 @@ body {
   display: block; }
 
 .gamepage-chat {
-  background-color: rgba(222, 226, 230, 0.5);
+  background-color: #e9ecef;
   max-height: 600px;
   max-width: 400px; }
   .gamepage-chat > .view {
     margin-right: 0;
     width: initial; }
+  .gamepage-chat hr[data-content]::after {
+    background-color: #e9ecef; }
 
 .achievementer {
   position: absolute; }
@@ -3902,7 +3910,8 @@ img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 2rem; }
+  padding: 0 2rem;
+  max-width: 100%; }
 
 .message .info {
   height: 3.2rem; }
