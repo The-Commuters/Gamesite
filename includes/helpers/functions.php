@@ -16,6 +16,38 @@ function redirect($location) {
 
 }
 
+/**
+* Function that will first check if the folder for
+* PHPMailer is where it should be (includes/classes/PHPMailer)  
+* and if it is not there, it will create the folder and 
+* then it will do the same check 
+* for the 2 files, phpmailer.php and smtp.php
+* If they are not there it will download them 
+* and place them there.
+*
+*/
+
+function download_phpmailer(){
+
+	if (!file_exists(dirname(__FILE__, 2 ).DS."classes".DS."PHPMailer"))
+		mkdir(dirname(__FILE__, 2 ).DS."classes".DS."PHPMailer");
+	
+	if (!file_exists(dirname(__FILE__, 2 ).DS."classes".DS."PHPMailer".DS."PHPMailer.php")){
+	file_put_contents(dirname(__FILE__, 2 ).DS."classes".DS."PHPMailer".DS."PHPMailer.php",
+    file_get_contents("https://raw.githubusercontent.com/PHPMailer/PHPMailer/master/src/PHPMailer.php")
+	);
+
+	}
+
+	if (!file_exists(dirname(__FILE__, 2 ).DS."classes".DS."PHPMailer".DS."SMTP.php")){
+	file_put_contents(dirname(__FILE__, 2 ).DS."classes".DS."PHPMailer".DS."SMTP.php",
+    file_get_contents("https://raw.githubusercontent.com/PHPMailer/PHPMailer/master/src/SMTP.php")
+	);
+
+	}
+
+}
+
 /** 
  * This function allows you to register multiple functions 
  * (or static methods from your own Autoload class) that PHP 
@@ -38,6 +70,7 @@ function class_auto_loader($class) {
 }
 
 // Registers the auto-loader for the php-classes.
-spl_autoload_register('class_auto_loader');
 
+spl_autoload_register('class_auto_loader');
+download_phpmailer();
 ?>
