@@ -37,7 +37,8 @@ require_once("includes/init.php");
 					$current_needed_xp = Level::calc_needed_xp();
 					// Calculates the precentage 
 					$user_xp = Level::Calc_xp_percentage($user_xp, $current_needed_xp);
-				}
+					
+				}				
 
             ?>
 

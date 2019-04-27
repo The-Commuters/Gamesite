@@ -1,11 +1,10 @@
 <?php 
 
 /**
- * Achievement-class will handle the achievements that 
- * is in the Achivements table in the database. Used
- * to collect the images and text when one need to show
- * the achievements of a user, when its earned or for
- * the game.
+ * The level object-class that holds the levels
+ * that the users can be at, they are placed in
+ * the database and the needed xp to be the level
+ * is placed in it, uses id as the level.
  */
 
 class Level extends Db_object{
@@ -24,11 +23,14 @@ function calc_user_level() {
     $user = User::find_by_id($session->user_id);
 	$user_xp = $user->experience_points;
 	$levels = Level::find_all();
+	$current_user_level = 0;	
 
 	// Collects the needed xp to get to the next level, and the level of the user.
 	foreach ($levels as $level) {
 		if ($level->needed_xp >= $user_xp && $user_xp !== 0) {
-			$current_user_level = $level->id-1;	
+			if ($level->id != 0) {
+				$current_user_level = $level->id-1;	
+			}
 
 			// Breaks out of the foreach.
 			break; 
@@ -45,6 +47,7 @@ function calc_needed_xp() {
     $user = User::find_by_id($session->user_id);
 	$user_xp = $user->experience_points;
 	$levels = Level::find_all();
+	$current_needed_xp = 25;
 
 	// Collects the needed xp to get to the next level, and the level of the user.
 	foreach ($levels as $level) {
