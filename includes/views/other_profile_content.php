@@ -20,7 +20,7 @@ $user = User::find_by_id($_GET['id']);
 		<div class="profile-user">
 			<div style="background-image: url(<?php echo $user->get_user_image();?>)" class="avatar -s user"></div>
 			<div class="username"><?php echo $user->username;?></div>
-			<a class="action" onclick="start_chat(<?php echo $session->user_id .',' . $user->id?>)"><i class="fas fa-fw fa-comment-alt"></i></a>
+			<a class="action" onclick="startChat(<?php echo $session->user_id .',' . $user->id?>)"><i class="fas fa-fw fa-comment-alt"></i></a>
 		</div>
 		<div class="profile-content">
 

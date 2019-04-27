@@ -23,7 +23,7 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 		<div class="friendlist-container friendlist-search">
 
             <!-- The search bar for users to send friend request to. -->
-            <input type="text" onkeyup="find_friend()" id="search" value="" class="search-input" placeholder="Find new friends">
+            <input type="text" onkeyup="findFriend()" id="search" value="" class="search-input" placeholder="Find new friends">
 
             <!-- This is where the friend list is sent in the AJAX-function -->
 		    <div class="new-friends-container">

@@ -6,7 +6,7 @@
  *
  * @param int game_id Spillet som det gjelder sin id.
  */
-function rate_game(game_id) {
+function rateGame(game_id) {
 
     xmlhttp = new XMLHttpRequest();
     
@@ -24,7 +24,7 @@ function rate_game(game_id) {
 /**
  *
  */
-function delete_user(user_id) {
+function deleteUser(user_id) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -33,14 +33,14 @@ function delete_user(user_id) {
     };
     
     // Updates the friendlist in 0.1 second, giving the process time to finish.
-    setTimeout(function(){ update_userlist(); }, 100);
+    setTimeout(function(){ updateUserlist(); }, 100);
 
     xmlhttp.open("GET","includes/process/delete_user.php?id="+user_id,true);
     xmlhttp.send();
     
 }
 
-function update_userlist() {
+function updateUserlist() {
 
     var search = document.getElementById("search").value;
 
@@ -57,7 +57,7 @@ function update_userlist() {
 
 }
 
-function update_gamelist() {
+function updateGamelist() {
 
     var search = document.getElementById("search").value;
 
@@ -82,7 +82,7 @@ function update_gamelist() {
  * deleted from it, is called upon in the delete_friend()
  * function. 
  */
-function update_friendlist() {
+function updateFriendlist() {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -95,7 +95,7 @@ function update_friendlist() {
     
 }
 
-function find_friend() {
+function findFriend() {
 
     var search = document.getElementById("search").value;
 
@@ -112,7 +112,7 @@ function find_friend() {
 /**
  *
  */
-function delete_friend(user_id, friend_id) {
+function deleteFriend(user_id, friend_id) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -121,14 +121,14 @@ function delete_friend(user_id, friend_id) {
     };
     
     // Updates the friendlist in 0.1 second, giving the process time to finish.
-    setTimeout(function(){ update_friendlist(); }, 100);
+    setTimeout(function(){ updateFriendlist(); }, 100);
 
     xmlhttp.open("GET","includes/process/delete_friend.php?user_id="+user_id+"&friend_id="+friend_id,true);
     xmlhttp.send();
     
 }
 
-function send_friend_request(user_id, other_id) {
+function sendFriendRequest(user_id, other_id) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -136,7 +136,7 @@ function send_friend_request(user_id, other_id) {
             document.getElementById("search").value = "";
     };
 
-    hide_alert();
+    hideAlert();
 
     xmlhttp.open("GET","includes/process/add_friend.php?i="+user_id+"&o="+other_id,true);
     xmlhttp.send();
@@ -147,7 +147,7 @@ function send_friend_request(user_id, other_id) {
  *Accept one of the friend request when the user 
  * accept, changed the friend_list status to 1.
  */
-function handle_friend_request(user_id, other_id, id, act) {
+function handleFriendRequest(user_id, other_id, id, act) {
 
     //Act is 0 if declined and 1 if accepted.
 
@@ -157,10 +157,10 @@ function handle_friend_request(user_id, other_id, id, act) {
 
     };
     
-    hide_alert();
+    hideAlert();
 
     // Updates the friendlist in 0.1 second, giving the process time to finish.
-    setTimeout(function(){ update_friendlist(); }, 100);
+    setTimeout(function(){ updateFriendlist(); }, 100);
 
     xmlhttp.open("GET","includes/process/handle_friend_request.php?ui="+user_id+"&oi="+other_id+"&a="+act+"&id="+id,true);
     xmlhttp.send();
@@ -168,7 +168,7 @@ function handle_friend_request(user_id, other_id, id, act) {
 }
 
 // Belongs to the chat,
-function close_chatroom(friendship_id) {
+function closeChatroom(friendship_id) {
 
     xmlhttp = new XMLHttpRequest();
 
@@ -181,7 +181,7 @@ function close_chatroom(friendship_id) {
 }
 
 // Belongs to the chat, starts a chat between two people. 
-function start_chat(user_1, user_2) { 
+function startChat(user_1, user_2) { 
  
     xmlhttp = new XMLHttpRequest(); 
  
@@ -196,7 +196,7 @@ function start_chat(user_1, user_2) {
 } 
 
 // Updates the settings of a user
-function update_names() {
+function updateNames() {
 
     var first_name  = document.getElementById("fname").value;
     var middle_name = document.getElementById("mname").value;
@@ -208,7 +208,7 @@ function update_names() {
         document.getElementById("image").innerHTML = this.responseText;
     };
 
-    hide_alert();
+    hideAlert();
 
     xmlhttp.open("GET","includes/process/update_settings.php?fname="+first_name+"&mname="+middle_name+"&lname="+last_name,true);
     xmlhttp.send();
@@ -216,14 +216,14 @@ function update_names() {
 }
 
 // Belongs to the chat, starts a chat between two people.
-function earn_achievement(achievement_id) {
+function earnAchievement(achievement_id) {
 
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         document.getElementById("info").innerHTML = this.responseText;
     };
 
-    hide_alert();
+    hideAlert();
     
     
     xmlhttp.open("GET","includes/process/add_achievement.php?aId="+achievement_id,true);
@@ -232,10 +232,10 @@ function earn_achievement(achievement_id) {
 
 /**
  * Refreshes the header picture that shows of the users
- * avatar, is called in file_upload and used when a user
+ * avatar, is called in fileUpload and used when a user
  * upload a new avatar. 
  */
-function refresh_header_picture() {
+function refreshHeaderPicture() {
 
     // Timeout to ensure that the new avatar have been placed in the database.
     setTimeout(function(){ 
@@ -255,7 +255,7 @@ function refresh_header_picture() {
  * Opens up the process register_user.php on the 
  * register.php.
  */
-function register_user() {
+function registerUser() {
 
     var password_check   = document.getElementById("password_check").value;
     var password         = document.getElementById("password").value;
@@ -267,7 +267,7 @@ function register_user() {
         document.getElementById("image").innerHTML = this.responseText;
     };
 
-    hide_alert();
+    hideAlert();
     
     xmlhttp.open("GET","includes/process/register_user.php?pc="+ password_check +"&p=" + password + "&u=" + username + "&e=" + email,true);
     xmlhttp.send();
@@ -282,26 +282,26 @@ function register_user() {
  *
  * @param {event} event - The event in question.
  */
-function upload_file(event) {
+function uploadFile(event) {
     var file;
     event.preventDefault();
     file = event.dataTransfer.files[0];
-    file_upload(file);
+    fileUpload(file);
     
   }
  
 // On button
-function find_file() {
+function findFile() {
     var file;
     document.getElementById('selectfile').click();
     document.getElementById('selectfile').onchange = function() {
         file = document.getElementById('selectfile').files[0];
-      file_upload(file);
+      fileUpload(file);
     };
   }
  
 // Upload avatar picture.
-function file_upload(file) {
+function fileUpload(file) {
     if(file != undefined) {
         var form_data = new FormData();                  
         form_data.append('file', file);
@@ -313,20 +313,20 @@ function file_upload(file) {
         };
 
         
-        hide_alert();
+        hideAlert();
 
 
         xmlhttp.open("POST","includes/process/upload_profile_picture.php",true);
 
 
-        refresh_header_picture();
+        refreshHeaderPicture();
         xmlhttp.send(form_data);
 
     }
   }
 
 // closes alert after 3 seconds
-function hide_alert() {
+function hideAlert() {
 
     setTimeout(function(){ 
         document.getElementById('alert').classList.remove("-active");

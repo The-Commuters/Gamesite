@@ -19,7 +19,9 @@ if (isset($_GET['s'])) {
 } else {
 
   $search = "";
-  $games = Game::find_all();
+  $category = "";
+  $genre = "";
+  $games = Game::find_game($category, $genre, $search);
 
 }
 ?>

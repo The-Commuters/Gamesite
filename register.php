@@ -64,7 +64,7 @@ if ($session->is_signed_in()) {redirect("index.php");}
 	<a href="login.php#email" class="button-text">Sign in</a>
 
 	<!-- Sign up -->
-	<input type="button" name="submit" class="button-contained" value="Sign up" onclick="register_user()">
+	<input type="button" name="submit" class="button-contained" value="Sign up" onclick="registerUser()">
 </div>
 
 <script type="text/javascript">

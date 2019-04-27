@@ -75,7 +75,7 @@ if (isset($_GET['s'])) {
 
 					<!-- If the user is not a friend with this uder, hten show the send friend-request button -->
 				<?php if (!User::is_friend($session->user_id, $user->id)) { ?>
-				<button class="action -add" onclick="send_friend_request(<?php echo $session->user_id ?>, <?php echo $user->id ?>)">
+				<button class="action -add" onclick="sendFriendRequest(<?php echo $session->user_id ?>, <?php echo $user->id ?>)">
 					<i class="fas fa-fw fa-user-plus"></i>
 				</button>
 				<?php } ?>

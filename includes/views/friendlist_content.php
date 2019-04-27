@@ -46,12 +46,12 @@
                     <!-- Here the button for the friend request is placed, and the message when it is sent. -->
                     <div class="friend-actions" id="handle_friend_request">
 
-                        <a class="action -add" onclick="handle_friend_request(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
+                        <a class="action -add" onclick="handleFriendRequest(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
                             <?php echo $request->id ?>, 1)">
                             <i class="fas fa-fw fa-check"></i>
                         </a>
 
-                        <a class="action -delete" onclick="handle_friend_request(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
+                        <a class="action -delete" onclick="handleFriendRequest(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
                         <?php echo $request->id ?>, 0)">
                             <i class="fas fa-fw fa-trash-alt"></i>
                         </a>
@@ -114,11 +114,11 @@
                     <i class="fas fa-user"></i>
                 </a>
                 
-                <a class="action" onclick="start_chat(<?php echo $session->user_id . ", " . $user->id ?>)">
+                <a class="action" onclick="startChat(<?php echo $session->user_id . ", " . $user->id ?>)">
                     <i class="fas fa-fw fa-comment-alt"></i>
                 </a>
 
-                <div class="action -delete" onclick="delete_friend(<?php echo $session->user_id . ", " . $user->id ?>)">
+                <div class="action -delete" onclick="deleteFriend(<?php echo $session->user_id . ", " . $user->id ?>)">
                     <i class="fas fa-fw fa-user-times"></i>
                 </div>
             </div>

@@ -20,7 +20,7 @@ if (!isset($_GET['s'])) {
 
     <form action="">
         
-        <select id="genre" class="hide-element" onchange="update_gamelist()">
+        <select id="genre" class="hide-element" onchange="updateGamelist()">
             <option value="" selected="selected">Genre</option>
             <option value="Action">Action</option>
             <option value="Comedy">Comedy</option>
@@ -40,7 +40,7 @@ if (!isset($_GET['s'])) {
             <i class="fas fa-search"></i>
         </div>
 
-        <input placeholder="Search for game here" onkeyup="update_gamelist()" id="search" class="search-input" />
+        <input placeholder="Search for game here" onkeyup="updateGamelist()" id="search" class="search-input" />
     </form>
 
     <div class="category">

@@ -165,7 +165,7 @@ class Game extends Db_object {
 			$sql .= "AND (title LIKE '%{$search}%' ";
 			$sql .= "OR creator LIKE '%{$search}%') ";
 		}
-
+		$sql .= " ORDER BY rating DESC";
 		return self::find_by_query($sql);
 	}
 
