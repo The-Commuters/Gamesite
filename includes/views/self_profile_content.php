@@ -37,7 +37,7 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 		<div class="profile-user">
 			<div style="background-image: url(<?php echo $user->get_user_image();?>)" class="avatar -s user"></div>
 			<div class="username"><?php echo $user->username;?></div>
-			<a class="action" onclick="start_chat(<?php echo $session->user_id .',' . $user->id?>)"><i class="fas fa-fw fa-comment-alt"></i></a>
+			<a class="action" onclick="startChat(<?php echo $session->user_id .',' . $user->id?>)"><i class="fas fa-fw fa-comment-alt"></i></a>
 		</div>
 		<div class="profile-content">
 			<h2 class="title">Personal information</h2>
@@ -59,18 +59,18 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 	  			    </div>
 
 			        <div class="profile-info">
-			          <input class="button-contained" type="button" name="submit" value="Submit" onclick="update_names()">
+			          <input class="button-contained" type="button" name="submit" value="Submit" onclick="updateNames()">
 			        </div>
 	      		</form>
 
 		      	<div class="profile-info">
 		        	<div class="tag">Change photo</div>
 
-		        	<div class="drop-zone" id="drop_zone" ondrop="upload_file(event)" ondragover="return false">
+		        	<div class="drop-zone" id="drop_zone" ondrop="uploadFile(event)" ondragover="return false">
 		          		<div id="drag_upload_file">
 		            		<div class="drop-zone-actions">
 		              			<div>Drag a file or press the button</div>
-		              			<input type="button" value="Select File" onclick="find_file();" class="button-outlined">
+		              			<input type="button" value="Select File" onclick="findFile();" class="button-outlined">
 		            		</div>
 		            		<input type="file" id="selectfile">
 		          		</div>

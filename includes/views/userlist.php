@@ -24,7 +24,7 @@ if (isset($_GET['s'])) {
 } else {
 
 	$search = "";
-	$users = User::find_all();
+	$users = User::find_user("", "all");
 
 }
 
@@ -70,7 +70,7 @@ if (isset($_GET['s'])) {
 
 					<!-- Legg till en sjekk for om de virkelig vil slette denne brukeren -->
 					<button data-tooltip="Delete" class="user-list-action -delete tooltip" 
-						onclick="return confirm('Are you sure you want to delete user <?php echo $username; ?>?')?delete_user(<?php echo $user->id; ?>):'';"><i class="fas fa-user-times"></i></button>
+						onclick="return confirm('Are you sure you want to delete user <?php echo $username; ?>?')?deleteUser(<?php echo $user->id; ?>):'';"><i class="fas fa-user-times"></i></button>
 
 					<!-- Legg till en sjekk for om de virkelig vil promote denne brukeren -->
 					<button data-tooltip="Promote" class="user-list-action -promote tooltip"><i class="fas fa-user-tie"></i></button>

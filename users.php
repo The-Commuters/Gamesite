@@ -31,9 +31,9 @@ if (!isset($_GET['f'])) {
             <label>User Search</label>
 
             <div class="user-list-input">
-                <input type="text" placeholder="Search" onkeyup="update_userlist()" id="search" value="<?php echo htmlentities($search); ?>">
+                <input type="text" placeholder="Search" onkeyup="updateUserlist()" id="search" value="<?php echo htmlentities($search); ?>">
 
-                <select id="category" onchange="update_userlist()">
+                <select id="category" onchange="updateUserlist()">
                     <option value="all" selected="selected">All</option>
                     <option value="id">ID</option>
                     <option value="name">Name</option>

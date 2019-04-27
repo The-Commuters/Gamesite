@@ -33,7 +33,7 @@ function makeActive(active, event) {
             active.classList.add("active"); 
         }
         document.getElementById('genre').value = active.getAttribute('data-genre');
-        update_gamelist();
+        updateGamelist();
 }
 
 //////////////////////////////////////////////////////////////////////////////

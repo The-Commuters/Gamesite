@@ -19,7 +19,7 @@ $game = Game::find_by_id($current_game_id);?>
 
     <div class="heart-thing">
       <!-- If the checkbox is pressed the heart will be red, on click rate_game() will happen -->
-      <input id="heart" type="checkbox" onchange="rate_game(<?php echo $game->id; ?>)"
+      <input id="heart" type="checkbox" onchange="rateGame(<?php echo $game->id; ?>)"
       <?php echo (empty(Rating::check_if_rated($game->id, $user->id)) ? "" : "checked");?>/>
       <label for="heart"><i class="fas fa-heart"></i></label>
     </div>

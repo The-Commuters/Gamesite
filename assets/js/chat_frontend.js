@@ -144,7 +144,7 @@ function hideChatPanel(node) {
 
 
         // Call on the ajax function to close a chat, sends room_id.
-        close_chatroom(node.getAttribute('fsId'));
+        closeChatroom(node.getAttribute('fsId'));
       
         // Check if a replacement for active has been found
         if (!found) {
@@ -163,7 +163,7 @@ function hideChatPanel(node) {
         node.classList.add("-hide");
 
         // Call on the ajax function to close a chat, sends room_id.
-        close_chatroom(node.getAttribute('fsId'));
+        closeChatroom(node.getAttribute('fsId'));
 
     }
 }

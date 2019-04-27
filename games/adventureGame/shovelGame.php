@@ -20,24 +20,62 @@ var playerRight     = document.createElement("img"); // Creates a var for the pi
 var imageSprites    = []; // Creates and array for the tiles that will be placed on the canvas.
 var numberOfSprites = 0;  // Sets here up a var that will be used to check when  the game can start.
 
+var canvas, context;            // Var for the canvas and the 2d context of it.
+var p1 = new player();          // Creates here the new player-character.
+var score = 0;                  // Score that is used in the game.
+var achievement_id_1 = 1;       // The id of the achievement for reaching the end of the first level.
+var achievement_id_2 = 2; 
+var achievement_id_3 = 3; 
+var achievement_id_4 = 4; 
+var achievement_id_5 = 5; 
+
+// The map represented by 1-5 where every number represents a spesific tile.
+var map =
+[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 4, 0, 0, 0, 4, 1, 0, 0, 0, 5, 0, 1, 0, 0, 1,
+  1, 1, 1, 1, 5, 1, 1, 0, 1, 5, 1, 0, 1, 0, 2, 1,
+  1, 4, 1, 0, 4, 0, 1, 0, 1, 5, 1, 5, 1, 0, 1, 1,
+  1, 0, 1, 5, 1, 1, 1, 4, 1, 5, 1, 0, 0, 0, 0, 1,
+  1, 0, 1, 0, 0, 0, 1, 0, 1, 5, 1, 1, 1, 1, 4, 1,
+  1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0, 0, 0, 0, 1,
+  1, 0, 1, 5, 1, 1, 1, 1, 1, 5, 1, 4, 1, 1, 1, 1,
+  1, 0, 1, 5, 1, 4, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+  1, 0, 1, 0, 5, 4, 1, 0, 3, 0, 1, 1, 1, 1, 5, 1,
+  1, 4, 1, 4, 1, 4, 1, 0, 0, 0, 1, 4, 0, 4, 0, 1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+const tileHor    = 16;  // The number of horizontal tiles that the level have.
+const tileVer    = 12;  // The number of vertical tiles that the level have.
+const tileWidth  = 50;  // The width of the tiles in pixels.  50*16=800
+const tileHeight = 50;  // The height of the tiles in pixels. 50*12=600
+const FLOOR      = 0;   // The ground tiles, where the player can walk.
+const WALL       = 1;   // The wall tiles, where the player cant walk.
+const PLAYER     = 2;   // The player character, where it starts.
+const EXIT       = 3;   // The exit that the character shall reach.
+const SHOVEL     = 4;   // The shovel that the player can use to dig one pile of dirt.
+const DIRT       = 5;   // The dirt that is blocking their way.
+
+// Sets ut the Arrow-control with letters representing the numbers.
+// Will be used when for the player to control their character.
+const W = 38, A = 37, S = 40, D = 39;
+
 // Counts the images loaded and starts the game if the loading is finished.
-function countLoadedImageAndLaunchIfReady() {
+function countFinishedImages() {
   numberOfSprites--;          // One more picture have been loaded.
   if(numberOfSprites == 0) {  // Is the last of the images loaded?
-    loadingDoneSoStartGame(); // Start this function in main.js.
+    startGame();              // Start this function and the game.
   }
 }
 
 // Starts here loading the image choosen in the function under it.
-function beginLoadingImage(imgVar, fileName) {
-  imgVar.onload=countLoadedImageAndLaunchIfReady;      // Checks if it is ready.
+function loadImage(imgVar, fileName) {
+  imgVar.onload=countFinishedImages;                   // Checks if it is ready.
   imgVar.src="games/adventureGame/images/"+fileName;   // Sets the source path of the image.
 }
 
 // Gives the tile a code to be used in the bitmap later.
 function giveImageNumber(imageNumber, fileName) {
-  imageSprites[imageNumber] = document.createElement("img");
-  beginLoadingImage(imageSprites[imageNumber],fileName);
+  imageSprites[imageNumber] = document.createElement("img");  // Creates a img-element.
+  loadImage(imageSprites[imageNumber],fileName);      // Begins loading the image-sprite.
 }
 
 // This is called in main.js, and loads in all the images used in the game. 
@@ -66,7 +104,7 @@ function loadImages() {
     } else {
 
       // sends the tileType and the name of the file to the function.
-      beginLoadingImage(images[i].varName, images[i].theFile);
+      loadImage(images[i].varName, images[i].theFile);
     } 
   } 
 } 
@@ -77,10 +115,6 @@ function loadImages() {
  * up the controls for whatever might need moved.
  */
 
-// Sets ut the WASD-control with letters representing the numbers.
-// Will be used when for the player to control their character.
-const W = 87, A = 65, S = 83, D = 68;
-
 /**
  * This function is called in main and adds eventlistners
  * to the keys of the player, and then bind the controls
@@ -89,7 +123,7 @@ const W = 87, A = 65, S = 83, D = 68;
 function initInput() {
   document.addEventListener("keydown", keyPressed);   // On keydown, function keyPressed() is done.
   document.addEventListener("keyup", keyReleased);    // On keyUo, function keyReleased() is done.
-  p1.playerControls(W, D, S, A);                       // Binds the WASD-keys to the player-character.
+  p1.playerControls(W, D, S, A);                      // Binds the Arrow-keys to the player-character.
 }
 
 /**
@@ -101,11 +135,11 @@ function initInput() {
  * @param {Player}  player  - The player object that is controlled.
  * @param {boolean} status  - It's 'true' if the button is pressed, 'false' if released.
  */
-function movement(key, player, status) {
-  if(key == player.northKey) {player.pressedNorth = status;} // if key == 65
-  if(key == player.eastKey)  {player.pressedEast  = status;} // if key == 68
-  if(key == player.southKey) {player.pressedSouth = status;} // if key == 83
-  if(key == player.westKey)  {player.pressedWest  = status;} // if key == 87
+function movement(event, key, player, status) {
+  if(key == player.northKey) {event.preventDefault(); player.pressedNorth = status;} // if key == 38
+  if(key == player.eastKey)  {event.preventDefault(); player.pressedEast  = status;} // if key == 37
+  if(key == player.southKey) {event.preventDefault(); player.pressedSouth = status;} // if key == 40
+  if(key == player.westKey)  {event.preventDefault(); player.pressedWest  = status;} // if key == 39
 }
 
 /**
@@ -115,7 +149,8 @@ function movement(key, player, status) {
  * @param {event} event - A event that triggers when a key is pressed.
  */
 function keyPressed(event) {
-  movement(event.keyCode, p1, true); // Sends inn the key pressed, the player object and true.
+  if (event.keyCode == player.northKey || event.keyCode == player.southKey ||event.keyCode == player.eastKey) {event.preventDefault();}
+  movement(event, event.keyCode, p1, true); // Sends inn the key pressed, the player object and true.
   //event.preventDefault(); // This stops the default action from happeninh, which is scrolling down on the paghe.
 }
 
@@ -126,7 +161,7 @@ function keyPressed(event) {
  * @param {event} event - A event that triggers when a key is released.
  */
 function keyReleased(event) {
-  movement(event.keyCode, p1, false);
+  movement(event, event.keyCode, p1, false);
 }
 
 /** -----------------------------------------------------------------------------------------
@@ -135,30 +170,6 @@ function keyReleased(event) {
  * of the player.
  */
 
-// The map represented by 1-5 where every number represents a spesific tile.
-var map =
-[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 4, 0, 0, 0, 4, 1, 0, 0, 0, 5, 0, 1, 0, 0, 1,
-  1, 1, 1, 1, 5, 1, 1, 0, 1, 5, 1, 0, 1, 0, 2, 1,
-  1, 4, 1, 0, 4, 0, 1, 0, 1, 5, 1, 5, 1, 0, 1, 1,
-  1, 0, 1, 5, 1, 1, 1, 4, 1, 5, 1, 0, 0, 0, 0, 1,
-  1, 0, 1, 0, 0, 0, 1, 0, 1, 5, 1, 1, 1, 1, 4, 1,
-  1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0, 0, 0, 0, 1,
-  1, 0, 1, 5, 1, 1, 1, 1, 1, 5, 1, 4, 1, 1, 1, 1,
-  1, 0, 1, 5, 1, 4, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-  1, 0, 1, 0, 5, 4, 1, 0, 3, 0, 1, 1, 1, 1, 5, 1,
-  1, 4, 1, 4, 1, 4, 1, 0, 0, 0, 1, 4, 0, 4, 0, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-const tileHor    = 16;  // The number of horizontal tiles that the level have.
-const tileVer    = 12;  // The number of vertical tiles that the level have.
-const tileWidth  = 50;  // The width of the tiles in pixels.  50*16=800
-const tileHeight = 50;  // The height of the tiles in pixels. 50*12=600
-const FLOOR      = 0;   // The ground tiles, where the player can walk.
-const WALL       = 1;   // The wall tiles, where the player cant walk.
-const PLAYER     = 2;   // The player character, where it starts.
-const EXIT       = 3;   // The exit that the character shall reach.
-const SHOVEL     = 4;   // The shovel that the player can use to dig one pile of dirt.
-const DIRT       = 5;   // The dirt that is blocking their way.
 
 /**
  * PlaceSprites is the function that places all of 
@@ -237,7 +248,7 @@ function endText(score) {
 
 /** -----------------------------------------------------------------------------------------
  * This is the player object that is controlled
- * by the user with the WASD-keys, draws, resets,
+ * by the user with the Arrow-keys, draws, resets,
  * initalize, sets up controls and moves player.
  */
 
@@ -251,7 +262,7 @@ function player() {
 
   /**
    * Binds the control's for this to the keys set in input,
-   * uses WASD to control the player in the four directions.
+   * uses Arrow to control the player in the four directions.
    */
   this.playerControls = function(northKey,eastKey,southKey,westKey) {
     this.northKey = northKey; this.eastKey = eastKey;
@@ -277,8 +288,8 @@ function player() {
   this.restart = function() {
     this.shovels = 0;                           // Number shovels is restart to 0.
     if(this.startpointX == undefined) {         // If the start X and Y have never been set, the game is first started.
-      for(var i=0; i<map.length; i++) {      // For the length of the bitmap-array...
-        if( map[i] == PLAYER) {              // If the number on the bitmap is a player-object(2)
+      for(var i=0; i<map.length; i++) {         // For the length of the bitmap-array...
+        if( map[i] == PLAYER) {                 // If the number on the bitmap is a player-object(2)
           var tileRow = Math.floor(i/tileHor);  // Collects the row by dividing with the number of horizontal rows set.
 
           // Collects the column by collecting the leftover of player-placement multiplied with number of horizontal sprites.
@@ -311,7 +322,7 @@ function player() {
     var moveSpeed = 3;           // The move speed of the player, higher is faster.
     var walkIntoTileType = WALL; // Sets here up a var of the const for wall.
 
-    // The this.myBitmap is changed when 
+    // The this.myBitmap is changed when...
     if(this.pressedNorth) {nextY -= moveSpeed; this.myBitmap = playerUp;    this.haveMoved = true;} // If W is pressed, go up five pixels.
     if(this.pressedEast)  {nextX += moveSpeed; this.myBitmap = playerRight; this.haveMoved = true;} // If A is pressed, go right five pixels.
     if(this.pressedSouth) {nextY += moveSpeed; this.myBitmap = playerDown;  this.haveMoved = true;} // If S is pressed, go down five pixels.
@@ -333,7 +344,7 @@ function player() {
         break;
       case EXIT:                             // If the player walks on a square with the exit.
         this.endGame = true;
-        earn_achievement(achievement_id_1);
+        earnAchievement(achievement_id_1);
         this.restart();                      // Resets the player and the score.
         break;
       case DIRT:                             // If the player walks on a square with a dirt-block.
@@ -345,10 +356,10 @@ function player() {
       case SHOVEL:                           // If the player walks on the square with a shovel.
         this.shovels++;                      // gain one more shovel.
         map[spriteOnNewPos] = FLOOR;         // Then remove the shovel from the canvas.
-        if (this.shovels == 1) {earn_achievement(achievement_id_2);break;}
-        if (this.shovels == 2) {earn_achievement(achievement_id_3);break;}
-        if (this.shovels == 3) {earn_achievement(achievement_id_4);break;}
-        if (this.shovels == 4) {earn_achievement(achievement_id_5);break;}
+        if (this.shovels == 1) {earnAchievement(achievement_id_2);break;}
+        if (this.shovels == 2) {earnAchievement(achievement_id_3);break;}
+        if (this.shovels == 3) {earnAchievement(achievement_id_4);break;}
+        if (this.shovels == 4) {earnAchievement(achievement_id_5);break;}
         break;
       default:
         break;
@@ -376,15 +387,6 @@ function player() {
  * the canvas.
  */
 
-var canvas, context;            // Var for the canvas and the 2d context of it.
-var p1 = new player();          // Creates here the new player-character.
-var score = 0;                  // Score that is used in the game.
-var achievement_id_1 = 1;         // The id of the achievement for reaching the end of the first level.
-var achievement_id_2 = 2; 
-var achievement_id_3 = 3; 
-var achievement_id_4 = 4; 
-var achievement_id_5 = 5; 
-
 /**
  * This happens whenever the game is loaded onto the page.
  * Starts the game automatically by calling the first function.
@@ -403,7 +405,7 @@ window.onload = function() {
  * also initalize the player-character and collect the 
  * input.
  */
-function loadingDoneSoStartGame() {
+function startGame() {
   setInterval(function() {          // Sets here the interval that will run continuesly.
       moveEverything();             // Calls on the function that moves the player.
       drawEverything();             // Calls on the function that draws everything anew.

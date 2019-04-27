@@ -19,15 +19,44 @@ if (isset($_GET['s'])) {
 } else {
 
   $search = "";
-  $games = Game::find_all();
+  $category = "";
+  $genre = "";
+  $games = Game::find_game($category, $genre, $search);
 
 }
 ?>
 
     <div class="cards">
   <!-- For each loop that runs trough all the elements in the $games array. -->
-  <?php foreach ($games as $game) : ?>
+  <?php foreach ($games as $game) : 
 
+
+    switch ($game->genre) {
+      case 'Action': $color = "-red";
+      break;
+      case 'Adventure': $color = "-teal";
+      break;
+      case 'Comedy': $color = "-yellow";
+      break;
+      case 'Fantasy': $color = "-purple";
+      break;
+      case 'Idle': $color = "-indigo";
+      break;
+      case 'Romance': $color = "-pink";
+      break;
+      case 'Rouglike': $color = "-green";
+      break;
+      case 'Sport': $color = "-blue";
+      break;
+      case 'Simulation': $color = "-orange";
+      break;
+      case 'Strategy': $color = "-cyan";
+      break;
+      default: $color = "";
+      break;
+    }
+
+  ?>
 
       <a href="gamepage.php?game=<?php echo $game->id; ?>" class="card">
         <div class="card-image" style="background-image: url(<?php echo $game->game_image_path() ?>)">
@@ -44,12 +73,10 @@ if (isset($_GET['s'])) {
           <section class="scroller"><?php echo $game->description; ?></section>
 
           <footer>
-            <div class="chip -red"><?php echo $game->genre; ?></div>
-            <div class="chip -teal">Adventure</div>
+            <div class="chip <?php echo $color; ?>"><?php echo $game->genre; ?></div>
           </footer>
         </div>
       </a>
-
 
 <?php endforeach; ?>
 
