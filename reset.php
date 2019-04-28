@@ -112,7 +112,8 @@ if (isset($_GET["reset_code"])) {
 
 
 			if (empty($error_array)) {
-
+				Email::invalitate_reset_code($user_id);
+				//var_dump($user_id);
 				?>
 				<div id="alert" class="alert -success -active">
 					<div>Password set.</div>
@@ -152,7 +153,7 @@ if (isset($_GET["reset_code"])) {
 
 	?>
 				<div id="alert" class="alert -warning -active">
-					<div>Your link is broken/incorrect.</div>
+					<div>Your reset link is broken/incorrect/used.</div>
 				</div>
 	
 			<?php
