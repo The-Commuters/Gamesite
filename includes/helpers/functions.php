@@ -46,6 +46,13 @@ function download_phpmailer(){
 
 	}
 
+	if (!file_exists(dirname(__FILE__, 2 ).DS."classes".DS."PHPMailer".DS."Exception")){
+	file_put_contents(dirname(__FILE__, 2 ).DS."classes".DS."PHPMailer".DS."Exception.php",
+    file_get_contents("https://raw.githubusercontent.com/PHPMailer/PHPMailer/master/src/Exception.php")
+	);
+
+	}
+
 }
 
 /** 
