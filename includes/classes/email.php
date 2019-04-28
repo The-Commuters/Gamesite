@@ -88,16 +88,16 @@ class Email extends User{
 	   */
 
 	   // SMTP server address. 
-	   //$mail->Host = 'localhost';
+	   $mail->Host = 'localhost';
 
-	   //$mail->Port = 25;  
+	   $mail->Port = 25;  
 
 
 
 	// * For Sendgrid use or any other mail provider online*
 
 	
-
+	   /*
 	// SMTP Host
 	   $mail->Host = 'smtp.sendgrid.net';
 
@@ -117,7 +117,7 @@ class Email extends User{
 	// Sets the SMTP port. 
 	   $mail->Port = 587;
 
-	
+	*/
 	 	
 	   $mail->SMTPDebug = 0;
 	   
@@ -288,14 +288,16 @@ class Email extends User{
 		$code = $database->escape_string($code);
 		
 		// Finner ut om reset_code også ligger i databasen
-		$sql = "SELECT * FROM ". self::$db_table ." WHERE reset_code = '{$code}' Limit 1 ";
+		$sql = "SELECT * FROM ". self::$db_table ." WHERE reset_code = '{$code}' and used = 0 Limit 1 ";
 
 		// Prøver på noe som daniel har brukt, Ternary 
 		$the_result_array = static::find_by_query($sql);
 
 		
 		// retunerer det database objektet som blir funnet 
-		return !empty($the_result_array) ? array_shift($the_result_array) :  false;
+		return !empty($the_result_array) ? array_shift($the_result_array) :  $error_array;
+
+		//return static ::find_by_query($sql);
 	}
 
 

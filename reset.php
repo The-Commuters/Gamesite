@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 	if (empty($error_array)) {
 		?>
 		<div id="alert" class="alert -success -active">
-				<div>Email sent</div>
+				<div>Email sent. Please check your email</div>
 			</div>
 		<?php
 		
@@ -32,12 +32,12 @@ if (isset($_POST['submit'])) {
 			</div>
 
 		<?php
-		$the_message = "Your information is incorrect.";
+		$error_message = "Your information is incorrect.";
 	}
 
 } else {
 	$email          = "";
-	$the_message 	= "";
+	$error_message 	= "";
 	$error_array    = "";
 }
 
@@ -90,12 +90,13 @@ if (isset($_GET["reset_code"])) {
 	$reset_code = ($_GET["reset_code"]);
 
 	// henter inn koden og gir den vidre til aktiverings metoden 
-	$code = Email::find_user_by_reset_code($reset_code);
+	$in = Email::find_user_by_reset_code($reset_code);
 
-	if($code == true) {
+	if(!empty($in)) {
 
 		//var_dump($error_array);
-		$the_message="Please set your password";
+		$code = $in;
+		//$error_message="Please set your password";
 
 		$user_id = $code->id;
 
@@ -118,7 +119,10 @@ if (isset($_GET["reset_code"])) {
 				</div>
 	
 			<?php
-				$the_message="Password set";
+
+
+				//$error_message="Password set";
+
 
 			} else {
 				?>
@@ -128,14 +132,14 @@ if (isset($_GET["reset_code"])) {
 				</div>
 	
 			<?php
-				$the_message= "Your new password could not be set";
+				$error_message= "Your new password could not be set";
 			}
 
 		} else {
 
 			$password       = "";
 			$password_check = "";
-			$the_message 	= "";
+			$error_message 	= "";
 			$error_array    = "";
 
 		}
@@ -144,6 +148,7 @@ if (isset($_GET["reset_code"])) {
 	else {
 	$password       = "";
 	$password_check = "";
+	//$error_array    = "";
 
 	?>
 				<div id="alert" class="alert -warning -active">
@@ -152,9 +157,10 @@ if (isset($_GET["reset_code"])) {
 	
 			<?php
 
-	$the_message = "Your link is broken/incorrect.";
+	$error_message = "Your link is broken/incorrect.";
 	}
 }
+
 
 ?>
 
@@ -218,13 +224,26 @@ else{
 
 /*Hvis det er meldinger i errorarray blir de skrivt ut til brukeren med ny linje*/
 
-if (!empty($error_array)) {
-	foreach ($error_array as $error_message) {
-		echo '<div class="alert -warning -shown">' . $error_message .'</div>';
-	}
-}
-
 ?>
+<div id="alert" class="alert -warning -active">
+			<?php 
+			if (!empty($error_array)) {
+				foreach ($error_array as $error_message) {
+					echo $error_message . "<br>";
+					
+
+				}
+			}
+			else {
+
+				echo "<script>
+			hideAlert();
+			</script>";  
+			}
+			?>
+
+		</div>
+					
 
 </main>
 
