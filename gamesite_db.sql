@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 27. Apr, 2019 23:00 PM
--- Server-versjon: 10.1.29-MariaDB
--- PHP Version: 7.2.0
+-- Generation Time: 28. Apr, 2019 22:11 PM
+-- Tjener-versjon: 10.1.37-MariaDB
+-- PHP Version: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -57,6 +57,7 @@ INSERT INTO `achievements` (`id`, `game_id`, `title`, `image`, `text`, `experien
 CREATE TABLE `email_codes` (
   `id` int(11) NOT NULL,
   `reset_code` varchar(64) NOT NULL,
+  `used` tinyint(1) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -64,13 +65,13 @@ CREATE TABLE `email_codes` (
 -- Dataark for tabell `email_codes`
 --
 
-INSERT INTO `email_codes` (`id`, `reset_code`, `time`) VALUES
-(28, '05024cf14670782e54f58b4b1cc26b44', '2019-04-11 13:55:12'),
-(26, '06ad94dcb60f29a9238a7ccbed01c542', '2019-04-11 13:54:07'),
-(28, '3a6658a422e46a4a77c01e455b3b6283', '2019-04-11 11:37:23'),
-(28, '59381689fc1bb1e88947693b88c69b6a', '2019-04-11 12:28:20'),
-(28, 'a9c272f3fe0d449c41c2495b864d627a', '2019-04-11 12:27:57'),
-(26, 'be993c4439b66efb331c74d1e51aee80', '2019-04-11 13:52:14');
+INSERT INTO `email_codes` (`id`, `reset_code`, `used`, `time`) VALUES
+(28, '05024cf14670782e54f58b4b1cc26b44', 0, '2019-04-11 13:55:12'),
+(26, '06ad94dcb60f29a9238a7ccbed01c542', 0, '2019-04-11 13:54:07'),
+(28, '3a6658a422e46a4a77c01e455b3b6283', 0, '2019-04-11 11:37:23'),
+(28, '59381689fc1bb1e88947693b88c69b6a', 0, '2019-04-11 12:28:20'),
+(28, 'a9c272f3fe0d449c41c2495b864d627a', 0, '2019-04-11 12:27:57'),
+(26, 'be993c4439b66efb331c74d1e51aee80', 0, '2019-04-11 13:52:14');
 
 -- --------------------------------------------------------
 
@@ -477,7 +478,7 @@ INSERT INTO `user_chat` (`id`, `room_id`, `user_id`, `username`, `time`, `text`,
 (152, '3', 1, 'WilliWonka', '2019-04-27 21:41:45', '\nWhy am I collecting shovels and what should I do with them?', 1),
 (153, '3', 2, 'Derperud', '2019-04-27 22:19:16', 'You need to collect them to dig away the blocks of dirt.', 0),
 (154, '3', 2, 'Derperud', '2019-04-27 22:19:27', '\nMove with the arrow keys!', 0),
-(155, '23', 2, 'Derperud', '2019-04-27 22:58:14', 'Use the arrow keys, and try to get to the top. ', 0),
+(155, '23', 2, 'Derperud', '2019-04-27 22:58:14', 'Use the arrow keys, and try to get to the top. ', 1),
 (156, '23', 2, 'Derperud', '2019-04-27 22:58:19', '\nBut you\'re not hardcore enough, I bet!', 0);
 
 --
