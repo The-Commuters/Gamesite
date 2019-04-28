@@ -64,7 +64,8 @@ class Email extends User{
 	*/
 
 	public static function mail_Sender($mail, $to, $user_name, $subject, $txt){
-		
+
+		$mail_array = array();
 		
         /* Set the mail sender. */
 	   $mail->setFrom('no-reply@cm-games.com', 'CM-Games');
@@ -129,9 +130,11 @@ class Email extends User{
 
 	  if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
+    array_push($mail_array, "Mail sending failed, Please try again");
 } else {
     //echo "Message sent!";
 }
+return $mail_array;
 	}
 
  	/*
@@ -163,12 +166,16 @@ class Email extends User{
 	public static function send_ActivationMail($to, $user_name, $verify_code ){
 		$mail = new PHPMailer();
 
+		$mail_array = array();
+
 		$subject = "Hello " . $user_name . " Please activate your account at CM Games";
 
 		$txt = "Please press the link below to activate your new account at CM Games " . "http://localhost/gamesite/activate.php?code=" . $verify_code . " Thank you for registering. ";
 		
 		
-		self::mail_sender($mail, $to, $user_name , $subject, $txt);
+		$mail_array = self::mail_sender($mail, $to, $user_name , $subject, $txt);
+
+		return $mail_array;
 	}
 	
 	
@@ -281,7 +288,7 @@ class Email extends User{
 	*/
 
 
-	public static function find_user_by_reset_code($code){
+	public function find_user_by_reset_code($code){
 
 		global $database;
 
@@ -294,13 +301,13 @@ class Email extends User{
 		$sql = "SELECT * FROM ". self::$db_table ." WHERE reset_code = '{$code}' and used = 0 Limit 1 ";
 
 		// Prøver på noe som daniel har brukt, Ternary 
-		$the_result_array = static::find_by_query($sql);
+		//$the_result_array = static::find_by_query($sql);
 
 		
 		// retunerer det database objektet som blir funnet 
-		return !empty($the_result_array) ? array_shift($the_result_array) :  $error_array;
+		//return !empty($the_result_array) ? array_shift($the_result_array) :  $error_array;
 
-		//return static ::find_by_query($sql);
+		return static ::find_by_query($sql);
 	}
 
 

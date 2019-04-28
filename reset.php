@@ -95,7 +95,7 @@ if (isset($_GET["reset_code"])) {
 	if(!empty($in)) {
 
 		//var_dump($error_array);
-		$code = $in;
+		$code = array_shift($in);
 		//$error_message="Please set your password";
 
 		$user_id = $code->id;
