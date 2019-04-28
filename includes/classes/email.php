@@ -91,18 +91,19 @@ class Email extends User{
 	   *  and a mail client that can connect to the server 
 	   *  and read these mails.
 	   */
-
+	   
+	   /*
 	   // SMTP server address. 
-	   $mail->Host = 'localhost';
+	   $mail->Host = '192.168.1.2';
 
 	   $mail->Port = 25;  
-
-
+		*/
+		
 
 	// * For Sendgrid use or any other mail provider online*
 
 	
-	   /*
+	   
 	// SMTP Host
 	   $mail->Host = 'smtp.sendgrid.net';
 
@@ -122,7 +123,7 @@ class Email extends User{
 	// Sets the SMTP port. 
 	   $mail->Port = 587;
 
-	*/
+	
 	 	
 	   $mail->SMTPDebug = 0;
 	   
