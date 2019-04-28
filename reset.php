@@ -128,7 +128,7 @@ if (isset($_GET["reset_code"])) {
 				?>
 
 				<div id="alert" class="alert -warning -active">
-					<div>Your new password could not be set</div>
+					<div>Your new password must match</div>
 				</div>
 	
 			<?php
@@ -225,8 +225,10 @@ else{
 /*Hvis det er meldinger i errorarray blir de skrivt ut til brukeren med ny linje*/
 
 ?>
+<!--
 <div id="alert" class="alert -warning -active">
 			<?php 
+			/*
 			if (!empty($error_array)) {
 				foreach ($error_array as $error_message) {
 					echo $error_message . "<br>";
@@ -240,10 +242,11 @@ else{
 			hideAlert();
 			</script>";  
 			}
+			*/
 			?>
-
+			
 		</div>
-					
+		-->			
 
 </main>
 
