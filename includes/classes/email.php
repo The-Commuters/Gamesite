@@ -69,7 +69,7 @@ class Email extends User{
 		$mail_array = array();
 		
         /* Set the mail sender. */
-	   $mail->setFrom('no-reply@cm-games.com', 'CM-Games');
+	   $mail->setFrom('no-reply@cm-games.tk', 'CM-Games');
 
 	   /* Add a recipient. */
 	   $mail->addAddress($to, $user_name);
@@ -118,10 +118,10 @@ class Email extends User{
 	   $mail->Password = $api;
 
 	// Sets the encryption system. 
-	   $mail->SMTPSecure = 'tls';
+	   $mail->SMTPSecure = 'ssl';
 
 	// Sets the SMTP port. 
-	   $mail->Port = 587;
+	   $mail->Port = 465;
 
 	
 	 	
@@ -258,7 +258,7 @@ return $mail_array;
 		$user_email->reset_code = $reset_code;
 
 		// Lagrer alt dette i databasen ved bruk av den overrida create metoden lengere nede
-		$user_email->save();
+		$user_email->create();
 
 
 		// Sender ut eposten til den som forespurte den skulle alt værte ok og eposten ligger i vår database
