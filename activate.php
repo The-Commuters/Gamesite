@@ -1,8 +1,9 @@
 <?php require_once("includes/init.php") ?>
 <?php include("includes/views/header.php"); ?>
+<script src='assets/js/main.js'></script>
 
 
-<!-- <?php if ($session->is_signed_in()) {redirect("profile.php");} ?> -->
+<?php if ($session->is_signed_in()) {redirect("profile.php");} ?>
 
 <?php 
 
@@ -18,12 +19,30 @@ if (isset($_GET["code"])){
 	$code = ($_GET["code"]);
 
 	// henter inn koden og gir den vidre til aktiverings metoden 
-	User::activate_user($code);
+	
+?>
+<div id="alert" class="alert -success -active">
+			<?php 
+			User::activate_user($code);
+			?>
+		</div>
+<?php
+	
 }
 
+
 else{
-	echo "Activation could not be completed \n" ;
+?>
+<div id="alert" class="alert -warning -active">
+			<?php 
+			echo "Activation could not be completed" ;
+			?>
+		</div>
+<?php
 }
+
+	
+
 
 	
 	//Email::create_reset_code("newuser@localhost.com");
@@ -33,7 +52,5 @@ else{
 ?>
 
 
-
-<script src="js/functions.js"></script>
 
 <?php include("includes/views/footer.php"); ?>

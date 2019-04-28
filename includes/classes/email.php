@@ -7,9 +7,12 @@
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
 
 class Email extends User{
 
@@ -21,8 +24,9 @@ class Email extends User{
 
 	public $user_id;
 	public $reset_code;
+	public $used;
 
-	protected static $db_table_column = array('id','reset_code' );
+	protected static $db_table_column = array('id','reset_code' ,'used' );
 
 	/*
 	public static function mail_Sender($to, $subject, $txt){
@@ -61,7 +65,8 @@ class Email extends User{
 	*/
 
 	public static function mail_Sender($mail, $to, $user_name, $subject, $txt){
-		
+
+		$mail_array = array();
 		
         /* Set the mail sender. */
 	   $mail->setFrom('no-reply@cm-games.com', 'CM-Games');
@@ -88,16 +93,16 @@ class Email extends User{
 	   */
 
 	   // SMTP server address. 
-	   //$mail->Host = 'localhost';
+	   $mail->Host = 'localhost';
 
-	   //$mail->Port = 25;  
+	   $mail->Port = 25;  
 
 
 
 	// * For Sendgrid use or any other mail provider online*
 
 	
-
+	   /*
 	// SMTP Host
 	   $mail->Host = 'smtp.sendgrid.net';
 
@@ -117,7 +122,7 @@ class Email extends User{
 	// Sets the SMTP port. 
 	   $mail->Port = 587;
 
-	
+	*/
 	 	
 	   $mail->SMTPDebug = 0;
 	   
@@ -126,9 +131,11 @@ class Email extends User{
 
 	  if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
+    array_push($mail_array, "Mail sending failed, Please try again");
 } else {
     //echo "Message sent!";
 }
+return $mail_array;
 	}
 
  	/*
@@ -160,12 +167,16 @@ class Email extends User{
 	public static function send_ActivationMail($to, $user_name, $verify_code ){
 		$mail = new PHPMailer();
 
+		$mail_array = array();
+
 		$subject = "Hello " . $user_name . " Please activate your account at CM Games";
 
 		$txt = "Please press the link below to activate your new account at CM Games " . "http://localhost/gamesite/activate.php?code=" . $verify_code . " Thank you for registering. ";
 		
 		
-		self::mail_sender($mail, $to, $user_name , $subject, $txt);
+		$mail_array = self::mail_sender($mail, $to, $user_name , $subject, $txt);
+
+		return $mail_array;
 	}
 	
 	
@@ -246,7 +257,7 @@ class Email extends User{
 		$user_email->reset_code = $reset_code;
 
 		// Lagrer alt dette i databasen ved bruk av den overrida create metoden lengere nede
-		$user_email->create();
+		$user_email->save();
 
 
 		// Sender ut eposten til den som forespurte den skulle alt værte ok og eposten ligger i vår database
@@ -264,7 +275,7 @@ class Email extends User{
 
 	}
 
-	/**
+   /**
 	* Method that will take in the reset code from the user 
 	* and then it will try to locate this reset code in the database 
 	* and if it finds it, it will allow the user to 
@@ -288,19 +299,51 @@ class Email extends User{
 		$code = $database->escape_string($code);
 		
 		// Finner ut om reset_code også ligger i databasen
-		$sql = "SELECT * FROM ". self::$db_table ." WHERE reset_code = '{$code}' Limit 1 ";
+		$sql = "SELECT * FROM ". self::$db_table ." WHERE reset_code = '{$code}' and used = 0 Limit 1 ";
 
 		// Prøver på noe som daniel har brukt, Ternary 
-		$the_result_array = static::find_by_query($sql);
+		//$the_result_array = static::find_by_query($sql);
 
 		
 		// retunerer det database objektet som blir funnet 
-		return !empty($the_result_array) ? array_shift($the_result_array) :  false;
+		//return !empty($the_result_array) ? array_shift($the_result_array) :  $error_array;
+
+		return static ::find_by_query($sql);
 	}
 
+   /**
+	* Method that will take in the user id from the find_by_id method 
+	* and then it will try to locate this user in the database 
+	* and if it finds it, it will render the reset link useless 
+	* since it has been used, so the next time, 
+	* the user needs a new password
+	* they will need to request a new link.  
+	* 
+	* @param $id
+	*/
 
+	public static function invalitate_reset_code($id){
 
+		global $database;
 
+		$error_array    = array();
+
+		// Tar bort eventuele ting som ikke skal være med i stringen
+		$in = $database->escape_string($id);
+		
+		$in = self::find_by_id($id);
+	
+		if(!empty($in)){
+			
+		$user_email = $in;
+	
+		$user_email->used = 1;
+
+		$user_email->update();
+
+	}
+
+}
 
 	/**
 	 * This is the class that create database-rows for any of the objects that have
