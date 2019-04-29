@@ -1,7 +1,9 @@
 <?php 
 
 	/**
-	 * 
+	 * The process that registers a user after being
+	 * called on by ajax, runs the verify_new _user-
+	 * method and posts error or sucess alert.
 	 */
 
 	$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";

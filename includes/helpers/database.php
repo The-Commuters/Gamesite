@@ -31,7 +31,7 @@ class Database {
 	 */
 	public function open_db_connection() {
 
-		// Opens a connection to the database with the constants defined in config.
+		// Opens a connection to the database with the constants defined in config.php.
 		$this->connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 		// If an error have happened, then show the error-message.
@@ -88,10 +88,5 @@ class Database {
  * at the top of each page.
  */
 $database = new Database();
-
-
-
-
-
 
 ?>

@@ -9,6 +9,11 @@
 
 include("includes/views/header.php"); 
 
+// If the game is not in the URL, then go back to index.
+if (!isset($_GET['game'])) {
+  redirect("index.php");
+}
+
 $current_game_id = $_GET['game'];
 $game = Game::find_by_id($current_game_id);?>
 
