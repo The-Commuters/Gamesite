@@ -105,17 +105,17 @@ class Email extends User{
 	
 	   
 	// SMTP Host
-	   $mail->Host = 'smtp.sendgrid.net';
+	   $mail->Host = 'pro.turbo-smtp.com';
 
 	// Uses SMTP authentication. 
 	   $mail->SMTPAuth = true;
 	
 	// Username and password / api key
-	   $mail->Username = 'apikey';
+	   require 'safe.php';
+	   $mail->Username = $api_username;
 
 	// A file that needs to contain an key or a password for connecting to the SMTP server
-	   require 'safe.php';
-	   $mail->Password = $api;
+	   $mail->Password = $api_password;
 
 	// Sets the encryption system. 
 	   $mail->SMTPSecure = 'ssl';
