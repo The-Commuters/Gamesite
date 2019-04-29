@@ -12,9 +12,10 @@ $first_name  = trim($_GET['fname']);
 $middle_name = trim($_GET['mname']);
 $last_name   = trim($_GET['lname']);
 
-	// Verify_update lies in User and check what is sent in, more parameters to be added.
+// Verify_update lies in User and check what is sent in, more parameters to be added.
 $error_array = User::verify_update($first_name, $middle_name, $last_name);
 
+// If verify_update() found zero errors with the new name...
 if (empty($error_array)) {
 
 	$user = User::find_by_id($session->user_id);

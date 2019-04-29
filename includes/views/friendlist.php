@@ -1,10 +1,12 @@
 <?php 
 
 /**
- * This is the friendlist that will show up on the chat page and the chat
- * that will change depending on which radio-button is pressed.
+ * This is the friendlist that will show up on 
+ * the chat page and the chat that will change 
+ * depending on which radio-button is pressed.
  */
 
+// Collacts all the friendships of the users.
 $friends = Friendship::find_friends($session->user_id);
 
 ?>
@@ -21,6 +23,7 @@ $friends = Friendship::find_friends($session->user_id);
 <tbody>
 
 <?php 
+// For each of teh friends a user have.
 foreach ($friends as $friend) : 
   if ($friend->user_1 !== $session->user_id) {
     $user = User::find_by_id($friend->user_1);

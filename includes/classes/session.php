@@ -8,9 +8,8 @@
 
 class Session {
 
-	private $signed_in = false;
-	public $user_id;
-	public $current_game;
+	private $signed_in = false; // This will be used to check if a user is signed in or not.
+	public $user_id;			// This will be used to collect the id of the signed in user.		
 
 	/**
 	 * Happens whenever a session is started, which is every time 
@@ -20,8 +19,8 @@ class Session {
 	 */
 	function __construct() {
 
-		session_start();
-		$this->check_the_login();
+		session_start();			// Starts a new session.
+		$this->check_the_login();	// Check if the user is signed in.
 
 	}
 
@@ -36,19 +35,6 @@ class Session {
 	public function is_signed_in() {
 
 		return $this->signed_in;
-
-	}
-
-	/**
-	 * Collects the user id of the user that is logged in, can be used
-	 * on the website to collect what is needed from the database, about
-	 * the user.
-	 *
-	 * @return the user id of the user that is signed in.
-	 */
-	public function get_user_id() {
-
-		return $this->user_id;
 
 	}
 
@@ -99,23 +85,21 @@ class Session {
 	 */
 	private function check_the_login() {
 
+		// If the session-variable is set with the user id.
 		if (isset($_SESSION['user_id'])) {
-			
-			$this->user_id = $_SESSION['user_id']; 
 			$this->signed_in = true;
-
+			$this->user_id = $_SESSION['user_id']; 
 		} else {
-
 			unset($this->user_id);
 			$this->signed_in = false;
-
 		}
-
 	}
-
 } // End of the Session-class.
 
+/**
+ * As the $database a new object is created every
+ * time a page is loaded in. This starts the
+ * constructor and collects the SESSION variable.
+ */
 $session = new Session();
-
-
 ?>

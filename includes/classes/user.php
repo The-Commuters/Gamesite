@@ -9,10 +9,8 @@
 class User extends Db_object{
 
 	protected static $db_table = "users";
-
 	protected static $db_table_column = array('unique_id', 'username', 'email', 'password', 'first_name', 
 		'middle_name', 'last_name', 'user_image', 'experience_points', 'joined', 'verify_code', 'status', 'signed_in' );
-
 	public $id;
 	public $username;
 	public $email;
@@ -73,7 +71,6 @@ class User extends Db_object{
 
 			return false;
 		} else {
-
 			return false;
 		}	
 	}
@@ -119,21 +116,17 @@ class User extends Db_object{
 
 		$sql  = "INSERT INTO friend_list(user_1, user_2, friendship_status)";
 		$sql .= "VALUES ('{$user_id}', '{$friend_id}', '{$status}')";
-
 		if ($database->query($sql)) {
-
 			return true;
-
 		} else {
-
 			return false;
-
 		}
 
 	}
 
 	/**
-	 * The search function for users, uses when they look trough the list to add to friends.
+	 * The search function for users, uses when they 
+	 * look trough the list to add to friends.
 	 *
 	 * @param $search is the input of the user.
 	 * @return the list of users that is found.
@@ -142,14 +135,13 @@ class User extends Db_object{
 
 		global $database;
 
+		// If there is something in the search-input.
 		if ($search !== "") {
-
 			$sql  = "SELECT * FROM users WHERE ";
 			$search      = $database->escape_string($search);
 			$sql .= " username LIKE '%{$search}%' ";
 			return self::find_by_query($sql);
 		}
-
 	}
 
 	/**
@@ -270,9 +262,9 @@ class User extends Db_object{
 	}
 
 	/**
-	 * Verifiserer at brukeren ligger i databasen, brukes ved registrering og kan brukes andre steder.
-	 * Legger feilmeldinger inn i error_array, error arrayet sendes så tilbake. 
-     * Hvis det er felmeldinger vil ikke brukeren bli laget, og feilmeldingene vil vises.
+	 * Verifies that the user-information that have been entered is correct
+	 * and places all the errors that may happen in the error_array to be sent
+	 * back to the user.
      *
 	 * @param $username
 	 * @param $email
@@ -300,7 +292,7 @@ class User extends Db_object{
 		$password          = strip_tags($password);
 		$password_check    = strip_tags($password_check);
 
-		// Sjekker om brukernavn eller email ligger i databasen.
+		// Checks if the user already is in hte database.
 		$sql = "SELECT * FROM " . self::$db_table . " WHERE ";
 		$sql .= "email = '{$email}' ";
 		$sql .= "AND password = '{$password}' ";
@@ -311,9 +303,10 @@ class User extends Db_object{
 			array_push($error_array, "The username is already in use, pick something else!");
 		}
 
-		//SJEKKER EMAIL:
+		//Checks the email by filtering it of unwanted characters.
 		if(filter_var($email, FILTER_VALIDATE_EMAIL)) { 
 
+			// Filters out the characters that should not be in a email.
 			$email = filter_var($email, FILTER_VALIDATE_EMAIL); 
 			$email_check = $database->query("SELECT email FROM " . self::$db_table . " WHERE email='$email'");
 			$num_rows = mysqli_num_rows($email_check); 
@@ -342,9 +335,8 @@ class User extends Db_object{
 		//Check password - bruker check_password til å sjekke om et passord fungerer, kommer til å tilkalle verify_password.
 		if (empty($error_array)) {
 
-			
+			// Creats a new user object and fill's in the information.
 			$user = new user();														
-
 			$user->username    = $username;
 			$user->email       = $email;
 			$user->password    = $password;

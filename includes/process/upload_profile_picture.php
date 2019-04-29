@@ -23,6 +23,7 @@ if (in_array($_FILES['file']['type'], $file_types)) {
 	$image_name = time() . '_' . $_FILES['file']['name'];
 	$image_dir = $image_storage . DS . $image_name;
 
+	// Creates a user object and places the signed in user in it.
 	$user = new User;
 	$user = User::find_by_id($session->user_id);
 

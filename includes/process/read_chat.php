@@ -2,7 +2,7 @@
 
 	/**
 	 * Reads messages that belong to the current chat and 
-	 * places them into it for the users to read.
+	 * places them into it for the users to read. 
 	 */
 
 	$path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";

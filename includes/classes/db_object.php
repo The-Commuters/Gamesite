@@ -17,10 +17,9 @@ class Db_object {
 	 *
 	 * @return an array filled with the objects in the database-table.
 	 */
-	public static function find_all() {
+	public static function find_all_objects() {
 
 		return static::find_by_query("SELECT * FROM " . static::$db_table . " ");
-
 	}
 
 	/**
@@ -38,7 +37,6 @@ class Db_object {
 
 		//Man kan og gjøre dette, synes vi burde det på prosjektet, heter tenery syntax.
 		return !empty($the_result_array) ? array_shift($the_result_array) : false;
-
 	}
 
 	/**
@@ -79,15 +77,12 @@ class Db_object {
 
 		// For each of the collected rows, the attribute and its value.
 		foreach ($row as $attribute => $value) {
-
 			// If the object have the attribute, then...
 			if($object->has_attribute($attribute)) { 
 				$object->$attribute = $value;
 			}
 		}
-
 		return $object;
-
 	}
 
 	/**
@@ -102,9 +97,7 @@ class Db_object {
 	private function has_attribute($attribute) {
 
 		$properties = get_object_vars($this);
-
 		return array_key_exists($attribute, $properties); 
-
 	}
 
 	/**
@@ -176,15 +169,10 @@ class Db_object {
 		$sql .= "VALUES ('{$act}', '{$user_id}', '{$target}', '{$type}')";
 
 		if ($database->query($sql)) {
-			
 			$this->id = $database->get_last_insert_id();
-
 			return true;
-
 		} else {
-
 			return false;
-
 		}
 	}
 
@@ -200,7 +188,6 @@ class Db_object {
 		return isset($this->id) ? $this->update() : $this->create();
 	}
 
-
 	/**
 	 * This is the clas that create database-rows for any of the objects that have
 	 * their own object-classes, this checks and stores rows in the database to be 
@@ -215,26 +202,21 @@ class Db_object {
 		global $database;
 		global $session;
 
+		// Sends all of the properties of the object into real_escape_string().
 		$properties = $this->clean_properties();
 
 		$sql = "INSERT INTO " . static::$db_table . " (" . implode(",", array_keys($properties)) . ")";
 		$sql .= "VALUES ('" . implode("','", array_values($properties)) . "')";
 
 		if ($database->query($sql)) {
-			
 			$this->id = $database->get_last_insert_id();
 			$user_id = isset($session->user_id) ? $session->user_id : $this->id;
-
 			$log = $this->log_user_activity("create", $user_id, $this->id, static::$db_table);
 
 			return true;
-
 		} else {
-
 			return false;
-
 		}
-
 	}
 
 	/**
@@ -255,9 +237,7 @@ class Db_object {
 		$propteries_pairs = array();
 
 		foreach ($properties as $key => $value) {
-
 			$propteries_pairs[] = "{$key}='{$value}'";
-
 		}
 
 		$sql  = "UPDATE " . static::$db_table . " SET ";
@@ -266,7 +246,6 @@ class Db_object {
 
 		$database->query($sql);
 		return (mysqli_affected_rows($database->connection) == 1) ? true : false;
-
 	}
 
 	/**
@@ -287,9 +266,7 @@ class Db_object {
 		$database->query($sql);
 	    $log = $this->log_user_activity("delete", $session->user_id, $this->id, static::$db_table);
 		return (mysqli_affected_rows($database->connection) == 1) ? true : false;
-
 	}
-
 }// This is the end of the class.
 
 

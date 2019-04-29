@@ -2,7 +2,7 @@
 
 /**
  * This is the page where people will be able to read
- * about the website, will contain information about
+ * about the website, would contain information about
  * the creation and the vision.
  */
 

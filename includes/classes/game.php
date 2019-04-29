@@ -11,22 +11,21 @@ class Game extends Db_object {
 
 	protected static $db_table = "games"; 
 	protected static $db_table_column = array('id', 'title', 'description', 'foldername', 'filename', 'genre', 'creator', 'size', 'rating');
-	
 	public $id; 
 	public $title;
 	public $description;
-	public $foldername;
-	public $filename;
+	public $foldername;					// The name of the folder the game is placed in.
+	public $filename;					// The name of the php-file the canvas is placed in.
 	public $size;
 	public $genre;
 	public $creator;
 	public $rating;
-
-	public $tmp_path; 
-	public $upload_directory = "games";
+	public $tmp_path; 					// Used when uploading the game.
+	public $upload_directory = "games"; // The name of the directory the games is stored in.
 	public $errors = array();
-	public $upload_errors_array = array(
 
+	// The an array with the errors that may happen with the upload. 
+	public $upload_errors_array = array(
 		UPLOAD_ERR_OK            => "There is no error",
 		UPLOAD_ERR_INI_SIZE      => "The uploaded file exceeds the UPLOAD_MAX_FILESIZE",
 		UPLOAD_ERR_FORM_SIZE     => "The uploaded file exceeds the MAX_FILE_SIZE",
@@ -35,7 +34,6 @@ class Game extends Db_object {
 		UPLOAD_ERR_NO_TMP_DIR    => "Missing a temporary folder",
 		UPLOAD_ERR_CANT_WRITE    => "Failed to write to disk",
 		UPLOAD_ERR_EXTENSION     => "A PHP extension stopped the file upload."
-
 	);
 
 	/**
@@ -48,16 +46,14 @@ class Game extends Db_object {
 	*/
 	public function set_file($file) {
 
+		// If the file is empty, not there and not array.
 		if (empty($file) || !$file || !is_array($file)) {
 			$this->errors[] = "There was no file uploaded here";
 			return false;
-
 		} elseif ($file['error'] != 0) {
 			$this->errors[] = $this ->upload_errors_array[$file['error']]; 
 			return false;
-
 		} else {
-
 			$this->foldername = basename($file['name']); 
 			$this->filename   = substr($this->foldername, 0, -3) . "php"; 
 			$this->tmp_path   = $file['tmp_name'];

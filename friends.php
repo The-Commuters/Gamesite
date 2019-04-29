@@ -16,10 +16,7 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 <main class="friendlist">
     <h1 class="friendlist-title">Friends</h1>
 
-
-    <!----------------------------------- Friend search---------------------------------------->
-
-    <!-- Add friend stuff starts here -->
+    <!-- This is the search-input and friendlist -->
 		<div class="friendlist-container friendlist-search">
 
             <!-- The search bar for users to send friend request to. -->
@@ -30,8 +27,6 @@ if (!$session->is_signed_in()) {redirect("login.php");}
                 <div id="friend_search" class="new-friends"></div>
 		    </div>
     </div>
-
-	<!----------------------------------- /Friend search---------------------------------------->
 
     <!-- Div that is used to update friendlist with ajax -->
     <div id="friendlist_content-ajax">

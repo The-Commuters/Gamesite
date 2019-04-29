@@ -10,7 +10,6 @@
 class Rating extends Db_object {
 
 	protected static $db_table = "ratings"; 
-
 	protected static $db_table_column = array('game_id', 'user_id');
 	public $id; 
 	public $game_id;
@@ -42,25 +41,30 @@ class Rating extends Db_object {
 
 		$the_result_array = self::find_by_query($sql);
 
-		// Collect's the game object, so that the rating can be changed.
+		// Collects the game object, so that the rating can be changed.
 		$game = new Game();
 		$game = Game::find_by_id($game_id);
 
+		// If the array is not empty
 		if (!empty($the_result_array)) {
 			$rating->id = $the_result_array[0]->id;
 			$rating->delete();
 			$game->rating -= 1;
-
 		} else {
 			$rating->create();
 			$game->rating += 1;
-			
 		}
 
+		// Update the new rating on the row of the game in the database.
 		$game->update();
 
 	}
 
+	/**
+	 * Checks if the user have liked the game before,
+	 * and sends either false or the rating object 
+	 * depending on if the user have done so before.
+	 */
 	public function check_if_rated($game_id, $user_id) {
 
 		global $session;
