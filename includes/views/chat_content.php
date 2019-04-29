@@ -5,6 +5,9 @@
  * resemble the facebook messenger. 
  */
 
+// If the user is not signed in, send to login.
+if (!$session->is_signed_in()) {redirect("login.php");} 
+
 // Collects all of the active chatrooms that the user have.
 $friends = Friendship::find_active_chatrooms($session->user_id);
 

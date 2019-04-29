@@ -13,6 +13,13 @@
 	$day_check = 0;										// Used when checking where the date-lines should be placed.
 	$minute_check = 0;									// Used when checking wheter the messages should be lumped together.
 	$user_check = 0; 									// Used when checking if the user was the one that posted the last message.
+	$signed_in_user = 0;
+
+	// Places the id of the signed in user in the variable $signed_in_user,
+	// This stops errors from happening when a non-signed in user plays a game.
+	if ($session->is_signed_in()) {
+		$signed_in_user = $session->user_id;
+	}
 
 	foreach ($messages as $message) : 					// Does this for each of the messages that belong to the room.
 		
@@ -22,7 +29,7 @@
 
 		// Decides if the message belongs to signed in user or not.
 		$other = null;
-		if ($message->user_id == $session->user_id) {
+		if ($message->user_id == $signed_in_user) {
 			$other = "-user";
 		}
 		
@@ -34,7 +41,7 @@
 		$minute=date('i', strtotime($message->time));   // Gather's the minute that the message was sent.
 
 		// Will here check if the message is viewed or not.
-		if ($session->user_id != $message->user_id) {
+		if ($signed_in_user != $message->user_id) {
 			$message->viewed = 1;
 			$message->update();
 		}
