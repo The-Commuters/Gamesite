@@ -214,12 +214,16 @@ return $mail_array;
 	public static function send_Password_ResetMail($to, $user_name, $reset_code ){
 		$mail = new PHPMailer();
 
+		$mail_array = array();
+
 		$subject = "Hello " . $user_name . " Here is your password reset";
 
 		$txt = "Please press the link below to reset your password for your account at CM Games " . "http://localhost/gamesite/reset.php?reset_code=" . $reset_code;
 		
 		
-		self::mail_sender($mail, $to, $user_name, $subject, $txt);
+		$mail_array = self::mail_sender($mail, $to, $user_name, $subject, $txt);
+
+		return $mail_array;
 	}
 
 	/**
@@ -236,6 +240,7 @@ return $mail_array;
 
 		global $database;
 		
+		$mail_array = array();
 
 		$error_array = array();
 		// Removes any code that should not be included in the string
@@ -258,11 +263,18 @@ return $mail_array;
 		$user_email->reset_code = $reset_code;
 
 		// Lagrer alt dette i databasen ved bruk av den overrida create metoden lengere nede
-		$user_email->create();
+		
+
+
 
 
 		// Sender ut eposten til den som forespurte den skulle alt værte ok og eposten ligger i vår database
-		self::send_Password_resetMail($user->email, $user->username, $reset_code);
+		$mail_array = self::send_Password_resetMail($user->email, $user->username, $reset_code);
+
+		if(empty($mail_array))
+			$user_email->create();
+		else
+			array_push($error_array, array_shift($mail_array));
 		
 		return $error_array;
 

@@ -21,6 +21,9 @@ if (isset($_POST['submit'])) {
 		?>
 		<div id="alert" class="alert -success -active">
 				<div>Email sent. Please check your email</div>
+				<script type="text/javascript">
+					hideAlert();
+				</script>
 			</div>
 		<?php
 		
@@ -28,11 +31,18 @@ if (isset($_POST['submit'])) {
 		?>
 
 			<div id="alert" class="alert -warning -active">
-				<div>Your information is incorrect.</div>
+				<!-- <div>Your information is incorrect.</div> -->
+				<?php
+				echo array_shift($error_array);
+				?>
+				<script type="text/javascript">
+					hideAlert();
+				</script>
+
 			</div>
 
 		<?php
-		$error_message = "Your information is incorrect.";
+		
 	}
 
 } else {
@@ -84,7 +94,6 @@ if (isset($_POST['submit'])) {
 
 if (isset($_GET["reset_code"])) {
 
-
 	// Gjør at det som er inni div taggen ikke vises til brukeren
 	
 	$reset_code = ($_GET["reset_code"]);
@@ -117,6 +126,9 @@ if (isset($_GET["reset_code"])) {
 				?>
 				<div id="alert" class="alert -success -active">
 					<div>Password set.</div>
+					<script type="text/javascript">
+					hideAlert();
+					</script>
 				</div>
 	
 			<?php
@@ -129,11 +141,13 @@ if (isset($_GET["reset_code"])) {
 				?>
 
 				<div id="alert" class="alert -warning -active">
-					<div>Your new password must match</div>
+					<?php echo array_shift($error_array);?>
+				<script type="text/javascript">
+					hideAlert();
+				</script>
 				</div>
 	
 			<?php
-				$error_message= "Your new password could not be set";
 			}
 
 		} else {
@@ -154,6 +168,9 @@ if (isset($_GET["reset_code"])) {
 	?>
 				<div id="alert" class="alert -warning -active">
 					<div>Your reset link is broken/incorrect/used.</div>
+					<script type="text/javascript">
+					hideAlert();
+					</script>
 				</div>
 	
 			<?php
@@ -222,32 +239,7 @@ else{
 	</script>";
 }
 	
-
-/*Hvis det er meldinger i errorarray blir de skrivt ut til brukeren med ny linje*/
-
 ?>
-<!--
-<div id="alert" class="alert -warning -active">
-			<?php 
-			/*
-			if (!empty($error_array)) {
-				foreach ($error_array as $error_message) {
-					echo $error_message . "<br>";
-					
-
-				}
-			}
-			else {
-
-				echo "<script>
-			hideAlert();
-			</script>";  
-			}
-			*/
-			?>
-			
-		</div>
-		-->			
 
 </main>
 
