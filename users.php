@@ -9,16 +9,12 @@
 
 include("includes/views/header.php");
 
+// If there is no signed in user, or if the user is not an admin.
 if (!$session->is_signed_in() || !User::is_admin($session->user_id)) {redirect("login.php");} 
 
 $genres = array();
-
-if (!isset($_GET['f'])) {
-
-  $search = "";
-  $users = User::find_all();
-
-}
+$search = "";
+$users = User::find_all_objects();
 
 ?>
 

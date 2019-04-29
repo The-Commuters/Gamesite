@@ -91,9 +91,9 @@ if (!isset($_GET["user"])) {
      <!-- This is where the messages is loaded in. -->
      <div class="chat">
         <div class="header">
-            <!-- The <a> is sent by the javascript that control the Html and css -->
-                <span id="username">
 
+            <!-- The <a> is sent by the javascript that control the Html and css of the chat -->
+                <span id="username">
                     <?php if ($current_username != ""): ?>
                         <a href="profile.php?id='<?php echo $current_user ?> '" class="username"><?php echo $current_username ?></a>;
                     <?php endif; ?>

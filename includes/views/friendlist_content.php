@@ -30,45 +30,43 @@
             }
             ?>
 
- 
-            
-                <div class="friend">
-                    <div class="friend-info">
-                        <div style="background-image: url(<?php echo $user->get_user_image(); ?>" class="avatar -s"></div>
-                        <div class="username"><?php echo $user->username; ?><div class="friend-request-notification">New</div></div>
-                    </div>
-
-                    <div class="friend-status">
-                        <div class="status <?php echo $signed_in ?>"></div>
-                        <div class="description"><?php echo $status ?></div>
-                    </div>
-
-                    <!-- Here the button for the friend request is placed, and the message when it is sent. -->
-                    <div class="friend-actions" id="handle_friend_request">
-
-                        <a class="action -add" onclick="handleFriendRequest(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
-                            <?php echo $request->id ?>, 1)">
-                            <i class="fas fa-fw fa-check"></i>
-                        </a>
-
-                        <a class="action -delete" onclick="handleFriendRequest(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
-                        <?php echo $request->id ?>, 0)">
-                            <i class="fas fa-fw fa-trash-alt"></i>
-                        </a>
-                            
-                        <a href="profile.php?id=<?php echo $user->id; ?>" class="action">
-                            <i class="fas fa-user"></i>
-                        </a> 
-
-                    </div>
+            <div class="friend">
+                <div class="friend-info">
+                    <div style="background-image: url(<?php echo $user->get_user_image(); ?>" class="avatar -s"></div>
+                    <div class="username"><?php echo $user->username; ?><div class="friend-request-notification">New</div></div>
                 </div>
-     
-            
+
+                <div class="friend-status">
+                    <div class="status <?php echo $signed_in ?>"></div>
+                    <div class="description"><?php echo $status ?></div>
+                </div>
+
+                <!-- Here the button for the friend request is placed, and the message when it is sent. -->
+                <div class="friend-actions" id="handle_friend_request">
+
+                    <a class="action -add" onclick="handleFriendRequest(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
+                        <?php echo $request->id ?>, 1)">
+                        <i class="fas fa-fw fa-check"></i>
+                    </a>
+
+                    <a class="action -delete" onclick="handleFriendRequest(<?php echo $session->user_id ?>, <?php echo $request->user_1 ?>, 
+                        <?php echo $request->id ?>, 0)">
+                        <i class="fas fa-fw fa-trash-alt"></i>
+                    </a>
+
+                    <a href="profile.php?id=<?php echo $user->id; ?>" class="action">
+                        <i class="fas fa-user"></i>
+                    </a> 
+
+                </div>
+            </div>
+
+
         <?php 
         endforeach; 
         ?>
 
-    <?php 
+        <?php 
         /**
          * Inside of this div the friendlist is placed, and
          * the user can choose to go to their profile, open 
@@ -76,11 +74,12 @@
          */
 
         if (!isset($_GET['f'])) {
-          $friends = Friendship::find_friends($session->user_id);
+            $friends = Friendship::find_friends($session->user_id);
         }
 
+        // Lists opp all the friends.
         foreach ($friends as $friend) :
-            
+
             if ($friend->user_1 !== $session->user_id) {
                 $user = User::find_by_id($friend->user_1);
             } else {
@@ -94,38 +93,38 @@
                 $signed_in = "";
                 $status = "Offline";
             }
-        ?> 
-    
-    <div class="friendlist-container">
-        
-        <div class="friend">
-            <div class="friend-info">
-                <div style="background-image: url(<?php echo $user->get_user_image(); ?>" class="avatar -s"></div>
-                <div class="username"><?php echo $user->username; ?></div>
-            </div>
+            ?> 
 
-            <div class="friend-status">
-                <div class="status <?php echo $signed_in ?>"></div>
-                <div class="description"><?php echo $status ?></div>
-            </div>
+            <div class="friendlist-container">
 
-            <div class="friend-actions">
-                <a href="profile.php?id=<?php echo $user->id; ?>" class="action">
-                    <i class="fas fa-user"></i>
-                </a>
-                
-                <a class="action" onclick="startChat(<?php echo $session->user_id . ", " . $user->id ?>)">
-                    <i class="fas fa-fw fa-comment-alt"></i>
-                </a>
+                <div class="friend">
+                    <div class="friend-info">
+                        <div style="background-image: url(<?php echo $user->get_user_image(); ?>" class="avatar -s"></div>
+                        <div class="username"><?php echo $user->username; ?></div>
+                    </div>
 
-                <div class="action -delete" onclick="deleteFriend(<?php echo $session->user_id . ", " . $user->id ?>)">
-                    <i class="fas fa-fw fa-user-times"></i>
+                    <div class="friend-status">
+                        <div class="status <?php echo $signed_in ?>"></div>
+                        <div class="description"><?php echo $status ?></div>
+                    </div>
+
+                    <div class="friend-actions">
+                        <a href="profile.php?id=<?php echo $user->id; ?>" class="action">
+                            <i class="fas fa-user"></i>
+                        </a>
+
+                        <a class="action" onclick="startChat(<?php echo $session->user_id . ", " . $user->id ?>)">
+                            <i class="fas fa-fw fa-comment-alt"></i>
+                        </a>
+
+                        <div class="action -delete" onclick="deleteFriend(<?php echo $session->user_id . ", " . $user->id ?>)">
+                            <i class="fas fa-fw fa-user-times"></i>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        </div>
 
-    </div>
-
-    <?php
+        <?php
         endforeach; 
-    ?>
+        ?>

@@ -1,22 +1,17 @@
 
 <?php 
-if (empty($_GET['id'])) {
-  redirect("users.php");
-}
-
-$user = User::find_by_id($session->user_id);
-?>
-
-
-
-
-<?php
 
 /**
  * This is the page where the users can change their data,
  * Can only be reached by admins with the access to the
  * userlist or the users themself.
  */
+
+if (empty($_GET['id'])) {
+  redirect("index.php");
+}
+
+$user = User::find_by_id($session->user_id);
 
 require_once("includes/views/header.php");
 
@@ -26,9 +21,6 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 
 <!-- The alert is placed here -->
 <div id="image"></div>
-
-</div>
-
 
 <main>
 	<h1 class="banner">Profile</h1>
@@ -81,13 +73,14 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 			<h2 class="title">Achievements</h2>
 			<div class="content">
 			<?php 
+
+			// Will show of achievements that the user have gained.
 			$gained_achievements = Gained_Achievement::get_gained_achievements($user->id);
 			foreach ($gained_achievements as $gained_achievement) :
 
 				$achievement = new Achievement();
 				$achievement = Achievement::find_by_id($gained_achievement->achievement_id);
 				?>
-
 
 				<div class="achievement">
 					<div style="background-image: url(<?php echo $achievement->get_achievement_image() ?>)" class="achievement-image"></div>
@@ -96,7 +89,6 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 						<div class="description"><?php echo $achievement->text; ?></div>
 					</div>
 				</div>
-
 
 				<?php 
 			endforeach;

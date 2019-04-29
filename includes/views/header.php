@@ -27,6 +27,7 @@ require_once("includes/init.php");
 				$user_level = 1;
 				$current_user_level = 1;
 				$current_needed_xp = 100;
+
 				//If somone is signed in.
 				if ($session->is_signed_in()) {
 
@@ -74,7 +75,10 @@ require_once("includes/init.php");
 				<a href="about.php" class="item <?php if($page == "about"){echo "-active";} ?>">About</a>
             </nav>
 
-            <?php if ($session->is_signed_in()) { ?>
+            <?php 
+            // If the user is signed in.
+            if ($session->is_signed_in()) { 
+            ?>
 
             <div class="interaction">
 				<!-- Avatar (Only show when logged in)-->
@@ -96,7 +100,11 @@ require_once("includes/init.php");
 						<hr class="divider">
 						<a href="upload.php"><i class="fas fa-fw fa-upload"></i>Submit game</a>
 
-						<?php if ($user->is_admin($user->id)) { ?>
+
+						<?php 
+						// Only show the path to the user-list if the user is a Administrator. 
+						if ($user->is_admin($user->id)) { 
+						?>
 
 						<hr class="divider">
 						<a href="users.php"><i class="fas fa-fw fa-users"></i>User list</a>

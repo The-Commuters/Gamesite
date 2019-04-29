@@ -45,6 +45,8 @@ class Database {
 	 * Collects the last id inserted into the database, this
 	 * means that any auto-generated id is collected and sent
 	 * back to where this method is called.
+	 *
+	 * @return the last id-created in the database.
 	 */
 	public function get_last_insert_id() {
 

@@ -1,23 +1,23 @@
 
 <?php 
+
+/**
+ * This view is called in on index.php with
+ * a ajax-function every time someone write
+ * something into the search-input on the 
+ * page.
+ */
+
 $path = dirname(__FILE__,2) .DIRECTORY_SEPARATOR."init.php";
 require_once($path); 
 
-//Sjekker om brukeren er logget inn, kommer ikke nødvendigvis til å være nødvendig i prosjektet.
-//Sender dem til login ved hjelp av funksjonen redirect i "functions.php".
-
-$genres = array();
-
 if (isset($_GET['s'])) {
-
   $category = trim($_GET['c']); 
   $genre = trim($_GET['g']);
   $search = trim($_GET['s']);
-  
   $games = Game::find_game($category, $genre, $search);
 
 } else {
-
   $search = "";
   $category = "";
   $genre = "";
@@ -30,7 +30,7 @@ if (isset($_GET['s'])) {
   <!-- For each loop that runs trough all the elements in the $games array. -->
   <?php foreach ($games as $game) : 
 
-
+    // A switch that decide what color to show.
     switch ($game->genre) {
       case 'Action': $color = "-red";
       break;

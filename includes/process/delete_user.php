@@ -16,5 +16,4 @@
 	// Deletes the user with the id from the database.
 	$user = User::find_by_id($_GET['id']);
 	$user->delete();
-
 ?>

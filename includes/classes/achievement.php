@@ -11,7 +11,6 @@
 class Achievement extends Db_object{
 
 	protected static $db_table = "achievements"; 
-
 	protected static $db_table_column = array('id', 'title', 'text', 'image', 'game_id', 'experience_points');
 	public $id;
 	public $title;
@@ -26,7 +25,6 @@ class Achievement extends Db_object{
 	 * be stored inside of the $image of this achievement.
 	 */
 	public function get_achievement_image() {
-
 		return "assets/" . "img/" . "achievements/" . $this->image;
 	}
 
