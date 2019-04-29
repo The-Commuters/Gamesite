@@ -347,14 +347,12 @@ return $mail_array;
 		$error_array    = array();
 
 		// Removes any code that should not be included in the string
-		$in = $database->escape_string($id);
+		$id = $database->escape_string($id);
+	
+		if(!empty($id)){
 		
-		$in = self::find_by_id($id);
-	
-		if(!empty($in)){
-			
-		$user_email = $in;
-	
+		$user_email = new Email();
+		$user_email = self::find_by_id($id);
 		$user_email->used = 1;
 
 		$user_email->update();
