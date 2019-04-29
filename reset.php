@@ -10,11 +10,11 @@
 
 if (isset($_POST['submit'])) {
 
-	// Fjerner eventuelle tagger og stringer som kan skade databasen
+	// Removes eventual tags and strings that could damage data in the database.
+
 	$email = trim($_POST['email']);
-	// Skjuler passord setting når den andre er i bruk 
 	
-	//Putter brukerens email inni metoden create_reset_code
+	//Puts users email to method create_reset_code
 	$error_array = Email::create_reset_code($email);
 
 	if (empty($error_array)) {
@@ -31,7 +31,6 @@ if (isset($_POST['submit'])) {
 		?>
 
 			<div id="alert" class="alert -warning -active">
-				<!-- <div>Your information is incorrect.</div> -->
 				<?php
 				echo array_shift($error_array);
 				?>
@@ -58,7 +57,7 @@ if (isset($_POST['submit'])) {
 	<h4></h4>
 
 <!-- 
-Åpner en form for slik at brukeren kan skrive inne sin epost for å så kunne få til sent en passord tilbakestillingsepost
+Opens a form for a user to enter their email in order to request and send a password reset email.
 
 -->
 
@@ -94,18 +93,15 @@ if (isset($_POST['submit'])) {
 
 if (isset($_GET["reset_code"])) {
 
-	// Gjør at det som er inni div taggen ikke vises til brukeren
 	
 	$reset_code = ($_GET["reset_code"]);
 
-	// henter inn koden og gir den vidre til aktiverings metoden 
+	// Gets the reset code from the get method
 	$in = Email::find_user_by_reset_code($reset_code);
 
 	if(!empty($in)) {
 
-		//var_dump($error_array);
 		$code = array_shift($in);
-		//$error_message="Please set your password";
 
 		$user_id = $code->id;
 
@@ -116,13 +112,12 @@ if (isset($_GET["reset_code"])) {
 			$password = trim($_POST['password']);
 			$password_check = trim($_POST['password_check']);
 
-			// I am unsure where i want to place this, because i need to get the id or the user object to this method 
 			$error_array = User::verify_password_update($user->id,$password, $password_check );
 
 
 			if (empty($error_array)) {
 				Email::invalitate_reset_code($user_id);
-				//var_dump($user_id);
+
 				?>
 				<div id="alert" class="alert -success -active">
 					<div>Password set.</div>
@@ -132,9 +127,6 @@ if (isset($_GET["reset_code"])) {
 				</div>
 	
 			<?php
-
-
-				//$error_message="Password set";
 
 
 			} else {
@@ -163,7 +155,6 @@ if (isset($_GET["reset_code"])) {
 	else {
 	$password       = "";
 	$password_check = "";
-	//$error_array    = "";
 
 	?>
 				<div id="alert" class="alert -warning -active">
@@ -183,7 +174,7 @@ if (isset($_GET["reset_code"])) {
 ?>
 
 <!-- Password reset form 
-Here the user will put in their new password twice and submit it for checks agianst our database 
+Here the user will put in their new password twice and submit it for checks against our database 
 -->
 
 

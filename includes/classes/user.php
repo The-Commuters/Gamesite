@@ -353,10 +353,8 @@ class User extends Db_object{
 			$user->joined      = date("Y-m-d");
 			$user->verify_code = md5($username . microtime());
 
-			// Closing this out for now as it brings a error without the setup.
 			 $mail_array = Email::send_ActivationMail($email, $username, $user->verify_code);
-			 var_dump($mail_array);
-
+			
 
 			if(empty($mail_array)){
 				$user->create();
@@ -370,6 +368,22 @@ class User extends Db_object{
 		return $error_array;
 
 	}
+
+	/**
+	 * Method that takes in the users id, password 
+	 * and password check from password setting form 
+	 * when reseting the password, it will check if the 
+	 * password matches the password check. And then 
+	 * it will check the length of the password.
+	 * 
+	 * Then it will hash the password using password_hash() 
+	 * method and then it will save the new password 
+	 * to the database.
+	 *
+	 * @param $id;
+	 * @param $password;
+	 * @param $password_check;
+	 */
 
 	public function verify_password_update($id, $password, $password_check)
 	{
@@ -386,6 +400,8 @@ class User extends Db_object{
 				
 		}
 
+		/* If the password is less that 5 chars and longer than 50 chars it will let the user know that they cant do that.
+		*/
 		if((strlen($password) > 50) || strlen($password) < 5) {  
 			array_push($error_array, "Your password must be between 5 and 50 characters");
 		}
@@ -396,7 +412,6 @@ class User extends Db_object{
 
 
 		if(empty($error_array)){
-
 
 		
 		$user = self::find_by_id($id);
@@ -430,55 +445,95 @@ class User extends Db_object{
 		return $number;
 	}
 	
+	/** 
+	* Method that will find a user based on their email. 
+	* The method uses the find_by_query method from 
+	* the db_object class. 
+	*   
+	* For this to work the user has to have been activated 
+	* thru the email verifciation system.
+	* 
+	* @param $email;
+	*/
 
 	public static function find_user_by_email($email){
 
 		global $database;
-		// Tar bort eventuele ting som ikke skal være med i stringen
+		
+		// Removes any code that should not be included in the string
 		$email = $database->escape_string($email);
 		
-		// Finner ut om verify_code også ligger i databasen
+		// Finds out if the requested email is in the database and is activated 
 		$sql = "SELECT * FROM ". self::$db_table ." WHERE email = '{$email}' AND status = 1 Limit 1 ";
 		
-		// retunerer det database objektet som blir funnet 
+		// returns the found database object
 		return static ::find_by_query($sql); 
 	}
 
-
+	/** 
+	* Method that will find a user based on their activation code. 
+	* The method uses the find_by_query method from 
+	* the db_object class. 
+	*   
+	* For this to work the user has to be not activated 
+	* thru the email verifciation system.
+	*
+	* The reason being that this method is used 
+	* to find the user thru the activation code, 
+	* so that the user can be actiaved 
+	* thru the activate user method.
+	*
+	* @param $code;
+	*/
 
 	public static function find_user_by_code($code){
 
 		global $database;
-		// Tar bort eventuele ting som ikke skal være med i stringen
+		
+		// Removes any code that should not be included in the string
 		$code = $database->escape_string($code);
 		
-		// Finner ut om verify_code også ligger i databasen
+		// Finds out if the requested verify_code also is in the database
 		$sql = "SELECT * FROM ". self::$db_table ." WHERE verify_code = '{$code}' AND status = 0 Limit 1 ";
 		
-		// retunerer det database objektet som blir funnet 
+		// Returns the found database object
 		return static ::find_by_query($sql); 
 	}
+	
+	/**
+	* This method takes in the activation code 
+	* from the get parameter in the browser window
+	* and then it checks if it can find the 
+	* code in the verify colum in our user table.
+	* 
+	* If it can find it will activate the user 
+	* and tell the user that thier account 
+	* has been activeated
+	* 
+	* If it cant find the user it will let the user 
+	* know that their user cant be activated.
+	*
+	* @param $code
+	*/
+
 
 	public function activate_user($code){
 		global $database;
 
-		// Finner den brukeren som har den aktiverings koden
+		// Finds the user who has that activation code in the database
 		$in = self::find_user_by_code($code);
-		// Henter det neste objektet i rekken og gir det tilbake
 		
-
-		// Får in db-objektet og ser om den er tom
-		// Må legge inn sjekk for at brukeren ikke er aktivert fra før 
+		// Gets the db-object and sees if it is empty
+		
 		if(!empty($in)){
+		// Retrieves the next object in the row and returns it
 			$user = array_shift($in);
-			//var_dump($user);
+		
 			
-			//Denne endrer status på brukeren til aktiv eller nå bare til 1 og default er 0 
+		// This changes the status of the user to active or acitive is 1 and default is 0
 			$user->status = 1;
 
-
 			$user->update();
-
 			
 			echo "User was acitvated";
 		}

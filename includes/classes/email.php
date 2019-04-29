@@ -6,6 +6,13 @@
  *
  */
 
+/**
+* Here, I have chosen to use PHPMailer instead of
+* PHP own included mailer, since this one works on all platforms
+* and without any setup on the server host, other than the standard 
+* XAMPP setup or lamp setup if you are using Linux.
+*
+*/
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -16,7 +23,7 @@ require 'PHPMailer/Exception.php';
 
 class Email extends User{
 
-	// This controls which email adress, the emails created by this class is sent from
+	// This controls which email address, the emails created by this class is sent from
 	private static $fromEmail = "no-reply@cm-games.com" ;
 
 	protected static $db_table = "email_codes";
@@ -31,13 +38,18 @@ class Email extends User{
 	/*
 	public static function mail_Sender($to, $subject, $txt){
 		
-		// Denne setter avsender adresses ved bruk av variablen fromEmail
+	// This sets the sender address by using the variable fromEmail
 		$headers = "From:". self::$fromEmail . "\r\n";
 
-		/* PHP sin egen mail sender, den bruker standard SMTP Port for mail sending som er 25, disse kan endres i php sine instillinger.
-		Virker kun på lokale adresser for øyeblikket. 
-		
-		mail($to, $subject, $txt, $headers);
+	/*
+	* PHP's own mail sender, it uses the standard 
+	* SMTP port for mail sending which is 25, 
+	* this can be changed in php's settings.
+	* Only works on local addresses at the moment.
+	*/
+
+	/*
+	mail($to, $subject, $txt, $headers);
 
 
 	}
@@ -68,41 +80,41 @@ class Email extends User{
 
 		$mail_array = array();
 		
-        /* Set the mail sender. */
+       // Sets the mail sender.
 	   $mail->setFrom('no-reply@cm-games.tk', 'CM-Games');
 
-	   /* Add a recipient. */
+	   // Adds a recipient.
 	   $mail->addAddress($to, $user_name);
 
-	   /* Set the subject. */
+	   // Sets the subject.
 	   $mail->Subject = $subject;
 
-	   /* Set the mail message body. */
+	   // Sets the mail message body. 
 	   $mail->Body = $txt;
 	 
-	  /* Tells PHPMailer to use SMTP. */
+	  // Tells PHPMailer to use SMTP. 
 	   $mail->isSMTP();
 	   
 	   
-	   // * For local use *
-	   /* If you want to use it localy 
-	   *  you need a local mailserver that has a 
+	   /* For local use */
+	   /* If you want to use it locally 
+	   *  you need a local mail server that has a 
 	   *  SMTP server running on localhost with port 25 
 	   *  and a mail client that can connect to the server 
 	   *  and read these mails.
 	   */
 	   
+	   
+	   /* SMTP server address. */
+	  
 	   /*
-	   // SMTP server address. 
-	   $mail->Host = '192.168.1.2';
-
+	   $mail->Host = 'localhost';
+		
 	   $mail->Port = 25;  
 		*/
 		
 
-	// * For Sendgrid use or any other mail provider online*
-
-	
+	/* For Turbo-SMTP use or any other mail provider online */
 	   
 	// SMTP Host
 	   $mail->Host = 'pro.turbo-smtp.com';
@@ -123,8 +135,6 @@ class Email extends User{
 	// Sets the SMTP port. 
 	   $mail->Port = 465;
 
-	
-	 	
 	   $mail->SMTPDebug = 0;
 	   
 	  
@@ -154,8 +164,10 @@ return $mail_array;
 
 	/**
 	* This method will take the users email in and 
-	* then, it will send a activation mail with their unique verify-code to 
-	* the mail that they put in when signed up for our site.
+	* then, it will send a activation mail 
+	* with their unique verify-code to 
+	* the mail that they put in 
+	* when signed up for our site.
 	* 
 	* It uses the mail_sender method to do this. 
 	* 
@@ -255,23 +267,22 @@ return $mail_array;
 
 		// Creates a new email object 
 		$user_email = new Email();
-		// Setter variablene id og lager en unik kode for reseting
+
+		// Sets the variable id and creates a unique code for resetting.
+
 		$user_email->id = $user->id;
 
 		$reset_code = md5($user->email . microtime());
 	
 		$user_email->reset_code = $reset_code;
 
-		// Lagrer alt dette i databasen ved bruk av den overrida create metoden lengere nede
-		
+		// Sends the email to the person who requested it should all be ok and the email is in our database.
 
-
-
-
-		// Sender ut eposten til den som forespurte den skulle alt værte ok og eposten ligger i vår database
 		$mail_array = self::send_Password_resetMail($user->email, $user->username, $reset_code);
 
+		// Saves all this to the database using the overrided create method further down.
 		if(empty($mail_array))
+
 			$user_email->create();
 		else
 			array_push($error_array, array_shift($mail_array));
@@ -308,28 +319,22 @@ return $mail_array;
 
 		$error_array    = array();
 
-		// Tar bort eventuele ting som ikke skal være med i stringen
+		// Removes any code that should not be included in the string
 		$code = $database->escape_string($code);
 		
-		// Finner ut om reset_code også ligger i databasen
+		// Finds out if the requested reset_code also is in the database
 		$sql = "SELECT * FROM ". self::$db_table ." WHERE reset_code = '{$code}' and used = 0 Limit 1 ";
-
-		// Prøver på noe som daniel har brukt, Ternary 
-		//$the_result_array = static::find_by_query($sql);
-
-		
-		// retunerer det database objektet som blir funnet 
-		//return !empty($the_result_array) ? array_shift($the_result_array) :  $error_array;
 
 		return static ::find_by_query($sql);
 	}
 
    /**
-	* Method that will take in the user id from the find_by_id method 
-	* and then it will try to locate this user in the database 
-	* and if it finds it, it will render the reset link useless 
-	* since it has been used, so the next time, 
-	* the user needs a new password
+	* Method that will take in the user id from
+	* the find_by_id method and then it will 
+	* try to locate this user in the database 
+	* and if it finds it, it will make
+	* the reset link useless since it has been used, 
+	* so the next time, the user needs a new password
 	* they will need to request a new link.  
 	* 
 	* @param $id
@@ -341,7 +346,7 @@ return $mail_array;
 
 		$error_array    = array();
 
-		// Tar bort eventuele ting som ikke skal være med i stringen
+		// Removes any code that should not be included in the string
 		$in = $database->escape_string($id);
 		
 		$in = self::find_by_id($id);

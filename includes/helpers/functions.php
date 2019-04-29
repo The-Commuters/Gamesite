@@ -20,8 +20,8 @@ function redirect($location) {
 * Function that will first check if the folder for
 * PHPMailer is where it should be (includes/classes/PHPMailer)  
 * and if it is not there, it will create the folder and 
-* then it will do the same check 
-* for the 2 files, phpmailer.php and smtp.php
+* then it will do the same check for the 3 files, 
+* phpmailer.php and smtp.php and exception.php
 * If they are not there it will download them 
 * and place them there.
 *

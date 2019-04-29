@@ -334,8 +334,7 @@ function hideAlert() {
 
 
 }
-
+// hides the the content in the specific id
 function hide(id){
     document.getElementById(id).style.display="none";
-    //console.log("ho");
 }
