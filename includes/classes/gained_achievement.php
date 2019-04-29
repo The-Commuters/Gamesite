@@ -9,7 +9,6 @@
 class Gained_Achievement extends Db_object{
 
 	protected static $db_table = "gained_achievements"; 
-
 	protected static $db_table_column = array('achievement_id', 'user_id', 'gained');
 	public $achievement_id;
 	public $user_id;

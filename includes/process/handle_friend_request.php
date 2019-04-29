@@ -18,7 +18,7 @@
 	if ($status == 1) {													// Echo positive or negative depending on on $status.	
     ?>
 
-	<div id="alert" class="alert -warning -active">
+	<div id="alert" class="alert -success -active">
 		<div>Friendship accepted!</div>
 	</div>
 

@@ -53,7 +53,7 @@ if ($session->is_signed_in()) {redirect("index.php");}
 	<!-- Password input check -->
 	<div class="float-label">
 		<input type="password" name="password_check" id="password_check" placeholder="Password" required>
-		<label for="password">Password_Check</label>
+		<label for="password">Password Check</label>
 	</div>
 </div>
 

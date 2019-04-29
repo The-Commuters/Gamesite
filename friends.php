@@ -12,7 +12,6 @@ if (!$session->is_signed_in()) {redirect("login.php");}
 
 ?>
 
-
 <main class="friendlist">
     <h1 class="friendlist-title">Friends</h1>
 

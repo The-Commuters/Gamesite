@@ -35,7 +35,7 @@ $game = Game::find_by_id($current_game_id);?>
   <div class="gamepage-container">
     <div class="gamepage-game">
     <?php
-    // Includes the link to the canvas
+    // Includes the link to the canvas if the game-variable is set and the php-file exists.
     if (isset($game) && file_exists($game->game_path())) { include($game->game_path()); }
     ?>
     </div>
@@ -66,14 +66,4 @@ $game = Game::find_by_id($current_game_id);?>
     </div>
 </main>
 
-
-
-
-<?php
-
-//$chatroom_id = $current_game_id;
-//include("includes/views/userchat.php");
-
-include("includes/views/footer.php");
-
-?>
+<?php include("includes/views/footer.php"); ?>

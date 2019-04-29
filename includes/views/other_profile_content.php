@@ -21,7 +21,14 @@ $user = User::find_by_id($_GET['id']);
 		<div class="profile-user">
 			<div style="background-image: url(<?php echo $user->get_user_image();?>)" class="avatar -s user"></div>
 			<div class="username"><?php echo $user->username;?></div>
+			<?php 
+			// If the user is a friend the message, show message.
+			if (User::is_friend($session->user_id, $user->id)) {
+			?>
 			<a class="action" onclick="startChat(<?php echo $session->user_id .',' . $user->id?>)"><i class="fas fa-fw fa-comment-alt"></i></a>
+			<?php
+			}
+			?>
 		</div>
 		<div class="profile-content">
 

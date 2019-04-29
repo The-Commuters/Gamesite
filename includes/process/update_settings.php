@@ -22,12 +22,11 @@ if (empty($error_array)) {
 	$user->first_name = $first_name;
 	$user->middle_name = $middle_name;
 	$user->last_name = $last_name;
-
 	$user->update();
 ?>
 
 <!-- If the names pass the verification. -->
-<div id="alert" class="alert -warning -active">
+<div id="alert" class="alert -success -active">
 	<div>Your name have been updated!</div>
 </div>
 

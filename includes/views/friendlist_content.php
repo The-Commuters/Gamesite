@@ -16,6 +16,9 @@
          * They can accept and refuse the request, or visit the  
          * profile of the user.
          */
+        ?>
+        <div class="friendlist-container">
+        <?php
         $requests = Friendship::find_friend_requests($session->user_id);
         foreach ($requests as $request) : 
 
@@ -76,7 +79,7 @@
         if (!isset($_GET['f'])) {
             $friends = Friendship::find_friends($session->user_id);
         }
-
+   
         // Lists opp all the friends.
         foreach ($friends as $friend) :
 
@@ -94,8 +97,6 @@
                 $status = "Offline";
             }
             ?> 
-
-            <div class="friendlist-container">
 
                 <div class="friend">
                     <div class="friend-info">
@@ -123,8 +124,7 @@
                     </div>
                 </div>
 
-            </div>
-
         <?php
         endforeach; 
         ?>
+    </div>
