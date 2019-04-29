@@ -383,7 +383,11 @@ class User extends Db_object{
 
 		if($password != $password_check) { 
 			array_push($error_array, "Your passwords do not match");
-				//var_dump($error_array);
+				
+		}
+
+		if((strlen($password) > 50) || strlen($password) < 5) {  
+			array_push($error_array, "Your password must be between 5 and 50 characters");
 		}
 
 
