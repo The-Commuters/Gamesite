@@ -283,7 +283,7 @@ return $mail_array;
 		// Saves all this to the database using the overrided create method further down.
 		if(empty($mail_array))
 
-			$user_email->create();
+			$user_email->save();
 		else
 			array_push($error_array, array_shift($mail_array));
 		
@@ -352,10 +352,10 @@ return $mail_array;
 		if(!empty($id)){
 		
 		$user_email = new Email();
-		$user_email = self::find_by_id($id);
-		$user_email->used = 1;
 
-		$user_email->update();
+		$user_email = self::find_by_id($id);
+
+		$user_email->delete();
 
 	}
 
@@ -396,7 +396,42 @@ return $mail_array;
 		}
 
 	}
+	/**
+	 * Makes the PHP smarter, with this you can do '$user->save();' and if it
+	 * is already created it will update, and if its not then it will create it.
+	 *
+	 * @return either create an object or return, true both times.
+	 */
+
+	public function save() {
+		
+		return isset($this->user_id) ? $this->update() : $this->create();
+	}
+
+	/**
+	 * Last of the CRUD methods, this delete a row on the objects table with the id
+	 * of the object thr method is called on. Then adds a new row to the user_actvity-
+	 * table. 
+	 *
+	 * @return true if a row is deleted and false if not.
+	 */
+
+	public function delete() {
+
+		global $database;
+		global $session;
+
+		$sql = "DELETE FROM " . static::$db_table . " WHERE id= " . $database->escape_string($this->id);
+		$sql .= " LIMIT 1";
+
+		$user_id = $this->id;
+
+		$database->query($sql);
+	   	$log = $this->log_user_activity("set new password", $user_id, $this->id, static::$db_table);
+		return (mysqli_affected_rows($database->connection) == 1) ? true : false;
+	}
 
 }
+
 
 ?>
